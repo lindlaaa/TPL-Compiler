@@ -104,6 +104,6 @@ class Body extends AbstractSyntaxTree{
   public Body( StatementList sl ){
     statementList = sl;
   }
-  //FIXME do we need to identify "BEGIN" and "END" in this definition of the syntax???
+  //FIXME do we need to identify "BEGIN" and "END" in this definition of the syntax???FIXME
   public StatementList statementList(){ return statementList; }// FIXME
 }

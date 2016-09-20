@@ -1,7 +1,9 @@
-//Last Modified: Avery 09.11
-
+package src.main.*;
 import java.io.PushBackInputStream;
 import java.io.PrintStream;
+
+//Last Modified: Avery 09.11
+
 
 public class FlairCompiler{
 

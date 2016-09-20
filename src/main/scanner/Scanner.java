@@ -1,6 +1,6 @@
 package src.main.scanner;
-import src.main.exception;
-import src.main.token;
+import src.main.exception.*;
+import src.main.token.*;
 import java.util.*;
 
 
@@ -17,8 +17,8 @@ public class Scanner{
     public static final int string = 2;
 
     int currentState = 0;
-    String symbolString = "+-*/<=(){},:;"; TODO
-    String[] keywordArray = {"if", "then", "else"};//has more than this TODO
+    String symbolString = "+-*/<=(){},:;";
+    String[] keywordArray = {"if", "then", "else", "integer", "boolean", "true", "false", "not", "or", "and", "print", "program", "function", "return", "begin", "end"};
     List<Token> tokenArray = new ArrayList<>();
     String accum = "";
     char curChar;
@@ -37,12 +37,10 @@ public class Scanner{
         }
     }
 
-    //needs to be called by a loop until length is greater than curIndex
-      //FIXME must not let keywords self-delemit. ex) if8 is an identifierTokennot keywordToken
-      //FIXME add token only if we KNOW we have one
+
     //make sure not to ignore what was in the accum at the end of the
     public void takeNextToken(){
-      do{
+      do{ //while we havent made a new token, DO
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
         {
@@ -56,7 +54,7 @@ public class Scanner{
                     accum += curChar;
                     currentState = 2;//string
                 }else if(symbolString.indexOf(curChar) != -1)
-                {//terminator, punctToken, and opToken
+                {//terminator, punctuationToken, and opToken
                     switch (curChar)
                     {//all symbols are self-delimiting
                         case ';':
@@ -68,13 +66,13 @@ public class Scanner{
                             break;
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
-                            tokenArray.add(new PunctToken(curChar));
+                            tokenArray.add(new PunctuationToken(curChar));
                         default:
                             break;
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                    //throw error
+                    ScanException e = new ScanException(" --STATE 0, HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
                     currentState = 0;//looking again
                 }
@@ -103,13 +101,13 @@ public class Scanner{
                             break;
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
-                            tokenArray.add(new PunctToken(curChar));
+                            tokenArray.add(new PunctuationToken(curChar));
                     }
                     accum = "";
                     currentState = 0;//looking again
                 }else
                 {
-                    //throw error
+                    ScanException e = new ScanException(" --STATE 1, HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
                     currentState = 0;//looking again
                 }
@@ -159,20 +157,20 @@ public class Scanner{
                             break;
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
-                            tokenArray.add(new PunctToken(curChar));
+                            tokenArray.add(new PunctuationToken(curChar));
                         accum = "";
                         currentState = 0;//looking again
                     }
                 }else
                 {
-                   //throw error
+                   ScanException e = new ScanException(" --STATE 2, HAD UNEXPECTED CHARACTER-- ");
                 }
                 curIndex++;
                 break;
         }
 
 
-      }while( !str.isEmpty() );
+      }while( !accum.isEmpty() );
     }
 
 }

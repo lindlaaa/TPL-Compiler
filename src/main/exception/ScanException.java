@@ -14,6 +14,6 @@ public class ScanException extends Exception{
 
   public String toString(){
 
-    return "FLAR SCAN EXCEPTION -- " + super.toString();
+    return "FLAIR SCAN EXCEPTION -- " + super.toString();
   }
 }

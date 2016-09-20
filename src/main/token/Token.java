@@ -13,6 +13,7 @@ public interface Token{
 
 
 //FIXME do not need
+/*
 public class DecToken implements Token{
     String outputString = "Declaration ";
     public DecToken(String inputString){
@@ -22,3 +23,4 @@ public class DecToken implements Token{
         return outputString;
     }
 }
+*/

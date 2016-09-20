@@ -1,5 +1,5 @@
 /*
-  Last Modified: Avery 09.11
+  Last Modified: Avery 09.20
   Definitions for our datatypes
   Singleton pattern
   Made to support only integers and boolean datatypes

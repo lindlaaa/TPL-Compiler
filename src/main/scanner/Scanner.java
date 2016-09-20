@@ -6,7 +6,7 @@ import java.util.*;
 
 /*
   Scanner datatype definition
-  Last Modified: Avery 09.11
+  Last Modified: Avery 09.20
 */
 
 
@@ -17,13 +17,14 @@ public class Scanner{
     public static final int string = 2;
 
     int currentState = 0;
-    String symbolString = "+-*/<=(){},:;";
-    String[] keywordArray = {"if", "then", "else"};//has more than this
+    String symbolString = "+-*/<=(){},:;"; TODO
+    String[] keywordArray = {"if", "then", "else"};//has more than this TODO
     List<Token> tokenArray = new ArrayList<>();
     String accum = "";
     char curChar;
     String inputFile;
     int curIndex = 0;
+    //TODO Do we need a lookahead variable with this implementation?
 
     public Scanner(String fileString){
         inputFile = fileString;
@@ -37,10 +38,11 @@ public class Scanner{
     }
 
     //needs to be called by a loop until length is greater than curIndex
-      //FIXME must not let keywords self-delemit
-      //FIXME return token if we KNOW we have one, otherwise recurse takeNextToken()
+      //FIXME must not let keywords self-delemit. ex) if8 is an identifierTokennot keywordToken
+      //FIXME add token only if we KNOW we have one
     //make sure not to ignore what was in the accum at the end of the
     public void takeNextToken(){
+      do{
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
         {
@@ -168,6 +170,9 @@ public class Scanner{
                 curIndex++;
                 break;
         }
+
+
+      }while( !str.isEmpty() );
     }
 
 }

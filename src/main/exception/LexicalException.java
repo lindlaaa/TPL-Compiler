@@ -1,4 +1,6 @@
-//Last Modified: Avery 09.11
+package src.main.exception;
+
+//Last Modified: Avery 09.20
 
 
 public class LexicalException extends Exception{

@@ -12,6 +12,7 @@ public class ScanException extends Exception{
   }
 
 
+  @Override
   public String toString(){
 
     return "FLAIR SCAN EXCEPTION -- " + super.toString();

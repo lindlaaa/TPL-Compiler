@@ -48,7 +48,7 @@ public class Scanner{
         {
             takeNextToken();
         }
-        while (curIndex <= inputFile.length());
+        while (curIndex < inputFile.length());
         
         /*
         accum may not be empty. If the program doesnt end with a 
@@ -187,10 +187,10 @@ public class Scanner{
                             break;
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
-                            tokenArray.add(new PunctuationToken(curChar));
-                        accum = "";
-                        currentState = LOOKING;
+                            tokenArray.add(new PunctuationToken(curChar));                           
                     }
+                    accum = "";
+                    currentState = LOOKING;
                 }else
                 {
                    ScanException e = new ScanException(" --STATE 2 " +

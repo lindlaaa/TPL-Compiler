@@ -34,9 +34,8 @@ public class Scanner{
         }
     }
 
-
     //make sure not to ignore what was in the accum at the end of the
-    public void takeNextToken(){
+    public void takeAllTokens(){
       do{ //while we havent made a new token, DO
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
@@ -69,7 +68,7 @@ public class Scanner{
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                    ScanException e = new ScanException(" --STATE 0" +
+                    ScanException e = new ScanException(" --STATE 0 " +
                       "HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
                     currentState = LOOKING;//looking again
@@ -170,8 +169,10 @@ public class Scanner{
                 break;
         }
 
-
       }while( !accum.isEmpty() );
+      //accum is set to empty frequently, so this won't work
+      //should be similar to       while (curIndex <= inputFile.length()); 
+      //what happens when the end is reached with tokens charcters in the accum?
+      //input file obviously has to be stored before this function call
     }
-
 }

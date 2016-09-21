@@ -10,12 +10,12 @@ public class Scanner{
     public static final int LOOKING = 0;
     public static final int INTEGER = 1;
     public static final int STRING = 2;
-
-    int currentState = 0;
     String symbolString = "+-*/<=(){},:;";
     String[] keywordArray = {"if", "then", "else", "integer", "boolean",
       "true", "false", "not", "or", "and", "print", "program",
       "function", "return", "begin", "end"};
+    
+    int currentState = LOOKING;
     List<Token> tokenArray = new ArrayList<>();
     String accum = "";
     char curChar;
@@ -26,6 +26,7 @@ public class Scanner{
     public Scanner(String fileString){
         inputFile = fileString;
     }
+    
     public void printTokenStrings()
     {
         for (Token individualToken : tokenArray)
@@ -33,10 +34,35 @@ public class Scanner{
            System.out.println(individualToken);
         }
     }
-
-    //make sure not to ignore what was in the accum at the end of the
+    
     public void takeAllTokens(){
-      do{ //while we havent made a new token, DO
+        do
+        {
+            takeNextToken();
+        }
+        while (curIndex <= inputFile.length());
+        
+        /*
+        accum may not be empty. If the program doesnt end with a 
+        whitespace, self delimitingsymbol, or semicolon the accum would
+        not have been reset to ""
+        */
+        if(!accum.isEmpty())
+        {
+            if(accum.equals("false") || accum.equals("true"))
+            {
+                tokenArray.add(new BoolToken(accum));
+            }else if(Arrays.asList(keywordArray).contains(accum))
+            {//need to add keywords to the array still
+                tokenArray.add(new KeywordToken(accum));
+            } else
+            {
+                tokenArray.add(new IdentifierToken(accum));
+            }
+        }
+    }
+    
+    public void takeNextToken(){
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
         {
@@ -168,11 +194,5 @@ public class Scanner{
                 curIndex++;
                 break;
         }
-
-      }while( !accum.isEmpty() );
-      //accum is set to empty frequently, so this won't work
-      //should be similar to       while (curIndex <= inputFile.length()); 
-      //what happens when the end is reached with tokens charcters in the accum?
-      //input file obviously has to be stored before this function call
     }
 }

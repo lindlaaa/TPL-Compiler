@@ -1,10 +1,10 @@
-
-
 /*
   Scanner datatype definition
   Last Modified: Avery 09.20
 */
 
+import java.nio.file.*; 
+import java.util.*; 
 
 //state machine
 public class Scanner{
@@ -22,12 +22,10 @@ public class Scanner{
     char curChar;
     String inputFile;
     int curIndex = 0;
-    //TODO Do we need a lookahead variable with this implementation?
     
     public Scanner(String filePath){
         try{
         inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
-        //import java.nio.file.*; will make the above line work
         }catch (Exception e) 
         {
             System.err.println("IOException");
@@ -73,15 +71,15 @@ public class Scanner{
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
         {
-            case LOOKING: //looking
+            case LOOKING: 
                 if(Character.isDigit(curChar))
-                {//intToken
+                {
                     accum += curChar;
                     currentState = INTEGER;//integer
                 }else if(Character.isLetter(curChar))
                 {//boolToken, keywordToken, and identifierToken
                     accum += curChar;
-                    currentState = STRING;//string
+                    currentState = STRING;
                 }else if(symbolString.indexOf(curChar) != -1)
                 {//terminator, punctuationToken, and opToken
                     switch (curChar)
@@ -104,11 +102,11 @@ public class Scanner{
                     ScanException e = new ScanException(" --STATE 0 " +
                       "HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
-                    currentState = LOOKING;//looking again
+                    currentState = LOOKING;
                 }
                 curIndex++;
                 break;
-            case INTEGER: //integer state
+            case INTEGER: 
                 if(Character.isDigit(curChar))
                 {
                     accum += curChar;
@@ -116,12 +114,12 @@ public class Scanner{
                 {
                     tokenArray.add(new IntToken(accum));
                     accum = "";
-                    currentState = LOOKING;//looking again
+                    currentState = LOOKING;
                 }else if(symbolString.indexOf(curChar) != -1)
                 {
                     tokenArray.add(new IntToken(accum));
                     switch (curChar)
-                    {//the symbols are self-delimiting
+                    {
                         case ';':
                             tokenArray.add(new TerminatorToken());
                             break;
@@ -134,52 +132,48 @@ public class Scanner{
                             tokenArray.add(new PunctuationToken(curChar));
                     }
                     accum = "";
-                    currentState = LOOKING;//looking again
+                    currentState = LOOKING;
                 }else
                 {
                     ScanException e = new ScanException(" --STATE 1 " +
                       "HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
-                    currentState = LOOKING;//looking again
+                    currentState = LOOKING;
                 }
                 curIndex++;
                 break;
-            case STRING: //string state
+            case STRING: 
                 if(Character.isLetterOrDigit(curChar))
                 {
                     accum += curChar;
                 }else if(Character.isWhitespace(curChar))
                 {
-                    //boolToken, keywordToken, or identifierToken?
                     if(accum.equals("false") || accum.equals("true"))
                     {
                        tokenArray.add(new BoolToken(accum));
-                    }else if(Arrays.asList(keywordArray).contains(accum))
-                        //import java.util.*; will allow the above line to work
-                    {//need to add keywords to the array still
+                    }else if(Arrays.asList(keywordArray).contains(accum))                      
+                    {
                         tokenArray.add(new KeywordToken(accum));
                     } else
                     {
                         tokenArray.add(new IdentifierToken(accum));
                     }
                     accum = "";
-                    currentState = LOOKING;//looking again
+                    currentState = LOOKING;
                 }else if(symbolString.indexOf(curChar) != -1)
                 {
-                    //boolToken, keywordToken, or identifierToken?
                     if(accum.equals("false") || accum.equals("true"))
                     {
                        tokenArray.add(new BoolToken(accum));
                     }else if(Arrays.asList(keywordArray).contains(accum))
-                    {//need to add keywords to the array still
+                    {
                         tokenArray.add(new KeywordToken(accum));
                     } else
                     {
                         tokenArray.add(new IdentifierToken(accum));
                     }
-                    //boolToken, keywordToken, and identifierToken?
                     switch (curChar)
-                    {//the symbols are self-delimiting
+                    {
                         case ';':
                             tokenArray.add(new TerminatorToken());
                             break;
@@ -191,7 +185,7 @@ public class Scanner{
                         case '}': case ',': case ':':
                             tokenArray.add(new PunctuationToken(curChar));
                         accum = "";
-                        currentState = LOOKING;//looking again
+                        currentState = LOOKING;
                     }
                 }else
                 {

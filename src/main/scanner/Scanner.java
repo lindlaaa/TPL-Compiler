@@ -1,17 +1,15 @@
 
 
-
 /*
   Scanner datatype definition
   Last Modified: Avery 09.20
 */
 
-
 //state machine
 public class Scanner{
-    public static final int looking = 0;
-    public static final int integer = 1;
-    public static final int string = 2;
+    public static final int LOOKING = 0;
+    public static final int INTEGER = 1;
+    public static final int STRING = 2;
 
     int currentState = 0;
     String symbolString = "+-*/<=(){},:;";
@@ -43,15 +41,15 @@ public class Scanner{
         curChar = inputFile.charAt(curIndex);
         switch (currentState)
         {
-            case 0: //looking
+            case LOOKING: //looking
                 if(Character.isDigit(curChar))
                 {//intToken
                     accum += curChar;
-                    currentState = 1;//integer
+                    currentState = INTEGER;//integer
                 }else if(Character.isLetter(curChar))
                 {//boolToken, keywordToken, and identifierToken
                     accum += curChar;
-                    currentState = 2;//string
+                    currentState = STRING;//string
                 }else if(symbolString.indexOf(curChar) != -1)
                 {//terminator, punctuationToken, and opToken
                     switch (curChar)
@@ -71,14 +69,14 @@ public class Scanner{
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                    ScanException e = new ScanException(" --STATE 0,
-                      HAD UNEXPECTED CHARACTER-- ");
+                    ScanException e = new ScanException(" --STATE 0" +
+                      "HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
-                    currentState = 0;//looking again
+                    currentState = LOOKING;//looking again
                 }
                 curIndex++;
                 break;
-            case 1: //integer state
+            case INTEGER: //integer state
                 if(Character.isDigit(curChar))
                 {
                     accum += curChar;
@@ -86,7 +84,7 @@ public class Scanner{
                 {
                     tokenArray.add(new IntToken(accum));
                     accum = "";
-                    currentState = 0;//looking again
+                    currentState = LOOKING;//looking again
                 }else if(symbolString.indexOf(curChar) != -1)
                 {
                     tokenArray.add(new IntToken(accum));
@@ -104,17 +102,17 @@ public class Scanner{
                             tokenArray.add(new PunctuationToken(curChar));
                     }
                     accum = "";
-                    currentState = 0;//looking again
+                    currentState = LOOKING;//looking again
                 }else
                 {
-                    ScanException e = new ScanException(" --STATE 1,
-                      HAD UNEXPECTED CHARACTER-- ");
+                    ScanException e = new ScanException(" --STATE 1 " +
+                      "HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
-                    currentState = 0;//looking again
+                    currentState = LOOKING;//looking again
                 }
                 curIndex++;
                 break;
-            case 2: //string state
+            case STRING: //string state
                 if(Character.isLetterOrDigit(curChar))
                 {
                     accum += curChar;
@@ -125,6 +123,7 @@ public class Scanner{
                     {
                        tokenArray.add(new BoolToken(accum));
                     }else if(Arrays.asList(keywordArray).contains(accum))
+                        //import java.util.*; will allow the above line to work
                     {//need to add keywords to the array still
                         tokenArray.add(new KeywordToken(accum));
                     } else
@@ -132,7 +131,7 @@ public class Scanner{
                         tokenArray.add(new IdentifierToken(accum));
                     }
                     accum = "";
-                    currentState = 0;//looking again
+                    currentState = LOOKING;//looking again
                 }else if(symbolString.indexOf(curChar) != -1)
                 {
                     //boolToken, keywordToken, or identifierToken?
@@ -160,12 +159,12 @@ public class Scanner{
                         case '}': case ',': case ':':
                             tokenArray.add(new PunctuationToken(curChar));
                         accum = "";
-                        currentState = 0;//looking again
+                        currentState = LOOKING;//looking again
                     }
                 }else
                 {
-                   ScanException e = new ScanException(" --STATE 2,
-                    HAD UNEXPECTED CHARACTER-- ");
+                   ScanException e = new ScanException(" --STATE 2 " +
+                    "HAD UNEXPECTED CHARACTER-- ");
                 }
                 curIndex++;
                 break;

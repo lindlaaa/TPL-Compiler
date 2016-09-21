@@ -1,4 +1,4 @@
-package src.main.token;
+
 
 public class PunctToken implements Token{
     String outputString = "Punctuation ";

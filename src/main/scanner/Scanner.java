@@ -5,6 +5,7 @@
   Last Modified: Avery 09.20
 */
 
+
 //state machine
 public class Scanner{
     public static final int LOOKING = 0;
@@ -22,9 +23,15 @@ public class Scanner{
     String inputFile;
     int curIndex = 0;
     //TODO Do we need a lookahead variable with this implementation?
-
-    public Scanner(String fileString){
-        inputFile = fileString;
+    
+    public Scanner(String filePath){
+        try{
+        inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
+        //import java.nio.file.*; will make the above line work
+        }catch (Exception e) 
+        {
+            System.err.println("IOException");
+        }
     }
     
     public void printTokenStrings()

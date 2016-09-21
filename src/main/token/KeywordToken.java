@@ -1,4 +1,4 @@
-package src.main.token;
+
 
 public class KeywordToken implements Token{
     String outputString = "Keyword ";

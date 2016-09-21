@@ -1,4 +1,4 @@
-package src.main.token;
+
 
 public class OpToken implements Token{
     String outputString = "Operator ";

@@ -1,4 +1,4 @@
-package src.main.token;
+
 
 public class BoolToken implements Token{
     String outputString = "Boolean ";

@@ -1,4 +1,3 @@
-package src.main.token;
 
 public class IdentifierToken implements Token{
     String outputString = "Identifier ";

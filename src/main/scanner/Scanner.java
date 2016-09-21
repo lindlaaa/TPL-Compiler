@@ -1,7 +1,4 @@
-package src.main.scanner;
-import src.main.exception.*;
-import src.main.token.*;
-import java.util.*;
+
 
 
 /*
@@ -18,7 +15,9 @@ public class Scanner{
 
     int currentState = 0;
     String symbolString = "+-*/<=(){},:;";
-    String[] keywordArray = {"if", "then", "else", "integer", "boolean", "true", "false", "not", "or", "and", "print", "program", "function", "return", "begin", "end"};
+    String[] keywordArray = {"if", "then", "else", "integer", "boolean",
+      "true", "false", "not", "or", "and", "print", "program",
+      "function", "return", "begin", "end"};
     List<Token> tokenArray = new ArrayList<>();
     String accum = "";
     char curChar;
@@ -72,7 +71,8 @@ public class Scanner{
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                    ScanException e = new ScanException(" --STATE 0, HAD UNEXPECTED CHARACTER-- ");
+                    ScanException e = new ScanException(" --STATE 0,
+                      HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
                     currentState = 0;//looking again
                 }
@@ -107,7 +107,8 @@ public class Scanner{
                     currentState = 0;//looking again
                 }else
                 {
-                    ScanException e = new ScanException(" --STATE 1, HAD UNEXPECTED CHARACTER-- ");
+                    ScanException e = new ScanException(" --STATE 1,
+                      HAD UNEXPECTED CHARACTER-- ");
                     accum = "";
                     currentState = 0;//looking again
                 }
@@ -163,7 +164,8 @@ public class Scanner{
                     }
                 }else
                 {
-                   ScanException e = new ScanException(" --STATE 2, HAD UNEXPECTED CHARACTER-- ");
+                   ScanException e = new ScanException(" --STATE 2,
+                    HAD UNEXPECTED CHARACTER-- ");
                 }
                 curIndex++;
                 break;

@@ -1,4 +1,4 @@
-package src.main.token;
+
 
 public class IntToken implements Token{
     String outputString = "Integer ";

@@ -4,14 +4,17 @@
 */
 
 import java.nio.file.*; 
-import java.util.*; 
+import java.util.*;
+
 
 //state machine
 public class Scanner{
+  
+  
     public static final int LOOKING = 0;
     public static final int INTEGER = 1;
     public static final int STRING = 2;
-    String symbolString = "+-*/<=(){},:;";
+    String symbolString = "+-*/<=(){}.,:;";
     String[] keywordArray = {"if", "then", "else", "integer", "boolean",
       "true", "false", "not", "or", "and", "print", "program",
       "function", "return", "begin", "end"};
@@ -69,6 +72,7 @@ public class Scanner{
     
     public void takeNextToken(){
         curChar = inputFile.charAt(curIndex);
+        
         switch (currentState)
         {
             case LOOKING: 
@@ -84,15 +88,15 @@ public class Scanner{
                 {//terminator, punctuationToken, and opToken
                     switch (curChar)
                     {//all symbols are self-delimiting
-                        case ';':
-                            tokenArray.add(new TerminatorToken());
+                        case ';': case '.':
+                            tokenArray.add(new TerminatorToken(curChar));
                             break;
-                        case '+': case '-': case '*':
+                        case '+': case '-': case '*': 
                         case '/': case '<': case '=':
                             tokenArray.add(new OpToken(curChar));
                             break;
                         case '(': case ')': case '{':
-                        case '}': case ',': case ':':
+                        case '}': case ',': case ':': 
                             tokenArray.add(new PunctuationToken(curChar));
                         default:
                             break;
@@ -120,8 +124,8 @@ public class Scanner{
                     tokenArray.add(new IntToken(accum));
                     switch (curChar)
                     {
-                        case ';':
-                            tokenArray.add(new TerminatorToken());
+                        case ';': case '.':
+                            tokenArray.add(new TerminatorToken(curChar));
                             break;
                         case '+': case '-': case '*':
                         case '/': case '<': case '=':
@@ -174,8 +178,8 @@ public class Scanner{
                     }
                     switch (curChar)
                     {
-                        case ';':
-                            tokenArray.add(new TerminatorToken());
+                        case ';': case '.':
+                            tokenArray.add(new TerminatorToken(curChar));
                             break;
                         case '+': case '-': case '*':
                         case '/': case '<': case '=':
@@ -196,4 +200,13 @@ public class Scanner{
                 break;
         }
     }
+    
+    public static void main(String[] args) {
+      Scanner test = new Scanner("test.txt");
+      
+      test.takeAllTokens();
+      test.printTokenStrings();
+    }
+    
+    
 }

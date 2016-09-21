@@ -1,8 +1,8 @@
 
 
-public class PunctToken implements Token{
+public class PunctuationToken implements Token{
     String outputString = "Punctuation ";
-    public PunctToken(char inputChar){
+    public PunctuationToken(char inputChar){
         outputString += inputChar;
     }
     public String toString(){

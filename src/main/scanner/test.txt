@@ -1,0 +1,5 @@
+abcd apple Grant .,();; if ;;;;... then....
+program main() : integer;
+begin
+	return 1
+end.$\||||

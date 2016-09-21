@@ -2,9 +2,10 @@
 
 public class TerminatorToken implements Token{
     String outputString = "Terminator ";
-    public TerminatorToken(){
+    public TerminatorToken(char inputChar){
+        outputString += inputChar;
     }
     public String toString(){
-        return outputString + ";";
+        return outputString;
     }
 }

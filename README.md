@@ -1,11 +1,2 @@
-# TPL-Compiler
-This project spans an effort to create a compiler for our TPL project course.
-Our team members can commit changes along the different stages of development.
-This progress can be seen on Trello.com with team name 'Compiles of Money'.
-There you can see a board containing the components and their progress..
-
-Our team name is 'Compiles of Money'
-Our intermediate language is java
-Our team can be reached at lindlaaa@uni.edu
-Our repository is on GitHub
-Our IDE is up to personal preference
+#Scanner
+   Our scanner uses the same logic as a finite state automata. As the scanner takes in tokens, it switches states for when it is looking for a token, when it is taking an integer, and when it is taking in a string. It switches through these states to treat each token or character appropriately, and returns the type of each individual token.

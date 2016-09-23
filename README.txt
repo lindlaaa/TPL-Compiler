@@ -7,14 +7,14 @@ Output:           String of token objects representing the input file
 Compile & Run:    1. cd src/main/scanner
                   2. javac -d bin Scanner.java
                   3. cd bin
-                  4. java Scanner <desire file path>
+                  4. java Scanner <desired file path>
 
 Documentation:    cd /doc
 
 Date:       2016/09/23
 
 
-#Scanner
+Hight level Scanner design:
    Our scanner uses the same logic as a finite state automata.
    As the scanner takes in tokens, it switches states for when
    it is looking for a token, when it is taking an integer,

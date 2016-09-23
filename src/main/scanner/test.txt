@@ -2,7 +2,7 @@
 program main() : integer;
 begin
 	return 1
-end.\||||
-_hello_ _
+end.
+hello
 poopoo1
-1popo
+popo

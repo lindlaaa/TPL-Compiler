@@ -5,7 +5,7 @@
   Last Modified: Avery 09.20
 */
 
-package src.main.scanner;
+
 import java.nio.file.*;
 import java.util.*;
 
@@ -31,12 +31,12 @@ public class Scanner{
     String inputFile;
     int curIndex = 0;
 
-    public Scanner(String filePath){
+    public Scanner(String filePath) throws ScanException{
         try{
         inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
-        }catch (Exception e)
+        } catch (Exception e)
         {
-            System.err.println("IOException");
+          throw new ScanException(" --FLAIR FILE READ EXCEPTION--\n");
         }
     }
 
@@ -116,9 +116,9 @@ public class Scanner{
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                  throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                  throw new ScanException(" --STATE: LOOKING, STARTED WITH |"+
                     accum + "| HAD UNEXPECTED CHARACTER |"
-                    + curChar + "|--");
+                    + curChar + "|--\n");
                 }
                 curIndex++;
                 break;
@@ -152,9 +152,9 @@ public class Scanner{
                     currentState = LOOKING;
                 }else
                 {
-                    throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                    throw new ScanException(" --STATE: INTEGER, STARTED WITH |"+
                       accum + "| HAD UNEXPECTED CHARACTER |"
-                      + curChar + "|--");
+                      + curChar + "|--\n");
                 }
                 curIndex++;
                 break;
@@ -206,9 +206,9 @@ public class Scanner{
                     currentState = LOOKING;
                 }else
                 {
-                  throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                  throw new ScanException(" --STATE: STRING, STARTED WITH |"+
                     accum + "| HAD UNEXPECTED CHARACTER |"
-                    + curChar + "|--");
+                    + curChar + "|--\n");
                 }
                 curIndex++;
                 break;
@@ -216,7 +216,7 @@ public class Scanner{
     }
 
     public static void main(String[] args) throws ScanException{
-      Scanner test = new Scanner("palindrome.flr");
+      Scanner test = new Scanner(args[0]);
 
       test.takeAllTokens();
       test.printTokenStrings();

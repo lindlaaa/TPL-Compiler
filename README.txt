@@ -9,7 +9,7 @@ Compile & Run:    1. cd src/main/scanner
                   3. cd bin
                   4. java Scanner <desire file path>
 
-Documentation:    cd doc/src/main/scanner
+Documentation:    cd /doc
 
 Date:       2016/09/23
 

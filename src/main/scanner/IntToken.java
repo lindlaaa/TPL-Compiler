@@ -18,7 +18,7 @@ public class IntToken implements Token{
         if( intValue > MAX ){
           throw new ScanException( " --INTEGER VALUE TOO LARGE-- " );
         }
-        outputString += intValue;
+        outputString += inputInt;
     }
 
     /**

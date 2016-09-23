@@ -1,8 +1,0 @@
-    abcd apple Grant .,();; ififif ;;;;... then....
-program main() : integer;
-begin
-	return 1
-end.
-hello
-poopoo1
-popo

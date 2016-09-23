@@ -1,5 +1,7 @@
-
-
+package src.main.scanner;
+/**
+ *
+ */
 public class BoolToken implements Token{
     String outputString = "Boolean ";
     public BoolToken(String inputString){

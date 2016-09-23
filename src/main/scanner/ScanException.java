@@ -1,8 +1,7 @@
-
-
-//Last Modified: Avery 09.20
-
-
+package src.main.scanner;
+/**
+ *
+ */
 public class ScanException extends Exception{
 
 

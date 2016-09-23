@@ -1,16 +1,21 @@
+
+
 /*
   Scanner datatype definition
   Last Modified: Avery 09.20
 */
 
-import java.nio.file.*; 
+package src.main.scanner;
+import java.nio.file.*;
 import java.util.*;
 
 
-//state machine
+/**
+ *
+ */
 public class Scanner{
-  
-  
+
+
     public static final int LOOKING = 0;
     public static final int INTEGER = 1;
     public static final int STRING = 2;
@@ -18,23 +23,26 @@ public class Scanner{
     String[] keywordArray = {"if", "then", "else", "integer", "boolean",
       "true", "false", "not", "or", "and", "print", "program",
       "function", "return", "begin", "end"};
-    
+
     int currentState = LOOKING;
     List<Token> tokenArray = new ArrayList<>();
     String accum = "";
     char curChar;
     String inputFile;
     int curIndex = 0;
-    
+
     public Scanner(String filePath){
         try{
         inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
-        }catch (Exception e) 
+        }catch (Exception e)
         {
             System.err.println("IOException");
         }
     }
-    
+
+    /**
+     * [printTokenStrings description]
+     */
     public void printTokenStrings()
     {
         for (Token individualToken : tokenArray)
@@ -42,19 +50,19 @@ public class Scanner{
            System.out.println(individualToken);
         }
     }
-    
-    public void takeAllTokens(){
+
+    /**
+     * Sets a loop that gets all tokens from the input string.
+     * Then makes sure accum is accounted for as a Token.
+     * @throws ScanException
+     */
+    public void takeAllTokens() throws ScanException{
         do
         {
             takeNextToken();
         }
         while (curIndex < inputFile.length());
-        
-        /*
-        accum may not be empty. If the program doesnt end with a 
-        whitespace, self delimitingsymbol, or semicolon the accum would
-        not have been reset to ""
-        */
+
         if(!accum.isEmpty())
         {
             if(accum.equals("false") || accum.equals("true"))
@@ -63,19 +71,25 @@ public class Scanner{
             }else if(Arrays.asList(keywordArray).contains(accum))
             {//need to add keywords to the array still
                 tokenArray.add(new KeywordToken(accum));
-            } else
+            }/*else if(accum.isNumeric())TODO TODO TODO FIXME
+            {
+              tokenArray.add(new IntToken(accum));
+            }*/else
             {
                 tokenArray.add(new IdentifierToken(accum));
             }
         }
     }
-    
-    public void takeNextToken(){
+
+    /**
+     * [takeNextToken description]
+     */
+    public void takeNextToken() throws ScanException{
         curChar = inputFile.charAt(curIndex);
-        
+
         switch (currentState)
         {
-            case LOOKING: 
+            case LOOKING:
                 if(Character.isDigit(curChar))
                 {
                     accum += curChar;
@@ -91,26 +105,24 @@ public class Scanner{
                         case ';': case '.':
                             tokenArray.add(new TerminatorToken(curChar));
                             break;
-                        case '+': case '-': case '*': 
+                        case '+': case '-': case '*':
                         case '/': case '<': case '=':
                             tokenArray.add(new OpToken(curChar));
                             break;
                         case '(': case ')': case '{':
-                        case '}': case ',': case ':': 
+                        case '}': case ',': case ':':
                             tokenArray.add(new PunctuationToken(curChar));
-                        default:
                             break;
                     }
                 }else if(!Character.isWhitespace(curChar))
                 {
-                    ScanException e = new ScanException(" --STATE 0 " +
-                      "HAD UNEXPECTED CHARACTER-- ");
-                    accum = "";
-                    currentState = LOOKING;
+                  throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                    accum + "| HAD UNEXPECTED CHARACTER |"
+                    + curChar + "|--");
                 }
                 curIndex++;
                 break;
-            case INTEGER: 
+            case INTEGER:
                 if(Character.isDigit(curChar))
                 {
                     accum += curChar;
@@ -134,19 +146,19 @@ public class Scanner{
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
                             tokenArray.add(new PunctuationToken(curChar));
+                            break;
                     }
                     accum = "";
                     currentState = LOOKING;
                 }else
                 {
-                    ScanException e = new ScanException(" --STATE 1 " +
-                      "HAD UNEXPECTED CHARACTER-- ");
-                    accum = "";
-                    currentState = LOOKING;
+                    throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                      accum + "| HAD UNEXPECTED CHARACTER |"
+                      + curChar + "|--");
                 }
                 curIndex++;
                 break;
-            case STRING: 
+            case STRING:
                 if(Character.isLetterOrDigit(curChar))
                 {
                     accum += curChar;
@@ -155,7 +167,7 @@ public class Scanner{
                     if(accum.equals("false") || accum.equals("true"))
                     {
                        tokenArray.add(new BoolToken(accum));
-                    }else if(Arrays.asList(keywordArray).contains(accum))                      
+                    }else if(Arrays.asList(keywordArray).contains(accum))
                     {
                         tokenArray.add(new KeywordToken(accum));
                     } else
@@ -187,26 +199,28 @@ public class Scanner{
                             break;
                         case '(': case ')': case '{':
                         case '}': case ',': case ':':
-                            tokenArray.add(new PunctuationToken(curChar));                           
+                            tokenArray.add(new PunctuationToken(curChar));
+                            break;
                     }
                     accum = "";
                     currentState = LOOKING;
                 }else
                 {
-                   ScanException e = new ScanException(" --STATE 2 " +
-                    "HAD UNEXPECTED CHARACTER-- ");
+                  throw new ScanException(" --STATE INTEGER STARTED WITH |"+
+                    accum + "| HAD UNEXPECTED CHARACTER |"
+                    + curChar + "|--");
                 }
                 curIndex++;
                 break;
         }
     }
-    
-    public static void main(String[] args) {
-      Scanner test = new Scanner("test.txt");
-      
+
+    public static void main(String[] args) throws ScanException{
+      Scanner test = new Scanner("palindrome.flr");
+
       test.takeAllTokens();
       test.printTokenStrings();
     }
-    
-    
+
+
 }

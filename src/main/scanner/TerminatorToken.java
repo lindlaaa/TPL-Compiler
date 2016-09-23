@@ -1,5 +1,7 @@
-
-
+package src.main.scanner;
+/**
+ *
+ */
 public class TerminatorToken implements Token{
     String outputString = "Terminator ";
     public TerminatorToken(char inputChar){

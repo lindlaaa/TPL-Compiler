@@ -1,8 +1,6 @@
-
-
-//Last Modified: Avery 09.20
-
-
+/**
+ * 
+ */
 public class ParseException extends Exception{
 
 

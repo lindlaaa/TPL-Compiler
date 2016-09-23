@@ -1,5 +1,8 @@
+package src.main.scanner;
 
-
+/**
+ *
+ */
 public class PunctuationToken implements Token{
     String outputString = "Punctuation ";
     public PunctuationToken(char inputChar){

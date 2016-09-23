@@ -11,7 +11,13 @@ import java.util.*;
 
 
 /**
- *
+ *his class serves as a state machine. Its constructor expects a
+ *string as input. The input serves as a file path. If the files
+ *contents can’t be retrieved as a string, a generic exception
+ *is thrown. The scanner holds information about the current state
+ *and what is accepted as tokens. The scanner’s methods create tokens,
+ *fill the token array, and display the output
+ *for tokens within the array.
  */
 public class Scanner{
 
@@ -41,7 +47,12 @@ public class Scanner{
     }
 
     /**
-     * [printTokenStrings description]
+     * There is no input because this method works off of the token
+     * array that the other methods create.
+     * A for loop iterates through each element of the array and
+     * prints the token.
+     * Although the array may carry different types of tokens,
+     * the token interface enforced a toString() method.
      */
     public void printTokenStrings()
     {
@@ -52,9 +63,13 @@ public class Scanner{
     }
 
     /**
-     * Sets a loop that gets all tokens from the input string.
-     * Then makes sure accum is accounted for as a Token.
-     * @throws ScanException
+     * This method takes no input and may throw ScanException.
+     * It iterates through every character of inputFile by repeatedly
+     * calling takeNextToken().
+     * After the file has been fully read, the accumulator may
+     * still contain information.
+     * This method checks to see if it is empty or not and
+     * categorizes the accumulators content if necessary.
      */
     public void takeAllTokens() throws ScanException{
         do
@@ -82,7 +97,14 @@ public class Scanner{
     }
 
     /**
-     * [takeNextToken description]
+     * The individual characters are categorized in this method.
+     * It has no input parameter because it utilizes the scanner’s
+     * attributes.
+     * The code mirrors the DFA.
+     * The creation of tokens depends on the current state and
+     * what is read as the curChar. Unexpected characters will throw the
+     * ScanException. It serves more as a helper function
+     * to takeAllTokens().
      */
     public void takeNextToken() throws ScanException{
         curChar = inputFile.charAt(curIndex);

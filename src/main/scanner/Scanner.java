@@ -11,7 +11,7 @@ import java.util.*;
 
 
 /**
- *his class serves as a state machine. Its constructor expects a
+ *This class serves as a state machine. Its constructor expects a
  *string as input. The input serves as a file path. If the files
  *contents can’t be retrieved as a string, a generic exception
  *is thrown. The scanner holds information about the current state

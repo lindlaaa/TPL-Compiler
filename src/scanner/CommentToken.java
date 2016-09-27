@@ -8,7 +8,7 @@ package src.scanner;
 *requiring a toString() method.
 */
 public class CommentToken implements Token{
-   String outputString = "Identifier ";
+   String outputString = "Comment ";
    public CommentToken(String inputString){
        outputString += inputString;
    }

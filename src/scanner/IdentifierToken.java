@@ -7,8 +7,13 @@ package src.scanner;
  */
 public class IdentifierToken implements Token{
     String outputString = "Identifier ";
+	String idVal;
     public IdentifierToken(String inputString){
+        idVal = inputString;
         outputString += inputString;
+    }
+    public String getVal(){
+            return idVal;
     }
 
     /**
@@ -19,6 +24,7 @@ public class IdentifierToken implements Token{
      *  @return String A concatenation of the
      *                 string “Identifier “ with the character input.
      */
+    @Override
     public String toString(){
         return outputString;
     }

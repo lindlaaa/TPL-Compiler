@@ -30,6 +30,7 @@ public class Scanner{
   String inputFile;
   int curIndex = 0;
   int curLine = 1;
+  int curPos = 1;
 
   public Scanner(String filePath) throws ScanException{
       try{
@@ -68,6 +69,7 @@ public class Scanner{
   public void takeAllTokens() throws ScanException{
       do{
           takeNextToken();
+          curPos++;
       }
       while (curIndex < inputFile.length());
 
@@ -78,17 +80,14 @@ public class Scanner{
           }else if(Arrays.asList(keywordArray).contains(accum))
           {//need to add keywords to the array still
               tokenArray.add(new KeywordToken(accum));
-          }/*else if(accum.isNumeric())TODO TODO TODO FIXME
-          {
-            tokenArray.add(new IntToken(accum));
-          }*/else
+          }else
           {
               tokenArray.add(new IdentifierToken(accum));
           }
       }
   }
 
-  /**TODO FIXME
+  /**
    *  This function returns the contents of a comment,
    *  returning an error if no end of comment symbol is found
    *
@@ -145,17 +144,18 @@ public class Scanner{
                   case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
-                  case '{': //TODO FIXME
+                  case '{':
                       tokenArray.add(new CommentToken(getComment()));
                       break;
               }
           }else if(!Character.isWhitespace(curChar)){
             throw new ScanException(" Line: " + curLine +
-                    "--STATE: LOOKING, STARTED WITH |" + accum +
+                    " Col: " + curPos + "--STATE: LOOKING, STARTED WITH |" + accum +
                     "| HAD UNEXPECTED CHARACTER |" + curChar + "|--\n");
           }
           if(curChar == ('\n')){
             curLine++;
+            curPos = 0;
           }
           curIndex++;
           break;
@@ -165,6 +165,7 @@ public class Scanner{
           }else if(Character.isWhitespace(curChar)){
               if(curChar == ('\n')){
                 curLine++;
+                curPos = 0;
               }
 
               tokenArray.add(new IntToken(accum));
@@ -184,7 +185,7 @@ public class Scanner{
                   case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
-                  case '{': //TODO FIXME
+                  case '{':
                       tokenArray.add(new CommentToken(getComment()));
                       break;
               }
@@ -202,6 +203,7 @@ public class Scanner{
           }else if(Character.isWhitespace(curChar)){
               if(curChar == ('\n')){
                 curLine++;
+                curPos = 0;
               }
               if(accum.equals("false") || accum.equals("true")){
                  tokenArray.add(new BoolToken(accum));
@@ -232,7 +234,7 @@ public class Scanner{
                   case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
-                  case '{': //TODO FIXME
+                  case '{':
                       tokenArray.add(new CommentToken(getComment()));
                       break;
               }

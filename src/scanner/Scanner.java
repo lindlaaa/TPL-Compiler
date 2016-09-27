@@ -132,6 +132,7 @@ public class Scanner{
               accum += curChar;
               currentState = STRING;
           }else if(symbolString.indexOf(curChar) != -1){//terminator, punctuationToken, and opToken
+              accum = "";
               switch (curChar){//all symbols are self-delimiting
                   case ';': case '.':
                       tokenArray.add(new TerminatorToken(curChar));
@@ -145,7 +146,6 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       tokenArray.add(new CommentToken(getComment()));
-                      accum = "";
                       break;
               }
           }else if(!Character.isWhitespace(curChar)){
@@ -164,6 +164,7 @@ public class Scanner{
               currentState = LOOKING;
           }else if(symbolString.indexOf(curChar) != -1){
               tokenArray.add(new IntToken(accum));
+              accum = "";
               switch (curChar){
                   case ';': case '.':
                       tokenArray.add(new TerminatorToken(curChar));
@@ -177,10 +178,8 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       tokenArray.add(new CommentToken(getComment()));
-                      accum = "";
                       break;                              
               }
-              accum = "";
               currentState = LOOKING;
           }else{
               throw new ScanException(" --STATE: INTEGER, STARTED WITH |"+
@@ -210,6 +209,7 @@ public class Scanner{
               }else{
                   tokenArray.add(new IdentifierToken(accum));
               }
+              accum = "";
               switch (curChar){
                   case ';': case '.':
                       tokenArray.add(new TerminatorToken(curChar));
@@ -223,10 +223,8 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       tokenArray.add(new CommentToken(getComment()));
-                      accum = "";
                       break;
               }
-              accum = "";
               currentState = LOOKING;
           }else{
             throw new ScanException(" --STATE: STRING, STARTED WITH |"+

@@ -1,3 +1,4 @@
 #!/bin/bash
-
-java -cp . src.main.Compiler $1
+cd bin
+java -cp . src.main.Compiler ../test/$1
+cd ..

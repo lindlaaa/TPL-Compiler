@@ -26,7 +26,7 @@ public class IntToken implements Token{
      *
      * @return double representing the int value of this token
      */
-    public double getIntValue(){
+    public double getVal(){
         return intValue;
     }
 

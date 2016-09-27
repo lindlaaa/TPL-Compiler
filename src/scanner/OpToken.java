@@ -6,14 +6,16 @@ package src.scanner;
  */
 public class OpToken implements Token{
     String outputString = "Operator ";
-	char opVal;
+    char opVal;
+    
     public OpToken(char inputChar){
         outputString += inputChar;
     }
 	
-	public char getVal(){
-		return opVal;
-	}
+    public char getVal(){
+	return opVal;
+    }
+    
     /**
      *  When the token’s toString() is called,
      *  it will return a concatenation of the string “Operator “

@@ -6,14 +6,16 @@ package src.scanner;
  */
 public class KeywordToken implements Token{
     String outputString = "Keyword ";
-	String keyString;
+    String keyString;
+    
     public KeywordToken(String inputString){
         outputString += inputString;
     }
 	
-	public String getVal(){
-		return keyString;
-	}
+    public String getVal(){
+	return keyString;
+    }
+    
     /**
      *  When the token’s toString() is called,
      *  it will return a concatenation of the string “Keyword “

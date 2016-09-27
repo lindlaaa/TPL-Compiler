@@ -6,14 +6,16 @@ package src.scanner;
  */
 public class PunctuationToken implements Token{
     String outputString = "Punctuation ";
-	char punctVal;
+    char punctVal;
 	
     public PunctuationToken(char inputChar){
         outputString += inputChar;
     }
-	public char getVal(){
-		return punctVal;
-	}
+    
+    public char getVal(){
+	return punctVal;
+    }
+    
     /**
      *  When the token’s toString() is called, it will return a
      *  concatenation of the string “Punctuation “ with the

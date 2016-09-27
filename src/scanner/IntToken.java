@@ -11,12 +11,13 @@ public class IntToken implements Token{
 
     private final double MAX = Math.pow(2, 32) - 1;
     String outputString = "Integer ";
-    double intValue;
+    double intVal;
 
-    public IntToken(String inputInt) throws ScanException{
-        intValue = (Double.parseDouble(inputInt));
-        if( intValue > MAX ){
-          throw new ScanException( " --INTEGER VALUE TOO LARGE-- " );
+    public IntToken(String inputInt, int curLine, int curPos) throws ScanException{
+        intVal = (Double.parseDouble(inputInt));
+        if( intVal > MAX ){
+            throw new ScanException(" Line: " + curLine + "Position: " + curPos + 
+                " --INTEGER VALUE TOO LARGE-- " );
         }
         outputString += inputInt;
     }
@@ -27,7 +28,7 @@ public class IntToken implements Token{
      * @return double representing the int value of this token
      */
     public double getVal(){
-        return intValue;
+        return intVal;
     }
 
     /**

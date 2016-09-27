@@ -14,7 +14,6 @@ import java.util.*;
  */
 public class Scanner{
 
-
   public static final int LOOKING = 0;
   public static final int INTEGER = 1;
   public static final int STRING = 2;
@@ -30,10 +29,11 @@ public class Scanner{
   String inputFile;
   int curIndex = 0;
   int curLine = 1;
+  int curPos = 0;
 
   public Scanner(String filePath) throws ScanException{
       try{
-      inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
+        inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
       } catch (Exception e)
       {
         throw new ScanException(" --FLAIR FILE READ EXCEPTION--\n");
@@ -78,16 +78,30 @@ public class Scanner{
           }else if(Arrays.asList(keywordArray).contains(accum))
           {//need to add keywords to the array still
               tokenArray.add(new KeywordToken(accum));
-          }/*else if(accum.isNumeric())TODO TODO TODO FIXME
+          }else if(isNumeric(accum))
           {
-            tokenArray.add(new IntToken(accum));
-          }*/else
+            tokenArray.add(new IntToken(accum, curLine,curPos));
+          }else
           {
               tokenArray.add(new IdentifierToken(accum));
           }
       }
   }
-
+  public boolean isNumeric(String inputString)
+  {
+    int length = inputString.length();
+    if(length == 0){
+        return false;
+    }
+    
+    for (int i = 0; i < length; i++) {
+        char tempChar = inputString.charAt(i);
+        if (tempChar < '0' || tempChar > '9') {
+            return false;
+        }
+    }
+    return true;  
+  }
   /**TODO FIXME
    *  This function returns the contents of a comment,
    *  returning an error if no end of comment symbol is found
@@ -100,13 +114,13 @@ public class Scanner{
       while(curChar != '}')
       {
         output += curChar;
-        curIndex++;
+        curIndex++; curPos++;
         curChar = inputFile.charAt(curIndex);
       }
       return output + "}";
     }catch(Exception e){
-      throw new ScanException(" --HIT E.O.F. WHEN " +
-        "EXPECTING END COMMENT SYMBOL--\n");
+      throw new ScanException(" Line: " + curLine + "Position: " + curPos + 
+              "--HIT E.O.F. WHEN EXPECTING END COMMENT SYMBOL--\n");
     }
   }
 
@@ -150,28 +164,28 @@ public class Scanner{
                       break;
               }
           }else if(!Character.isWhitespace(curChar)){
-            throw new ScanException(" Line: " + curLine +
-                    "--STATE: LOOKING, STARTED WITH |" + accum +
+            throw new ScanException(" Line: " + curLine + "Position: " + curPos 
+                    + "--STATE: LOOKING, STARTED WITH |" + accum +
                     "| HAD UNEXPECTED CHARACTER |" + curChar + "|--\n");
           }
           if(curChar == ('\n')){
-            curLine++;
+            curLine++; curPos = 0;
           }
-          curIndex++;
+          curIndex++; curPos++;
           break;
       case INTEGER:
           if(Character.isDigit(curChar)){
               accum += curChar;
           }else if(Character.isWhitespace(curChar)){
               if(curChar == ('\n')){
-                curLine++;
+                curLine++; curPos = 0;
               }
 
               tokenArray.add(new IntToken(accum));
               accum = "";
               currentState = LOOKING;
           }else if(symbolString.indexOf(curChar) != -1){
-              tokenArray.add(new IntToken(accum));
+              tokenArray.add(new IntToken(accum, curLine,curPos));
               accum = "";
               switch (curChar){
                   case ';': case '.':
@@ -190,18 +204,19 @@ public class Scanner{
               }
               currentState = LOOKING;
           }else{
-              throw new ScanException(" --STATE: INTEGER, STARTED WITH |"+
-                accum + "| HAD UNEXPECTED CHARACTER |"
-                + curChar + "|--\n");
+              throw new ScanException(" Line: " + curLine + "Position: " + 
+                    curPos + " --STATE: INTEGER, STARTED WITH |" +
+                    accum + "| HAD UNEXPECTED CHARACTER |"
+                    + curChar + "|--\n");
           }
-          curIndex++;
+          curIndex++; curPos++;
           break;
       case STRING:
           if(Character.isLetterOrDigit(curChar)){
               accum += curChar;
           }else if(Character.isWhitespace(curChar)){
               if(curChar == ('\n')){
-                curLine++;
+                curLine++; curPos = 0;
               }
               if(accum.equals("false") || accum.equals("true")){
                  tokenArray.add(new BoolToken(accum));
@@ -238,11 +253,12 @@ public class Scanner{
               }
               currentState = LOOKING;
           }else{
-            throw new ScanException(" --STATE: STRING, STARTED WITH |"+
-              accum + "| HAD UNEXPECTED CHARACTER |"
-              + curChar + "|--\n");
+            throw new ScanException(" Line: " + curLine + "Position: " + curPos 
+                    + " --STATE: STRING, STARTED WITH |"+
+                    accum + "| HAD UNEXPECTED CHARACTER |"
+                    + curChar + "|--\n");
           }
-          curIndex++;
+          curIndex++; curPos++;
           break;
     }
   }

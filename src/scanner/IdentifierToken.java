@@ -7,11 +7,13 @@ package src.scanner;
  */
 public class IdentifierToken implements Token{
     String outputString = "Identifier ";
-	String idVal;
+    String idVal;
+    
     public IdentifierToken(String inputString){
         idVal = inputString;
         outputString += inputString;
     }
+    
     public String getVal(){
             return idVal;
     }

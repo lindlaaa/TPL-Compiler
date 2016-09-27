@@ -142,7 +142,7 @@ public class Scanner{
                   case '/': case '<': case '=':
                       tokenArray.add(new OpToken(curChar));
                       break;
-                  case '(': case ')': case ',': case ':': //FIXME
+                  case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
                   case '{': //TODO FIXME
@@ -183,7 +183,7 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       tokenArray.add(new CommentToken(getComment()));
-                      break;                              
+                      break;
               }
               currentState = LOOKING;
           }else{

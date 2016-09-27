@@ -15,7 +15,7 @@ public class IntToken implements Token{
 
     public IntToken(String inputInt) throws ScanException{
         intValue = (Double.parseDouble(inputInt));
-        if( intValue >= MAX ){
+        if( intValue > MAX ){
           throw new ScanException( " --INTEGER VALUE TOO LARGE-- " );
         }
         outputString += inputInt;

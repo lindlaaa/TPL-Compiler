@@ -178,7 +178,7 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       tokenArray.add(new CommentToken(getComment()));
-                      break;                              
+                      break;
               }
               currentState = LOOKING;
           }else{

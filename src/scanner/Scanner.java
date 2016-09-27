@@ -141,7 +141,7 @@ public class Scanner{
                   case '/': case '<': case '=':
                       tokenArray.add(new OpToken(curChar));
                       break;
-                  case '(': case ')': case ',': case ':': //FIXME
+                  case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
                   case '{': //TODO FIXME

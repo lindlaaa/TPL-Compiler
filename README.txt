@@ -14,6 +14,16 @@ Documentation:    cd /doc
 Date:       2016/09/23
 
 
+Known Issues:
+
+
+Directory Structure:
+  bin/ : stores the binary files
+  doc/ : stores the javadoc in html form
+  src/ : stores the .java files in a structure that is self descriptive
+  test/: stores the .flr files used to test the project parts
+
+
 Hight level Scanner design:
    Our scanner uses the same logic as a finite state automata.
    As the scanner takes in tokens, it switches states for when

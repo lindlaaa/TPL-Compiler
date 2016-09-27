@@ -18,7 +18,7 @@ public class Scanner{
   public static final int LOOKING = 0;
   public static final int INTEGER = 1;
   public static final int STRING = 2;
-  String symbolString = "+-*/<=(){}.,:;";
+  String symbolString = "+-*/<=(){.,:;";
   String[] keywordArray = {"if", "then", "else", "integer", "boolean",
     "true", "false", "not", "or", "and", "print", "program",
     "function", "return", "begin", "end"};
@@ -144,9 +144,9 @@ public class Scanner{
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
                   case '{': //TODO FIXME
-                      accum += '{';
-                      tokenArray.add(new CommentToken(getComment());
+                      tokenArray.add(new CommentToken(getComment()));
                       accum = "";
+                      break;
               }
           }else if(!Character.isWhitespace(curChar)){
             throw new ScanException(" --STATE: LOOKING, STARTED WITH |"+
@@ -172,10 +172,13 @@ public class Scanner{
                   case '/': case '<': case '=':
                       tokenArray.add(new OpToken(curChar));
                       break;
-                  case '(': case ')': case '{':
-                  case '}': case ',': case ':':
+                  case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
                       break;
+                  case '{': //TODO FIXME
+                      tokenArray.add(new CommentToken(getComment()));
+                      accum = "";
+                      break;                              
               }
               accum = "";
               currentState = LOOKING;
@@ -215,9 +218,12 @@ public class Scanner{
                   case '/': case '<': case '=':
                       tokenArray.add(new OpToken(curChar));
                       break;
-                  case '(': case ')': case '{':
-                  case '}': case ',': case ':':
+                  case '(': case ')': case ',': case ':':
                       tokenArray.add(new PunctuationToken(curChar));
+                      break;
+                  case '{': //TODO FIXME
+                      tokenArray.add(new CommentToken(getComment()));
+                      accum = "";
                       break;
               }
               accum = "";

@@ -5,25 +5,44 @@ package src.scanner;
  * It implements the Token interface, requiring a toString() method.
  */
 public class OpToken implements Token{
-    String outputString = "Operator ";
+
+  String outputString = "Operator ";
 	char opVal;
-    public OpToken(char inputChar){
-        outputString += inputChar;
-    }
-	
+  int column;
+
+  public OpToken(char inputChar, int c){
+    outputString += inputChar;
+    column = c;
+  }
+
+  /**
+   *  Returns the column number this Token is in
+   *
+   *  @return int Representing the column location of this Token
+   */
+  public int getColumn(){
+    return column;
+  }
+
+  /**
+   *  Returns the op represented by this Token
+   *
+   *  @return String  Represents the op represented by this Token
+   */
 	public char getVal(){
 		return opVal;
 	}
-    /**
-     *  When the token’s toString() is called,
-     *  it will return a concatenation of the string “Operator “
-     *  with the character input.
-     *
-     *  @return String A concatenation of the string “Operator “
-     *                 with the character input.
-     */
-    @Override
-    public String toString(){
-        return outputString;
-    }
+
+  /**
+   *  When the token’s toString() is called,
+   *  it will return a concatenation of the string “Operator “
+   *  with the character input.
+   *
+   *  @return String A concatenation of the string “Operator “
+   *                 with the character input.
+   */
+  @Override
+  public String toString(){
+      return outputString;
+  }
 }

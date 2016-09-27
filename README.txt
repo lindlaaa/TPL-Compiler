@@ -1,13 +1,11 @@
 Authors: Avery Lindley,  Noah Schroeder, Grant Siebring, Blake Eggleston
 
 File to compile:  Scanner.java
-Input:            Path of the file you want scanned
+Input:            File in the test/ folder you want Scanned
 Output:           String of token objects representing the input file
 
-Compile & Run:    1. cd src/main/scanner
-                  2. javac -d bin Scanner.java
-                  3. cd bin
-                  4. java Scanner <desired file path>
+Compile & Run:    1.  make
+                  2.  ./flairs <fileName in test/>
 
 Documentation:    cd /doc
 
@@ -24,7 +22,7 @@ Directory Structure:
   test/: stores the .flr files used to test the project parts
 
 
-Hight level Scanner design:
+High level Scanner design:
    Our scanner uses the same logic as a finite state automata.
    As the scanner takes in tokens, it switches states for when
    it is looking for a token, when it is taking an integer,

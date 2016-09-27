@@ -5,10 +5,14 @@ package src.scanner;
  * It implements the Token interface, requiring a toString() method.
  */
 public class TerminatorToken implements Token{
+
   String outputString = "Terminator ";
 	char termVal;
-  public TerminatorToken(char inputChar){
-      outputString += inputChar;
+  int column;
+
+  public TerminatorToken(char inputChar, int c){
+    outputString += inputChar;
+    column = c;
   }
 
   /**

@@ -9,6 +9,7 @@ public class IdentifierToken implements Token{
 
   String outputString = "Identifier ";
 	String idVal;
+  int column;
 
   public IdentifierToken(String inputString, int c){
     idVal = inputString;

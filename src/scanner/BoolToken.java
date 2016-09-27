@@ -7,11 +7,15 @@ package src.scanner;
 public class BoolToken implements Token{
 
   String outputString = "Boolean ";
-	String boolValue;
+	boolean boolValue;
   int column;
 
   public BoolToken(String inputString, int c){
-	  boolValue = inputString;
+    if(inputString == "true"){
+      boolValue = true;
+    }else{
+      boolValue = false;
+    }
     outputString += inputString;
     column = c;
   }

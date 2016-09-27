@@ -25,6 +25,6 @@ public class LexicalException extends Exception{
   @Override
   public String toString(){
 
-    return "FLAIR LEXICAL EXCEPTION -- " + super.toString();
+    return "--FLAIR LEXICAL EXCEPTION-- \n" + super.toString();
   }
 }

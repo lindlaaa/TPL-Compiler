@@ -29,6 +29,7 @@ public class Scanner{
   char curChar;
   String inputFile;
   int curIndex = 0;
+  int curLine = 0;
 
   public Scanner(String filePath) throws ScanException{
       try{
@@ -149,9 +150,9 @@ public class Scanner{
                       break;
               }
           }else if(!Character.isWhitespace(curChar)){
-            throw new ScanException(" --STATE: LOOKING, STARTED WITH |"+
-              accum + "| HAD UNEXPECTED CHARACTER |"
-              + curChar + "|--\n");
+            throw new ScanException(" Line: " + curLine +
+                    "--STATE: LOOKING, STARTED WITH |" + accum + 
+                    "| HAD UNEXPECTED CHARACTER |" + curChar + "|--\n");
           }
           curIndex++;
           break;
@@ -159,6 +160,10 @@ public class Scanner{
           if(Character.isDigit(curChar)){
               accum += curChar;
           }else if(Character.isWhitespace(curChar)){
+              if(curChar == ('\r')){
+                curLine++;  
+              }
+              
               tokenArray.add(new IntToken(accum));
               accum = "";
               currentState = LOOKING;
@@ -192,6 +197,9 @@ public class Scanner{
           if(Character.isLetterOrDigit(curChar)){
               accum += curChar;
           }else if(Character.isWhitespace(curChar)){
+              if(curChar == ('\r')){
+                curLine++;  
+              }
               if(accum.equals("false") || accum.equals("true")){
                  tokenArray.add(new BoolToken(accum));
               }else if(Arrays.asList(keywordArray).contains(accum)){

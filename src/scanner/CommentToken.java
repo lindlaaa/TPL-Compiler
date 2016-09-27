@@ -10,13 +10,15 @@ package src.scanner;
 public class CommentToken implements Token{
    String outputString = "Comment ";
    String commentVal;
-   public CommentToken(String inputString){
-	   commentString = inputString;
-       outputString += inputString;
-   }
-	public String getVal(){
-		return commentVal;
-	}
+   
+    public CommentToken(String inputString){
+	commentVal = inputString;
+        outputString += inputString;
+    }
+    
+    public String getVal(){
+	return commentVal;
+    }
 	
    /**
     *  When the token’s toString() is

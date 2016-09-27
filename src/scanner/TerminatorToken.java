@@ -6,13 +6,16 @@ package src.scanner;
  */
 public class TerminatorToken implements Token{
     String outputString = "Terminator ";
-	char termVal;
+    char termVal;
+    
     public TerminatorToken(char inputChar){
         outputString += inputChar;
     }
-	public char getVal(){
-		return termVal;
-	}
+    
+    public char getVal(){
+	return termVal;
+    }
+    
     /**
      *  When the token’s toString() is called, it will return a
      *  concatenation of the string “Terminator “ with the

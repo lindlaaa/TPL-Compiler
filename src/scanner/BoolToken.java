@@ -6,15 +6,15 @@ package src.scanner;
  */
 public class BoolToken implements Token{
     String outputString = "Boolean ";
-	String boolValue;
+    boolean boolVal;
         
     public BoolToken(String inputString){
-	boolValue = inputString;
+	boolVal = Boolean.parseBoolean(inputString);
         outputString += inputString;
     }
 	
-    public String getVal(){
-	return boolValue;
+    public boolean getVal(){
+	return boolVal;
     }
     /**
      *  When the token's toString()

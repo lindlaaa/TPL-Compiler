@@ -104,7 +104,6 @@ public class Scanner{
       throw new ScanException(" --HIT E.O.F. WHEN " +
         "EXPECTING END COMMENT SYMBOL--\n");
     }
-
   }
 
   /**

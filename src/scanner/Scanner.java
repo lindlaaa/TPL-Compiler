@@ -138,6 +138,15 @@ public class Scanner{
                 tokenArray.add(new CommentToken(getComment()));
                 break;    
     }
+    private void boolKeyId(){
+        if(accum.equals("false") || accum.equals("true")){
+            tokenArray.add(new BoolToken(accum));
+        }else if(Arrays.asList(keywordArray).contains(accum)){
+            tokenArray.add(new KeywordToken(accum));
+        }else{
+            tokenArray.add(new IdentifierToken(accum));
+        }        
+    }
     /**
      * The individual characters are categorized in this method.
      * It has no input parameter because it utilizes the scanner’s
@@ -199,23 +208,11 @@ public class Scanner{
                     if(curChar == ('\n')){
                         curLine++; curPos = 0;
                     }
-                    if(accum.equals("false") || accum.equals("true")){
-                        tokenArray.add(new BoolToken(accum));
-                    }else if(Arrays.asList(keywordArray).contains(accum)){
-                        tokenArray.add(new KeywordToken(accum));
-                    }else{
-                        tokenArray.add(new IdentifierToken(accum));
-                    }
+                    boolKeyId();
                     accum = "";
                     currentState = LOOKING;
                 }else if(symbolString.indexOf(curChar) != -1){
-                    if(accum.equals("false") || accum.equals("true")){
-                        tokenArray.add(new BoolToken(accum));
-                    }else if(Arrays.asList(keywordArray).contains(accum)){
-                        tokenArray.add(new KeywordToken(accum));
-                    }else{
-                        tokenArray.add(new IdentifierToken(accum));
-                    }
+                    boolKeyId();
                     handleSymbols();
                     currentState = LOOKING;
                 }else{

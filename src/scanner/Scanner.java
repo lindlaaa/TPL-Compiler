@@ -96,10 +96,13 @@ public class Scanner{
   private String getComment() throws ScanException{
     String output = "";
     try{
-      while(curChar != '}'){
+      while(curChar != '}')
+      {
         output += curChar;
+        curIndex++;
+        curChar = inputFile.charAt(curIndex);
       }
-      return output;
+      return output + "}";
     }catch(Exception e){
       throw new ScanException(" --HIT E.O.F. WHEN " +
         "EXPECTING END COMMENT SYMBOL--\n");
@@ -142,8 +145,7 @@ public class Scanner{
                       break;
                   case '{': //TODO FIXME
                       accum += '{';
-                      tokenArray.add(new CommentToken(
-                                        '{' + getComment() + '}'));
+                      tokenArray.add(new CommentToken(getComment());
                       accum = "";
               }
           }else if(!Character.isWhitespace(curChar)){

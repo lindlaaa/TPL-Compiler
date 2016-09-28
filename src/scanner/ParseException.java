@@ -25,6 +25,6 @@ public class ParseException extends Exception{
   @Override
   public String toString(){
 
-    return "FLAR PARSE EXCEPTION -- " + super.toString();
+    return "--FLAR PARSE EXCEPTION-- \n" + super.toString();
   }
 }

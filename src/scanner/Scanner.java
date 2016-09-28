@@ -98,7 +98,6 @@ public class Scanner{
       throw new ScanException(" --HIT E.O.F. WHEN " +
                   "EXPECTING END COMMENT SYMBOL--\n");
     }
-  }
 
   /**
    * The individual characters are categorized in this method.
@@ -237,5 +236,4 @@ public class Scanner{
         curIndex++;
         break;
     }
-  }
 }

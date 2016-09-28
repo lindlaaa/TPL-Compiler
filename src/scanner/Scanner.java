@@ -86,6 +86,7 @@ public class Scanner{
    */
   private String getComment() throws ScanException{
     String output = "";
+
     try{
       while(curChar != '}'){
         output += curChar;
@@ -109,20 +110,26 @@ public class Scanner{
    * ScanException. It serves more as a helper function
    * to takeAllTokens().
    */
-  public void takeNextToken() throws ScanException{
+  public void takeNextToken() throws ScanException
+  {
     curChar = inputFile.charAt(curIndex);
 
-    switch (currentState){
+    switch (currentState)
+    {
       case LOOKING:
-        if(Character.isDigit(curChar)){
+        if(Character.isDigit(curChar))
+        {
           accum += curChar;
           currentState = INTEGER;
-        }else if(Character.isLetter(curChar)){
+        }else if(Character.isLetter(curChar))
+        {
           accum += curChar;
           currentState = STRING;
-        }else if(symbolString.indexOf(curChar) != -1){
+        }else if(symbolString.indexOf(curChar) != -1)
+        {
           accum = "";
-          switch (curChar){//all symbols are self-delimiting
+          switch (curChar)
+          {
             case ';': case '.':
               tokenArray.add(new TerminatorToken(curChar, curLine));
               break;
@@ -136,33 +143,40 @@ public class Scanner{
             case '{':
               tokenArray.add(new CommentToken(getComment(), curLine));
               break;
-            }
-        }else if(!Character.isWhitespace(curChar)){
+          }
+        }else if(!Character.isWhitespace(curChar))
+        {
           throw new ScanException(
                   "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
                   "  Scanner.java:ln:"+curLine+"col:"+curPos+"--\n");
         }
-        if(curChar == ('\n')){
+        if(curChar == ('\n'))
+        {
           curLine++;
           curPos = 0;
         }
         curIndex++;
         break;
       case INTEGER:
-        if(Character.isDigit(curChar)){
+        if(Character.isDigit(curChar))
+        {
           accum += curChar;
-        }else if(Character.isWhitespace(curChar)){
-          if(curChar == ('\n')){
+        }else if(Character.isWhitespace(curChar))
+        {
+          if(curChar == ('\n'))
+          {
             curLine++;
             curPos = 0;
           }
           tokenArray.add(new IntToken(accum, curLine));
           accum = "";
           currentState = LOOKING;
-        }else if(symbolString.indexOf(curChar) != -1){
+        }else if(symbolString.indexOf(curChar) != -1)
+        {
           tokenArray.add(new IntToken(accum, curLine));
           accum = "";
-          switch (curChar){
+          switch (curChar)
+          {
             case ';': case '.':
               tokenArray.add(new TerminatorToken(curChar, curLine));
               break;
@@ -176,9 +190,10 @@ public class Scanner{
             case '{':
               tokenArray.add(new CommentToken(getComment(), curLine));
               break;
-            }
+          }
             currentState = LOOKING;
-        }else{
+        }else
+        {
           throw new ScanException(
                   "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
                   "  Scanner.java:ln:"+curLine+"col:"+curPos+"--\n");
@@ -186,32 +201,43 @@ public class Scanner{
         curIndex++;
         break;
       case STRING:
-        if(Character.isLetterOrDigit(curChar)){
+        if(Character.isLetterOrDigit(curChar))
+        {
           accum += curChar;
-        }else if(Character.isWhitespace(curChar)){
-          if(curChar == ('\n')){
+        }else if(Character.isWhitespace(curChar))
+        {
+          if(curChar == ('\n'))
+          {
             curLine++;
             curPos = 0;
           }
-          if(accum.equals("false") || accum.equals("true")){
+          if(accum.equals("false") || accum.equals("true"))
+          {
              tokenArray.add(new BoolToken(accum, curLine));
-          }else if(Arrays.asList(keywordArray).contains(accum)){
+          }else if(Arrays.asList(keywordArray).contains(accum))
+          {
               tokenArray.add(new KeywordToken(accum, curLine));
-          }else{
+          }else
+          {
               tokenArray.add(new IdentifierToken(accum, curLine));
           }
           accum = "";
           currentState = LOOKING;
-        }else if(symbolString.indexOf(curChar) != -1){
-          if(accum.equals("false") || accum.equals("true")){
+        }else if(symbolString.indexOf(curChar) != -1)
+        {
+          if(accum.equals("false") || accum.equals("true"))
+          {
              tokenArray.add(new BoolToken(accum, curLine));
-          }else if(Arrays.asList(keywordArray).contains(accum)){
+          }else if(Arrays.asList(keywordArray).contains(accum))
+          {
               tokenArray.add(new KeywordToken(accum, curLine));
-          }else{
+          }else
+          {
               tokenArray.add(new IdentifierToken(accum, curLine));
           }
           accum = "";
-          switch (curChar){
+          switch (curChar)
+          {
             case ';': case '.':
               tokenArray.add(new TerminatorToken(curChar, curLine));
               break;
@@ -227,12 +253,14 @@ public class Scanner{
               break;
           }
           currentState = LOOKING;
-        }else{
+        }else
+        {
           throw new ScanException(
                   "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
-                  "  Scanner.java:ln:"+curLine+"col:"+curPos+"--\n");
+                  "  Scanner.java:ln:"+curLine+" col:"+curPos+"--\n");
         }
         curIndex++;
         break;
     }
+  }
 }

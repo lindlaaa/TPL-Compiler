@@ -94,7 +94,7 @@ public class Scanner{
         }
         for (int i = 0; i < length; i++) {
             char tempChar = inputString.charAt(i);
-            if (tempChar < '0' || tempChar > '9') {
+            if (!Character.isDigit(tempChar)) {
                 return false;
             }
         }
@@ -147,6 +147,11 @@ public class Scanner{
             tokenArray.add(new IdentifierToken(accum));
         }        
     }
+    private void callScanException(){
+        throw new ScanException(" Line: " + curLine + "Position: " + 
+            curPos + "--STATE: LOOKING, STARTED WITH |" + accum +
+            "| HAD UNEXPECTED CHARACTER |" + curChar + "|--\n");
+    }
     /**
      * The individual characters are categorized in this method.
      * It has no input parameter because it utilizes the scanner’s
@@ -170,9 +175,7 @@ public class Scanner{
                 }else if(symbolString.indexOf(curChar) != -1){
                     handleSymbols();
                 }else if(!Character.isWhitespace(curChar)){
-                    throw new ScanException(" Line: " + curLine + "Position: " + 
-                        curPos + "--STATE: LOOKING, STARTED WITH |" + accum +
-                        "| HAD UNEXPECTED CHARACTER |" + curChar + "|--\n");
+                    callScanException();
                 }
                 if(curChar == ('\n')){
                     curLine++; curPos = 0;
@@ -194,10 +197,7 @@ public class Scanner{
                     handleSymbols();
                     currentState = LOOKING;
                 }else{
-                    throw new ScanException(" Line: " + curLine + "Position: " + 
-                        curPos + " --STATE: INTEGER, STARTED WITH |" +
-                        accum + "| HAD UNEXPECTED CHARACTER |"
-                        + curChar + "|--\n");
+                    callScanException();
                 }
                 curIndex++; curPos++;
                 break;
@@ -216,13 +216,10 @@ public class Scanner{
                     handleSymbols();
                     currentState = LOOKING;
                 }else{
-                    throw new ScanException(" Line: " + curLine + "Position: "
-                        + curPos + " --STATE: STRING, STARTED WITH |" +
-                        accum + "| HAD UNEXPECTED CHARACTER |"
-                        + curChar + "|--\n");
+                    callScanException();
                 }
-            curIndex++; curPos++;
-            break;
+                curIndex++; curPos++;
+             break;
         }
     }
 }

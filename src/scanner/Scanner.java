@@ -34,7 +34,7 @@ public class Scanner{
     try{
     inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
     }catch (Exception e){
-      throw new ScanException(" --FLAIR FILE READ EXCEPTION--\n");
+      throw new ScanException("--Flair file read error--\n");
     }
   }
 
@@ -95,8 +95,8 @@ public class Scanner{
       }
       return output + "}";
     }catch(Exception e){
-      throw new ScanException(" --HIT E.O.F. WHEN " +
-                  "EXPECTING END COMMENT SYMBOL--\n");
+      throw new ScanException("--Hit end of file when " +
+                  "expecting end-comment symbol--\n");
     }
   }
 
@@ -147,8 +147,8 @@ public class Scanner{
         }else if(!Character.isWhitespace(curChar))
         {
           throw new ScanException(
-                  "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
-                  "  Scanner.java:ln:"+curLine+"col:"+curPos+"--\n");
+                  "--Had unexpected character |" +curChar+ "| at"+
+                  " line:"+curLine+" col:"+curPos+"--\n");
         }
         if(curChar == ('\n'))
         {
@@ -195,8 +195,8 @@ public class Scanner{
         }else
         {
           throw new ScanException(
-                  "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
-                  "  Scanner.java:ln:"+curLine+"col:"+curPos+"--\n");
+                  "--Has unexpected character |" +curChar+ "| at"+
+                  " line:"+curLine+" col:"+curPos+"--\n");
         }
         curIndex++;
         break;
@@ -213,13 +213,13 @@ public class Scanner{
           }
           if(accum.equals("false") || accum.equals("true"))
           {
-             tokenArray.add(new BoolToken(accum, curLine));
+            tokenArray.add(new BoolToken(accum, curLine));
           }else if(Arrays.asList(keywordArray).contains(accum))
           {
-              tokenArray.add(new KeywordToken(accum, curLine));
+            tokenArray.add(new KeywordToken(accum, curLine));
           }else
           {
-              tokenArray.add(new IdentifierToken(accum, curLine));
+            tokenArray.add(new IdentifierToken(accum, curLine));
           }
           accum = "";
           currentState = LOOKING;
@@ -230,10 +230,10 @@ public class Scanner{
              tokenArray.add(new BoolToken(accum, curLine));
           }else if(Arrays.asList(keywordArray).contains(accum))
           {
-              tokenArray.add(new KeywordToken(accum, curLine));
+            tokenArray.add(new KeywordToken(accum, curLine));
           }else
           {
-              tokenArray.add(new IdentifierToken(accum, curLine));
+            tokenArray.add(new IdentifierToken(accum, curLine));
           }
           accum = "";
           switch (curChar)
@@ -256,8 +256,8 @@ public class Scanner{
         }else
         {
           throw new ScanException(
-                  "\n--HAD UNEXPECTED CHARACTER |" +curChar+ "| at\n"+
-                  "  Scanner.java:ln:"+curLine+" col:"+curPos+"--\n");
+                  "--Had unexpected character|" +curChar+ "| at"+
+                  " line:"+curLine+" col:"+curPos+"--\n");
         }
         curIndex++;
         break;

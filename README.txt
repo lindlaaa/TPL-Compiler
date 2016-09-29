@@ -1,13 +1,12 @@
 Authors: Avery Lindley,  Noah Schroeder, Grant Siebring, Blake Eggleston
 
-File to compile:  Scanner.java
 Input:            File in the test/ folder you want Scanned
 Output:           String of token objects representing the input file
 
 Compile & Run:    1.  make
                   2.  ./flairs <fileName in test/>
 
-Documentation:    cd /doc
+Documentation:    doc/
 
 Date:       2016/09/23
 

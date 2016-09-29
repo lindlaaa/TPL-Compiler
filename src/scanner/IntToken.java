@@ -17,8 +17,8 @@ public class IntToken implements Token{
   public IntToken(String inputInt, int c) throws ScanException{
     intValue = Long.parseLong(inputInt);
     if( intValue > MAX ){
-      throw new ScanException("--Integer value too large: "+inputInt+
-                              " at line:" +c+ "--\n");
+      throw new ScanException("--Integer value too large: |"+inputInt+
+                              "| at line:" +c+ "--\n");
     }
     outputString += inputInt;
     column = c;

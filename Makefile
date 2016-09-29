@@ -6,3 +6,5 @@ all:
 clean:
 	rm -rf doc/*
 	rm -rf bin/*
+	cp test/doNotDelete.txt bin/
+	cp test/doNotDelete.txt doc/

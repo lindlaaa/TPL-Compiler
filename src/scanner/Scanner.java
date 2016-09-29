@@ -80,7 +80,7 @@ public class Scanner{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }
     }
-
+    tokenArray.add(new EOFToken());
     return tokenArray;
   }
 

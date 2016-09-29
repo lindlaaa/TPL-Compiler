@@ -11,7 +11,11 @@ public class IdentifierToken implements Token{
 	String idVal;
   int column;
 
-  public IdentifierToken(String inputString, int c){
+  public IdentifierToken(String inputString,int c) throws ScanException{
+    if(inputString.length() > 256){
+      throw new ScanException("--Identifier too long. Id starting with "
+                              + inputString.substring(0, 12)+"...--\n");
+    }
     idVal = inputString;
     outputString += inputString;
     column = c;

@@ -12,7 +12,7 @@ public class IntToken implements Token{
   private final long MAX = 4294967295L;
   String outputString = "Integer ";
   long intValue;
-  int column;
+  int line;
 
   public IntToken(String inputInt, int c) throws ScanException{
     intValue = Long.parseLong(inputInt);
@@ -21,7 +21,7 @@ public class IntToken implements Token{
                               "| at line:" +c+ "--\n");
     }
     outputString += inputInt;
-    column = c;
+    line = c;
   }
 
   /**
@@ -34,12 +34,12 @@ public class IntToken implements Token{
   }
 
   /**
-   *  Returns the column number this Token is in
+   *  Returns the line number this Token is in
    *
-   *  @return int Representing the column location of this Token
+   *  @return int Representing the line location of this Token
    */
-  public int getColumn(){
-    return column;
+  public int getline(){
+    return line;
   }
 
   /**

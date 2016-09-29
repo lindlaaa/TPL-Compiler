@@ -8,20 +8,20 @@ public class OpToken implements Token{
 
   String outputString = "Operator ";
 	char opVal;
-  int column;
+  int line;
 
   public OpToken(char inputChar, int c){
     outputString += inputChar;
-    column = c;
+    line = c;
   }
 
   /**
-   *  Returns the column number this Token is in
+   *  Returns the line number this Token is in
    *
-   *  @return int Representing the column location of this Token
+   *  @return int Representing the line location of this Token
    */
-  public int getColumn(){
-    return column;
+  public int getline(){
+    return line;
   }
 
   /**

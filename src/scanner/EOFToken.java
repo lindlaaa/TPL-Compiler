@@ -7,10 +7,11 @@ package src.scanner;
 public class EOFToken implements Token{
 
   String outputString = "EOFToken ";
-    int column;
+  int line;
 
-  public EOFToken(){
+  public EOFToken(int c){
     outputString += '$';
+    line = c;
   }
 
   /**
@@ -23,8 +24,17 @@ public class EOFToken implements Token{
     }
 
   /**
+   *  Returns the line number this Token is in
+   *
+   *  @return int Representing the line location of this Token
+   */
+  public int getline(){
+    return line;
+  }
+
+  /**
    *  When the token’s toString() is called, it will return a
-   *  the char EOF 
+   *  the char EOF
    *
    *  @return EOF symbol
    */

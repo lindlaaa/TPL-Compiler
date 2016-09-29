@@ -8,11 +8,11 @@ public class KeywordToken implements Token{
 
   String outputString = "Keyword ";
 	String keyString;
-  int column;
+  int line;
 
   public KeywordToken(String inputString, int c){
     outputString += inputString;
-    column = c;
+    line = c;
   }
 
   /**
@@ -25,12 +25,12 @@ public class KeywordToken implements Token{
 	}
 
   /**
-   *  Returns the column number this Token is in
+   *  Returns the line number this Token is in
    *
-   *  @return int Representing the column location of this Token
+   *  @return int Representing the line location of this Token
    */
-  public int getColumn(){
-    return column;
+  public int getline(){
+    return line;
   }
 
   /**

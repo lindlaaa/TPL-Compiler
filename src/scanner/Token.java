@@ -10,5 +10,5 @@ public interface Token{
     @Override
     public String toString();
 
-    public int getColumn();
+    public int getline();
 }

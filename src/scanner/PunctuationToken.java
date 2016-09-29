@@ -8,11 +8,11 @@ public class PunctuationToken implements Token{
 
   String outputString = "Punctuation ";
 	char punctVal;
-  int column;
+  int line;
 
   public PunctuationToken(char inputChar, int c){
     outputString += inputChar;
-    column = c;
+    line = c;
   }
 
   /**
@@ -25,12 +25,12 @@ public class PunctuationToken implements Token{
 	}
 
   /**
-   *  Returns the column number this Token is in
+   *  Returns the line number this Token is in
    *
-   *  @return int Representing the column location of this Token
+   *  @return int Representing the line location of this Token
    */
-  public int getColumn(){
-    return column;
+  public int getline(){
+    return line;
   }
 
   /**

@@ -80,7 +80,7 @@ public class Scanner{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }
     }
-    tokenArray.add(new EOFToken());
+    tokenArray.add(new EOFToken(curLine));
     return tokenArray;
   }
 
@@ -88,7 +88,7 @@ public class Scanner{
    *  CHecks if a string is a number value
    *
    *  @param  inputString String version of a number
-   *  
+   *
    *  @return boolean Tells if a string can be converted to a integer
    */
   private boolean isNumeric(String inputString)

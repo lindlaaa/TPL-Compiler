@@ -73,7 +73,7 @@ public class Scanner{
       }else if(Arrays.asList(keywordArray).contains(accum)){
         tokenArray.add(new KeywordToken(accum, curLine));
       }else if(isNumeric(accum)){
-        tokenArray.add(new IntToken(accum, curLine,curPos));
+        tokenArray.add(new IntToken(accum, curLine));
       }else{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }

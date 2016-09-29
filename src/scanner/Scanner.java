@@ -72,10 +72,26 @@ public class Scanner{
         tokenArray.add(new BoolToken(accum, curLine));
       }else if(Arrays.asList(keywordArray).contains(accum)){
         tokenArray.add(new KeywordToken(accum, curLine));
+      //}else if(isNumeric(accum)){
+      //  tokenArray.add(new IntToken(accum, curLine,curPos));
       }else{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }
     }
+  }
+  private boolean isNumeric(String inputString)
+  {
+    int length = inputString.length();
+    if(length == 0){
+      return false;
+    }
+    for (int i = 0; i < length; i++) {
+      char tempChar = inputString.charAt(i);
+      if (!Character.isDigit(tempChar)) {
+        return false;
+      }
+    }
+    return true;  
   }
 
   /**
@@ -93,13 +109,39 @@ public class Scanner{
         curIndex++;
         curChar = inputFile.charAt(curIndex);
       }
-      return output + "}";
+      return output + '}';
     }catch(Exception e){
       throw new ScanException("--Hit end of file when " +
                   "expecting end-comment symbol--\n");
     }
   }
-
+  private void handleSymbols(){
+    accum = "";
+    switch (curChar){//all symbols are self-delimiting
+      case ';': case '.':
+        tokenArray.add(new TerminatorToken(curChar));
+        break;
+      case '+': case '-': case '*':
+      case '/': case '<': case '=':
+        tokenArray.add(new OpToken(curChar));
+        break;
+      case '(': case ')': case ',': case ':':
+        tokenArray.add(new PunctuationToken(curChar));
+        break;
+      case '{': 
+        tokenArray.add(new CommentToken(getComment()));
+        break;    
+    }
+    
+    private void handleStrngs(){
+      if(accum.equals("false") || accum.equals("true")){
+        tokenArray.add(new BoolToken(accum));
+      }else if(Arrays.asList(keywordArray).contains(accum)){
+        tokenArray.add(new KeywordToken(accum));
+      }else{
+        tokenArray.add(new IdentifierToken(accum));
+      }        
+    }
   /**
    * The individual characters are categorized in this method.
    * It has no input parameter because it utilizes the scanner’s

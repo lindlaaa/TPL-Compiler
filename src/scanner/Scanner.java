@@ -60,8 +60,10 @@ public class Scanner{
    * still contain information.
    * This method checks to see if it is empty or not and
    * categorizes the accumulators content if necessary.
+   *
+   *  @return List<Token> Represents the input file as a List of Tokens
    */
-  public void takeAllTokens() throws ScanException{
+  public List<Token> takeAllTokens() throws ScanException{
     do{
       takeNextToken();
       curPos++;
@@ -78,7 +80,17 @@ public class Scanner{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }
     }
+
+    return tokenArray;
   }
+
+  /**
+   *  CHecks if a string is a number value
+   *
+   *  @param  inputString String version of a number
+   *  
+   *  @return boolean Tells if a string can be converted to a integer
+   */
   private boolean isNumeric(String inputString)
   {
     int length = inputString.length();
@@ -108,6 +120,11 @@ public class Scanner{
         output += curChar;
         curIndex++;
         curPos++;
+        if(curChar == ('\n'))
+        {
+          curLine++;
+          curPos = 1;
+        }
         curChar = inputFile.charAt(curIndex);
       }
       return output + '}';

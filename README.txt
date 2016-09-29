@@ -4,7 +4,7 @@ Input:            File in the test/ folder you want Scanned
 Output:           String of token objects representing the input file
 
 Compile & Run:    1.  make
-                  2.  ./flairs <fileName in test/>
+                  2.  ./flairs <fileName>
 
 Documentation:    doc/
 

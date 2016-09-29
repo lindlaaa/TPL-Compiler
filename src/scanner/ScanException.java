@@ -13,7 +13,7 @@ public class ScanException extends Exception{
    */
   public ScanException( String s ){
 
-    super( s );
+    super( s , null, true, false);
   }
 
   /**

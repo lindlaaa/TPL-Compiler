@@ -32,7 +32,7 @@ public class Scanner{
 
   public Scanner(String filePath) throws ScanException{
     try{
-    inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
+      inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
     }catch (Exception e){
       throw new ScanException("--Flair file read error--\n");
     }
@@ -91,7 +91,7 @@ public class Scanner{
         return false;
       }
     }
-    return true;  
+    return true;
   }
 
   /**
@@ -116,33 +116,34 @@ public class Scanner{
                   "expecting end-comment symbol--\n");
     }
   }
-  private void handleSymbols(){
+  private void handleSymbols() throws ScanException{
     accum = "";
     switch (curChar){//all symbols are self-delimiting
       case ';': case '.':
-        tokenArray.add(new TerminatorToken(curChar));
+        tokenArray.add(new TerminatorToken(curChar, curLine));
         break;
       case '+': case '-': case '*':
       case '/': case '<': case '=':
-        tokenArray.add(new OpToken(curChar));
+        tokenArray.add(new OpToken(curChar, curLine));
         break;
       case '(': case ')': case ',': case ':':
-        tokenArray.add(new PunctuationToken(curChar));
+        tokenArray.add(new PunctuationToken(curChar, curLine));
         break;
-      case '{': 
-        tokenArray.add(new CommentToken(getComment()));
-        break;    
+      case '{':
+        tokenArray.add(new CommentToken(getComment(), curLine));
+        break;
     }
-    
-    private void handleStrngs(){
-      if(accum.equals("false") || accum.equals("true")){
-        tokenArray.add(new BoolToken(accum));
-      }else if(Arrays.asList(keywordArray).contains(accum)){
-        tokenArray.add(new KeywordToken(accum));
-      }else{
-        tokenArray.add(new IdentifierToken(accum));
-      }        
+  }
+
+  private void handleStrings() throws ScanException{
+    if(accum.equals("false") || accum.equals("true")){
+      tokenArray.add(new BoolToken(accum, curLine));
+    }else if(Arrays.asList(keywordArray).contains(accum)){
+      tokenArray.add(new KeywordToken(accum, curLine));
+    }else{
+      tokenArray.add(new IdentifierToken(accum, curLine));
     }
+  }
   /**
    * The individual characters are categorized in this method.
    * It has no input parameter because it utilizes the scanner’s

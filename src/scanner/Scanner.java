@@ -72,8 +72,8 @@ public class Scanner{
         tokenArray.add(new BoolToken(accum, curLine));
       }else if(Arrays.asList(keywordArray).contains(accum)){
         tokenArray.add(new KeywordToken(accum, curLine));
-      //}else if(isNumeric(accum)){
-      //  tokenArray.add(new IntToken(accum, curLine,curPos));
+      }else if(isNumeric(accum)){
+        tokenArray.add(new IntToken(accum, curLine));
       }else{
         tokenArray.add(new IdentifierToken(accum, curLine));
       }
@@ -154,8 +154,7 @@ public class Scanner{
    * ScanException. It serves more as a helper function
    * to takeAllTokens().
    */
-  public void takeNextToken() throws ScanException
-  {
+  private void takeNextToken() throws ScanException {
     curChar = inputFile.charAt(curIndex);
 
     switch (currentState)
@@ -171,23 +170,7 @@ public class Scanner{
           currentState = STRING;
         }else if(symbolString.indexOf(curChar) != -1)
         {
-          accum = "";
-          switch (curChar)
-          {
-            case ';': case '.':
-              tokenArray.add(new TerminatorToken(curChar, curLine));
-              break;
-            case '+': case '-': case '*':
-            case '/': case '<': case '=':
-              tokenArray.add(new OpToken(curChar, curLine));
-              break;
-            case '(': case ')': case ',': case ':':
-              tokenArray.add(new PunctuationToken(curChar, curLine));
-              break;
-            case '{':
-              tokenArray.add(new CommentToken(getComment(), curLine));
-              break;
-          }
+            handleSymbols();
         }else if(!Character.isWhitespace(curChar))
         {
           throw new ScanException(
@@ -199,7 +182,6 @@ public class Scanner{
           curLine++;
           curPos = 0;
         }
-        curIndex++;
         break;
       case INTEGER:
         if(Character.isDigit(curChar))
@@ -218,31 +200,14 @@ public class Scanner{
         }else if(symbolString.indexOf(curChar) != -1)
         {
           tokenArray.add(new IntToken(accum, curLine));
-          accum = "";
-          switch (curChar)
-          {
-            case ';': case '.':
-              tokenArray.add(new TerminatorToken(curChar, curLine));
-              break;
-            case '+': case '-': case '*':
-            case '/': case '<': case '=':
-              tokenArray.add(new OpToken(curChar, curLine));
-              break;
-            case '(': case ')': case ',': case ':':
-              tokenArray.add(new PunctuationToken(curChar, curLine));
-              break;
-            case '{':
-              tokenArray.add(new CommentToken(getComment(), curLine));
-              break;
-          }
-            currentState = LOOKING;
+          handleSymbols();
+          currentState = LOOKING;
         }else
         {
           throw new ScanException(
                   "--Has unexpected character |" +curChar+ "| at"+
                   " line:"+curLine+" col:"+curPos+"--\n");
         }
-        curIndex++;
         break;
       case STRING:
         if(Character.isLetterOrDigit(curChar))
@@ -255,47 +220,13 @@ public class Scanner{
             curLine++;
             curPos = 0;
           }
-          if(accum.equals("false") || accum.equals("true"))
-          {
-            tokenArray.add(new BoolToken(accum, curLine));
-          }else if(Arrays.asList(keywordArray).contains(accum))
-          {
-            tokenArray.add(new KeywordToken(accum, curLine));
-          }else
-          {
-            tokenArray.add(new IdentifierToken(accum, curLine));
-          }
+          handleStrings();
           accum = "";
           currentState = LOOKING;
         }else if(symbolString.indexOf(curChar) != -1)
         {
-          if(accum.equals("false") || accum.equals("true"))
-          {
-             tokenArray.add(new BoolToken(accum, curLine));
-          }else if(Arrays.asList(keywordArray).contains(accum))
-          {
-            tokenArray.add(new KeywordToken(accum, curLine));
-          }else
-          {
-            tokenArray.add(new IdentifierToken(accum, curLine));
-          }
-          accum = "";
-          switch (curChar)
-          {
-            case ';': case '.':
-              tokenArray.add(new TerminatorToken(curChar, curLine));
-              break;
-            case '+': case '-': case '*':
-            case '/': case '<': case '=':
-              tokenArray.add(new OpToken(curChar, curLine));
-              break;
-            case '(': case ')': case ',': case ':':
-              tokenArray.add(new PunctuationToken(curChar, curLine));
-              break;
-            case '{':
-              tokenArray.add(new CommentToken(getComment(), curLine));
-              break;
-          }
+          handleStrings();
+          handleSymbols();
           currentState = LOOKING;
         }else
         {
@@ -303,8 +234,8 @@ public class Scanner{
                   "--Had unexpected character|" +curChar+ "| at"+
                   " line:"+curLine+" col:"+curPos+"--\n");
         }
-        curIndex++;
         break;
     }
+    curIndex++;
   }
 }

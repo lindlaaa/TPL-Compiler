@@ -91,6 +91,7 @@ public class Scanner{
       while(curChar != '}'){
         output += curChar;
         curIndex++;
+        curPos++;
         curChar = inputFile.charAt(curIndex);
       }
       return output + "}";

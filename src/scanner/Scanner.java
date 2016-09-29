@@ -133,17 +133,6 @@ public class Scanner{
         tokenArray.add(new CommentToken(getComment(), curLine));
         break;
     }
-<<<<<<< HEAD
-    
-    private void handleStrings(){
-      if(accum.equals("false") || accum.equals("true")){
-        tokenArray.add(new BoolToken(accum));
-      }else if(Arrays.asList(keywordArray).contains(accum)){
-        tokenArray.add(new KeywordToken(accum));
-      }else{
-        tokenArray.add(new IdentifierToken(accum));
-      }        
-=======
   }
 
   private void handleStrings() throws ScanException{
@@ -153,7 +142,6 @@ public class Scanner{
       tokenArray.add(new KeywordToken(accum, curLine));
     }else{
       tokenArray.add(new IdentifierToken(accum, curLine));
->>>>>>> refs/remotes/origin/master
     }
   }
   /**

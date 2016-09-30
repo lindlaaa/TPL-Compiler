@@ -1,4 +1,5 @@
 #!/bin/bash
 cd bin
-java -cp . src.main.ParserMain $1
+time java -cp . src.main.ParserMain $1
+echo "^^^ Time ^^^^^^^"
 cd ..

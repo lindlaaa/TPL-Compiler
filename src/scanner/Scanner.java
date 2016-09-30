@@ -52,6 +52,7 @@ public class Scanner{
     }
   }
 
+  @SuppressWarnings("checkstyle:javadocmethod")
   /**
    * This method takes no input and may throw ScanException.
    * It iterates through every character of inputFile by repeatedly
@@ -191,8 +192,9 @@ public class Scanner{
         }else if(!Character.isWhitespace(curChar))
         {
           throw new ScanException(
-                  "--Had unexpected character |" +curChar+ "| at"+
-                  " line:"+curLine+" col:"+curPos+"--\n");
+                  "--Unexpected character |" +curChar+ "| @"+
+                  " line:"+curLine+" col:"+curPos+"--\n" +
+                "                                                   ^");
         }
         if(curChar == ('\n'))
         {

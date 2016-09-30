@@ -1,4 +1,4 @@
 #!/bin/bash
 cd bin
-java -cp . src.main.Parsermain ../test/$1
+java -cp . src.main.ParserMain $1
 cd ..

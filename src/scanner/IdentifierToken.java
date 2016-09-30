@@ -13,8 +13,10 @@ public class IdentifierToken implements Token{
 
   public IdentifierToken(String inputString,int c) throws ScanException{
     if(inputString.length() > 256){
-      throw new ScanException("--Identifier too long. Id starting with |"
-                              + inputString.substring(0, 12)+"|...--\n");
+      throw new ScanException("--ID too long |"
+                              +inputString.substring(0, 12)+
+                              "...| @ ln:"+c+ "--\n" +
+        "                                          ^");
     }
     idVal = inputString;
     outputString += inputString;

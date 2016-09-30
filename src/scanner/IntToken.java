@@ -10,9 +10,9 @@ package src.scanner;
 public class IntToken implements Token{
 
   private final long MAX = 4294967295L;
-  String outputString = "Integer ";
-  long intValue;
-  int line;
+  private String outputString = "Integer ";
+  private long intValue;
+  private int line;
 
   public IntToken(String inputInt, int c) throws ScanException{
     intValue = Long.parseLong(inputInt);

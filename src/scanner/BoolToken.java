@@ -6,9 +6,9 @@ package src.scanner;
  */
 public class BoolToken implements Token{
 
-  String outputString = "Boolean ";
-	boolean boolValue;
-  int line;
+  private String outputString = "Boolean ";
+	private boolean boolValue;
+  private int line;
 
   public BoolToken(String inputString, int c){
     if(inputString == "true"){

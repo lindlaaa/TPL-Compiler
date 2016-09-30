@@ -6,9 +6,9 @@ package src.scanner;
  */
 public class TerminatorToken implements Token{
 
-  String outputString = "Terminator ";
-	char termVal;
-  int line;
+  private String outputString = "Terminator ";
+	private char termVal;
+  private int line;
 
   public TerminatorToken(char inputChar, int c){
     outputString += inputChar;

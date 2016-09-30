@@ -6,9 +6,9 @@ package src.scanner;
  */
 public class PunctuationToken implements Token{
 
-  String outputString = "Punctuation ";
-	char punctVal;
-  int line;
+  private String outputString = "Punctuation ";
+	private char punctVal;
+  private int line;
 
   public PunctuationToken(char inputChar, int c){
     outputString += inputChar;
@@ -43,6 +43,6 @@ public class PunctuationToken implements Token{
    */
   @Override
   public String toString(){
-      return outputString;
+      return outputString ;
   }
 }

@@ -7,9 +7,9 @@ package src.scanner;
 */
 public class CommentToken implements Token{
 
-  String outputString = "Comment ";
-  String commentVal;
-  int line;
+  private String outputString = "Comment ";
+  private String commentVal;
+  private int line;
 
   public CommentToken(String inputString, int c){
 	  commentVal = inputString;

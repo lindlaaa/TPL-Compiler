@@ -6,9 +6,9 @@ package src.scanner;
  */
 public class OpToken implements Token{
 
-  String outputString = "Operator ";
-	char opVal;
-  int line;
+  private String outputString = "Operator ";
+	private char opVal;
+  private int line;
 
   public OpToken(char inputChar, int c){
     outputString += inputChar;

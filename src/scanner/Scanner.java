@@ -16,19 +16,18 @@ public class Scanner{
   public static final int LOOKING = 0;
   public static final int INTEGER = 1;
   public static final int STRING = 2;
-  String symbolString = "+-*/<=(){.,:;";
-  String[] keywordArray = {"if", "then", "else", "integer", "boolean",
-    "true", "false", "not", "or", "and", "print", "program",
+  private String symbolString = "+-*/<=(){.,:;";
+  private String[] keywordArray = {"if", "then", "else", "integer",
+    "boolean", "true", "false", "not", "or", "and", "print", "program",
     "function", "return", "begin", "end"};
-
-  int currentState = LOOKING;
-  List<Token> tokenArray = new ArrayList<>();
-  String accum = "";
-  char curChar;
-  String inputFile;
-  int curIndex = 0;
-  int curLine = 1;
-  int curPos = 1;
+  private int currentState = LOOKING;
+  private List<Token> tokenArray = new ArrayList<>();
+  private String accum = "";
+  private char curChar;
+  private String inputFile;
+  private int curIndex = 0;
+  private int curLine = 1;
+  private int curPos = 1;
 
   public Scanner(String filePath) throws ScanException{
     try{

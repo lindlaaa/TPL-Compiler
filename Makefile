@@ -4,7 +4,8 @@ all:
 	javadoc -d doc -package src.main src.scanner
 
 clean:
-	rm -rf doc/*
-	rm -rf bin/*
-	cp test/doNotDelete.txt bin/
-	cp test/doNotDelete.txt doc/
+	@rm -rf doc/*
+	@cp test/doNotDelete doc/
+	@rm -rf bin/*
+	@cp test/doNotDelete bin/
+	@fortune | cowsay -f www | lolcat

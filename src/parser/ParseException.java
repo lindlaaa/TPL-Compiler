@@ -1,4 +1,4 @@
-package src.scanner;
+package src.parser;
 /**
  * This class extends the Exception class.
  * When this exception is thrown, it will return a string

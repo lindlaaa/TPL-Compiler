@@ -1,17 +1,19 @@
 Authors: Avery Lindley,  Noah Schroeder, Grant Siebring, Blake Eggleston
 
-Input:            File in the test/ folder you want Scanned
-Output:           String of token objects representing the input file
+Input:            File in the test/ folder you want used.
+Output:           String representing the result of your command.
 
 Compile & Run:    1.  make
-                  2.  ./flairs <fileName>
+                  2.  ./flairs <fileName> to Scan
+                  3.  ./flairp <fileName> to Parse
+
 
 Documentation:    doc/
 
-Date:       2016/09/23
+Date:       2016/09/29
 
 
-Known Issues:
+Known Issues: Some strange error after running 'make clean'.
 
 
 Directory Structure:

@@ -9,7 +9,7 @@ import src.scanner.*;
 public class ScannerMain{
 
 
-
+  @SuppressWarnings("checkstyle:javadocmethod")
   /**
    *  <b>Runs the Scanner</b>
    *

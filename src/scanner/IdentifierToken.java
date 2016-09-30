@@ -7,9 +7,9 @@ package src.scanner;
  */
 public class IdentifierToken implements Token{
 
-  String outputString = "Identifier ";
-	String idVal;
-  int line;
+  private String outputString = "Identifier ";
+	private String idVal;
+  private int line;
 
   public IdentifierToken(String inputString,int c) throws ScanException{
     if(inputString.length() > 256){

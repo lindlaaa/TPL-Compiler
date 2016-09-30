@@ -6,8 +6,8 @@ package src.scanner;
  */
 public class EOFToken implements Token{
 
-  String outputString = "EOFToken ";
-  int line;
+  private String outputString = "EOFToken ";
+  private int line;
 
   public EOFToken(int c){
     outputString += '$';

@@ -1,6 +1,7 @@
 package src.main;
 
-import src.scanner.*;
+import src.scanner.Scanner;
+import src.scanner.ScanException;
 
 /**
  *  <b>This is the main class for the project,

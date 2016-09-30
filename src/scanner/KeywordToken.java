@@ -6,9 +6,9 @@ package src.scanner;
  */
 public class KeywordToken implements Token{
 
-  String outputString = "Keyword ";
-	String keyString;
-  int line;
+  private String outputString = "Keyword ";
+	private String keyString;
+  private int line;
 
   public KeywordToken(String inputString, int c){
     outputString += inputString;

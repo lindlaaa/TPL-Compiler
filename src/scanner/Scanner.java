@@ -13,9 +13,9 @@ import java.util.*;
  */
 public class Scanner{
 
-  public static final int LOOKING = 0;
-  public static final int INTEGER = 1;
-  public static final int STRING = 2;
+  private static final int LOOKING = 0;
+  private static final int INTEGER = 1;
+  private static final int STRING = 2;
   private String symbolString = "+-*/<=(){.,:;";
   private String[] keywordArray = {"if", "then", "else", "integer",
     "boolean", "true", "false", "not", "or", "and", "print", "program",
@@ -133,6 +133,11 @@ public class Scanner{
                   "expecting end-comment symbol--\n");
     }
   }
+
+  /**
+   *  This function creates tokens after we know we are looking for one.
+   *  Called from the takeNextToken.
+   */
   private void handleSymbols() throws ScanException{
     accum = "";
     switch (curChar){//all symbols are self-delimiting
@@ -152,6 +157,10 @@ public class Scanner{
     }
   }
 
+  /**
+   *  This function creates tokens after we know we are looking for one.
+   *  Called from the takeNextToken
+   */
   private void handleStrings() throws ScanException{
     if(accum.equals("false") || accum.equals("true")){
       tokenArray.add(new BoolToken(accum, curLine));
@@ -161,6 +170,7 @@ public class Scanner{
       tokenArray.add(new IdentifierToken(accum, curLine));
     }
   }
+
   /**
    * The individual characters are categorized in this method.
    * It has no input parameter because it utilizes the scanner’s

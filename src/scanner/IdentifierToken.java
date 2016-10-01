@@ -10,17 +10,19 @@ public class IdentifierToken implements Token{
   private String outputString = "Identifier ";
 	private String idVal;
   private int line;
+  private int col;
 
-  public IdentifierToken(String inputString,int c) throws ScanException{
+  public IdentifierToken(String inputString,int r, int c) throws ScanException{
+    col = c - inputString.length() - 1;
     if(inputString.length() > 256){
       throw new ScanException("--ID too long |"
                               +inputString.substring(0, 12)+
-                              "...| @ ln:"+c+ "--\n" +
+                              "...| @ ln:"+r+"col:"+col+"--\n" +
         "                                          ^");
     }
     idVal = inputString;
     outputString += inputString;
-    line = c;
+    line = r;
   }
 
   /**

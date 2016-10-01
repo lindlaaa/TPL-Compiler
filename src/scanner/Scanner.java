@@ -66,7 +66,6 @@ public class Scanner{
   public List<Token> takeAllTokens() throws ScanException{
     do{
       takeNextToken();
-      curPos++;
     }while (curIndex < inputFile.length());
 
     if(!accum.isEmpty()){
@@ -75,9 +74,9 @@ public class Scanner{
       }else if(Arrays.asList(keywordArray).contains(accum)){
         tokenArray.add(new KeywordToken(accum, curLine));
       }else if(isNumeric(accum)){
-        tokenArray.add(new IntToken(accum, curLine));
+        tokenArray.add(new IntToken(accum, curLine, curPos));
       }else{
-        tokenArray.add(new IdentifierToken(accum, curLine));
+        tokenArray.add(new IdentifierToken(accum, curLine, curPos));
       }
     }
     tokenArray.add(new EOFToken(curLine));
@@ -167,7 +166,7 @@ public class Scanner{
     }else if(Arrays.asList(keywordArray).contains(accum)){
       tokenArray.add(new KeywordToken(accum, curLine));
     }else{
-      tokenArray.add(new IdentifierToken(accum, curLine));
+      tokenArray.add(new IdentifierToken(accum, curLine, curPos));
     }
   }
 
@@ -197,7 +196,7 @@ public class Scanner{
           currentState = STRING;
         }else if(symbolString.indexOf(curChar) != -1)
         {
-            handleSymbols();
+          handleSymbols();
         }else if(!Character.isWhitespace(curChar))
         {
           throw new ScanException(
@@ -208,7 +207,7 @@ public class Scanner{
         if(curChar == ('\n'))
         {
           curLine++;
-          curPos = 0;
+          curPos = 1;
         }
         break;
       case INTEGER:
@@ -217,17 +216,17 @@ public class Scanner{
           accum += curChar;
         }else if(Character.isWhitespace(curChar))
         {
+          tokenArray.add(new IntToken(accum, curLine, curPos));
           if(curChar == ('\n'))
           {
             curLine++;
-            curPos = 0;
+            curPos = 1;
           }
-          tokenArray.add(new IntToken(accum, curLine));
           accum = "";
           currentState = LOOKING;
         }else if(symbolString.indexOf(curChar) != -1)
         {
-          tokenArray.add(new IntToken(accum, curLine));
+          tokenArray.add(new IntToken(accum, curLine, curPos));
           handleSymbols();
           currentState = LOOKING;
         }else
@@ -243,12 +242,12 @@ public class Scanner{
           accum += curChar;
         }else if(Character.isWhitespace(curChar))
         {
+          handleStrings();
           if(curChar == ('\n'))
           {
             curLine++;
-            curPos = 0;
+            curPos = 1;
           }
-          handleStrings();
           accum = "";
           currentState = LOOKING;
         }else if(symbolString.indexOf(curChar) != -1)
@@ -265,5 +264,6 @@ public class Scanner{
         break;
     }
     curIndex++;
+    curPos++;
   }
 }

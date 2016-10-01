@@ -13,17 +13,19 @@ public class IntToken implements Token{
   private String outputString = "Integer ";
   private long intValue;
   private int line;
+  private int col;
 
-  public IntToken(String inputInt, int c) throws ScanException{
+  public IntToken(String inputInt, int r, int c) throws ScanException{
     intValue = Long.parseLong(inputInt);
     if( intValue > MAX ){
+      col = c - inputInt.length() - 1;
       throw new ScanException("--Int too long |"
                               +inputInt.substring(0, 6)+
-                              "...| @ ln:"+c+ "--\n" +
+                              "...| @ ln:"+r+"col:"+col+"--\n" +
         "                                           ^");
     }
     outputString += inputInt;
-    line = c;
+    line = r;
   }
 
   /**

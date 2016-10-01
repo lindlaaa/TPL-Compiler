@@ -4,9 +4,10 @@ Input:            File in the test/ folder you want used.
 Output:           String representing the result of your command.
 
 Compile & Run:
-  1.  make
-  2a.  ./flairs <fileName> to Scan
-  2b.  ./flairp <fileName> to Parse
+  A.  Scanner
+    1.  make s foo=<filepath>
+  B.  Parser
+    1.  make p foo=<filepath>
 
 Documentation:    doc/
 

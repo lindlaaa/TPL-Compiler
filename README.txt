@@ -4,10 +4,15 @@ Input:            File in the test/ folder you want used.
 Output:           String representing the result of your command.
 
 Compile & Run:
-  A.  Scanner
-    1.  make s foo=<filepath>
-  B.  Parser
-    1.  make p foo=<filepath>
+  A.  Everything
+    1.  make
+    
+  B.  Scanner
+    1.  make scanner
+
+  C.  Parser
+    1.  make parser
+
 
 Documentation:    doc/
 

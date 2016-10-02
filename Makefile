@@ -34,4 +34,4 @@ clean:
 	@cp test/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test/doNotDelete bin/
-	@fortune -s -o | cowsay -f www | lolcat -d 30
+	@fortune -s | cowsay -f www | lolcat -d 30

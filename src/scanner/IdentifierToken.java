@@ -8,7 +8,7 @@ package src.scanner;
 public class IdentifierToken implements Token{
 
   private String outputString = "Identifier ";
-	private String idVal;
+  private String idVal;
   private int line;
   private int col;
 
@@ -42,6 +42,10 @@ public class IdentifierToken implements Token{
   public int getline(){
     return line;
   }
+  
+  public int getTerminalType(){
+    return 29;    
+  } 
 
   /**
    *  When the token’s toString() is

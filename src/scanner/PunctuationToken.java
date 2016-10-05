@@ -7,11 +7,12 @@ package src.scanner;
 public class PunctuationToken implements Token{
 
   private String outputString = "Punctuation ";
-	private char punctVal;
+  private char punctVal;
   private int line;
 
   public PunctuationToken(char inputChar, int c){
     outputString += inputChar;
+    punctVal = inputChar;
     line = c;
   }
 
@@ -20,9 +21,9 @@ public class PunctuationToken implements Token{
    *
    *  @return String  Represents the char represented by this Token
    */
-	public char getVal(){
-		return punctVal;
-	}
+  public char getVal(){
+    return punctVal;
+  }
 
   /**
    *  Returns the line number this Token is in
@@ -33,6 +34,17 @@ public class PunctuationToken implements Token{
     return line;
   }
 
+  public int getTerminalType(){
+    switch (punctVal) {
+      case '(':  
+        return 2;
+      case ')':
+        return 3;
+      case ',':  
+        return 4;
+      case ':':
+        return 5;
+  }  
   /**
    *  When the token’s toString() is called, it will return a
    *  concatenation of the string “Punctuation “ with the
@@ -43,6 +55,6 @@ public class PunctuationToken implements Token{
    */
   @Override
   public String toString(){
-      return outputString ;
+    return outputString ;
   }
 }

@@ -7,11 +7,12 @@ package src.scanner;
 public class TerminatorToken implements Token{
 
   private String outputString = "Terminator ";
-	private char termVal;
+  private char termVal;
   private int line;
 
   public TerminatorToken(char inputChar, int c){
     outputString += inputChar;
+    termVal = inputChar;
     line = c;
   }
 
@@ -20,9 +21,9 @@ public class TerminatorToken implements Token{
    *
    *  @return String  Represents the op represented by this Token
    */
-	public char getVal(){
-		return termVal;
-	}
+  public char getVal(){
+    return termVal;
+  }
 
   /**
    *  Returns the line number this Token is in
@@ -32,7 +33,14 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
-
+  
+  public int getTerminalType(){
+    switch (termVal) {
+      case ';':  
+        return 0;
+      case '.':
+        return 1;
+  }
   /**
    *  When the token’s toString() is called, it will return a
    *  concatenation of the string “Terminator “ with the

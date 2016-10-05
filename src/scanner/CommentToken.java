@@ -12,7 +12,7 @@ public class CommentToken implements Token{
   private int line;
 
   public CommentToken(String inputString, int c){
-	  commentVal = inputString;
+    commentVal = inputString;
     outputString += inputString;
     line = c;
   }
@@ -23,8 +23,8 @@ public class CommentToken implements Token{
    *  @return String  Represents the comment represented by this Token
    */
   public String getVal(){
-	   return commentVal;
-	}
+    return commentVal;
+  }
 
   /**
    *  Returns the line number this Token is in
@@ -34,7 +34,10 @@ public class CommentToken implements Token{
   public int getline(){
     return line;
   }
-
+  
+  public int getTerminalType(){
+    return 31;    
+  } 
   /**
    *  When the token’s toString() is
    *  called, it will return a concatenation of the

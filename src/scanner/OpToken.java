@@ -7,11 +7,12 @@ package src.scanner;
 public class OpToken implements Token{
 
   private String outputString = "Operator ";
-	private char opVal;
+  private char opVal;
   private int line;
 
   public OpToken(char inputChar, int c){
     outputString += inputChar;
+    opVal = inputChar;
     line = c;
   }
 
@@ -23,15 +24,31 @@ public class OpToken implements Token{
   public int getline(){
     return line;
   }
-
+  //    case '+': case '-': case '*':
+  //    case '/': case '<': case '=':
+  public int getTerminalType(){
+    switch (opVal) {
+      case '+':  
+        return 6;
+      case '-':
+        return 7;
+      case '*':  
+        return 8;
+      case '/':
+        return 9;
+      case '<':  
+        return 10;
+      case '=':
+        return 11;
+  }    
   /**
    *  Returns the op represented by this Token
    *
    *  @return String  Represents the op represented by this Token
    */
-	public char getVal(){
-		return opVal;
-	}
+  public char getVal(){
+    return opVal;
+  }
 
   /**
    *  When the token’s toString() is called,

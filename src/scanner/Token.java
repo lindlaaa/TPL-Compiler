@@ -12,7 +12,7 @@ public interface Token{
 
     public int getline();
     
-    public <T> T getVal();
+    //public <T> T getVal();
     
     public int getTerminalType();
 }

@@ -92,13 +92,29 @@ public class ParseRule
 
     private int convertNonTerminal( NonTerminal symbol )
     {
-        if (symbol.equals( NonTerminal.Program )       ) return 0;
-        if (symbol.equals( NonTerminal.Declarations )  ) return 1;
-        if (symbol.equals( NonTerminal.Declaration )   ) return 2;
-        if (symbol.equals( NonTerminal.Statements )    ) return 3;
-        if (symbol.equals( NonTerminal.Statement )     ) return 4;
-        if (symbol.equals( NonTerminal.ExpressionTail )) return 5;
-        if (symbol.equals( NonTerminal.Value )         ) return 6;
+        if (symbol.equals( NonTerminal.Program )              ) return 0;
+        if (symbol.equals( NonTerminal.Definitions )          ) return 1;
+        if (symbol.equals( NonTerminal.Def )                  ) return 2;
+        if (symbol.equals( NonTerminal.Formals )              ) return 3;
+        if (symbol.equals( NonTerminal.Formal )               ) return 4;
+        if (symbol.equals( NonTerminal.NonEmptyFormals )      ) return 5;
+        if (symbol.equals( NonTerminal.NonEmptyFormalsPrime)  ) return 6;
+        if (symbol.equals( NonTerminal.Body )                 ) return 7;
+        if (symbol.equals( NonTerminal.StatementList )        ) return 8;
+        if (symbol.equals( NonTerminal.Type )                 ) return 9;
+        if (symbol.equals( NonTerminal.Expr )                 ) return 10;
+        if (symbol.equals( NonTerminal.ExprPrime )            ) return 11;
+        if (symbol.equals( NonTerminal.SimpleExpr )           ) return 12;
+        if (symbol.equals( NonTerminal.SimpleExprPrime)       ) return 13;
+        if (symbol.equals( NonTerminal.Term )                 ) return 14;
+        if (symbol.equals( NonTerminal.TermPrime )            ) return 15;
+        if (symbol.equals( NonTerminal.Factor )               ) return 16;
+        if (symbol.equals( NonTerminal.Identifier )           ) return 17;
+        if (symbol.equals( NonTerminal.Actuals )              ) return 18;
+        if (symbol.equals( NonTerminal.NonEmptyActuals )      ) return 19;
+        if (symbol.equals( NonTerminal.NonEmptyActualsPrime ) ) return 20;
+        if (symbol.equals( NonTerminal.Literal )              ) return 21;
+        if (symbol.equals( NonTerminal.PrintStatement )       ) return 22;
 
         return 0;
     }

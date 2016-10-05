@@ -1,4 +1,7 @@
+package src.parser;
+
 import java.util.Stack;
+import src.scanner.*;
 
 public class PushTerminal implements ParseRule
 {
@@ -9,6 +12,7 @@ public class PushTerminal implements ParseRule
       this.token = token;
    }
 
+   @SuppressWarnings("unchecked")
    public void execute( Stack stack )
    {
       stack.push( token );

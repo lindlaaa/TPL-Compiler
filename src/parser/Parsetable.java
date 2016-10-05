@@ -15,7 +15,7 @@ public class Parsetable{
   private ParseRule[][] table;
 
   public Parsetable(){
-    table = new ParseRule[22][29];
+    table = new ParseRule[22][31];
   }
 
   public ParseRule lookup(NonTerminal symbol, Token token, ParseRule action){
@@ -96,7 +96,7 @@ public class ParseRule
 
     public ParsingTable()
     {
-         table = new ParseRule[22][29];
+         table = new ParseRule[22][31];
     }
 
     public ParseAction lookup( NonTerminal symbol, Token token )

@@ -24,24 +24,25 @@ public class Parser{
 
 /*-----------------------------------------------------------------------------------------
        ParseRule rule00 = new PushNothing();
-       ParseRule rule01 = new PushRule(
-                 new ParseRule[] { new PushTerminal(new keyWordToken("Program")),
-                                new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken('(')),
-								new PushTerminal(new TerminatorToken(';')), new PushNonTerminal(NonTerminal.Formals),
-								new PushTerminal(new PunctuationToken(')')), new PushNonTerminal(NonTerminal.Definitions),
-								new PushNonTerminal(NonTerminal.Body), new PushTerminal(new TerminatorToken('.'));
+       ParseRule ProgramRule01 = new PushRule(
+                 new ParseRule[] { new PushTerminal(new keyWordToken("program")),
+                                new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken('(', 0)),
+								new PushTerminal(new TerminatorToken(';',0)), new PushNonTerminal(NonTerminal.Formals),
+								new PushTerminal(new PunctuationToken(')', 0)), new PushNonTerminal(NonTerminal.Definitions),
+								new PushNonTerminal(NonTerminal.Body), new PushTerminal(new TerminatorToken('.', 0));
                       } );
-       ParseAction rule02 = new PushSequence(
-                 new ParseAction[] { new PushNonTerminal(NonTerminal.Declaration),
-                                new PushNonTerminal(NonTerminal.Declarations)
+       ParseAction DefinitonsRule01 = new PushSequence(
+                 new ParseAction[] { new PushNull()
                       } );
-       ParseAction rule03 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(floatDeclaration),
-                                new PushTerminal(identifier)
+       ParseAction DefinitionsRule02 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Def), new PushNonTerminal(NonTerminal.Definitions)
                       } );
-       ParseAction rule04 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(intDeclaration),
-                                new PushTerminal(identifier)
+       ParseAction DefRule01 = new PushSequence(//function <IDENTIFIER> ( <FORMALS> ) : <TYPE> <BODY> ;
+                 new ParseAction[] { new PushTerminal(new KeywordToken("function", 0), new PushNonTerminal(NonTerminal.Identifier),
+                                new PushTerminal(new PunctuationToken('(', 0)), new PushNonTerminal(NonTerminal.Formals),
+								new PushTerminal(new PunctuationToken(')', 0)), new PushTerminal(new PunctuationToken(':', 0)),
+								new PushNonTerminal(NonTerminal.Type), new PushNonTerminal(NonTerminal.Body), 
+								new PushTerminal(new TerminatorToken(';', 0)							
                       } );
        ParseAction rule05 = new PushSequence(
                  new ParseAction[] { new PushNonTerminal(NonTerminal.Statement),

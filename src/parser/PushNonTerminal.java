@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class PushNonTerminal implements ParseAction
+public class PushNonTerminal implements ParseRule
 {
    private NonTerminal symbol;
 

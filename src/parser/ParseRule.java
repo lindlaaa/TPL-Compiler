@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public interface ParseAction
+public interface ParseRule
 {
    public void   execute( Stack stack );
    public String toString();

@@ -29,13 +29,13 @@ public class Parsetable{
 
 import java.util.Stack;
 
-public class ParsingTable
+public class ParseRule
 {
-    private ParseAction[][] table;
+    private ParseRule[][] table;
 
     public ParsingTable()
     {
-         table = new ParseAction[7][10];
+         table = new ParseRule[22][29];
     }
 
     public ParseAction lookup( NonTerminal symbol, Token token )

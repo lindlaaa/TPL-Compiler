@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class PushTerminal implements ParseAction
+public class PushTerminal implements ParseRule
 {
    private Token token;
 

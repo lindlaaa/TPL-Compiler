@@ -23,9 +23,15 @@ public class TableDrivenParser extends Parser{
 
 
   private Parsetable makeParsingTable(){
-    //Make the parse table on paper
+
+    Parsetable table = new Parsetable();
+
+    //Make the parse table on google sheets
     //Declare and Add the rules to the table here
+    ParseRule rule00 = new PushNull();
+
+
     //return the table to use in parseProgram()
-    return new Parsetable();
+    return table;
   }
 }

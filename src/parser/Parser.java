@@ -24,59 +24,14 @@ public class Parser{
 
 
 
-
-
-
-
-// TODO FIXME the following is what wallingford made
-
-
-import java.io.IOException;
-import java.util.Stack;
-
-public class TableDrivenParser extends Parser
-{
-    private ParsingTable acTable;
-
-    public TableDrivenParser( Scanner source )
-    {
-        super( source );
-        acTable = makeAcParsingTable();
-    }
-
-    protected boolean parseProgram() throws ParseException,
-                                            LexicalException,
-                                            IOException
-    {
-        // ... the algorithm
-        return answer;
-    }
-
-    // -------------------------------------------------------------------
-    // AC PARSING TABLE FACTORY
-
-    private ParsingTable makeAcParsingTable()
-    {
-       ParsingTable table = new ParsingTable();
-
-       try {
-
-       Token floatDeclaration = new Token( Token.FloatDeclaration );
-       Token intDeclaration   = new Token( Token.IntegerDeclaration );
-       Token print            = new Token( Token.PrintOp );
-       Token assignment       = new Token( Token.AssignmentOp );
-       Token plus             = new Token( Token.PlusOp );
-       Token minus            = new Token( Token.MinusOp );
-       Token identifier       = new Token( Token.Identifier );
-       Token floatValue       = new Token( Token.FloatValue );
-       Token integerValue     = new Token( Token.IntegerValue );
-       Token endOfStream      = new Token( Token.EOFsymbol );
-
-       ParseAction rule00 = new PushNothing();
-       ParseAction rule01 = new PushSequence(
-                 new ParseAction[] { new PushNonTerminal(NonTerminal.Declarations),
-                                new PushNonTerminal(NonTerminal.Statements),
-                                new PushTerminal   (endOfStream)
+//-----------------------------------------------------------------------------------------
+       ParseRule rule00 = new PushNothing();
+       ParseRule rule01 = new PushRule(
+                 new ParseRule[] { new PushTerminal(new keyWordToken("Program")),
+                                new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken('(')), 
+								new PushTerminal(new TerminatorToken(';')), new PushNonTerminal(NonTerminal.Formals), 
+								new PushTerminal(new PunctuationToken(')')), new PushNonTerminal(NonTerminal.Definitions),
+								new PushNonTerminal(NonTerminal.Body), new PushTerminal(new TerminatorToken('.'));
                       } );
        ParseAction rule02 = new PushSequence(
                  new ParseAction[] { new PushNonTerminal(NonTerminal.Declaration),

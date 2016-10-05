@@ -4,7 +4,7 @@ public class PushSequence implements ParseRule
 {
    private ParseRule[] actions;
 
-   public PushSequence( ParseRule[] actions )
+   public PushRule( ParseRule[] actions )
    {
       this.actions = actions;
    }

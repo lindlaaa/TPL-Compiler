@@ -7,11 +7,12 @@ package src.scanner;
 public class KeywordToken implements Token{
 
   private String outputString = "Keyword ";
-	private String keyString;
+  private String keyString;
   private int line;
 
   public KeywordToken(String inputString, int c){
     outputString += inputString;
+    keyString = inputString;
     line = c;
   }
 
@@ -20,9 +21,9 @@ public class KeywordToken implements Token{
    *
    *  @return String  Represents the comment represented by this Token
    */
-	public String getVal(){
-		return keyString;
-	}
+  public String getVal(){
+    return keyString;
+  }
 
   /**
    *  Returns the line number this Token is in
@@ -32,7 +33,43 @@ public class KeywordToken implements Token{
   public int getline(){
     return line;
   }
-
+  
+  /*
+  {"if", "then", "else", "integer",
+    "boolean", "true", "false", "not", "or", "and", "print", "program",
+    "function", "return", "begin", "end"};
+  */
+  public int getTerminalType(){
+    switch (keyString) {
+      case "if":  
+        return 12;
+      case "then":
+        return 13;
+      case "else":  
+        return 14;
+      case "integer":
+        return 15;
+      case "boolean":  
+        return 16;
+      case "not":
+        return 19;
+      case "or":  
+        return 20;
+      case "and":
+        return 21;
+      case "print":  
+        return 22;
+      case "program":
+        return 23;
+      case "function":
+        return 24;
+      case "return":  
+        return 25;
+      case "begin":
+        return 26;  
+      case "end":
+        return 27;
+  } 
   /**
    *  When the token’s toString() is called,
    *  it will return a concatenation of the string “Keyword “

@@ -19,10 +19,13 @@ public class EOFToken implements Token{
    *
    *  @return '$' to represent EOF
    */
-    public char getVal(){
-        return '$';
-    }
-
+  public char getVal(){
+      return '$';
+  }
+  
+  public int getTerminalType(){
+    return 30;    
+  } 
   /**
    *  Returns the line number this Token is in
    *

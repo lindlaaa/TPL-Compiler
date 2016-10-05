@@ -1,6 +1,6 @@
 package src.main;
 
-import src.parser.Parser;
+import src.parser.TableDrivenParser;
 import src.scanner.Scanner;
 import src.scanner.ScanException;
 
@@ -19,8 +19,8 @@ public class ParserMain{
    */
   public static void main(String[] args) throws ScanException{
 
-    Parser parser = new Parser( new Scanner( args[0] ));
+    TableDrivenParser parser = new TableDrivenParser( new Scanner( args[0] ));
 
-    //TODO
+    System.out.println(parser.parseProgram());
   }
 }

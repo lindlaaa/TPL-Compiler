@@ -37,7 +37,7 @@ public class BoolToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public int getTerminalType(){
     if(boolValue){
       return 17;

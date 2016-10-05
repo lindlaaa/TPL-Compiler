@@ -36,15 +36,19 @@ public class PunctuationToken implements Token{
 
   public int getTerminalType(){
     switch (punctVal) {
-      case '(':  
+      case '(':
         return 2;
       case ')':
         return 3;
-      case ',':  
+      case ',':
         return 4;
       case ':':
         return 5;
-  }  
+      default:
+        System.out.println("ERROR IN THE PUNCT TERMTYPE");
+        return 0;
+    }
+  }
   /**
    *  When the token’s toString() is called, it will return a
    *  concatenation of the string “Punctuation “ with the

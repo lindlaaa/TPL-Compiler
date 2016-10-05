@@ -69,6 +69,10 @@ public class KeywordToken implements Token{
         return 26;
       case "end":
         return 27;
+      default:
+        System.out.println("ERROR IN THE KEYWORD TERMTYPE");
+        return 0;
+    }
   }
   /**
    *  When the token’s toString() is called,

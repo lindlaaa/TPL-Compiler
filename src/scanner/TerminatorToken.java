@@ -33,13 +33,18 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public int getTerminalType(){
     switch (termVal) {
-      case ';':  
+      case ';':
         return 0;
       case '.':
         return 1;
+      default:
+        System.out.println("ERROR IN THE TERM TERMTYPE");
+        return 0;
+
+    }
   }
   /**
    *  When the token’s toString() is called, it will return a

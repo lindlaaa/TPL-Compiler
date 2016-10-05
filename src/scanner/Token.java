@@ -11,4 +11,8 @@ public interface Token{
     public String toString();
 
     public int getline();
+    
+    public <T> T getVal();
+    
+    public int getTerminalType();
 }

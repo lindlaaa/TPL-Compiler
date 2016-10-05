@@ -9,14 +9,14 @@ Main container of our Parser
 public class Parser{
 
   private Scanner source;
-  private List<Token> stack = new ArrayList<>();
+  private List<Token> tokenArray = new ArrayList<>();
 
   public Parser(Scanner source) throws ScanException{
 
     this.source = source;
-    stack = this.source.takeAllTokens();
+    tokenArray = this.source.takeAllTokens();
   }
-
+  
   //TODO
 }
 

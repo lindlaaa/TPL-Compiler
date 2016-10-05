@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class PushNothing implements ParseAction
+public class PushNothing implements ParseRule
 {
    public PushNothing() {}
 

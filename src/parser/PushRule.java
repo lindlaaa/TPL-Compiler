@@ -1,10 +1,10 @@
 import java.util.Stack;
 
-public class PushSequence implements ParseAction
+public class PushSequence implements ParseRule
 {
-   private ParseAction[] actions;
+   private ParseRule[] actions;
 
-   public PushSequence( ParseAction[] actions )
+   public PushSequence( ParseRule[] actions )
    {
       this.actions = actions;
    }

@@ -20,7 +20,7 @@ public class NonTerminal
     public static final NonTerminal Term = new NonTerminal("TERM");
     public static final NonTerminal TermPrime = new NonTerminal("TERMPRIME");
     public static final NonTerminal Factor = new NonTerminal("FACTOR");
-    public static final NonTerminal FactorPrime = new NonTerminal("FACTORPRIME");
+    //public static final NonTerminal FactorPrime = new NonTerminal("FACTORPRIME");
     public static final NonTerminal Actuals = new NonTerminal("ACTUALS");
     public static final NonTerminal NonEmptyActuals = new NonTerminal("NONEMPTYACTUALS");
     public static final NonTerminal NonEmptyActualsPrime = new NonTerminal("NONEMPTYACTUALSPRIME");

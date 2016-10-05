@@ -16,7 +16,7 @@ public class Parser{
     this.source = source;
     tokenArray = this.source.takeAllTokens();
   }
-  
+
   //TODO
 }
 
@@ -24,12 +24,12 @@ public class Parser{
 
 
 
-//-----------------------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------------------
        ParseRule rule00 = new PushNothing();
        ParseRule rule01 = new PushRule(
                  new ParseRule[] { new PushTerminal(new keyWordToken("Program")),
-                                new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken('(')), 
-								new PushTerminal(new TerminatorToken(';')), new PushNonTerminal(NonTerminal.Formals), 
+                                new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken('(')),
+								new PushTerminal(new TerminatorToken(';')), new PushNonTerminal(NonTerminal.Formals),
 								new PushTerminal(new PunctuationToken(')')), new PushNonTerminal(NonTerminal.Definitions),
 								new PushNonTerminal(NonTerminal.Body), new PushTerminal(new TerminatorToken('.'));
                       } );
@@ -111,4 +111,4 @@ public class Parser{
 
        return table;
     }
-}
+}*/

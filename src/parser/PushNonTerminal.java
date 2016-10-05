@@ -1,3 +1,5 @@
+package src.parser;
+
 import java.util.Stack;
 
 public class PushNonTerminal implements ParseRule
@@ -9,6 +11,7 @@ public class PushNonTerminal implements ParseRule
       this.symbol = symbol;
    }
 
+   @SuppressWarnings("unchecked")
    public void execute( Stack stack )
    {
       stack.push( symbol );

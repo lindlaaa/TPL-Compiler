@@ -1,8 +1,10 @@
+package src.parser;
+
 import java.util.Stack;
 
-public class PushNothing implements ParseRule
+public class PushNull implements ParseRule
 {
-   public PushNothing() {}
+   public PushNull() {}
 
    public void execute( Stack stack ) {}
 

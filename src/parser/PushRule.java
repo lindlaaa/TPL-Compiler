@@ -1,6 +1,8 @@
+package src.parser;
+
 import java.util.Stack;
 
-public class PushSequence implements ParseRule
+public class PushRule implements ParseRule
 {
    private ParseRule[] actions;
 

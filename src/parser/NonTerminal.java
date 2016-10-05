@@ -1,5 +1,4 @@
 package src.parser;
-// This class is an example of a type-safe enum in Java.
 
 public class NonTerminal
 {
@@ -26,7 +25,7 @@ public class NonTerminal
     public static final NonTerminal NonEmptyActualsPrime = new NonTerminal("NONEMPTYACTUALSPRIME");
     public static final NonTerminal Literal = new NonTerminal("LITTERAL");
     public static final NonTerminal PrintStatement = new NonTerminal("PRINTSTATEMENT");
-    
+
     private String typeName;
 
     private NonTerminal( String name )

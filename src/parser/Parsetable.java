@@ -1,6 +1,7 @@
 package src.parser;
 
-import java.util.HashMap;
+import src.scanner.*;
+
 /*
 Contains some data-structure that represents our Parse table,
 holding objects [functions?] that act when its block [location]
@@ -11,16 +12,16 @@ is called.
 
 public class Parsetable{
 
-  private ParseRule[][];
+  private ParseRule[][] table;
 
   public Parsetable(){
-    table = new ParseRule[22][29]
+    table = new ParseRule[22][29];
   }
 
   public ParseRule lookup(NonTerminal symbol, Token token, ParseRule action){
 
-    int row = convertNonTerminal();
-    int column = convertTerminal();
+    int row = convertNonTerminal(symbol);
+    int column = convertTerminal(token);
 
     return table[row][column];
   }
@@ -29,7 +30,7 @@ public class Parsetable{
               throws Exception
   {
     int row = convertNonTerminal( symbol );
-    int col = convertToken( token  );
+    int column = convertTerminal( token  );
 
     table[row][column] = action;
   }
@@ -38,6 +39,16 @@ public class Parsetable{
   {
     return table.toString();
   }
+
+  private int convertNonTerminal( NonTerminal symbol )
+    {
+        return 1;
+    }
+
+    private int convertTerminal( Token token )
+    {
+        return 1;
+    }
 }
 
 
@@ -49,7 +60,7 @@ public class Parsetable{
 
 
 
-
+/*
 //TODO FIXME The following is what wallingford made
 
 
@@ -108,3 +119,4 @@ public class ParseRule
         return token.type();
     }
 }
+*/

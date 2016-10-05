@@ -7,7 +7,7 @@ package src.scanner;
 public class BoolToken implements Token{
 
   private String outputString = "Boolean ";
-	private boolean boolValue;
+  private boolean boolValue;
   private int line;
 
   public BoolToken(String inputString, int c){
@@ -26,7 +26,7 @@ public class BoolToken implements Token{
    *  @return boolean Represents the java boolean value of this Token
    */
   public boolean getVal(){
-	  return boolValue;
+      return boolValue;
   }
 
   /**
@@ -37,7 +37,14 @@ public class BoolToken implements Token{
   public int getline(){
     return line;
   }
-
+  
+  public int getTerminalType(){
+    if(boolValue){
+      return 17;
+    }else{
+      return 18;
+    }
+  }
   /**
    *  When the token's toString()
    *  is called, it will return a concatenation of the string

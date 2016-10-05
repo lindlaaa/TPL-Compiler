@@ -18,10 +18,17 @@ public class Parsetable{
     table = new ParseRule[22][31];
   }
 
-  public ParseRule lookup(NonTerminal symbol, Token token, ParseRule action){
+  public ParseRule lookup(NonTerminal symbol,
+                          Token token,
+                          ParseRule action)
+                          throws ParseException{
 
     int row = convertNonTerminal(symbol);
     int column = convertTerminal(token);
+
+    if(table[row][column] == null){
+      throw new ParseException("Tried to reach block that is undefined");
+    }
 
     return table[row][column];
   }

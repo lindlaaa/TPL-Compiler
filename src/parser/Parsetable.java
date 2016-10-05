@@ -11,7 +11,33 @@ is called.
 
 public class Parsetable{
 
-  private HashMap table = new HashMap();
+  private ParseRule[][];
+
+  public Parsetable(){
+    table = new ParseRule[22][29]
+  }
+
+  public ParseRule lookup(NonTerminal symbol, Token token, ParseRule action){
+
+    int row = convertNonTerminal();
+    int column = convertTerminal();
+
+    return table[row][column];
+  }
+
+  public void add( NonTerminal symbol, Token token, ParseRule action )
+              throws Exception
+  {
+    int row = convertNonTerminal( symbol );
+    int col = convertToken( token  );
+
+    table[row][column] = action;
+  }
+
+  public String toString()
+  {
+    return table.toString();
+  }
 }
 
 

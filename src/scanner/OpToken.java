@@ -28,19 +28,23 @@ public class OpToken implements Token{
   //    case '/': case '<': case '=':
   public int getTerminalType(){
     switch (opVal) {
-      case '+':  
+      case '+':
         return 6;
       case '-':
         return 7;
-      case '*':  
+      case '*':
         return 8;
       case '/':
         return 9;
-      case '<':  
+      case '<':
         return 10;
       case '=':
         return 11;
-  }    
+      default:
+        System.out.println("ERROR IN THE OP TERMTYPE");
+        return 0;
+    }
+  }
   /**
    *  Returns the op represented by this Token
    *

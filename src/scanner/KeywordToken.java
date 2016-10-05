@@ -33,7 +33,7 @@ public class KeywordToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   /*
   {"if", "then", "else", "integer",
     "boolean", "true", "false", "not", "or", "and", "print", "program",
@@ -41,35 +41,39 @@ public class KeywordToken implements Token{
   */
   public int getTerminalType(){
     switch (keyString) {
-      case "if":  
+      case "if":
         return 12;
       case "then":
         return 13;
-      case "else":  
+      case "else":
         return 14;
       case "integer":
         return 15;
-      case "boolean":  
+      case "boolean":
         return 16;
       case "not":
         return 19;
-      case "or":  
+      case "or":
         return 20;
       case "and":
         return 21;
-      case "print":  
+      case "print":
         return 22;
       case "program":
         return 23;
       case "function":
         return 24;
-      case "return":  
+      case "return":
         return 25;
       case "begin":
-        return 26;  
+        return 26;
       case "end":
         return 27;
-  } 
+      default:
+        System.out.println("ERROR IN THE KEYWORD TERMTYPE");
+        return 0;
+    }
+  }
   /**
    *  When the token’s toString() is called,
    *  it will return a concatenation of the string “Keyword “

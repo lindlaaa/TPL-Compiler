@@ -50,7 +50,7 @@ public class TableDrivenParser extends Parser{
   private Parsetable makeParsingTable() throws ScanException,
                                                 Exception{
 
-    Parsetable table = new Parsetable();
+    Parsetable tempTable = new Parsetable();
 
     //Make the parse table on google sheets
     //Declare and Add the rules to the table here
@@ -95,7 +95,6 @@ public class TableDrivenParser extends Parser{
 
     ParseRule NonEmptyFormalsRule01 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Formal),
-                        new PushTerminal(     new PunctuationToken(',',0)),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormalsPrime),
                         } );
 
@@ -281,9 +280,9 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';',0))
                         } );
 
-    flairTable.add(NonTerminal.Program, new KeywordToken("program", 0), ProgramRule01);
+    tempTable.add(NonTerminal.Program, new KeywordToken("program", 0), ProgramRule01);
 
     //return the table to use in parseProgram()
-    return table;
+    return tempTable;
   }
 }

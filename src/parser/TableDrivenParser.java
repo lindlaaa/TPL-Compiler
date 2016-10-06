@@ -262,6 +262,7 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.Definitions, new KeywordToken("function", 0), rule02);
     tempTable.add(NonTerminal.Definitions, new KeywordToken("begin", 0), rule00);
     tempTable.add(NonTerminal.Definitions, new EOFToken(0), rule00);
+    tempTable.add(NonTerminal.Body,        new KeywordToken("body", 0), rule08);
 
     //return the table to use in parseProgram()
     return tempTable;

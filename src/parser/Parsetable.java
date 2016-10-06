@@ -73,6 +73,7 @@ public class Parsetable{
     if (symbol.equals( NonTerminal.NonEmptyActualsPrime ) ) return 20;
     if (symbol.equals( NonTerminal.Literal )              ) return 21;
     if (symbol.equals( NonTerminal.PrintStatement )       ) return 22;
+	if (symbol.equals( NonTerminal.IdentifierPrime)       ) return 23;
 
     return 0;
   }

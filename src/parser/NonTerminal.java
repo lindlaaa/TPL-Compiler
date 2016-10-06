@@ -36,8 +36,6 @@ public class NonTerminal
                         new NonTerminal("TERMPRIME");
     public static final NonTerminal Factor =
                         new NonTerminal("FACTOR");
-    public static final NonTerminal Identifier =
-                        new NonTerminal("IDENTIFIER");
     public static final NonTerminal Actuals =
                         new NonTerminal("ACTUALS");
     public static final NonTerminal NonEmptyActuals =

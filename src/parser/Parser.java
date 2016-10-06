@@ -37,40 +37,150 @@ public class Parser{
        ParseAction DefinitionsRule02 = new PushSequence(
                  new ParseAction[] { new PushNonTerminal(NonTerminal.Def), new PushNonTerminal(NonTerminal.Definitions)
                       } );
-       ParseAction DefRule01 = new PushSequence(//function <IDENTIFIER> ( <FORMALS> ) : <TYPE> <BODY> ;
+       ParseAction DefRule01 = new PushSequence(
                  new ParseAction[] { new PushTerminal(new KeywordToken("function", 0), new PushNonTerminal(NonTerminal.Identifier),
                                 new PushTerminal(new PunctuationToken('(', 0)), new PushNonTerminal(NonTerminal.Formals),
 								new PushTerminal(new PunctuationToken(')', 0)), new PushTerminal(new PunctuationToken(':', 0)),
 								new PushNonTerminal(NonTerminal.Type), new PushNonTerminal(NonTerminal.Body), 
 								new PushTerminal(new TerminatorToken(';', 0)							
                       } );
-       ParseAction rule05 = new PushSequence(
-                 new ParseAction[] { new PushNonTerminal(NonTerminal.Statement),
-                                new PushNonTerminal(NonTerminal.Statements)
+       ParseAction FormalsRule01 = new PushSequence(
+                 new ParseAction[] { new PushNull()
                       } );
-       ParseAction rule06 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(print),
-                                new PushTerminal(identifier)
+       ParseAction FormalsRule02 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.NonEmptyFormals)
                       } );
-       ParseAction rule07 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(identifier),
-                                new PushTerminal(assignment),
-                                new PushNonTerminal(NonTerminal.Value),
-                                new PushNonTerminal(NonTerminal.ExpressionTail)
+       ParseAction NonEmptyFormalsRule01 = new PushSequence(<NONEMPTYFORMALS> ::= <FORMAL> , <NONEMPTYFORMALS*>
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Formal), new PushTerminal(new PunctuationToken(',',0)),
+                                new PushNonTerminal(NonTerminal.NonEmptyFormalsPrime),
+                      } );				  
+       ParseAction NonEmptyFormalsPrimeRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new PunctuationToken(',',0)), new PushNonTerminal(NonTerminal.NonEmptyFormals)
                       } );
-       ParseAction rule08 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(plus),
-                                new PushNonTerminal(NonTerminal.Value),
-                                new PushNonTerminal(NonTerminal.ExpressionTail)
+       ParseAction NonEmptyFormalsPrimeRule02 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );		  
+       ParseAction FormalRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Identifier), new PushTerminal(new PunctuationToken(':',0)),
+				 new PushNonTerminal(NonTerminal.Type)
                       } );
-       ParseAction rule09 = new PushSequence(
-                 new ParseAction[] { new PushTerminal(minus),
-                                new PushNonTerminal(NonTerminal.Value),
-                                new PushNonTerminal(NonTerminal.ExpressionTail)
+       ParseAction FormalRule02 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.NonEmptyFormals)
+                      } );									  
+       ParseAction BodyRule01 = new PushSequence(<NONEMPTYFORMALS> ::= <FORMAL> , <NONEMPTYFORMALS*>
+                 new ParseAction[] { new PushTerminal(new KeywordToken("begin", 0)), new PushNonTerminal(NonTerminal.StatementList),
+                                new PushTerminal(new KeywordToken("end", 0))
+                      } );				  
+       ParseAction StatementListRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.PrintStatement), new PushNonTerminal(NonTerminal.StatementList)
                       } );
-       ParseAction rule10 = new PushTerminal(identifier);
-       ParseAction rule11 = new PushTerminal(floatValue);
-       ParseAction rule12 = new PushTerminal(integerValue);
+       ParseAction StatementListRule02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("return"), new PushNonTerminal(NonTerminal.Expr)
+                      } );
+       ParseAction TypeRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("integer", 0)
+                      } );
+       ParseAction TypeRule02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("boolean", 0)
+                      } );
+       ParseAction ExprRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.SimpleExpr), new PushNonTerminal(NonTerminal.ExprPrime)
+                      } );				  
+       ParseAction ExprPrimeRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('<', 0)),new PushNonTerminal(NonTerminal.SimplExpr)
+                      } );
+       ParseAction ExprPrimeRule02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('=', 0)),new PushNonTerminal(NonTerminal.SimplExpr)
+                      } );
+       ParseAction ExprPrimeRule03 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );
+       ParseAction SimpleExprRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Term), new PushNonTerminal(NonTerminal.SimpleExprPrime)
+                      } );
+       ParseAction SimpleExprRulePrime01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("or", 0)), new PushNonTerminal(NonTerminal.Term)
+                      } );					  
+       ParseAction SimpleExprRulePrime02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('+',0)), new PushNonTerminal(NonTerminal.Term)
+                      } );
+       ParseAction SimpleExprRulePrime03 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('-',0)), new PushNonTerminal(NonTerminal.Term)
+                      } );
+       ParseAction SimpleExprRulePrime04 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );								
+       ParseAction TermRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Factor), new PushNonTerminal(NonTerminal.TermPrime),
+                      } );
+       ParseAction TermPrimeRule01 = new PushSequence(
+                    new ParseAction[] { new PushTerminal(new KeywordToken("and",0)), new PushNonTerminal(NonTerminal.Factor)
+                      } );
+       ParseAction TermPrimeRule02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('*',0)), new PushNonTerminal(NonTerminal.Factor)
+                      } );					  
+       ParseAction TermPrimeRule03 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('/',0)), new PushNonTerminal(NonTerminal.Factor)
+                      } );
+       ParseAction TermPrimeRule04 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );					  
+       ParseAction FactorRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("if",0)),new PushNonTerminal(NonTerminal.Expr),
+                                new PushTerminal(new KeywordToken("then",0)),new PushNonTerminal(NonTerminal.Expr),
+								new PushTerminal(new KeywordToken("else",0)),new PushNonTerminal(NonTerminal.Expr)
+                      } );
+       ParseAction FactorRule02 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new KeywordToken("not",0)),new PushNonTerminal(NonTerminal.Factor)
+                      } );
+       ParseAction FactorRule03 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Identifier), new PushNonTerminal(NonTerminal.FactorPrime)
+                      } );					  
+       ParseAction FactorRule04 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Literal)
+                      } );
+       ParseAction FactorRule05 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new OpToken('-',0)), new PushNonTerminal(NonTerminal.Factor)
+                      } );
+       ParseAction FactorRule06 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new PunctuationToken('(', 0)), new PushNonTerminal(NonTerminal.Expr),
+								new PushTerminal(new PunctuationToken(')', 0))
+                      } );								
+       ParseAction FactorPrimeRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new PunctuationToken('(', 0)), new PushNonTerminal(NonTerminal.Actuals),
+								new PushTerminal(new PunctuationToken(')', 0))
+                      } );								
+       ParseAction FactorPrimeRule02 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+				      } );
+       ParseAction ActualsRule01 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );
+       ParseAction ActualsRule02 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.NonEmptyActuals)
+                      } );				 
+       ParseAction NonEmptyActualsRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Expr), new PushNonTerminal(NonTerminal.NonEmptyActualsPrime)
+                      } );								
+       ParseAction NonEmptyActualsPrimeRule01 = new PushSequence(
+                 new ParseAction[] { new PushTerminal(new PunctuationToken(',',0)),new PushNonTerminal(NonTerminal.Expr),
+				 new PushNonTerminal(NonTerminal.NonEmptyActualsPrime)	
+                      } );
+       ParseAction NonEmptyActualsRulePrime02 = new PushSequence(
+                 new ParseAction[] { new PushNull()
+                      } );								
+       ParseAction LiteralRule01 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Number)
+                      } );
+       ParseAction LiteralRule02 = new PushSequence(
+                 new ParseAction[] { new PushNonTerminal(NonTerminal.Boolean)
+                      } );   
+       ParseAction PrintStatementRule01 = new PushSequence(//print ( <EXPR> ) ;
+                 new ParseAction[] { new PushNonTerminal(new KeywordToken("print",0)),new PushTerminal(new PunctuationToken('(', 0)),
+				 new PushNonTerminal(NonTerminal.Expr), new PushTerminal(new PunctuationToken(')', 0)),
+				 new PushTerminal(new TerminatorToken(';',0))
+                      } );	   
+	   
 
        table.add( NonTerminal.Program, floatDeclaration, rule01 );
        table.add( NonTerminal.Program, intDeclaration,   rule01 );

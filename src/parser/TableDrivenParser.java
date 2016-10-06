@@ -6,6 +6,7 @@ import src.scanner.*;
 public class TableDrivenParser extends Parser{
 
   private Parsetable flairTable;
+  private Stack stack = new Stack();
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
@@ -14,11 +15,17 @@ public class TableDrivenParser extends Parser{
     flairTable = makeParsingTable();
   }
 
-
+  @SuppressWarnings("unchecked")
   public boolean parseProgram(){
-    //TODO
-    //Add pseudo code from Slack here
-    //FIXME
+    stack.push(new EOFToken(1)); //push EOF onto stack
+    stack.push(NonTerminal.Program);//push start symbol onto stack
+
+    //Main loop
+    do{
+      System.out.println("insode while loop");
+    }while((stack.peek() instanceof EOFToken) == false);
+
+    System.out.println(stack);
     return true;
   }
 

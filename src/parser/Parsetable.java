@@ -15,7 +15,7 @@ public class Parsetable{
   private ParseRule[][] table;
 
   public Parsetable(){
-    table = new ParseRule[22][31];
+    table = new ParseRule[24][31];
   }
 
   public ParseRule lookup(NonTerminal symbol,

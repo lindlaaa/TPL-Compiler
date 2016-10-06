@@ -58,9 +58,9 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushTerminal(     new KeywordToken("program", 0)),
                         new PushNonTerminal(  NonTerminal.Identifier),
                         new PushTerminal(     new PunctuationToken('(', 0)),
-                        new PushTerminal(     new TerminatorToken(';',0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
+                        new PushTerminal(     new TerminatorToken(';',0)),						
                         new PushNonTerminal(  NonTerminal.Definitions),
                         new PushNonTerminal(  NonTerminal.Body),
                         new PushTerminal(     new TerminatorToken('.', 0))
@@ -111,10 +111,6 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
                         new PushTerminal(     new PunctuationToken(':',0)),
                         new PushNonTerminal(  NonTerminal.Type)
-                        } );
-
-    ParseRule FormalRule02 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals)
                         } );
 
     ParseRule BodyRule01 = new PushRule(
@@ -219,11 +215,10 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Factor)
                         } );
 
-    //FIXME TODO Ther is no factorPrime
-    /*ParseRule FactorRule03 = new PushRule(
+    ParseRule FactorRule03 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
-                        new PushNonTerminal(  NonTerminal.FactorPrime)
-                      } );*/
+                        new PushNonTerminal(  NonTerminal.IdentifierPrime)
+                        } );
 
     ParseRule FactorRule04 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Literal)
@@ -240,13 +235,13 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new PunctuationToken(')', 0))
                         } );
 
-    ParseRule FactorPrimeRule01 = new PushRule(
+    ParseRule IdentifierPrimeRule01 = new PushRule(
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Actuals),
                         new PushTerminal(     new PunctuationToken(')', 0))
                         } );
 
-    ParseRule FactorPrimeRule02 = new PushRule(
+    ParseRule IdentifierPrimeRule02 = new PushRule(
       new ParseRule[] { new PushNull() } );
 
     ParseRule ActualsRule01 = new PushRule(
@@ -271,11 +266,11 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushNull() } );
 
     ParseRule LiteralRule01 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Number)
+      new ParseRule[] { new PushTerminal(new IntToken("0", 0))
                         } );
 
     ParseRule LiteralRule02 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Boolean)
+      new ParseRule[] { new PushTerminal(new BoolToken("false", 0))
                         } );
 
     ParseRule PrintStatementRule01 = new PushRule(

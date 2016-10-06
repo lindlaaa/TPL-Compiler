@@ -48,11 +48,8 @@ public class NonTerminal
                         new NonTerminal("LITTERAL");
     public static final NonTerminal PrintStatement =
                         new NonTerminal("PRINTSTATEMENT");
-	public static final NonTerminal Number =
-                        new NonTerminal("NUMBER");
-	public static final NonTerminal Boolean =
-                        new NonTerminal("BOOLEAN");
-
+    public static final NonTerminal IdentifierPrime =
+                        new NonTerminal("IDENTIFIERPRIME");
     private String typeName;
 
     private NonTerminal( String name )

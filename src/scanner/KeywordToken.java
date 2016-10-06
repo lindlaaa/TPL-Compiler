@@ -70,7 +70,8 @@ public class KeywordToken implements Token{
       case "end":
         return 27;
       default:
-        System.out.println("ERROR IN THE KEYWORD TERMTYPE");
+        System.out.println("ERROR IN THE KEYWORD TERMTYPE\n"+
+                "keyString = "+keyString+"\n");
         return 0;
     }
   }

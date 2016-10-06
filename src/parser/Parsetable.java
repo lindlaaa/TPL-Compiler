@@ -27,7 +27,7 @@ public class Parsetable{
     int column = convertTerminal(token);
 
     if(table[row][column] == null){
-      throw new ParseException("Tried to reach block that is undefined");
+      throw new ParseException("--Tried to reach block that is undefined--");
     }
 
     return table[row][column];
@@ -79,7 +79,7 @@ public class Parsetable{
 
     private int convertTerminal( Token token )
     {
-        return token.getTerminalType();
+      return token.getTerminalType();
     }
 }
 

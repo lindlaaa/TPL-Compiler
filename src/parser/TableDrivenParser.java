@@ -60,7 +60,7 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
-                        new PushTerminal(     new TerminatorToken(';',0)),						
+                        new PushTerminal(     new TerminatorToken(';',0)),
                         new PushNonTerminal(  NonTerminal.Definitions),
                         new PushNonTerminal(  NonTerminal.Body),
                         new PushTerminal(     new TerminatorToken('.', 0))
@@ -266,7 +266,7 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushNull() } );
 
     ParseRule LiteralRule01 = new PushRule(
-      new ParseRule[] { new PushTerminal(new IntToken("0", 0))
+      new ParseRule[] { new PushTerminal(new IntToken("0", 0, 0))
                         } );
 
     ParseRule LiteralRule02 = new PushRule(
@@ -281,7 +281,7 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';',0))
                         } );
 
-
+    flairTable.add(NonTerminal.Program, new KeywordToken("program", 0), ProgramRule01);
 
     //return the table to use in parseProgram()
     return table;

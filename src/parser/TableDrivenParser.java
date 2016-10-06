@@ -56,7 +56,7 @@ public class TableDrivenParser extends Parser{
     //Declare and Add the rules to the table here
     ParseRule ProgramRule01 = new PushRule(
       new ParseRule[] { new PushTerminal(     new KeywordToken("program", 0)),
-                        new PushNonTerminal(  NonTerminal.Identifier),
+                        new PushTerminal(  new IdentifierToken("X", 0, 0)),
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
@@ -76,7 +76,7 @@ public class TableDrivenParser extends Parser{
 
     ParseRule DefRule01 = new PushRule(
       new ParseRule[] { new PushTerminal(     new KeywordToken("function", 0)),
-                        new PushNonTerminal(  NonTerminal.Identifier),
+                        new PushTerminal(  new IdentifierToken("X", 0,0)),
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
@@ -107,7 +107,7 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushNull() } );
 
     ParseRule FormalRule01 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
+      new ParseRule[] { new PushTerminal(  new IdentifierToken("X", 0, 0)),
                         new PushTerminal(     new PunctuationToken(':',0)),
                         new PushNonTerminal(  NonTerminal.Type)
                         } );
@@ -215,7 +215,7 @@ public class TableDrivenParser extends Parser{
                         } );
 
     ParseRule FactorRule03 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
+      new ParseRule[] { new PushTerminal(  new IdentifierToken("X", 0, 0)),
                         new PushNonTerminal(  NonTerminal.IdentifierPrime)
                         } );
 
@@ -281,6 +281,7 @@ public class TableDrivenParser extends Parser{
                         } );
 
     tempTable.add(NonTerminal.Program, new KeywordToken("program", 0), ProgramRule01);
+    //tempTable.add(NonTerminal.Definitions, new KeywordToken("function", 0),)
 
     //return the table to use in parseProgram()
     return tempTable;

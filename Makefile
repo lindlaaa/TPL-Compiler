@@ -31,7 +31,7 @@ parser:
 
 clean:
 	@rm -rf doc/*
-	@cp test/doNotDelete doc/
+	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
-	@cp test/doNotDelete bin/
+	@cp test_ignore/doNotDelete bin/
 	@fortune -s | cowsay -f www | lolcat -d 30

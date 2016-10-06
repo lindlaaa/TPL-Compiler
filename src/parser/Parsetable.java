@@ -19,9 +19,9 @@ public class Parsetable{
   }
 
   public ParseRule lookup(NonTerminal symbol,
-                          Token token,
-                          ParseRule action)
-                          throws ParseException{
+                          Token token)
+                          throws ParseException
+  {
 
     int row = convertNonTerminal(symbol);
     int column = convertTerminal(token);
@@ -32,6 +32,7 @@ public class Parsetable{
 
     return table[row][column];
   }
+
 
   public void add( NonTerminal symbol, Token token, ParseRule action )
               throws Exception
@@ -78,7 +79,7 @@ public class Parsetable{
 
     private int convertTerminal( Token token )
     {
-        return 1;
+        return token.getTerminalType();
     }
 }
 

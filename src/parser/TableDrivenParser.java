@@ -15,17 +15,31 @@ public class TableDrivenParser extends Parser{
     flairTable = makeParsingTable();
   }
 
+
   @SuppressWarnings("unchecked")
   public boolean parseProgram(){
     stack.push(new EOFToken(1));    //push EOF onto stack
     stack.push(NonTerminal.Program);//push start symbol onto stack
 
-    //Main loop
-    do{
-      System.out.println("insode while loop");
+    do{ //Main loop
+      if(stack.peek() instanceof Token){ //Terminal
+        if(stack.peek() == curToken){
+          stack.pop();
+          consumeToken();
+        }else{
+          //ERROR
+        }
+      }else if(stack.peek() instanceof NonTerminal){ //NonTerminal
+        /*if(flairTable.lookup(stack.peek(), curToken))
+        {
+          stack.push(flairTable.lookup(stack.pop(), curToken));
+        }*/
+        System.out.println(curToken);
+      }else{ //Parse Error
+
+      }
     }while((stack.peek() instanceof EOFToken) == false);
 
-    System.out.println(stack);
     return true;
   }
 

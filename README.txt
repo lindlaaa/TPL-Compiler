@@ -6,7 +6,7 @@ Output:           String representing the result of your command.
 Compile & Run:
   A.  Everything
     1.  make
-    
+
   B.  Scanner
     1.  make scanner
 
@@ -19,14 +19,14 @@ Documentation:    doc/
 Date:       2016/10/01
 
 
-Known Issues: Some strange error after running 'make clean'.
+Known Issues: Some strange error message after running 'make clean'.
 
 
 Directory Structure:
   bin/ : stores the binary files
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
-  test/: stores the .flr files used to test the project parts
+  test_ignore/: stores the .flr files used to test the project parts
 
 
 High level Scanner design:

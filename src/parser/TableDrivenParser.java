@@ -256,6 +256,7 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';',0))
                         } );
 
+    //Make symbols '}' and string "a"
     tempTable.add(NonTerminal.Program, new KeywordToken("program", 0), rule01);
 
     tempTable.add(NonTerminal.Definitions, new KeywordToken("function", 0), rule02);

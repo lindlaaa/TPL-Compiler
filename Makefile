@@ -34,4 +34,4 @@ clean:
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/
-	@fortune -s | cowsay -f www | lolcat -d 30
+	@echo "Done!"

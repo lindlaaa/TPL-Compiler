@@ -299,7 +299,7 @@ public class TableDrivenParser extends Parser{
   tempTable.add(NonTerminal.SimpleExpr,     new KeywordToken("if", 0), rule16);
   tempTable.add(NonTerminal.SimpleExpr,     new KeywordToken("not", 0), rule16);
   tempTable.add(NonTerminal.SimpleExpr,     new IntToken("0", 0, 0), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new BoolToken("0", 0), rule16);
+  tempTable.add(NonTerminal.SimpleExpr,     new BoolToken("false", 0), rule16);
   tempTable.add(NonTerminal.SimpleExpr,     new IdentifierToken("0", 0, 0), rule16);
   
   tempTable.add(NonTerminal.SimpleExprPrime, new PunctuationToken(')', 0), rule00);
@@ -321,7 +321,7 @@ public class TableDrivenParser extends Parser{
   tempTable.add(NonTerminal.Term, new KeywordToken("if", 0), rule20);
   tempTable.add(NonTerminal.Term, new KeywordToken("not", 0), rule20);
   tempTable.add(NonTerminal.Term, new IntToken("0", 0, 0), rule20);
-  tempTable.add(NonTerminal.Term, new BoolToken("0", 0), rule20);
+  tempTable.add(NonTerminal.Term, new BoolToken("false", 0), rule20);
   tempTable.add(NonTerminal.Term, new IdentifierToken("0", 0, 0), rule20);
 	
 	tempTable.add(NonTerminal.TermPrime, new PunctuationToken(')', 0), rule00);
@@ -343,17 +343,17 @@ public class TableDrivenParser extends Parser{
 	tempTable.add(NonTerminal.Factor, new OpToken('-', 0), rule28);	
 	tempTable.add(NonTerminal.Factor, new KeywordToken("if", 0), rule24);	
 	tempTable.add(NonTerminal.Factor, new KeywordToken("not", 0), rule25);
-	tempTable.add(NonTerminal.Factor, new IntToken(0,0,0), rule27);
+	tempTable.add(NonTerminal.Factor, new IntToken("0",0,0), rule27);
 	tempTable.add(NonTerminal.Factor, new BoolToken("false",0), rule27);	
-	tempTable.add(NonTerminal.Factor, new IdentifierToken('X',0,0), rule26);	
+	tempTable.add(NonTerminal.Factor, new IdentifierToken("0",0,0), rule26);	
 	
     tempTable.add(NonTerminal.IdentifierPrime, new PunctuationToken('(', 0), rule30);
     tempTable.add(NonTerminal.IdentifierPrime, new OpToken('-', 0), rule00);		
     tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("if", 0), rule00);	
     tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("not", 0), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new IntToken(0,0,0), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime, new IntToken("0",0,0), rule00);
     tempTable.add(NonTerminal.IdentifierPrime, new BoolToken("false",0), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new IdentifierToken('X',0,0), rule00);	
+    tempTable.add(NonTerminal.IdentifierPrime, new IdentifierToken("X",0,0), rule00);	
     tempTable.add(NonTerminal.IdentifierPrime, new EOFToken(0), rule00);	
 	
     tempTable.add(NonTerminal.Actuals, new PunctuationToken('(', 0), rule31);
@@ -361,22 +361,22 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.Actuals, new OpToken('-', 0), rule31);
     tempTable.add(NonTerminal.Actuals, new KeywordToken("if", 0), rule31);	
     tempTable.add(NonTerminal.Actuals, new KeywordToken("not", 0), rule31);	
-    tempTable.add(NonTerminal.Actuals, new IntToken(0,0,0), rule31);
+    tempTable.add(NonTerminal.Actuals, new IntToken("0",0,0), rule31);
     tempTable.add(NonTerminal.Actuals, new BoolToken("false",0), rule31);	
-    tempTable.add(NonTerminal.Actuals, new IdentifierToken('X',0,0), rule31);	
+    tempTable.add(NonTerminal.Actuals, new IdentifierToken("X",0,0), rule31);	
 	
 	tempTable.add(NonTerminal.NonEmptyActuals, new PunctuationToken('(', 0), rule32);
 	tempTable.add(NonTerminal.NonEmptyActuals, new OpToken('-', 0), rule32);	
 	tempTable.add(NonTerminal.NonEmptyActuals, new KeywordToken("if", 0), rule32);
-	tempTable.add(NonTerminal.NonEmptyActuals, new IntToken(0,0,0), rule32);
+	tempTable.add(NonTerminal.NonEmptyActuals, new IntToken("0",0,0), rule32);
 	tempTable.add(NonTerminal.NonEmptyActuals, new BoolToken("false",0), rule32);	
-	tempTable.add(NonTerminal.NonEmptyActuals, new IdentifierToken('X',0,0), rule32);		
+	tempTable.add(NonTerminal.NonEmptyActuals, new IdentifierToken("X",0,0), rule32);		
 		
 	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(')', 0), rule00);
 	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(',', 0), rule33);	
 	tempTable.add(NonTerminal.NonEmptyActualsPrime, new EOFToken(0), rule00);	
 
-    tempTable.add(NonTerminal.Literal, new IntToken(0,0,0), rule34);
+    tempTable.add(NonTerminal.Literal, new IntToken("0",0,0), rule34);
     tempTable.add(NonTerminal.Literal, new BoolToken("false",0), rule35);	
 
     tempTable.add(NonTerminal.PrintStatement, new KeywordToken("print", 0), rule36);	

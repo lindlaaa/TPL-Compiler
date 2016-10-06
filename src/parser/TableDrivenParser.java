@@ -54,9 +54,12 @@ public class TableDrivenParser extends Parser{
 
     //Make the parse table on google sheets
     //Declare and Add the rules to the table here
-    ParseRule ProgramRule01 = new PushRule(
+    ParseRule rule00 = new PushRule(
+      new ParseRule[] { new PushNull() } );
+
+    ParseRule rule01 = new PushRule( //ProgramRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("program", 0)),
-                        new PushNonTerminal(  NonTerminal.Identifier),
+                        new PushTerminal(     new IdentifierToken("X", 0, 0)),
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
@@ -66,17 +69,14 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken('.', 0))
                       } );
 
-    ParseRule DefinitonsRule01 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule DefinitionsRule02 = new PushRule(
+    ParseRule rule02 = new PushRule( // DefinitionsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Def),
                         new PushNonTerminal(  NonTerminal.Definitions)
                         } );
 
-    ParseRule DefRule01 = new PushRule(
+    ParseRule rule03 = new PushRule( // DefRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("function", 0)),
-                        new PushNonTerminal(  NonTerminal.Identifier),
+                        new PushTerminal(     new IdentifierToken("X", 0,0)),
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')', 0)),
@@ -86,121 +86,106 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';', 0))
                         } );
 
-    ParseRule FormalsRule01 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule FormalsRule02 = new PushRule(
+    ParseRule rule04 = new PushRule( // FormalsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals)
                         } );
 
-    ParseRule NonEmptyFormalsRule01 = new PushRule(
+    ParseRule rule05 = new PushRule( // NonEmptyFormalsRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Formal),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormalsPrime),
                         } );
 
-    ParseRule NonEmptyFormalsPrimeRule01 = new PushRule(
+    ParseRule rule06 = new PushRule( // NonEmptyFormalsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',',0)),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormals)
                         } );
 
-    ParseRule NonEmptyFormalsPrimeRule02 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule FormalRule01 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
+    ParseRule rule07 = new PushRule( // FormalRule01
+      new ParseRule[] { new PushTerminal(     new IdentifierToken("X", 0, 0)),
                         new PushTerminal(     new PunctuationToken(':',0)),
                         new PushNonTerminal(  NonTerminal.Type)
                         } );
 
-    ParseRule BodyRule01 = new PushRule(
+    ParseRule rule08 = new PushRule( // BodyRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("begin", 0)),
                         new PushNonTerminal(  NonTerminal.StatementList),
                         new PushTerminal(     new KeywordToken("end", 0))
                         } );
 
-    ParseRule StatementListRule01 = new PushRule(
+    ParseRule rule09 = new PushRule( // StatementListRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.PrintStatement),
                         new PushNonTerminal(  NonTerminal.StatementList)
                         } );
 
-    ParseRule StatementListRule02 = new PushRule(
+    ParseRule rule10 = new PushRule( // StatementListRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("return", 0)),
                         new PushNonTerminal(  NonTerminal.Expr)
                         } );
 
-    ParseRule TypeRule01 = new PushRule(
-      new ParseRule[] { new PushTerminal( new KeywordToken("integer", 0))
+    ParseRule rule11 = new PushRule( // TypeRule01
+      new ParseRule[] { new PushTerminal(     new KeywordToken("integer", 0))
                         } );
 
-    ParseRule TypeRule02 = new PushRule(
-      new ParseRule[] { new PushTerminal( new KeywordToken("boolean", 0))
+    ParseRule rule12 = new PushRule(
+      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean", 0))
                         } );
 
-    ParseRule ExprRule01 = new PushRule(
+    ParseRule rule13 = new PushRule( // ExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.SimpleExpr),
                         new PushNonTerminal(  NonTerminal.ExprPrime)
                         } );
 
-    ParseRule ExprPrimeRule01 = new PushRule(
+    ParseRule rule14 = new PushRule( // ExprPrimeRule01
       new ParseRule[] { new PushTerminal(     new OpToken('<', 0)),
                         new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
-    ParseRule ExprPrimeRule02 = new PushRule(
+    ParseRule rule15 = new PushRule( // ExprPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('=', 0)),
                         new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
-    ParseRule ExprPrimeRule03 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule SimpleExprRule01 = new PushRule(
+    ParseRule rule16 = new PushRule( // SimpleExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Term),
                         new PushNonTerminal(  NonTerminal.SimpleExprPrime)
                         } );
 
-    ParseRule SimpleExprRulePrime01 = new PushRule(
+    ParseRule rule17 = new PushRule( // SimpleExprRulePrime01
       new ParseRule[] { new PushTerminal(     new KeywordToken("or", 0)),
                         new PushNonTerminal(  NonTerminal.Term)
                         } );
 
-    ParseRule SimpleExprRulePrime02 = new PushRule(
+    ParseRule rule18 = new PushRule( // SimpleExprRulePrime02
       new ParseRule[] { new PushTerminal(     new OpToken('+',0)),
                         new PushNonTerminal(  NonTerminal.Term)
                         } );
 
-    ParseRule SimpleExprRulePrime03 = new PushRule(
+    ParseRule rule19 = new PushRule( // SimpleExprRulePrime03
       new ParseRule[] { new PushTerminal(     new OpToken('-',0)),
                         new PushNonTerminal(  NonTerminal.Term)
                         } );
 
-    ParseRule SimpleExprRulePrime04 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule TermRule01 = new PushRule(
+    ParseRule rule20 = new PushRule( // TermRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Factor),
                         new PushNonTerminal(  NonTerminal.TermPrime),
                         } );
 
-    ParseRule TermPrimeRule01 = new PushRule(
-       new ParseRule[] { new PushTerminal(      new KeywordToken("and",0)),
-                          new PushNonTerminal(  NonTerminal.Factor)
+    ParseRule rule21 = new PushRule( // TermPrimeRule01
+       new ParseRule[] { new PushTerminal(    new KeywordToken("and",0)),
+                         new PushNonTerminal( NonTerminal.Factor)
                           } );
 
-    ParseRule TermPrimeRule02 = new PushRule(
+    ParseRule rule22 = new PushRule( // TermPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('*',0)),
                         new PushNonTerminal(  NonTerminal.Factor)
                         } );
 
-    ParseRule TermPrimeRule03 = new PushRule(
+    ParseRule rule23 = new PushRule( // TermPrimeRule03
       new ParseRule[] { new PushTerminal(     new OpToken('/',0)),
                         new PushNonTerminal(  NonTerminal.Factor)
                         } );
 
-    ParseRule TermPrimeRule04 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule FactorRule01 = new PushRule(
+    ParseRule rule24 = new PushRule( // FactorRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("if",0)),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new KeywordToken("then",0)),
@@ -209,78 +194,73 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Expr)
                         } );
 
-    ParseRule FactorRule02 = new PushRule(
+    ParseRule rule25 = new PushRule( // FactorRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("not",0)),
                         new PushNonTerminal(  NonTerminal.Factor)
                         } );
 
-    ParseRule FactorRule03 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Identifier),
+    ParseRule rule26 = new PushRule( // FactorRule03
+      new ParseRule[] { new PushTerminal(     new IdentifierToken("X", 0, 0)),
                         new PushNonTerminal(  NonTerminal.IdentifierPrime)
                         } );
 
-    ParseRule FactorRule04 = new PushRule(
+    ParseRule rule27 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Literal)
                         } );
 
-    ParseRule FactorRule05 = new PushRule(
+    ParseRule rule28 = new PushRule(
       new ParseRule[] { new PushTerminal(     new OpToken('-',0)),
                         new PushNonTerminal(  NonTerminal.Factor)
                         } );
 
-    ParseRule FactorRule06 = new PushRule(
+    ParseRule rule29 = new PushRule( // FactorRule06
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new PunctuationToken(')', 0))
                         } );
 
-    ParseRule IdentifierPrimeRule01 = new PushRule(
+    ParseRule rule30 = new PushRule( // IdentifierPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Actuals),
                         new PushTerminal(     new PunctuationToken(')', 0))
                         } );
 
-    ParseRule IdentifierPrimeRule02 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule ActualsRule01 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule ActualsRule02 = new PushRule(
+    ParseRule rule31 = new PushRule( // ActualsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyActuals)
                         } );
 
-    ParseRule NonEmptyActualsRule01 = new PushRule(
+    ParseRule rule32 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime)
                         } );
 
-    ParseRule NonEmptyActualsPrimeRule01 = new PushRule(
+    ParseRule rule33 = new PushRule( // NonEmptyActualsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',',0)),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime)
                         } );
 
-    ParseRule NonEmptyActualsRulePrime02 = new PushRule(
-      new ParseRule[] { new PushNull() } );
-
-    ParseRule LiteralRule01 = new PushRule(
-      new ParseRule[] { new PushTerminal(new IntToken("0", 0, 0))
+    ParseRule rule34 = new PushRule(
+      new ParseRule[] { new PushTerminal(     new IntToken("0", 0, 0))
                         } );
 
-    ParseRule LiteralRule02 = new PushRule(
-      new ParseRule[] { new PushTerminal(new BoolToken("false", 0))
+    ParseRule rule35 = new PushRule(
+      new ParseRule[] { new PushTerminal(     new BoolToken("false", 0))
                         } );
 
-    ParseRule PrintStatementRule01 = new PushRule(
-      new ParseRule[] { new PushTerminal(  new KeywordToken("print", 0)),
+    ParseRule rule36 = new PushRule(
+      new ParseRule[] { new PushTerminal(     new KeywordToken("print", 0)),
                         new PushTerminal(     new PunctuationToken('(', 0)),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new PunctuationToken(')', 0)),
                         new PushTerminal(     new TerminatorToken(';',0))
                         } );
 
-    tempTable.add(NonTerminal.Program, new KeywordToken("program", 0), ProgramRule01);
+    tempTable.add(NonTerminal.Program, new KeywordToken("program", 0), rule01);
+
+    tempTable.add(NonTerminal.Definitions, new KeywordToken("function", 0), rule02);
+    tempTable.add(NonTerminal.Definitions, new KeywordToken("begin", 0), rule00);
+    tempTable.add(NonTerminal.Definitions, new EOFToken(0), rule00);
 
     //return the table to use in parseProgram()
     return tempTable;

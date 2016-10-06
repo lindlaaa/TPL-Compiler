@@ -67,13 +67,12 @@ public class Parsetable{
     if (symbol.equals( NonTerminal.Term )                 ) return 14;
     if (symbol.equals( NonTerminal.TermPrime )            ) return 15;
     if (symbol.equals( NonTerminal.Factor )               ) return 16;
-    if (symbol.equals( NonTerminal.Identifier )           ) return 17;
+    if (symbol.equals( NonTerminal.IdentifierPrime )      ) return 17;
     if (symbol.equals( NonTerminal.Actuals )              ) return 18;
     if (symbol.equals( NonTerminal.NonEmptyActuals )      ) return 19;
     if (symbol.equals( NonTerminal.NonEmptyActualsPrime ) ) return 20;
     if (symbol.equals( NonTerminal.Literal )              ) return 21;
     if (symbol.equals( NonTerminal.PrintStatement )       ) return 22;
-	if (symbol.equals( NonTerminal.IdentifierPrime)       ) return 23;
 
     return 0;
   }

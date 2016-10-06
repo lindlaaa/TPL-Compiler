@@ -17,7 +17,8 @@ public class ParserMain{
    *  @param args List of args, first being the
    *              path of file to Scan and Parse.
    */
-  public static void main(String[] args) throws ScanException{
+  public static void main(String[] args) throws ScanException,
+                                                Exception{
 
     TableDrivenParser parser = new TableDrivenParser( new Scanner( args[0] ));
 

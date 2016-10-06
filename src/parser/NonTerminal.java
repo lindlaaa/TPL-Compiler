@@ -49,9 +49,9 @@ public class NonTerminal
     public static final NonTerminal PrintStatement =
                         new NonTerminal("PRINTSTATEMENT");
 	public static final NonTerminal Number =
-                        new NonTerminal("NUMBER");	
+                        new NonTerminal("NUMBER");
 	public static final NonTerminal Boolean =
-                        new NonTerminal("BOOLEAN");						
+                        new NonTerminal("BOOLEAN");
 
     private String typeName;
 

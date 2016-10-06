@@ -17,26 +17,29 @@ public class TableDrivenParser extends Parser{
 
 
   @SuppressWarnings("unchecked")
-  public boolean parseProgram(){
+  public boolean parseProgram() throws ParseException{
+
     stack.push(new EOFToken(1));    //push EOF onto stack
-    stack.push(NonTerminal.Program);//push start symbol onto stack
+    stack.push(NonTerminal.Program);//push program onto stack
 
     do{ //Main loop
-      if(stack.peek() instanceof Token){ //Terminal
+      if(stack.peek() instanceof Token) //Terminal
+      {
         if(stack.peek() == curToken){
           stack.pop();
           consumeToken();
-        }else{
+        }else
+        {
           //ERROR
         }
       }else if(stack.peek() instanceof NonTerminal){ //NonTerminal
-        /*if(flairTable.lookup(stack.peek(), curToken))
+        if(flairTable.lookup((NonTerminal)stack.peek(),curToken) != null)
         {
-          stack.push(flairTable.lookup(stack.pop(), curToken));
-        }*/
-        System.out.println(curToken);
-      }else{ //Parse Error
-
+          stack.push(flairTable.lookup((NonTerminal)stack.peek(),curToken));
+        }
+      }else //Parse Error
+      {
+        System.out.println("No rule is here");
       }
     }while((stack.peek() instanceof EOFToken) == false);
 
@@ -283,7 +286,7 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';',0))
                         } );
 
-    table.add( NonTerminal.Program, new KeywordToken("Program", 1),  PrintStatementRule01);
+
 
     //return the table to use in parseProgram()
     return table;

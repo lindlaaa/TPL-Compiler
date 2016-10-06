@@ -95,7 +95,6 @@ public class TableDrivenParser extends Parser{
 
     ParseRule NonEmptyFormalsRule01 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Formal),
-                        new PushTerminal(     new PunctuationToken(',',0)),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormalsPrime),
                         } );
 

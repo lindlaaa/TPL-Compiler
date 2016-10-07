@@ -24,7 +24,9 @@ public class IdentifierToken implements Token{
     outputString += inputString;
     line = r;
   }
-
+  public IdentifierToken(){
+    this("X",0,0);
+  }
   /**
    *  Returns the name represented by this Token
    *

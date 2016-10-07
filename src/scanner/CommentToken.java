@@ -16,7 +16,10 @@ public class CommentToken implements Token{
     outputString += inputString;
     line = c;
   }
-
+  
+  public CommentToken(){
+    this("Comment",0);
+  }
   /**
    *  Returns the comment represented by this Token
    *

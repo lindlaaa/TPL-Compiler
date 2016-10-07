@@ -13,7 +13,10 @@ public class EOFToken implements Token{
     outputString += '$';
     line = c;
   }
-
+  
+  public EOFToken(){
+    this(0);
+  }
   /**
    *  Returns the EOF symbol
    *

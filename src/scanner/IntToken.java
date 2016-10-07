@@ -27,7 +27,9 @@ public class IntToken implements Token{
     outputString += inputInt;
     line = r;
   }
-
+  public IntToken(){
+    this("0",0,0);
+  }
   /**
    * When called it returns the integer value of the token
    *

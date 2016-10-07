@@ -27,13 +27,14 @@ program palindome(number : integer);
    end;
 
    { ----------------------------------------------
-     determine if a number is a palndrome
+     determine if a number is a palindrome
      ---------------------------------------------- }
 
    function isPalindrome(n : integer) : boolean
    begin
+      {This should not cause a parse error. RIGHT?}
       return 0 = (n - reverse(n))
-   else;
+   end;
 
 { ----------------------------------------------
   main function: takes command-line argument

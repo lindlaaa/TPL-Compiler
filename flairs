@@ -1,5 +1,5 @@
 #!/bin/bash
 cd bin
 time java -cp . src.main.ScannerMain $1
-echo "^^^ Time ^^^^^^^"
+echo "^^^Time to run^^"
 cd ..

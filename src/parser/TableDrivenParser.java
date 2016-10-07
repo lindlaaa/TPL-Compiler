@@ -29,30 +29,40 @@ public class TableDrivenParser extends Parser{
       if(stack.peek() instanceof Token) //Terminal
       {
         if(stack.peek().getClass().equals(curToken.getClass())){
-          System.out.println("Item popped from stack: \n"+stack.pop()+"\n");
-          System.out.println("Token Consumed: \n"+curToken+"\n");
+          //System.out.println("Item popped from stack: \n"+stack.peek()+"\n");
+          //System.out.println("Token Consumed: \n"+curToken+"\n");
+          stack.pop();
           consumeToken();
         }else // Token mismatch
         {
-          System.out.println("\n---");
-          System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
-          throw new ParseException("--Token mismatch--");
+          //System.out.println("\n---");
+          //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
+          //throw new ParseException("--Token mismatch--");
+          //
+          System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
+          return false;
         }
 
       }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
         try{
           flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
         }catch(Exception e){
-          System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
-          throw new ParseException("--There is no rule here--"+ e);//FIXME
+          //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
+          //throw e;//FIXME
+          //
+          System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
+          return false;
         }
       }else //Parse Error
       {
-        System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
-        throw new ParseException("--Top of stack is not terminal or nonterminal--");
+        //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
+        //throw new ParseException("--Top of stack is not terminal or nonterminal--");
+        //
+        System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
+        return false;
       }
-      System.out.println("\nAt end of loop:\n"+stack.peek()+"\n"+curToken);
-      System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+      //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);
+      //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     }while((stack.peek() instanceof EOFToken) == false);
 
     return true;

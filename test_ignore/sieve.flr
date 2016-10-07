@@ -45,7 +45,8 @@ program sieve( n : integer );
 
    function rem( num : integer, den : integer) : integer
    begin
-    //should have 'return' before expr->simpleexpr->term->factor->if
+    {should have 'return' before expr->simpleexpr->term->factor->if}
+    return
       if num < den
          then num
          else rem( num-den, den)

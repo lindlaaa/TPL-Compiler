@@ -19,7 +19,10 @@ public class BoolToken implements Token{
     outputString += inputString;
     line = c;
   }
-
+  
+  public BoolToken(){
+    this("false",0);
+  }
   /**
    *  Returns the java boolean value this token represents
    *

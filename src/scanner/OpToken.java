@@ -15,7 +15,9 @@ public class OpToken implements Token{
     opVal = inputChar;
     line = c;
   }
-
+  public OpToken(char inputChar){
+    this(inputChar,0);
+  }
   /**
    *  Returns the line number this Token is in
    *

@@ -15,7 +15,9 @@ public class TerminatorToken implements Token{
     termVal = inputChar;
     line = c;
   }
-
+  public TerminatorToken(char inputChar){
+    this(inputChar,0);
+  }
   /**
    *  Returns the op represented by this Token
    *

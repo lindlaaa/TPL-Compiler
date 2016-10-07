@@ -15,7 +15,9 @@ public class PunctuationToken implements Token{
     punctVal = inputChar;
     line = c;
   }
-
+  public PunctuationToken(char inputChar){
+    this(inputChar,0);
+  }
   /**
    *  Returns the char represented by this Token
    *

@@ -41,7 +41,8 @@ public class OpToken implements Token{
       case '=':
         return 11;
       default:
-        System.out.println("ERROR IN THE OP TERMTYPE");
+        System.out.println("ERROR IN THE OP TERMTYPE\n" +
+                            "opVal = " +opVal + "\n");
         return 0;
     }
   }

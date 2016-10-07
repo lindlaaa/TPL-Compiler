@@ -1,9 +1,9 @@
 all:
-	@javac -d bin src/main/*.java
+	@javac -d bin -Xdiags:verbose src/main/*.java
 	@echo -n '. '
-	@javac -d bin src/scanner/*.java
+	@javac -d bin -Xdiags:verbose src/scanner/*.java
 	@echo -n '. '
-	@javac -d bin src/parser/*.java
+	@javac -d bin -Xdiags:verbose src/parser/*.java
 	@echo -n '. '
 	@javadoc -d doc -quiet -package src.main src.scanner src.parser
 	@echo !

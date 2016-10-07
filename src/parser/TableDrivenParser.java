@@ -30,35 +30,29 @@ public class TableDrivenParser extends Parser{
       {
         if(stack.peek().getClass().equals(curToken.getClass())){
           System.out.println("Item popped from stack: \n"+stack.pop()+"\n");
-          System.out.println("Token Consumed: "+curToken+"\n");
+          System.out.println("Token Consumed: \n"+curToken+"\n");
           consumeToken();
         }else // Token mismatch
         {
           System.out.println("\n---");
-          System.out.println("Stack before error:\n"+stack.peek()+"\n");
-          System.out.println("curToken token before error:\n"+curToken+"\n");
+          System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
           throw new ParseException("--Token mismatch--");
         }
 
       }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
         try{
-          System.out.println("\nStack before push:\n"+stack.peek()+"\n");
           flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
-          System.out.println("Stack after push:\n"+stack.peek()+"\n");
         }catch(Exception e){
-          System.out.println("Stack at error:\n"+stack.peek()+"\n");
-          System.out.println("curToken token at error:\n"+curToken+"\n");
+          System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
           throw new ParseException("--There is no rule here--"+ e);//FIXME
         }
       }else //Parse Error
       {
-        System.out.println("Stack before error:\n"+stack.peek()+"\n");
-        System.out.println("curToken token before error:\n"+curToken+"\n");
+        System.out.println("\nAt error:\n"+stack.peek()+"\n"+curToken+"\n");
         throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
+      System.out.println("\nAt end of loop:\n"+stack.peek()+"\n"+curToken);
       System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-      System.out.println("Stack at end:\n"+stack.peek()+"\n");
-      System.out.println("curToken token at end:\n"+curToken+"\n");
     }while((stack.peek() instanceof EOFToken) == false);
 
     return true;
@@ -332,6 +326,7 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.SimpleExpr,           new BoolToken(), rule16);
     tempTable.add(NonTerminal.SimpleExpr,           new IdentifierToken(), rule16);
 
+    tempTable.add(NonTerminal.SimpleExprPrime,      new PunctuationToken(','), rule00);
     tempTable.add(NonTerminal.SimpleExprPrime,      new PunctuationToken(')'), rule00);
     tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("end"), rule00);
     tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("and"), rule00);
@@ -369,7 +364,7 @@ public class TableDrivenParser extends Parser{
   	tempTable.add(NonTerminal.TermPrime,            new OpToken('<'), rule00);
   	tempTable.add(NonTerminal.TermPrime,            new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Factor,               new PunctuationToken(')'), rule29);
+    tempTable.add(NonTerminal.Factor,               new PunctuationToken('('), rule29);
   	tempTable.add(NonTerminal.Factor,               new OpToken('-'), rule28);
   	tempTable.add(NonTerminal.Factor,               new KeywordToken("if"), rule24);
   	tempTable.add(NonTerminal.Factor,               new KeywordToken("not"), rule25);
@@ -385,6 +380,18 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.IdentifierPrime,      new BoolToken(), rule00);
     tempTable.add(NonTerminal.IdentifierPrime,      new IdentifierToken(), rule00);
     tempTable.add(NonTerminal.IdentifierPrime,      new EOFToken(), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new PunctuationToken(','), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("end"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("or"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('+'), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("and"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('*'), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('/'), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("then"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("else"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('='), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('<'), rule00);
 
     tempTable.add(NonTerminal.Actuals,              new PunctuationToken('('), rule31);
     tempTable.add(NonTerminal.Actuals,              new PunctuationToken(')'), rule00);

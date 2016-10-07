@@ -1,6 +1,6 @@
 Authors: Avery Lindley,  Noah Schroeder, Grant Siebring, Blake Eggleston
 
-Input:            File in the test/ folder you want used.
+Input:            Name of the file you want used.
 Output:           String representing the result of your command.
 
 Compile & Run:
@@ -27,6 +27,7 @@ Directory Structure:
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
   test_ignore/: stores the .flr files used to test the project parts
+  parserTest.flr: The program required to turn into the Parser
 
 
 High level Scanner design:
@@ -38,4 +39,7 @@ High level Scanner design:
   appropriately, and returns the type of each individual token.
 
 High level Parser design:
-  TODO
+  The parser takes the grammar rules, based on the grammar logic table for flair.
+  This table is represented in a parseTable, and within this we create rule objects,
+  add those objects to the table in specific locations, and the parse algorithm then
+  uses that table to confirm there is no bad flair grammar in the input file.

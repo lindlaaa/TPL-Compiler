@@ -20,6 +20,8 @@ Date:       2016/10/01
 
 
 Known Issues: Does not recognize statements such as 0 = (n-1)
+              Does not have documentation for Parser Components...yet
+              Does not compile pizza.
 
 
 Directory Structure:

@@ -26,7 +26,11 @@ public class Parser{
   public void consumeToken(){
     curPos++;
     curToken = tokenArray.get(curPos);
-    peekToken = tokenArray.get(curPos+1);
+    try{
+      peekToken = tokenArray.get(curPos+1);
+    }catch(Exception e){
+      //TODO
+    }
   }
 }
 

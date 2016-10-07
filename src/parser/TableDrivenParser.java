@@ -23,8 +23,6 @@ public class TableDrivenParser extends Parser{
     stack.push(NonTerminal.Program);//push program onto stack
 
     do{ //Main loop
-      System.out.println("Top of stack is nonterminal: "+(stack.peek() instanceof NonTerminal));
-      System.out.println("Top of stack is terminal: "+(stack.peek() instanceof Token)+"\n");
       if(curToken instanceof CommentToken){
         consumeToken();
       }
@@ -59,6 +57,8 @@ public class TableDrivenParser extends Parser{
         throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
       System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+      System.out.println("Stack at end:\n"+stack.peek()+"\n");
+      System.out.println("curToken token at end:\n"+curToken+"\n");
     }while((stack.peek() instanceof EOFToken) == false);
 
     return true;

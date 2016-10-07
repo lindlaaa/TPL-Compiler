@@ -22,6 +22,8 @@ public class ParserMain{
 
     TableDrivenParser parser = new TableDrivenParser( new Scanner( args[0] ));
 
-    System.out.println(parser.parseProgram());
+    if(parser.parseProgram()){
+      System.out.println("OH_MY_GAWD_IT_WORKED!");
+    }
   }
 }

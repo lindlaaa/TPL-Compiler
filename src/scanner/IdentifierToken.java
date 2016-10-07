@@ -24,7 +24,7 @@ public class IdentifierToken implements Token{
     outputString += inputString;
     line = r;
   }
-  public IdentifierToken(){
+  public IdentifierToken() throws ScanException{
     this("X",0,0);
   }
   /**
@@ -44,10 +44,10 @@ public class IdentifierToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public int getTerminalType(){
-    return 29;    
-  } 
+    return 29;
+  }
 
   /**
    *  When the token’s toString() is

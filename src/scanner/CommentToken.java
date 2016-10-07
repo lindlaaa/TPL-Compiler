@@ -16,10 +16,11 @@ public class CommentToken implements Token{
     outputString += inputString;
     line = c;
   }
-  
+
   public CommentToken(){
     this("Comment",0);
   }
+
   /**
    *  Returns the comment represented by this Token
    *
@@ -37,10 +38,11 @@ public class CommentToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public int getTerminalType(){
-    return 31;    
-  } 
+    return 31;
+  }
+
   /**
    *  When the token’s toString() is
    *  called, it will return a concatenation of the

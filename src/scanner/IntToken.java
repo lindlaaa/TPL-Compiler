@@ -27,7 +27,7 @@ public class IntToken implements Token{
     outputString += inputInt;
     line = r;
   }
-  public IntToken(){
+  public IntToken() throws ScanException{
     this("0",0,0);
   }
   /**
@@ -47,10 +47,10 @@ public class IntToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public int getTerminalType(){
-    return 28;    
-  } 
+    return 28;
+  }
   /**
    * When the token’s toString() is called, it will return a
    * concatenation of the string “Integer “ with the string

@@ -22,38 +22,45 @@ public class TableDrivenParser extends Parser{
     stack.push(new EOFToken(1));    //push EOF onto stack
     stack.push(NonTerminal.Program);//push program onto stack
 
-    System.out.println(curToken);
-    System.out.println(stack.peek());
-
     do{ //Main loop
-      System.out.println("Top of stack is terminal: "+(stack.peek() instanceof NonTerminal)+"\n");
-      System.out.println("Before first if");
+      System.out.println("Top of stack is nonterminal: "+(stack.peek() instanceof NonTerminal));
+      System.out.println("Top of stack is terminal: "+(stack.peek() instanceof Token)+"\n");
+      if(curToken instanceof CommentToken){
+        consumeToken();
+      }
       if(stack.peek() instanceof Token) //Terminal
       {
-        System.out.println("before first ifs if");
-        if(stack.peek() == curToken){
-          System.out.println("after first ifs if");
-          stack.pop();
+        if(stack.peek().getClass().equals(curToken.getClass())){
+          System.out.println("Item popped from stack: \n"+stack.pop()+"\n");
+          System.out.println("Token Consumed: "+curToken+"\n");
           consumeToken();
-          System.out.println("after first ifs ifs consumeToken");
-        }else
+        }else // Token mismatch
         {
-          //ERROR
+          System.out.println("\n---");
+          System.out.println("Stack before error:\n"+stack.peek()+"\n");
+          System.out.println("curToken token before error:\n"+curToken+"\n");
+          throw new ParseException("--Token mismatch--");
         }
-        System.out.println("Before second if");
-      }else if(stack.peek() instanceof NonTerminal){ //NonTerminal
-        System.out.println("before second ifs if");
-        if(flairTable.lookup(stack.peek(), curToken) != null)
-        {
-          System.out.println("after second ifs if");
-          stack.push(flairTable.lookup(stack.pop(),curToken));
+
+      }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
+        try{
+          System.out.println("\nStack before push:\n"+stack.peek()+"\n");
+          flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
+          System.out.println("Stack after push:\n"+stack.peek()+"\n");
+        }catch(Exception e){
+          System.out.println("Stack at error:\n"+stack.peek()+"\n");
+          System.out.println("curToken token at error:\n"+curToken+"\n");
+          throw new ParseException("--There is no rule here--"+ e);//FIXME
         }
       }else //Parse Error
       {
-        throw new ParseException("--There is no rule here--");
+        System.out.println("Stack before error:\n"+stack.peek()+"\n");
+        System.out.println("curToken token before error:\n"+curToken+"\n");
+        throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
-      System.out.println("before restarting the while loop");
+      System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
     }while((stack.peek() instanceof EOFToken) == false);
+
     return true;
   }
 
@@ -267,257 +274,143 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new TerminatorToken(';'))
                         } );
 
-    //Make symbols '}' and string "a"
-<<<<<<< HEAD
-    tempTable.add(NonTerminal.Program,         new KeywordToken("program", 0), rule01);
+    tempTable.add(NonTerminal.Program,              new KeywordToken("program"), rule01);
 
-    tempTable.add(NonTerminal.Definitions,     new KeywordToken("function", 0), rule02);
-    tempTable.add(NonTerminal.Definitions,     new KeywordToken("begin", 0), rule00);
-    tempTable.add(NonTerminal.Definitions,     new EOFToken(0), rule00);
+    tempTable.add(NonTerminal.Definitions,          new KeywordToken("function"), rule02);
+    tempTable.add(NonTerminal.Definitions,          new KeywordToken("begin"), rule00);
+    tempTable.add(NonTerminal.Definitions,          new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Body,            new KeywordToken("begin", 0), rule08);
+    tempTable.add(NonTerminal.Def,                  new KeywordToken("function"), rule03);
 
-    tempTable.add(NonTerminal.StatementList,   new KeywordToken("print", 0), rule09);
-    tempTable.add(NonTerminal.StatementList,   new KeywordToken("return", 0), rule10);
+    tempTable.add(NonTerminal.Formals,              new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.Formals,              new IdentifierToken(), rule04);
+    tempTable.add(NonTerminal.Formals,              new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Type,            new KeywordToken("integer", 0), rule11);
-    tempTable.add(NonTerminal.Type,            new KeywordToken("boolean", 0), rule12);
+    tempTable.add(NonTerminal.NonEmptyFormals,      new IdentifierToken(), rule05);
 
-    tempTable.add(NonTerminal.Expr,            new PunctuationToken('(', 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new OpToken('-', 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new KeywordToken("if", 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new KeywordToken("not", 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new IntToken("0", 0, 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new BoolToken("0", 0), rule13);
-    tempTable.add(NonTerminal.Expr,            new IdentifierToken("0", 0, 0), rule13);
+    tempTable.add(NonTerminal.NonEmptyFormalsPrime, new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.NonEmptyFormalsPrime, new PunctuationToken(','), rule06);
+    tempTable.add(NonTerminal.NonEmptyFormalsPrime, new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.ExprPrime,       new PunctuationToken(')', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new PunctuationToken(',', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new KeywordToken("end", 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('+', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('-', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new KeywordToken("and", 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('*', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('/', 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new KeywordToken("then", 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new KeywordToken("else", 0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new EOFToken(0), rule00);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('<', 0), rule14);
-    tempTable.add(NonTerminal.ExprPrime,       new OpToken('=', 0), rule15);
+    tempTable.add(NonTerminal.Formal,               new IdentifierToken(), rule07);
 
-    tempTable.add(NonTerminal.SimpleExpr,      new PunctuationToken(')', 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new OpToken('-', 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new KeywordToken("if", 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new KeywordToken("not", 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new IntToken("0", 0, 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new BoolToken("false", 0), rule16);
-    tempTable.add(NonTerminal.SimpleExpr,      new IdentifierToken("0", 0, 0), rule16);
+    tempTable.add(NonTerminal.Body,                 new KeywordToken("begin"), rule08);
 
-    tempTable.add(NonTerminal.SimpleExprPrime, new PunctuationToken(')', 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("end", 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("and", 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('*', 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('/', 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("then", 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("else", 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('<', 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('=', 0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new EOFToken(0), rule00);
-    tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("or", 0), rule17);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('+', 0), rule18);
-    tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('-', 0), rule19);
+    tempTable.add(NonTerminal.StatementList,        new KeywordToken("print"), rule09);
+    tempTable.add(NonTerminal.StatementList,        new KeywordToken("return"), rule10);
 
-    tempTable.add(NonTerminal.Term,            new PunctuationToken('(', 0), rule20);
-    tempTable.add(NonTerminal.Term,            new OpToken('-', 0), rule20);
-    tempTable.add(NonTerminal.Term,            new KeywordToken("if", 0), rule20);
-    tempTable.add(NonTerminal.Term,            new KeywordToken("not", 0), rule20);
-    tempTable.add(NonTerminal.Term,            new IntToken("0", 0, 0), rule20);
-    tempTable.add(NonTerminal.Term,            new BoolToken("false", 0), rule20);
-    tempTable.add(NonTerminal.Term,            new IdentifierToken("0", 0, 0), rule20);
+    tempTable.add(NonTerminal.Type,                 new KeywordToken("integer"), rule11);
+    tempTable.add(NonTerminal.Type,                 new KeywordToken("boolean"), rule12);
 
-  	tempTable.add(NonTerminal.TermPrime,       new PunctuationToken(')', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new PunctuationToken(',', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new KeywordToken("end", 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new KeywordToken("or", 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('+', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('-', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new KeywordToken("and", 0), rule21);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('*', 0), rule22);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('/', 0), rule23);
-  	tempTable.add(NonTerminal.TermPrime,       new KeywordToken("then", 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new KeywordToken("else", 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('=', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new OpToken('<', 0), rule00);
-  	tempTable.add(NonTerminal.TermPrime,       new EOFToken(0), rule00);
+    tempTable.add(NonTerminal.Expr,                 new PunctuationToken('('), rule13);
+    tempTable.add(NonTerminal.Expr,                 new OpToken('-'), rule13);
+    tempTable.add(NonTerminal.Expr,                 new KeywordToken("if"), rule13);
+    tempTable.add(NonTerminal.Expr,                 new KeywordToken("not"), rule13);
+    tempTable.add(NonTerminal.Expr,                 new IntToken(), rule13);
+    tempTable.add(NonTerminal.Expr,                 new BoolToken(), rule13);
+    tempTable.add(NonTerminal.Expr,                 new IdentifierToken(), rule13);
 
-    tempTable.add(NonTerminal.Factor,          new PunctuationToken(')', 0), rule29);
-  	tempTable.add(NonTerminal.Factor,          new OpToken('-', 0), rule28);
-  	tempTable.add(NonTerminal.Factor,          new KeywordToken("if", 0), rule24);
-  	tempTable.add(NonTerminal.Factor,          new KeywordToken("not", 0), rule25);
-  	tempTable.add(NonTerminal.Factor,          new IntToken("0",0,0), rule27);
-  	tempTable.add(NonTerminal.Factor,          new BoolToken("false",0), rule27);
-  	tempTable.add(NonTerminal.Factor,          new IdentifierToken("0",0,0), rule26);
+    tempTable.add(NonTerminal.ExprPrime,            new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new PunctuationToken(','), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new KeywordToken("end"), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('+'), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('-'), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new KeywordToken("and"), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('*'), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('/'), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new KeywordToken("then"), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new KeywordToken("else"), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new EOFToken(), rule00);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('<'), rule14);
+    tempTable.add(NonTerminal.ExprPrime,            new OpToken('='), rule15);
 
-    tempTable.add(NonTerminal.IdentifierPrime, new PunctuationToken('(', 0), rule30);
-    tempTable.add(NonTerminal.IdentifierPrime, new OpToken('-', 0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("if", 0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("not", 0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new IntToken("0",0,0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new BoolToken("false",0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new IdentifierToken("X",0,0), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new EOFToken(0), rule00);
+    tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken(')'), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new OpToken('-'), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new KeywordToken("if"), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new KeywordToken("not"), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new IntToken(), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new BoolToken(), rule16);
+    tempTable.add(NonTerminal.SimpleExpr,           new IdentifierToken(), rule16);
 
-    tempTable.add(NonTerminal.Actuals,         new PunctuationToken('(', 0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new PunctuationToken(')', 0), rule00);
-    tempTable.add(NonTerminal.Actuals,         new OpToken('-', 0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new KeywordToken("if", 0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new KeywordToken("not", 0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new IntToken("0",0,0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new BoolToken("false",0), rule31);
-    tempTable.add(NonTerminal.Actuals,         new IdentifierToken("X",0,0), rule31);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("end"), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("and"), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('*'), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('/'), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("then"), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("else"), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('<'), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('='), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new EOFToken(), rule00);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new KeywordToken("or"), rule17);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('+'), rule18);
+    tempTable.add(NonTerminal.SimpleExprPrime,      new OpToken('-'), rule19);
 
-  	tempTable.add(NonTerminal.NonEmptyActuals, new PunctuationToken('(', 0), rule32);
-  	tempTable.add(NonTerminal.NonEmptyActuals, new OpToken('-', 0), rule32);
-  	tempTable.add(NonTerminal.NonEmptyActuals, new KeywordToken("if", 0), rule32);
-  	tempTable.add(NonTerminal.NonEmptyActuals, new IntToken("0",0,0), rule32);
-  	tempTable.add(NonTerminal.NonEmptyActuals, new BoolToken("false",0), rule32);
-  	tempTable.add(NonTerminal.NonEmptyActuals, new IdentifierToken("X",0,0), rule32);
+    tempTable.add(NonTerminal.Term,                 new PunctuationToken('('), rule20);
+    tempTable.add(NonTerminal.Term,                 new OpToken('-'), rule20);
+    tempTable.add(NonTerminal.Term,                 new KeywordToken("if"), rule20);
+    tempTable.add(NonTerminal.Term,                 new KeywordToken("not"), rule20);
+    tempTable.add(NonTerminal.Term,                 new IntToken(), rule20);
+    tempTable.add(NonTerminal.Term,                 new BoolToken(), rule20);
+    tempTable.add(NonTerminal.Term,                 new IdentifierToken(), rule20);
 
-  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(')', 0), rule00);
-  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(',', 0), rule33);
-  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new EOFToken(0), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new PunctuationToken(')'), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new PunctuationToken(','), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new KeywordToken("end"), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new KeywordToken("or"), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('+'), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('-'), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new KeywordToken("and"), rule21);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('*'), rule22);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('/'), rule23);
+  	tempTable.add(NonTerminal.TermPrime,            new KeywordToken("then"), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new KeywordToken("else"), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('='), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new OpToken('<'), rule00);
+  	tempTable.add(NonTerminal.TermPrime,            new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Literal,         new IntToken("0",0,0), rule34);
-    tempTable.add(NonTerminal.Literal,         new BoolToken("false",0), rule35);
+    tempTable.add(NonTerminal.Factor,               new PunctuationToken(')'), rule29);
+  	tempTable.add(NonTerminal.Factor,               new OpToken('-'), rule28);
+  	tempTable.add(NonTerminal.Factor,               new KeywordToken("if"), rule24);
+  	tempTable.add(NonTerminal.Factor,               new KeywordToken("not"), rule25);
+  	tempTable.add(NonTerminal.Factor,               new IntToken(), rule27);
+  	tempTable.add(NonTerminal.Factor,               new BoolToken(), rule27);
+  	tempTable.add(NonTerminal.Factor,               new IdentifierToken(), rule26);
 
-    tempTable.add(NonTerminal.PrintStatement,  new KeywordToken("print", 0), rule36);
-=======
-    tempTable.add(NonTerminal.Program, new KeywordToken("program"), rule01);
+    tempTable.add(NonTerminal.IdentifierPrime,      new PunctuationToken('('), rule30);
+    tempTable.add(NonTerminal.IdentifierPrime,      new OpToken('-'), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("if"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new KeywordToken("not"), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new IntToken(), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new BoolToken(), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new IdentifierToken(), rule00);
+    tempTable.add(NonTerminal.IdentifierPrime,      new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Definitions, new KeywordToken("function"), rule02);
-    tempTable.add(NonTerminal.Definitions, new KeywordToken("begin"), rule00);
-    tempTable.add(NonTerminal.Definitions, new EOFToken(), rule00);
-    tempTable.add(NonTerminal.Body,        new KeywordToken("body"), rule08);
-                                                  
-//grants	
+    tempTable.add(NonTerminal.Actuals,              new PunctuationToken('('), rule31);
+    tempTable.add(NonTerminal.Actuals,              new PunctuationToken(')'), rule00);
+    tempTable.add(NonTerminal.Actuals,              new OpToken('-'), rule31);
+    tempTable.add(NonTerminal.Actuals,              new KeywordToken("if"), rule31);
+    tempTable.add(NonTerminal.Actuals,              new KeywordToken("not"), rule31);
+    tempTable.add(NonTerminal.Actuals,              new IntToken(), rule31);
+    tempTable.add(NonTerminal.Actuals,              new BoolToken(), rule31);
+    tempTable.add(NonTerminal.Actuals,              new IdentifierToken(), rule31);
 
-  tempTable.add(NonTerminal.StatementList, new KeywordToken("print"), rule09);
-  tempTable.add(NonTerminal.StatementList, new KeywordToken("return"), rule10);
-  
-  tempTable.add(NonTerminal.Type,          new KeywordToken("integer"), rule11);
-  tempTable.add(NonTerminal.Type,          new KeywordToken("boolean"), rule12);
-  
-  tempTable.add(NonTerminal.Expr,          new PunctuationToken('('), rule13);
-  tempTable.add(NonTerminal.Expr,          new OpToken('-'), rule13);
-  tempTable.add(NonTerminal.Expr,          new KeywordToken("if"), rule13);
-  tempTable.add(NonTerminal.Expr,          new KeywordToken("not"), rule13);
-  tempTable.add(NonTerminal.Expr,          new IntToken(), rule13);
-  tempTable.add(NonTerminal.Expr,          new BoolToken(), rule13);
-  tempTable.add(NonTerminal.Expr,          new IdentifierToken(), rule13);
-  
-  tempTable.add(NonTerminal.ExprPrime,     new PunctuationToken(')'), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new PunctuationToken(','), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new KeywordToken("end"), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('+'), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('-'), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new KeywordToken("and"), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('*'), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('/'), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new KeywordToken("then"), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new KeywordToken("else"), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new EOFToken(), rule00);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('<'), rule14);
-  tempTable.add(NonTerminal.ExprPrime,     new OpToken('='), rule15);
-  
-  tempTable.add(NonTerminal.SimpleExpr,     new PunctuationToken(')'), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new OpToken('-'), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new KeywordToken("if"), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new KeywordToken("not"), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new IntToken(), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new BoolToken(), rule16);
-  tempTable.add(NonTerminal.SimpleExpr,     new IdentifierToken(), rule16);
-  
-  tempTable.add(NonTerminal.SimpleExprPrime, new PunctuationToken(')'), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("end"), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("and"), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('*'), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('/'), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("then"), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("else"), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('<'), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('='), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new EOFToken(), rule00);
-  tempTable.add(NonTerminal.SimpleExprPrime, new KeywordToken("or"), rule17);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('+'), rule18);
-  tempTable.add(NonTerminal.SimpleExprPrime, new OpToken('-'), rule19);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new PunctuationToken('('), rule32);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new OpToken('-'), rule32);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new KeywordToken("if"), rule32);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new IntToken(), rule32);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new BoolToken(), rule32);
+  	tempTable.add(NonTerminal.NonEmptyActuals,      new IdentifierToken(), rule32);
 
-  tempTable.add(NonTerminal.Term, new OpToken('('), rule20);
-  tempTable.add(NonTerminal.Term, new OpToken('-'), rule20);
-  tempTable.add(NonTerminal.Term, new KeywordToken("if"), rule20);
-  tempTable.add(NonTerminal.Term, new KeywordToken("not"), rule20);
-  tempTable.add(NonTerminal.Term, new IntToken(), rule20);
-  tempTable.add(NonTerminal.Term, new BoolToken(), rule20);
-  tempTable.add(NonTerminal.Term, new IdentifierToken(), rule20);
-	
-	tempTable.add(NonTerminal.TermPrime, new PunctuationToken(')'), rule00);
-	tempTable.add(NonTerminal.TermPrime, new PunctuationToken(','), rule00);
-	tempTable.add(NonTerminal.TermPrime, new KeywordToken("end"), rule00);
-	tempTable.add(NonTerminal.TermPrime, new KeywordToken("or"), rule00);
-	tempTable.add(NonTerminal.TermPrime, new OpToken('+', rule00);	
-	tempTable.add(NonTerminal.TermPrime, new OpToken('-'), rule00);
-	tempTable.add(NonTerminal.TermPrime, new KeywordToken("and"), rule21);
-	tempTable.add(NonTerminal.TermPrime, new OpToken('*'), rule22);	
-	tempTable.add(NonTerminal.TermPrime, new OpToken('/'), rule23);		
-	tempTable.add(NonTerminal.TermPrime, new KeywordToken("then"), rule00);
-	tempTable.add(NonTerminal.TermPrime, new KeywordToken("else"), rule00);	
-	tempTable.add(NonTerminal.TermPrime, new OpToken('='), rule00);
-	tempTable.add(NonTerminal.TermPrime, new OpToken('<'), rule00);
-	tempTable.add(NonTerminal.TermPrime, new EOFToken(), rule00);		
-	
-    tempTable.add(NonTerminal.Factor, new PunctuationToken(')'), rule29);
-	tempTable.add(NonTerminal.Factor, new OpToken('-'), rule28);	
-	tempTable.add(NonTerminal.Factor, new KeywordToken("if"), rule24);	
-	tempTable.add(NonTerminal.Factor, new KeywordToken("not"), rule25);
-	tempTable.add(NonTerminal.Factor, new IntToken(), rule27);
-	tempTable.add(NonTerminal.Factor, new BoolToken(), rule27);	
-	tempTable.add(NonTerminal.Factor, new IdentifierToken(), rule26);	
-	
-    tempTable.add(NonTerminal.IdentifierPrime, new PunctuationToken('('), rule30);
-    tempTable.add(NonTerminal.IdentifierPrime, new OpToken('-'), rule00);		
-    tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("if"), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new KeywordToken("not"), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new IntToken(), rule00);
-    tempTable.add(NonTerminal.IdentifierPrime, new BoolToken(), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new IdentifierToken(), rule00);	
-    tempTable.add(NonTerminal.IdentifierPrime, new EOFToken(), rule00);	
-	
-    tempTable.add(NonTerminal.Actuals, new PunctuationToken('('), rule31);
-    tempTable.add(NonTerminal.Actuals, new PunctuationToken(')'), rule00);	
-    tempTable.add(NonTerminal.Actuals, new OpToken('-'), rule31);
-    tempTable.add(NonTerminal.Actuals, new KeywordToken("if"), rule31);	
-    tempTable.add(NonTerminal.Actuals, new KeywordToken("not"), rule31);	
-    tempTable.add(NonTerminal.Actuals, new IntToken(), rule31);
-    tempTable.add(NonTerminal.Actuals, new BoolToken(), rule31);	
-    tempTable.add(NonTerminal.Actuals, new IdentifierToken(), rule31);	
-	
-	tempTable.add(NonTerminal.NonEmptyActuals, new PunctuationToken('('), rule32);
-	tempTable.add(NonTerminal.NonEmptyActuals, new OpToken('-'), rule32);	
-	tempTable.add(NonTerminal.NonEmptyActuals, new KeywordToken("if"), rule32);
-	tempTable.add(NonTerminal.NonEmptyActuals, new IntToken(), rule32);
-	tempTable.add(NonTerminal.NonEmptyActuals, new BoolToken(), rule32);	
-	tempTable.add(NonTerminal.NonEmptyActuals, new IdentifierToken(), rule32);		
-		
-	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(')'), rule00);
-	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(','), rule33);	
-	tempTable.add(NonTerminal.NonEmptyActualsPrime, new EOFToken(), rule00);	
+  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(')'), rule00);
+  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new PunctuationToken(','), rule33);
+  	tempTable.add(NonTerminal.NonEmptyActualsPrime, new EOFToken(), rule00);
 
-    tempTable.add(NonTerminal.Literal, new IntToken(), rule34);
-    tempTable.add(NonTerminal.Literal, new BoolToken(), rule35);	
+    tempTable.add(NonTerminal.Literal,              new IntToken(), rule34);
+    tempTable.add(NonTerminal.Literal,              new BoolToken(), rule35);
 
-    tempTable.add(NonTerminal.PrintStatement, new KeywordToken("print"), rule36);	
->>>>>>> origin/master
+    tempTable.add(NonTerminal.PrintStatement, new KeywordToken("print"), rule36);
 
-    //return the table to use in parseProgram()
     return tempTable;
   }
 }

@@ -27,7 +27,9 @@ public class Parsetable{
     int column = convertTerminal(token);
 
     if(table[row][column] == null){
-      throw new ParseException("--Tried to reach block that is undefined--");
+      throw new ParseException("--Tried to reach block that is undefined--\n"+
+                                "Row:"+symbol+" - Row#:"+row+"\n"+
+                                "Column:"+token+" - column#:"+column+"\n");
     }
 
     return table[row][column];
@@ -73,7 +75,7 @@ public class Parsetable{
     if (symbol.equals( NonTerminal.NonEmptyActualsPrime ) ) return 20;
     if (symbol.equals( NonTerminal.Literal )              ) return 21;
     if (symbol.equals( NonTerminal.PrintStatement )       ) return 22;
-	if (symbol.equals( NonTerminal.IdentifierPrime)         ) return 23;
+	  if (symbol.equals( NonTerminal.IdentifierPrime)       ) return 23;
 
     return 0;
   }

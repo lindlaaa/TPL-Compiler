@@ -15,6 +15,7 @@ public class KeywordToken implements Token{
     keyString = inputString;
     line = c;
   }
+  
   public KeywordToken(String inputString){
     this(inputString,0);
   }

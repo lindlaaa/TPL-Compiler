@@ -35,31 +35,22 @@ public class TableDrivenParser extends Parser{
           consumeToken();
         }else // Token mismatch
         {
-          //System.out.println("\n---");
-          //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
-          //throw new ParseException("--Token mismatch--");
-          //
-          System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
-          return false;
+          System.out.println("\n---");
+          System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+          throw new ParseException("--Token mismatch--");
         }
 
       }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
         try{
           flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
         }catch(Exception e){
-          //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
-          //throw e;//FIXME
-          //
-          System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
-          return false;
+          System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+          throw e;//FIXME
         }
       }else //Parse Error
       {
-        //System.out.println("\nAt error:\n"+stack+"\n"+curToken+" row: "+curToken.getline()+"\n");
-        //throw new ParseException("--Top of stack is not terminal or nonterminal--");
-        //
-        System.out.println("\nError near: "+curToken+" @ row: "+curToken.getline()+"\n");
-        return false;
+        System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+        throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
       //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);
       //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");

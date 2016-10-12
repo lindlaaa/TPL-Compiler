@@ -9,6 +9,10 @@ all:
 	@echo !
 	@echo "\n--Flair Compiler Ready!--"
 
+test:
+	@make
+	@./flairTest
+
 scanner:
 	@javac -d bin src/main/*.java
 	@echo -n '. '
@@ -30,7 +34,7 @@ parser:
 	@echo "\n--Flair Parser Ready!--"
 
 clean:
-	@rm -rf doc/*
+	@#@rm -rf doc/*
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/

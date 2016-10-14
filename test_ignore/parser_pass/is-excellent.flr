@@ -21,7 +21,7 @@ program IsExcellent(n : integer);
 
   function MOD( m : integer, n : integer ) : integer
   begin
-    return m - m/n * n
+    return m - m/(n * n)
   end;
 
   function EXP( m : integer, n : integer ) : integer

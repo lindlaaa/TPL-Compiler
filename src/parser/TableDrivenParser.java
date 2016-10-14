@@ -29,14 +29,13 @@ public class TableDrivenParser extends Parser{
       if(stack.peek() instanceof Token) //Terminal
       {
         if(stack.peek().getClass().equals(curToken.getClass())){
-          //System.out.println("Item popped from stack: \n"+stack.peek()+"\n");
-          //System.out.println("Token Consumed: \n"+curToken+"\n");
+          //System.out.println("Item popped from stack: \n"+stack.peek()+"\n");//FIXME
+          //System.out.println("Token Consumed: \n"+curToken+"\n");//FIXME
           stack.pop();
           consumeToken();
         }else // Token mismatch
         {
-          System.out.println("\n---");
-          System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+          System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
           throw new ParseException("--Token mismatch--");
         }
 
@@ -44,19 +43,24 @@ public class TableDrivenParser extends Parser{
         try{
           flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
         }catch(Exception e){
-          System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+          System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
           throw e;//FIXME
         }
       }else //Parse Error
       {
-        System.out.println("\nAt error:\n"+stack+"\n"+curToken+" @ line: "+curToken.getline()+"\n");
+        System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
         throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
-      //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);
-      //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+      //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);//FIXME
+      //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");//FIXME
     }while((stack.peek() instanceof EOFToken) == false);
 
-    return true;
+    if(stack.peek() instanceof EOFToken && curToken instanceof EOFToken){
+      return true;
+    }
+    else{
+      throw new ParseException("--Parser found tokens after program end.--");
+    }
   }
 
 
@@ -319,6 +323,7 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.ExprPrime,            new OpToken('<'), rule14);
     tempTable.add(NonTerminal.ExprPrime,            new OpToken('='), rule15);
 
+    tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken('('), rule16);//FIXME
     tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken(')'), rule16);
     tempTable.add(NonTerminal.SimpleExpr,           new OpToken('-'), rule16);
     tempTable.add(NonTerminal.SimpleExpr,           new KeywordToken("if"), rule16);

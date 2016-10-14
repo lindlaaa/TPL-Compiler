@@ -28,7 +28,7 @@ public class Parsetable{
 
     if(table[row][column] == null){
       throw new ParseException("--Tried to reach block that is undefined--\n"+
-                                " Stack:"+symbol+" - Row#:"+row+"\n"+
+                                "Stack: "+symbol+" - Row#:"+row+"\n"+
                                 "Stream:"+token+" - column#:"+column+"\n");
     }
 

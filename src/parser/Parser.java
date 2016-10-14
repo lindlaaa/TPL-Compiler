@@ -18,6 +18,7 @@ public class Parser{
 
     this.source = source;
     tokenArray = this.source.takeAllTokens();
+    tokenArray.add(new EOFToken());
     curPos = 0;
     curToken = tokenArray.get(curPos);
     peekToken = tokenArray.get(curPos+1);
@@ -29,7 +30,7 @@ public class Parser{
     try{
       peekToken = tokenArray.get(curPos+1);
     }catch(Exception e){
-      //TODO
+      //do nothing
     }
   }
 }

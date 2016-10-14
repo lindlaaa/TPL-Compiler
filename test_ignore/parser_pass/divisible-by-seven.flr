@@ -7,7 +7,7 @@ program DivisibleBySeven( n : integer );
 
    function divisibleByDifference( diff : integer ) : boolean
    begin
-      return if ((diff = 7) or ((diff = 0) or ((diff = -7) or (diff = -14))))
+      return if ((diff = 7) or (diff = 0) or (diff = -7) or (diff = -14))
                 then true
                 else if diff < 14
                         then false
@@ -21,7 +21,7 @@ program DivisibleBySeven( n : integer );
 
    function MOD( m : integer, n : integer ) : integer
    begin
-      return m - m/(n * n)
+      return m - m/n * n
    end;
 
 begin

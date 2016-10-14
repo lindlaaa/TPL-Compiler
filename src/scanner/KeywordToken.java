@@ -9,15 +9,17 @@ public class KeywordToken implements Token{
   private String outputString = "Keyword ";
   private String keyString;
   private int line;
+  private int col;
 
-  public KeywordToken(String inputString, int c){
+  public KeywordToken(String inputString, int r, int c){
+    col = c - inputString.length() - 1;
+    line = r;
     outputString += inputString;
     keyString = inputString;
-    line = c;
   }
-  
+
   public KeywordToken(String inputString){
-    this(inputString,0);
+    this(inputString,0,0);
   }
   /**
    *  Returns the comment represented by this Token
@@ -35,6 +37,15 @@ public class KeywordToken implements Token{
    */
   public int getline(){
     return line;
+  }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
   }
 
   /*

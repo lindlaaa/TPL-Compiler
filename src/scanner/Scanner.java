@@ -70,9 +70,9 @@ public class Scanner{
 
     if(!accum.isEmpty()){
       if(accum.equals("false") || accum.equals("true")){
-        tokenArray.add(new BoolToken(accum, curLine));
+        tokenArray.add(new BoolToken(accum, curLine, curPos));
       }else if(Arrays.asList(keywordArray).contains(accum)){
-        tokenArray.add(new KeywordToken(accum, curLine));
+        tokenArray.add(new KeywordToken(accum, curLine, curPos));
       }else if(isNumeric(accum)){
         tokenArray.add(new IntToken(accum, curLine, curPos));
       }else{
@@ -141,17 +141,17 @@ public class Scanner{
     accum = "";
     switch (curChar){//all symbols are self-delimiting
       case ';': case '.':
-        tokenArray.add(new TerminatorToken(curChar, curLine));
+        tokenArray.add(new TerminatorToken(curChar, curLine, curPos));
         break;
       case '+': case '-': case '*':
       case '/': case '<': case '=':
-        tokenArray.add(new OpToken(curChar, curLine));
+        tokenArray.add(new OpToken(curChar, curLine, curPos));
         break;
       case '(': case ')': case ',': case ':':
-        tokenArray.add(new PunctuationToken(curChar, curLine));
+        tokenArray.add(new PunctuationToken(curChar, curLine, curPos));
         break;
       case '{':
-        tokenArray.add(new CommentToken(getComment(), curLine));
+        tokenArray.add(new CommentToken(getComment(), curLine, curPos));
         break;
     }
   }
@@ -162,9 +162,9 @@ public class Scanner{
    */
   private void handleStrings() throws ScanException{
     if(accum.equals("false") || accum.equals("true")){
-      tokenArray.add(new BoolToken(accum, curLine));
+      tokenArray.add(new BoolToken(accum, curLine, curPos));
     }else if(Arrays.asList(keywordArray).contains(accum)){
-      tokenArray.add(new KeywordToken(accum, curLine));
+      tokenArray.add(new KeywordToken(accum, curLine, curPos));
     }else{
       tokenArray.add(new IdentifierToken(accum, curLine, curPos));
     }
@@ -181,8 +181,11 @@ public class Scanner{
    * to takeAllTokens().
    */
   private void takeNextToken() throws ScanException {
-    curChar = inputFile.charAt(curIndex);
-
+    try{
+      curChar = inputFile.charAt(curIndex);
+    }catch(StringIndexOutOfBoundsException e){
+      throw new ScanException("--File is empty. Get to programming!--");
+    }
     switch (currentState)
     {
       case LOOKING:

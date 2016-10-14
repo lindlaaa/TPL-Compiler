@@ -35,20 +35,20 @@ public class TableDrivenParser extends Parser{
           consumeToken();
         }else // Token mismatch
         {
-          System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
+          //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw new ParseException("--Token mismatch--");
         }
 
       }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
         try{
           flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
-        }catch(Exception e){
-          System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
-          throw e;//FIXME
+        }catch(ParseException e){
+          //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
+          throw e;
         }
       }else //Parse Error
       {
-        System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+"\n");
+        //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
         throw new ParseException("--Top of stack is not terminal or nonterminal--");
       }
       //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);//FIXME
@@ -154,12 +154,12 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule14 = new PushRule( // ExprPrimeRule01
       new ParseRule[] { new PushTerminal(     new OpToken('<')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.Expr)
                         } );
 
     ParseRule rule15 = new PushRule( // ExprPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('=')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.Expr)
                         } );
 
     ParseRule rule16 = new PushRule( // SimpleExprRule01
@@ -169,17 +169,17 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule17 = new PushRule( // SimpleExprRulePrime01
       new ParseRule[] { new PushTerminal(     new KeywordToken("or")),
-                        new PushNonTerminal(  NonTerminal.Term)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
     ParseRule rule18 = new PushRule( // SimpleExprRulePrime02
       new ParseRule[] { new PushTerminal(     new OpToken('+')),
-                        new PushNonTerminal(  NonTerminal.Term)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
     ParseRule rule19 = new PushRule( // SimpleExprRulePrime03
       new ParseRule[] { new PushTerminal(     new OpToken('-')),
-                        new PushNonTerminal(  NonTerminal.Term)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
     ParseRule rule20 = new PushRule( // TermRule01
@@ -189,17 +189,17 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule21 = new PushRule( // TermPrimeRule01
        new ParseRule[] { new PushTerminal(    new KeywordToken("and")),
-                         new PushNonTerminal( NonTerminal.Factor)
+                         new PushNonTerminal( NonTerminal.SimpleExpr)
                           } );
 
     ParseRule rule22 = new PushRule( // TermPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('*')),
-                        new PushNonTerminal(  NonTerminal.Factor)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
     ParseRule rule23 = new PushRule( // TermPrimeRule03
       new ParseRule[] { new PushTerminal(     new OpToken('/')),
-                        new PushNonTerminal(  NonTerminal.Factor)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr)
                         } );
 
     ParseRule rule24 = new PushRule( // FactorRule01

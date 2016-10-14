@@ -10,15 +10,17 @@ public class CommentToken implements Token{
   private String outputString = "Comment ";
   private String commentVal;
   private int line;
+  private int col;
 
-  public CommentToken(String inputString, int c){
+  public CommentToken(String inputString, int r, int c){
+    col = c - inputString.length() - 1;
+    line = r;
     commentVal = inputString;
     outputString += inputString;
-    line = c;
   }
 
   public CommentToken(){
-    this("Comment",0);
+    this("Comment",0,0);
   }
 
   /**
@@ -28,6 +30,15 @@ public class CommentToken implements Token{
    */
   public String getVal(){
     return commentVal;
+  }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
   }
 
   /**

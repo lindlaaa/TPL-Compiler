@@ -9,14 +9,17 @@ public class OpToken implements Token{
   private String outputString = "Operator ";
   private char opVal;
   private int line;
+  private int col;
 
-  public OpToken(char inputChar, int c){
+  public OpToken(char inputChar, int r, int c){
+    col = c;
+    line = r;
     outputString += inputChar;
     opVal = inputChar;
-    line = c;
   }
+
   public OpToken(char inputChar){
-    this(inputChar,0);
+    this(inputChar,0,0);
   }
   /**
    *  Returns the line number this Token is in
@@ -26,6 +29,17 @@ public class OpToken implements Token{
   public int getline(){
     return line;
   }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
+  }
+
+
   //    case '+': case '-': case '*':
   //    case '/': case '<': case '=':
   public int getTerminalType(){

@@ -9,19 +9,21 @@ public class BoolToken implements Token{
   private String outputString = "Boolean ";
   private boolean boolValue;
   private int line;
+  private int col;
 
-  public BoolToken(String inputString, int c){
+  public BoolToken(String inputString, int r, int c){
+    col = c - inputString.length() - 1;
+    line = r;
     if(inputString == "true"){
       boolValue = true;
     }else{
       boolValue = false;
     }
     outputString += inputString;
-    line = c;
   }
-  
+
   public BoolToken(){
-    this("false",0);
+    this("false",0,0);
   }
   /**
    *  Returns the java boolean value this token represents
@@ -39,6 +41,15 @@ public class BoolToken implements Token{
    */
   public int getline(){
     return line;
+  }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
   }
 
   public int getTerminalType(){

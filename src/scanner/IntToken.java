@@ -48,6 +48,15 @@ public class IntToken implements Token{
     return line;
   }
 
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
+  }
+
   public int getTerminalType(){
     return 28;
   }

@@ -27,9 +27,10 @@ public class Parsetable{
     int column = convertTerminal(token);
 
     if(table[row][column] == null){
-      throw new ParseException("--Tried to reach block that is undefined--\n"+
+      /*throw new ParseException("--Tried to reach block that is undefined--\n"+
                                 "Stack: "+symbol+" - Row#:"+row+"\n"+
-                                "Stream:"+token+" - column#:"+column+"\n");
+                                "Stream:"+token+" - column#:"+column+"\n");*/
+      throw new ParseException("--Tried to reach block that is undefined--\n");
     }
 
     return table[row][column];

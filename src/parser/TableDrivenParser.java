@@ -6,7 +6,9 @@ import src.scanner.*;
 public class TableDrivenParser extends Parser{
 
   private Parsetable flairTable;
-  private Stack stack = new Stack();
+  private Stack parseStack = new Stack();
+  private Stack semanticStack = new Stack();
+  private Stack semanticBuffer = new Stack();
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
@@ -15,47 +17,65 @@ public class TableDrivenParser extends Parser{
     flairTable = makeParsingTable();
   }
 
+  @SuppressWarnings("unchecked")
+  public void consumeToken(){
+    if((curToken instanceof IntToken)         ||//TODO
+       (curToken instanceof BoolToken)        ||
+       (curToken instanceof IdentifierToken))
+    {
+      semanticBuffer.push(curToken);
+    }
+    curPos++;
+    curToken = tokenArray.get(curPos);
+    try{
+      peekToken = tokenArray.get(curPos+1);
+    }catch(Exception e){
+      //do nothing
+    }
+  }
 
   @SuppressWarnings("unchecked")
   public boolean parseProgram() throws ParseException{
 
-    stack.push(new EOFToken(1));    //push EOF onto stack
-    stack.push(NonTerminal.Program);//push program onto stack
+    parseStack.push(new EOFToken(1));    //push EOF onto parseStack
+    parseStack.push(NonTerminal.Program);//push program onto parseStack
 
     do{ //Main loop
-      if(curToken instanceof CommentToken){
+      if(curToken instanceof CommentToken){ //comment
         consumeToken();
       }
-      if(stack.peek() instanceof Token) //Terminal
+      if(parseStack.peek() instanceof Token) //Terminal
       {
-        if(stack.peek().getClass().equals(curToken.getClass())){
-          //System.out.println("Item popped from stack: \n"+stack.peek()+"\n");//FIXME
+        if(parseStack.peek().getClass().equals(curToken.getClass())){
+          //System.out.println("Item popped from parseStack: \n"+parseStack.peek()+"\n");//FIXME
           //System.out.println("Token Consumed: \n"+curToken+"\n");//FIXME
-          stack.pop();
+          parseStack.pop();
           consumeToken();
         }else // Token mismatch
         {
-          //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
+          //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw new ParseException("--Token mismatch--");
         }
 
-      }else if((NonTerminal)stack.peek() instanceof NonTerminal){ //NonTerminal
+      }else if((NonTerminal)parseStack.peek() instanceof NonTerminal){ //NonTerminal
         try{
-          flairTable.lookup((NonTerminal)stack.pop(), curToken).execute(stack);
+          flairTable.lookup((NonTerminal)parseStack.pop(), curToken).execute(parseStack);
         }catch(ParseException e){
-          //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
+          //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw e;
         }
-      }else //Parse Error
+      }/*else if(parseStack.peek() instanceof SemAction){//FIXME TODO
+        semanticStack.push(parseStack.pop());
+      }*/else //Parse Error
       {
-        //System.out.println("\nAt error:\nSTACK:"+stack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
-        throw new ParseException("--Top of stack is not terminal or nonterminal--");
+        //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
+        throw new ParseException("--Top of parseStack is not terminal or nonterminal--");
       }
-      //System.out.println("\nAt end of loop:\n"+stack+"\n"+curToken);//FIXME
+      //System.out.println("\nAt end of loop:\n"+parseStack+"\n"+curToken);//FIXME
       //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");//FIXME
-    }while((stack.peek() instanceof EOFToken) == false);
+    }while((parseStack.peek() instanceof EOFToken) == false);
 
-    if(stack.peek() instanceof EOFToken && curToken instanceof EOFToken){
+    if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
       return true;
     }
     else{

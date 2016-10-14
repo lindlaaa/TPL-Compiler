@@ -33,12 +33,7 @@ public class Scanner{
     try{
       inputFile = new String(Files.readAllBytes(Paths.get(filePath)));
     }catch (Exception e){
-      System.out.println(e+"\n");
-      if(e instanceof StringIndexOutOfBoundsException){
-        throw new ScanException("--File is empty. Get to programming!--\n");
-      }else{
-        throw new ScanException("--Flair file read error--\n");
-      }
+      throw new ScanException("--Flair file read error--\n");
     }
   }
 
@@ -186,8 +181,11 @@ public class Scanner{
    * to takeAllTokens().
    */
   private void takeNextToken() throws ScanException {
-    curChar = inputFile.charAt(curIndex);
-
+    try{
+      curChar = inputFile.charAt(curIndex);
+    }catch(StringIndexOutOfBoundsException e){
+      throw new ScanException("--File is empty. Get to programming!--");
+    }
     switch (currentState)
     {
       case LOOKING:

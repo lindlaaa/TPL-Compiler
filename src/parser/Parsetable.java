@@ -30,7 +30,8 @@ public class Parsetable{
       /*throw new ParseException("--Tried to reach block that is undefined--\n"+
                                 "Stack: "+symbol+" - Row#:"+row+"\n"+
                                 "Stream:"+token+" - column#:"+column+"\n");*/
-      throw new ParseException("--Tried to reach block that is undefined--\n");
+      throw new ParseException("--Tried to reach block that is undefined--\n"+
+      "Failed at '"+token+"' @ line: "+token.getline()+" @ col: "+token.getCol());
     }
 
     return table[row][column];

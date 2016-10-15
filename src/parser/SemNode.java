@@ -12,7 +12,7 @@ public class SemNode
       this.nodeType = inputNodeType;
     }
 	
-	public void addElements(T inputAction)
+	public void addElement(T inputAction)
 	{
 	  this.nodeBody.push(inputAction);
 	}

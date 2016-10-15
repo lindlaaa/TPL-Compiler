@@ -97,129 +97,155 @@ public class TableDrivenParser extends Parser{
     ParseRule rule01 = new PushRule( //ProgramRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("program")),
                         new PushTerminal(     new IdentifierToken()),
+						//new PushSemantic(     SemAction.ActionIdentifier),						
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
                         new PushTerminal(     new TerminatorToken(';')),
                         new PushNonTerminal(  NonTerminal.Definitions),
                         new PushNonTerminal(  NonTerminal.Body),
-                        new PushTerminal(     new TerminatorToken('.'))
+                        new PushTerminal(     new TerminatorToken('.')),
+						//new PushSemantic(     SemAction.Action01)
                       } );
 
     ParseRule rule02 = new PushRule( // DefinitionsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Def),
-                        new PushNonTerminal(  NonTerminal.Definitions)
+                        new PushNonTerminal(  NonTerminal.Definitions),
+						//new PushSemantic(     SemAction.Action02)						
                         } );
 
     ParseRule rule03 = new PushRule( // DefRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("function")),
                         new PushTerminal(     new IdentifierToken()),
+						//new PushSemantic(     SemAction.ActionIdentifier),						
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
                         new PushTerminal(     new PunctuationToken(':')),
                         new PushNonTerminal(  NonTerminal.Type),
                         new PushNonTerminal(  NonTerminal.Body),
-                        new PushTerminal(     new TerminatorToken(';'))
+                        new PushTerminal(     new TerminatorToken(';')),
+						//new PushSemantic(     SemAction.Action03)		
                         } );
 
     ParseRule rule04 = new PushRule( // FormalsRule02
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals)
+      new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals),
+						//new PushSemantic(     SemAction.Action04)		
                         } );
 
     ParseRule rule05 = new PushRule( // NonEmptyFormalsRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Formal),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormalsPrime),
+						//new PushSemantic(     SemAction.Action05)		
                         } );
 
     ParseRule rule06 = new PushRule( // NonEmptyFormalsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
-                        new PushNonTerminal(  NonTerminal.NonEmptyFormals)
+                        new PushNonTerminal(  NonTerminal.NonEmptyFormals),
+						//new PushSemantic(     SemAction.Action06)		
                         } );
 
     ParseRule rule07 = new PushRule( // FormalRule01
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
+						//new PushSemantic(     SemAction.ActionIdentifier),	  
                         new PushTerminal(     new PunctuationToken(':')),
-                        new PushNonTerminal(  NonTerminal.Type)
+                        new PushNonTerminal(  NonTerminal.Type),
+						//new PushSemantic(     SemAction.Action07)		
                         } );
 
     ParseRule rule08 = new PushRule( // BodyRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("begin")),
                         new PushNonTerminal(  NonTerminal.StatementList),
-                        new PushTerminal(     new KeywordToken("end"))
+                        new PushTerminal(     new KeywordToken("end")),
+						//new PushSemantic(     SemAction.Action08)		
                         } );
 
     ParseRule rule09 = new PushRule( // StatementListRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.PrintStatement),
-                        new PushNonTerminal(  NonTerminal.StatementList)
+                        new PushNonTerminal(  NonTerminal.StatementList),
+						//new PushSemantic(     SemAction.Action09)		
                         } );
 
     ParseRule rule10 = new PushRule( // StatementListRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("return")),
-                        new PushNonTerminal(  NonTerminal.Expr)
+                        new PushNonTerminal(  NonTerminal.Expr),
+						//new PushSemantic(     SemAction.Action10)		
                         } );
 
     ParseRule rule11 = new PushRule( // TypeRule01
-      new ParseRule[] { new PushTerminal(     new KeywordToken("integer"))
+      new ParseRule[] { new PushTerminal(     new KeywordToken("integer")),
+						//new PushSemantic(     SemAction.Action11)
                         } );
 
     ParseRule rule12 = new PushRule(
-      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean"))
+      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean")),
+						//new PushSemantic(     SemAction.Action12)
                         } );
 
     ParseRule rule13 = new PushRule( // ExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.SimpleExpr),
-                        new PushNonTerminal(  NonTerminal.ExprPrime)
+                        new PushNonTerminal(  NonTerminal.ExprPrime),
+						//new PushSemantic(     SemAction.Action13)
                         } );
 
     ParseRule rule14 = new PushRule( // ExprPrimeRule01
       new ParseRule[] { new PushTerminal(     new OpToken('<')),
-                        new PushNonTerminal(  NonTerminal.Expr)
+                        new PushNonTerminal(  NonTerminal.Expr),
+						//new PushSemantic(     SemAction.Action14)
                         } );
 
     ParseRule rule15 = new PushRule( // ExprPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('=')),
-                        new PushNonTerminal(  NonTerminal.Expr)
+                        new PushNonTerminal(  NonTerminal.Expr),
+						//new PushSemantic(     SemAction.Action15)
                         } );
 
     ParseRule rule16 = new PushRule( // SimpleExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Term),
-                        new PushNonTerminal(  NonTerminal.SimpleExprPrime)
+                        new PushNonTerminal(  NonTerminal.SimpleExprPrime),
+						//new PushSemantic(     SemAction.Action16)
                         } );
 
     ParseRule rule17 = new PushRule( // SimpleExprRulePrime01
       new ParseRule[] { new PushTerminal(     new KeywordToken("or")),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action17)
                         } );
 
     ParseRule rule18 = new PushRule( // SimpleExprRulePrime02
       new ParseRule[] { new PushTerminal(     new OpToken('+')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action18)
                         } );
 
     ParseRule rule19 = new PushRule( // SimpleExprRulePrime03
       new ParseRule[] { new PushTerminal(     new OpToken('-')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action19)
                         } );
 
     ParseRule rule20 = new PushRule( // TermRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Factor),
                         new PushNonTerminal(  NonTerminal.TermPrime),
+						//new PushSemantic(     SemAction.Action20)
                         } );
 
     ParseRule rule21 = new PushRule( // TermPrimeRule01
        new ParseRule[] { new PushTerminal(    new KeywordToken("and")),
-                         new PushNonTerminal( NonTerminal.SimpleExpr)
+                         new PushNonTerminal( NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action21)
                           } );
 
     ParseRule rule22 = new PushRule( // TermPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('*')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action22)
                         } );
 
     ParseRule rule23 = new PushRule( // TermPrimeRule03
       new ParseRule[] { new PushTerminal(     new OpToken('/')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr)
+                        new PushNonTerminal(  NonTerminal.SimpleExpr),
+						//new PushSemantic(     SemAction.Action23)
                         } );
 
     ParseRule rule24 = new PushRule( // FactorRule01
@@ -228,61 +254,76 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new KeywordToken("then")),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new KeywordToken("else")),
-                        new PushNonTerminal(  NonTerminal.Expr)
+                        new PushNonTerminal(  NonTerminal.Expr),
+						//new PushSemantic(     SemAction.Action24)
                         } );
 
     ParseRule rule25 = new PushRule( // FactorRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("not")),
-                        new PushNonTerminal(  NonTerminal.Factor)
+                        new PushNonTerminal(  NonTerminal.Factor),
+						//new PushSemantic(     SemAction.Action25)
                         } );
 
     ParseRule rule26 = new PushRule( // FactorRule03
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
-                        new PushNonTerminal(  NonTerminal.IdentifierPrime)
+						//new PushSemantic(     SemAction.ActionIdentifier),	  
+                        new PushNonTerminal(  NonTerminal.IdentifierPrime),
+						//new PushSemantic(     SemAction.Action26)
                         } );
 
     ParseRule rule27 = new PushRule(
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.Literal)
+      new ParseRule[] { new PushNonTerminal(  NonTerminal.Literal),
+						//new PushSemantic(     SemAction.Action27)
                         } );
 
     ParseRule rule28 = new PushRule(
       new ParseRule[] { new PushTerminal(     new OpToken('-')),
-                        new PushNonTerminal(  NonTerminal.Factor)
+                        new PushNonTerminal(  NonTerminal.Factor),
+						//new PushSemantic(     SemAction.Action28)
                         } );
 
     ParseRule rule29 = new PushRule( // FactorRule06
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Expr),
-                        new PushTerminal(     new PunctuationToken(')'))
+                        new PushTerminal(     new PunctuationToken(')')),
+						//new PushSemantic(     SemAction.Action29)
                         } );
 
     ParseRule rule30 = new PushRule( // IdentifierPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Actuals),
-                        new PushTerminal(     new PunctuationToken(')'))
+                        new PushTerminal(     new PunctuationToken(')')),
+						//new PushSemantic(     SemAction.Action30)
                         } );
 
     ParseRule rule31 = new PushRule( // ActualsRule02
-      new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyActuals)
+      new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyActuals),
+						//new PushSemantic(     SemAction.Action31)
                         } );
 
     ParseRule rule32 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Expr),
-                        new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime)
+                        new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
+						//new PushSemantic(     SemAction.Action32)
                         } );
 
     ParseRule rule33 = new PushRule( // NonEmptyActualsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
                         new PushNonTerminal(  NonTerminal.Expr),
-                        new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime)
+                        new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
+						//new PushSemantic(     SemAction.Action33)
                         } );
 
     ParseRule rule34 = new PushRule(
-      new ParseRule[] { new PushTerminal(     new IntToken())
+      new ParseRule[] { new PushTerminal(     new IntToken()),
+	  					//new PushSemantic(     SemAction.ActionNumber),
+						//new PushSemantic(     SemAction.Action34)
                         } );
 
     ParseRule rule35 = new PushRule(
-      new ParseRule[] { new PushTerminal(     new BoolToken())
+      new ParseRule[] { new PushTerminal(     new BoolToken()),
+						//new PushSemantic(     SemAction.ActionBoolean),	  
+						//new PushSemantic(     SemAction.Action35)
                         } );
 
     ParseRule rule36 = new PushRule(
@@ -290,7 +331,8 @@ public class TableDrivenParser extends Parser{
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new PunctuationToken(')')),
-                        new PushTerminal(     new TerminatorToken(';'))
+                        new PushTerminal(     new TerminatorToken(';')),
+						//new PushSemantic(     SemAction.Action36)
                         } );
 
     tempTable.add(NonTerminal.Program,              new KeywordToken("program"), rule01);

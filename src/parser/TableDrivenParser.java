@@ -81,11 +81,11 @@ public class TableDrivenParser extends Parser{
 		SemAction tempAction = parseStack.pop();
 		semanticStack.push(tempAction);
 		int elementsToPop = tempAction.getSemanticAction();
-		semNode tempNode = new treeNode(semanticStack.pop()) 
+		SemNode tempNode = new SemNode(semanticStack.pop()) 
 		for (int i = 0; i < elementsToPop; i++){
-		  tempNode.addElements(semanticStack.pop());
+		  tempNode.addElement(semanticStack.pop());
 		}
-	      tree.addLeaf(treeNode);
+	      tree.addLeaf(SemNode);
       }*/else //Parse Error
       {
         //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");

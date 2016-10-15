@@ -81,7 +81,7 @@ public class TableDrivenParser extends Parser{
 		SemAction tempAction = parseStack.pop();
 		semanticStack.push(tempAction);
 		int elementsToPop = tempAction.getSemanticAction();
-		treeNode tempNode = new treeNode(semanticStack.pop()) 
+		semNode tempNode = new treeNode(semanticStack.pop()) 
 		for (int i = 0; i < elementsToPop; i++){
 		  tempNode.addElements(semanticStack.pop());
 		}

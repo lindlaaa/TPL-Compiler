@@ -50,6 +50,11 @@ public class TableDrivenParser extends Parser{
           //System.out.println("Item popped from parseStack: \n"+parseStack.peek()+"\n");//FIXME
           //System.out.println("Token Consumed: \n"+curToken+"\n");//FIXME
           parseStack.pop();
+		  /*Note by Noah: instead of just emptying the parseStack by popping, shouldnt the removed item be placed into the
+		  semantic stack now? If so, Don't I also require nonterminals to be placed within the semantic stack?
+		  
+		  semanticStack.push(parseStack.pop());
+		  */
           consumeToken();
         }else // Token mismatch
         {
@@ -64,8 +69,23 @@ public class TableDrivenParser extends Parser{
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw e;
         }
-      }/*else if(parseStack.peek() instanceof SemAction){//FIXME TODO
-        semanticStack.push(parseStack.pop());
+      }/* Note by Noah: be sure to confirm my understanding of this else if.
+		If it is correct, I need to create a treeNode with an addElements method and a tree to add to. I also
+		need to make sure that every item is placed in the semantic stack beforehand.
+		
+		--the semantic action is popped of the parse stack and placed on the semantic stack--
+		--the semantic action is popped off of the semantic stack and placed into the tree as a leaf node,
+		holding the needed x number of popped off items from the semantic stack.--
+	  
+		else if(parseStack.peek() instanceof SemAction){//FIXME TODO
+		SemAction tempAction = parseStack.pop();
+		semanticStack.push(tempAction);
+		int elementsToPop = tempAction.getSemanticAction();
+		treeNode tempNode = new treeNode(semanticStack.pop()) 
+		for (int i = 0; i < elementsToPop; i++){
+		  tempNode.addElements(semanticStack.pop());
+		}
+	      tree.addLeaf(treeNode);
       }*/else //Parse Error
       {
         //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");

@@ -3,19 +3,19 @@ package src.parser;
 public class SemAction
 {
     public static final SemAction Action01 =
-                        new SemAction(7);
+                        new SemAction(10);
     public static final SemAction Action02 =
                         new SemAction(2);
     public static final SemAction Action03 =
-                        new SemAction(9);
+                        new SemAction(10);
     public static final SemAction Action04 =
                         new SemAction(1);
     public static final SemAction Action05 =
                         new SemAction(2);
     public static final SemAction Action06 =
-                        new SemAction(1);
+                        new SemAction(2);
     public static final SemAction Action07 =
-                        new SemAction(3);
+                        new SemAction(4);
     public static final SemAction Action08 =
                         new SemAction(3);
     public static final SemAction Action09 =
@@ -53,7 +53,7 @@ public class SemAction
     public static final SemAction Action25 =
                         new SemAction(2);
     public static final SemAction Action26 =
-                        new SemAction(2);
+                        new SemAction(3);
     public static final SemAction Action27 =
                         new SemAction(1);
     public static final SemAction Action28 =
@@ -69,9 +69,9 @@ public class SemAction
     public static final SemAction Action33 =
                         new SemAction(3);
     public static final SemAction Action34 =
-                        new SemAction(1);
+                        new SemAction(2);
     public static final SemAction Action35 =
-                        new SemAction(1);
+                        new SemAction(2);
     public static final SemAction Action36 =
                         new SemAction(5);
     public static final SemAction ActionIdentifier =

@@ -37,7 +37,25 @@ public class TableDrivenParser extends Parser{
 
 
   public void consumeSemanticAction(){
-    //TODO
+	//1. The semanticAction is popped of the parseStack
+	//2. The semanticAction calls the creation of a semanticNode, corresponding to a specific make-rule.
+	SemAction tempAction = parseStack.pop();
+	SemNode tempNode = new SemNode(tempAction);
+		
+	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children. 
+        switch (tempAction ){
+          case ActionIdentifier: case ActionNumber: case ActionBoolean:
+            tempNode.addElement(semanticBuffer.pop());
+            break;
+          default:
+	    //a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
+	    for (int i = 0; i < tempNode.numberOfElementsToPop(); i++){		  		  		  
+              tempNode.addElement(semanticStack.pop());
+            }
+            break;
+          }
+	//4. We then add this new parent node, containing its children, onto the semantic stack.
+        semanticStack.push(tempNode);		
   }
 
   @SuppressWarnings("unchecked")
@@ -78,27 +96,6 @@ public class TableDrivenParser extends Parser{
         consumeSemanticAction();
         System.out.println(parseStack.pop());
       }
-      /*
-      }else if(parseStack.peek() instanceof SemAction){//FIXME TODO
-	//1. The semanticAction is popped of the parseStack
-	//2. The semanticAction calls the creation of a semanticNode, corresponding to a specific make-rule.
-	SemNode tempNode = new SemNode(parseStack.pop());
-		
-	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children. 
-        switch (tempAction){
-          case ActionIdentifier: case ActionNumber: case ActionBoolean:
-            tempNode.addElement(semanticBuffer.pop());
-            break;
-          default:
-	    //a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
-	    for (int i = 0; i < tempNode.numberOfElementsToPop(); i++){		  		  		  
-              tempNode.addElement(semanticStack.pop());
-            }
-            break;
-          }
-	//4. We then add this new parent node, containing its children, onto the semantic stack.
-        semanticStack.push(tempNode);						        
-      */
       //Parse Error
       else{
         //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");

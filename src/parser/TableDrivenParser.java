@@ -76,7 +76,7 @@ public class TableDrivenParser extends Parser{
       //SemanticAction
       }else if(parseStack.peek() instanceof SemanticAction){
         consumeSemanticAction();
-        System.out.println(parseStack.pop());
+        //System.out.println(parseStack.pop());
       }
       //Parse Error
       else{

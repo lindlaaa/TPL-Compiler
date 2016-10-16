@@ -2,6 +2,7 @@ package src.parser;
 
 import java.util.Stack;
 
+@SuppressWarnings("unchecked")
 public class PushNonTerminal implements ParseRule
 {
    private NonTerminal symbol;
@@ -11,7 +12,6 @@ public class PushNonTerminal implements ParseRule
       this.symbol = symbol;
    }
 
-   @SuppressWarnings("unchecked")
    public void execute( Stack stack )
    {
       stack.push( symbol );

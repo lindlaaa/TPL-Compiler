@@ -39,3 +39,43 @@ public class  SemanticNode
 	//  return tempString;
     //}
 }
+/*
+package src.parser;
+ 
+import java.util.Stack;
+
+public class SemNode
+{
+	SemAction nodeType;
+	Stack nodeBody = new Stack();
+
+    public SemNode( SemAction inputNodeType ){
+      this.nodeType = inputNodeType;
+    }
+	public SemAction getNodeType(){
+	  return this.nodeType;
+	}
+	
+	public void addElement(T inputAction){
+	  this.nodeBody.push(inputAction);
+	}
+	
+	public T removeElement(){
+	  return this.nodeBody.pop();
+	}
+	
+	public int numberOfElementsToPop(){
+	  return this.nodeType.getSemanticAction();	
+	}
+
+    //@Override
+    //public String toString(){
+	//  String tempString;
+	//  for(int i=0; i < nodeBody.length(); i++)
+	//  {
+	//	  tempstring += nodeBody.pop().toString(); 
+	//  }
+	//  return tempString;
+    //}
+}
+*/

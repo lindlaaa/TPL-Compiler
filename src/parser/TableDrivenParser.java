@@ -3,6 +3,7 @@ package src.parser;
 import java.util.Stack;
 import src.scanner.*;
 
+@SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
 
   private Parsetable flairTable;
@@ -17,11 +18,11 @@ public class TableDrivenParser extends Parser{
     flairTable = makeParsingTable();
   }
 
-  @SuppressWarnings("unchecked")
+
   public void consumeToken(){
-    if((curToken instanceof IntToken)         ||//TODO
-       (curToken instanceof BoolToken)        ||
-       (curToken instanceof IdentifierToken))
+    if((curToken instanceof IntToken)
+       || (curToken instanceof BoolToken)
+       || (curToken instanceof IdentifierToken))
     {
       semanticBuffer.push(curToken);
     }
@@ -34,6 +35,11 @@ public class TableDrivenParser extends Parser{
     }
   }
 
+
+  public void consumeSemanticAction(){
+    //TODO
+  }
+
   @SuppressWarnings("unchecked")
   public boolean parseProgram() throws ParseException{
 
@@ -44,50 +50,36 @@ public class TableDrivenParser extends Parser{
       if(curToken instanceof CommentToken){ //comment
         consumeToken();
       }
-      if(parseStack.peek() instanceof Token) //Terminal
+      //Terminal
+      if(parseStack.peek() instanceof Token)
       {
         if(parseStack.peek().getClass().equals(curToken.getClass())){
           //System.out.println("Item popped from parseStack: \n"+parseStack.peek()+"\n");//FIXME
           //System.out.println("Token Consumed: \n"+curToken+"\n");//FIXME
+          //TODO Will need to add primitive values to the semanticBuffer
+          //if they are popped from here!!
           parseStack.pop();
-		  /*Note by Noah: instead of just emptying the parseStack by popping, shouldnt the removed item be placed into the
-		  semantic stack now? If so, Don't I also require nonterminals to be placed within the semantic stack?
-		  
-		  semanticStack.push(parseStack.pop());
-		  */
           consumeToken();
         }else // Token mismatch
         {
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw new ParseException("--Token mismatch--");
         }
-
-      }else if((NonTerminal)parseStack.peek() instanceof NonTerminal){ //NonTerminal
+      //NonTerminal
+      }else if((NonTerminal)parseStack.peek() instanceof NonTerminal){
         try{
           flairTable.lookup((NonTerminal)parseStack.pop(), curToken).execute(parseStack);
         }catch(ParseException e){
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw e;
         }
-      }/* Note by Noah: be sure to confirm my understanding of this else if.
-		If it is correct, I need to create a treeNode with an addElements method and a tree to add to. I also
-		need to make sure that every item is placed in the semantic stack beforehand.
-		
-		--the semantic action is popped of the parse stack and placed on the semantic stack--
-		--the semantic action is popped off of the semantic stack and placed into the tree as a leaf node,
-		holding the needed x number of popped off items from the semantic stack.--
-	  
-		else if(parseStack.peek() instanceof SemAction){//FIXME TODO
-		SemAction tempAction = parseStack.pop();
-		semanticStack.push(tempAction);
-		int elementsToPop = tempAction.getSemanticAction();
-		SemNode tempNode = new SemNode(semanticStack.pop()) 
-		for (int i = 0; i < elementsToPop; i++){
-		  tempNode.addElement(semanticStack.pop());
-		}
-	      tree.addLeaf(SemNode);
-      }*/else //Parse Error
-      {
+      //SemanticAction
+      }else if(parseStack.peek() instanceof SemanticAction){
+        consumeSemanticAction();
+        System.out.println(parseStack.pop());
+      }
+      //Parse Error
+      else{
         //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
         throw new ParseException("--Top of parseStack is not terminal or nonterminal--");
       }
@@ -117,7 +109,7 @@ public class TableDrivenParser extends Parser{
     ParseRule rule01 = new PushRule( //ProgramRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("program")),
                         new PushTerminal(     new IdentifierToken()),
-						//new PushSemantic(     SemAction.ActionIdentifier),						
+						//new PushSemantic(     SemAction.ActionIdentifier),
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
@@ -131,13 +123,13 @@ public class TableDrivenParser extends Parser{
     ParseRule rule02 = new PushRule( // DefinitionsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Def),
                         new PushNonTerminal(  NonTerminal.Definitions),
-						//new PushSemantic(     SemAction.Action02)						
+						//new PushSemantic(     SemAction.Action02)
                         } );
 
     ParseRule rule03 = new PushRule( // DefRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("function")),
                         new PushTerminal(     new IdentifierToken()),
-						//new PushSemantic(     SemAction.ActionIdentifier),						
+						//new PushSemantic(     SemAction.ActionIdentifier),
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
@@ -145,51 +137,51 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Type),
                         new PushNonTerminal(  NonTerminal.Body),
                         new PushTerminal(     new TerminatorToken(';')),
-						//new PushSemantic(     SemAction.Action03)		
+						//new PushSemantic(     SemAction.Action03)
                         } );
 
     ParseRule rule04 = new PushRule( // FormalsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals),
-						//new PushSemantic(     SemAction.Action04)		
+						//new PushSemantic(     SemAction.Action04)
                         } );
 
     ParseRule rule05 = new PushRule( // NonEmptyFormalsRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Formal),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormalsPrime),
-						//new PushSemantic(     SemAction.Action05)		
+						//new PushSemantic(     SemAction.Action05)
                         } );
 
     ParseRule rule06 = new PushRule( // NonEmptyFormalsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormals),
-						//new PushSemantic(     SemAction.Action06)		
+						//new PushSemantic(     SemAction.Action06)
                         } );
 
     ParseRule rule07 = new PushRule( // FormalRule01
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
-						//new PushSemantic(     SemAction.ActionIdentifier),	  
+						//new PushSemantic(     SemAction.ActionIdentifier),
                         new PushTerminal(     new PunctuationToken(':')),
                         new PushNonTerminal(  NonTerminal.Type),
-						//new PushSemantic(     SemAction.Action07)		
+						//new PushSemantic(     SemAction.Action07)
                         } );
 
     ParseRule rule08 = new PushRule( // BodyRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("begin")),
                         new PushNonTerminal(  NonTerminal.StatementList),
                         new PushTerminal(     new KeywordToken("end")),
-						//new PushSemantic(     SemAction.Action08)		
+						//new PushSemantic(     SemAction.Action08)
                         } );
 
     ParseRule rule09 = new PushRule( // StatementListRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.PrintStatement),
                         new PushNonTerminal(  NonTerminal.StatementList),
-						//new PushSemantic(     SemAction.Action09)		
+						//new PushSemantic(     SemAction.Action09)
                         } );
 
     ParseRule rule10 = new PushRule( // StatementListRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("return")),
                         new PushNonTerminal(  NonTerminal.Expr),
-						//new PushSemantic(     SemAction.Action10)		
+						//new PushSemantic(     SemAction.Action10)
                         } );
 
     ParseRule rule11 = new PushRule( // TypeRule01
@@ -286,7 +278,7 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule26 = new PushRule( // FactorRule03
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
-						//new PushSemantic(     SemAction.ActionIdentifier),	  
+						//new PushSemantic(     SemAction.ActionIdentifier),
                         new PushNonTerminal(  NonTerminal.IdentifierPrime),
 						//new PushSemantic(     SemAction.Action26)
                         } );
@@ -342,7 +334,7 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule35 = new PushRule(
       new ParseRule[] { new PushTerminal(     new BoolToken()),
-						//new PushSemantic(     SemAction.ActionBoolean),	  
+						//new PushSemantic(     SemAction.ActionBoolean),
 						//new PushSemantic(     SemAction.Action35)
                         } );
 

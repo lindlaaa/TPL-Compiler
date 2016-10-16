@@ -9,14 +9,17 @@ public class TerminatorToken implements Token{
   private String outputString = "Terminator ";
   private char termVal;
   private int line;
+  private int col;
 
-  public TerminatorToken(char inputChar, int c){
+  public TerminatorToken(char inputChar, int r, int c){
+    col = c;
+    line = r;
     outputString += inputChar;
     termVal = inputChar;
-    line = c;
   }
+
   public TerminatorToken(char inputChar){
-    this(inputChar,0);
+    this(inputChar,0,0);
   }
   /**
    *  Returns the op represented by this Token
@@ -35,6 +38,16 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
+  }
+
 
   public int getTerminalType(){
     switch (termVal) {

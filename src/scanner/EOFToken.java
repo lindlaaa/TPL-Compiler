@@ -13,7 +13,7 @@ public class EOFToken implements Token{
     outputString += '$';
     line = c;
   }
-  
+
   public EOFToken(){
     this(0);
   }
@@ -25,10 +25,10 @@ public class EOFToken implements Token{
   public char getVal(){
       return '$';
   }
-  
+
   public int getTerminalType(){
-    return 30;    
-  } 
+    return 30;
+  }
   /**
    *  Returns the line number this Token is in
    *
@@ -36,6 +36,15 @@ public class EOFToken implements Token{
    */
   public int getline(){
     return line;
+  }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return 0;
   }
 
   /**

@@ -43,7 +43,7 @@ public class NonTerminal
     public static final NonTerminal NonEmptyActualsPrime =
                         new NonTerminal("NONEMPTYACTUALSPRIME");
     public static final NonTerminal Literal =
-                        new NonTerminal("LITTERAL");
+                        new NonTerminal("LITERAL");
     public static final NonTerminal PrintStatement =
                         new NonTerminal("PRINTSTATEMENT");
     public static final NonTerminal IdentifierPrime =

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+for i in $( ls test_ignore/parser_pass/ ); do
+  echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
+  echo -e "\033[1;32mStarting parser_pass/$i\033[m"
+  echo | ./flairp ../test_ignore/parser_pass/$i
+done
+echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
+
+for i in $( ls test_ignore/parser_fail/ ); do
+  echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
+  echo -e "\033[1;31mStarting parser_fail/$i/$i\033[m"
+  echo | ./flairp ../test_ignore/parser_fail/$i
+done
+echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
+
+for i in $( ls test_ignore/scanner_pass/ ); do
+  echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
+  echo -e "\033[1;32mStarting scanner_pass/$i\033[m"
+  echo | ./flairs ../test_ignore/scanner_pass/$i
+done
+echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
+
+for i in $( ls test_ignore/scanner_fail/ ); do
+  echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
+  echo -e "\033[1;31mStarting scanner_fail/$i\033[m"
+  echo | ./flairs ../test_ignore/scanner_fail/$i
+done
+echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
+
+
+
+echo    "/**************************************************************"
+echo -e "* Red file names SHOULD result in a \033[1;31mfailure\x1b[m and SHOW ERRORS   *"
+echo -e "* Green file names SHOULD result in \x1b[0;32msuccess\x1b[m and SHOW RESULT   *"
+echo    "**************************************************************/"

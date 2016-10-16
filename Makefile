@@ -1,13 +1,17 @@
 all:
-	@javac -d bin -Xdiags:verbose src/main/*.java
+	@javac -d bin src/main/*.java
 	@echo -n '. '
-	@javac -d bin -Xdiags:verbose src/scanner/*.java
+	@javac -d bin src/scanner/*.java
 	@echo -n '. '
-	@javac -d bin -Xdiags:verbose src/parser/*.java
+	@javac -d bin src/parser/*.java
 	@echo -n '. '
 	@javadoc -d doc -quiet -package src.main src.scanner src.parser
 	@echo !
 	@echo "\n--Flair Compiler Ready!--"
+
+test:
+	@make
+	@./flairTest
 
 scanner:
 	@javac -d bin src/main/*.java
@@ -30,7 +34,7 @@ parser:
 	@echo "\n--Flair Parser Ready!--"
 
 clean:
-	@rm -rf doc/*
+	@#@rm -rf doc/*
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/

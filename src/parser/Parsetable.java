@@ -27,9 +27,11 @@ public class Parsetable{
     int column = convertTerminal(token);
 
     if(table[row][column] == null){
+      /*throw new ParseException("--Tried to reach block that is undefined--\n"+
+                                "Stack: "+symbol+" - Row#:"+row+"\n"+
+                                "Stream:"+token+" - column#:"+column+"\n");*/
       throw new ParseException("--Tried to reach block that is undefined--\n"+
-                                "Row:"+symbol+" - Row#:"+row+"\n"+
-                                "Column:"+token+" - column#:"+column+"\n");
+      "Failed at '"+token+"' @ line: "+token.getline()+" @ col: "+token.getCol());
     }
 
     return table[row][column];
@@ -75,7 +77,6 @@ public class Parsetable{
     if (symbol.equals( NonTerminal.NonEmptyActualsPrime ) ) return 20;
     if (symbol.equals( NonTerminal.Literal )              ) return 21;
     if (symbol.equals( NonTerminal.PrintStatement )       ) return 22;
-	  if (symbol.equals( NonTerminal.IdentifierPrime)       ) return 23;
 
     return 0;
   }
@@ -84,6 +85,11 @@ public class Parsetable{
     {
       return token.getTerminalType();
     }
+	
+  private int convertSemanticAction( SemAction semanticAction )
+  {
+    return SemAction.getSemanticAction();
+  }  	
 }
 
 

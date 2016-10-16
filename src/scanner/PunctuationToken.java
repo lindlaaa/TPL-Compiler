@@ -9,14 +9,17 @@ public class PunctuationToken implements Token{
   private String outputString = "Punctuation ";
   private char punctVal;
   private int line;
+  private int col;
 
-  public PunctuationToken(char inputChar, int c){
+  public PunctuationToken(char inputChar, int r, int c){
+    col = c;
+    line = r;
     outputString += inputChar;
     punctVal = inputChar;
-    line = c;
   }
+
   public PunctuationToken(char inputChar){
-    this(inputChar,0);
+    this(inputChar,0,0);
   }
   /**
    *  Returns the char represented by this Token
@@ -35,6 +38,16 @@ public class PunctuationToken implements Token{
   public int getline(){
     return line;
   }
+
+  /**
+   *  Returns the column number this token BEGINS at.
+   *
+   *  @return int Representing the column position if the token.
+   */
+  public int getCol(){
+    return col;
+  }
+
 
   public int getTerminalType(){
     switch (punctVal) {

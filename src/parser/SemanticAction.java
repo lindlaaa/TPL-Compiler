@@ -2,13 +2,13 @@ package src.parser;
 
 public class SemanticAction
 {
-  public static final SemanticAction Program = new SemanticAction(1);
-  public static final SemanticAction Identifier = new SemanticAction(2);
-  public static final SemanticAction Formals = new SemanticAction(3);
-  public static final SemanticAction Definitions = new SemanticAction(4);
-  public static final SemanticAction Body = new SemanticAction(5);
-  public static final SemanticAction Def = new SemanticAction(6);
-  /*public static final SemanticAction Program = new SemanticAction(7);
+  public static final SemanticAction Program = new SemanticAction(1, 4);
+  public static final SemanticAction Identifier = new SemanticAction(2, 1);
+  /*public static final SemanticAction Program = new SemanticAction(3);
+  public static final SemanticAction Program = new SemanticAction(4);
+  public static final SemanticAction Program = new SemanticAction(5);
+  public static final SemanticAction Program = new SemanticAction(6);
+  public static final SemanticAction Program = new SemanticAction(7);
   public static final SemanticAction Program = new SemanticAction(8);
   public static final SemanticAction Program = new SemanticAction(9);
   public static final SemanticAction Program = new SemanticAction(10);
@@ -44,15 +44,21 @@ public class SemanticAction
   public static final SemanticAction Program = new SemanticAction(40);*/
 
   private int typeNumber;
+  private int childrenNeeded;
 
-  public SemanticAction( int semanticActionNumber )
+  public SemanticAction( int semanticActionNumber, int maxAmt )
   {
     typeNumber = semanticActionNumber;
+    childrenNeeded = maxAmt;
   }
 
-	public int getSemanticActionName(){
+	public int getSemanticActionNumber(){
 		return typeNumber;
 	}
+
+  public int numOfChildrenNeeded(){
+    return childrenNeeded;
+  }
 
   @Override
   public String toString()
@@ -142,15 +148,15 @@ public class SemAction
     public static final SemAction ActionNumber =
                         new SemAction(1);
     public static final SemAction ActionBoolean =
-                        new SemAction(1);						
-					
+                        new SemAction(1);
+
     private int itemsToPop;
 
     private SemAction( int itemsToPop )
     {
         this.itemsToPop = itemsToPop;
     }
-	
+
 	public int getSemanticAction(){
 		return itemsToPop;
 	}

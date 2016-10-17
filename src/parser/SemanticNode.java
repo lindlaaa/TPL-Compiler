@@ -41,7 +41,7 @@ public class  SemanticNode
 }
 /*
 package src.parser;
- 
+
 import java.util.Stack;
 
 public class SemNode
@@ -55,17 +55,17 @@ public class SemNode
 	public SemAction getNodeType(){
 	  return this.nodeType;
 	}
-	
+
 	public void addElement(T inputAction){
 	  this.nodeBody.push(inputAction);
 	}
-	
+
 	public T removeElement(){
 	  return this.nodeBody.pop();
 	}
-	
+
 	public int numberOfElementsToPop(){
-	  return this.nodeType.getSemanticAction();	
+	  return this.nodeType.getSemanticAction();
 	}
 
     //@Override
@@ -73,7 +73,7 @@ public class SemNode
 	//  String tempString;
 	//  for(int i=0; i < nodeBody.length(); i++)
 	//  {
-	//	  tempstring += nodeBody.pop().toString(); 
+	//	  tempstring += nodeBody.pop().toString();
 	//  }
 	//  return tempString;
     //}

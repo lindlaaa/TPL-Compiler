@@ -148,15 +148,15 @@ public class SemAction
     public static final SemAction ActionNumber =
                         new SemAction(1);
     public static final SemAction ActionBoolean =
-                        new SemAction(1);						
-					
+                        new SemAction(1);
+
     private int itemsToPop;
 
     private SemAction( int itemsToPop )
     {
         this.itemsToPop = itemsToPop;
     }
-	
+
 	public int getSemanticAction(){
 		return itemsToPop;
 	}

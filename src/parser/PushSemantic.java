@@ -2,6 +2,7 @@ package src.parser;
 
 import java.util.Stack;
 
+@SuppressWarnings("unchecked")
 public class PushSemantic implements ParseRule
 {
    private SemAction makeAction;
@@ -11,7 +12,6 @@ public class PushSemantic implements ParseRule
       this.makeAction = makeAction;
    }
 
-   @SuppressWarnings("unchecked")
    public void execute( Stack stack )
    {
       stack.push( makeAction );

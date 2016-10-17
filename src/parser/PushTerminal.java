@@ -3,6 +3,7 @@ package src.parser;
 import java.util.Stack;
 import src.scanner.*;
 
+@SuppressWarnings("unchecked")
 public class PushTerminal implements ParseRule
 {
    private Token token;
@@ -12,7 +13,6 @@ public class PushTerminal implements ParseRule
       this.token = token;
    }
 
-   @SuppressWarnings("unchecked")
    public void execute( Stack stack )
    {
       stack.push( token );

@@ -8,7 +8,7 @@ public class TableDrivenParser extends Parser{
 
   private Parsetable flairTable;
   private Stack parseStack = new Stack();
-  private Stack semanticStack = new Stack();
+  public static Stack semanticStack = new Stack();
   private Stack semanticBuffer = new Stack();
 
   public TableDrivenParser(Scanner source) throws ScanException,

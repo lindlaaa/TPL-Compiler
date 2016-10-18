@@ -86,9 +86,9 @@ public class Parsetable{
       return token.getTerminalType();
     }
 
-  private void convertSemanticAction( SemanticAction semanticAction )
+  private int convertSemanticAction( SemanticAction semanticAction )
   {
-    return SemanticAction.getSemanticActionNumber();
+    return semanticAction.getSemanticActionNumber();
   }
 }
 

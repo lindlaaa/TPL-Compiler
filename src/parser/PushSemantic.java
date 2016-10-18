@@ -5,9 +5,9 @@ import java.util.Stack;
 @SuppressWarnings("unchecked")
 public class PushSemantic implements ParseRule
 {
-   private SemAction makeAction;
+   private SemanticAction makeAction;
 
-   public PushSemantic( SemAction makeAction )
+   public PushSemantic( SemanticAction makeAction )
    {
       this.makeAction = makeAction;
    }

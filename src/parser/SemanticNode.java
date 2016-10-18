@@ -481,5 +481,4 @@ class IdentifierNode{
   private void getChildren(){  
   }
 }
-//---
 

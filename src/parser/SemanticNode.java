@@ -108,12 +108,6 @@ public class  SemanticNode
 	  this.tree.addLeaf(childNode);
 	}
 
-  //Do we need this???FIXME TODO
-	public SemanticNode removeElement(int childPosition){
-	  //return children.get(childPosition);
-	  return this;
-	}
-
     //@Override
     //public String toString(){
 	//  String tempString;
@@ -133,13 +127,10 @@ class ProgramNode(){
                       } );	
   public ProgramNode();
  
-  private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	    }
+  private void getChildren(){  
+    for(int i = 0; i < rulesList.length(); i++){
+      if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
+	    SemanticNode.this.tree.addleaf(semanticStack.pop());	  
       }
     }
   }
@@ -150,12 +141,10 @@ class DefinitionsNode(){
  
   private void getChildren(){
     if(semanticStack.peek().getNodeType() instanceof DefNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof DefinitionsNode){
-	      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	    }
-      }
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof DefinitionsNode){
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
     }
   }
 }
@@ -165,18 +154,18 @@ class DefNode(){
  
   private void getChildren(){
     if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      if(semanticStack.peek().getNodeType() instanceof FormalsNode){
-	    SemanticNode.this.tree.addleaf(semanticStack.pop());
-        if(semanticStack.peek().getNodeType() instanceof TypeIntegerNode ||
-		   semanticStack.peek().getNodeType() instanceof TypeBooleanNode){
-           SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-           if(semanticStack.peek().getNodeType() instanceof BodyNode){
-	        SemanticNode.this.tree.addleaf(semanticStack.pop());		
-	       }
-        }
-      }
-    }  
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());
+	  }	  
+    if(semanticStack.peek().getNodeType() instanceof FormalsNode){
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}
+    if(semanticStack.peek().getNodeType() instanceof TypeIntegerNode ||
+    semanticStack.peek().getNodeType() instanceof TypeBooleanNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof BodyNode){
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
   }
 }
 //---
@@ -195,11 +184,11 @@ class NonEmptyFormalsNode(){
  
   private void getChildren(){
     if(semanticStack.peek().getNodeType() instanceof FormalNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      if(semanticStack.peek().getNodeType() instanceof NonEmptyFormalsPrimeNode){
-	    SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      }
-    }
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof NonEmptyFormalsPrimeNode){
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
   }
 }
 //---
@@ -219,10 +208,10 @@ class FormalNode(){
   private void getChildren(){
     if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());
-      if(semanticStack.peek().getNodeType() instanceof TypeIntegerNode ||
-	  semanticStack.peek().getNodeType() instanceof TypeBooleanNode){
-        SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	  }
+	}
+    if(semanticStack.peek().getNodeType() instanceof TypeIntegerNode ||
+	semanticStack.peek().getNodeType() instanceof TypeBooleanNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
     }
   }
 }
@@ -243,11 +232,11 @@ class StatementListPSNode(){
  
   private void getChildren(){
     if(semanticStack.peek().getNodeType() instanceof PrintStatementNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      if(semanticStack.peek().getNodeType() instanceof StatementListPSNode ||
-	  semanticStack.peek().getNodeType() instanceof StatementListReturnNode){ 
-	    SemanticNode.this.tree.addleaf(semanticStack.pop());	
-      }
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof StatementListPSNode ||
+	semanticStack.peek().getNodeType() instanceof StatementListReturnNode){ 
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());	
     }
   }
 }
@@ -264,506 +253,309 @@ class StatementListReturnNode(){
 //---
 class TypeIntegerNode(){
   public TypeIntegerNode();
+  private void getChildren(){  
+  }  
  //only has a keyword terminal
 }
 //---
 class TypeBooleanNode(){
   public TypeBooleanNode();
+  private void getChildren(){  
+  }  
   //only has a keyword terminal
 }
 //---
 class ExprNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public ExprNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof SimplExprNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof ExprPrimeLTNode ||
+	semanticStack.peek().getNodeType() instanceof ExprPrimeExprNode){ 
+	  SemanticNode.this.tree.addleaf(semanticStack.pop());	
+    }
   }
 }
+//---
 class ExprPrimeLTNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public ExprPrimeLTNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	    
+	}
   }
 }
+//---
 class ExprPrimeExprNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public ExprPrimeExprNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	    
+	}
   }
 }
+//---
 class SimpleExprNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public SimpleExprNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof TermNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof SimpleExprPrimeOrNode ||
+	semanticStack.peek().getNodeType() instanceof SimpleExprPrimePlusNode ||
+	semanticStack.peek().getNodeType() instanceof SimpleExprPrimeMinusNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());			  
+    }
   }
 }
+//---
 class SimpleExprPrimeOrNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public SimpleExprPrimeOrNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof SimpleExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class SimpleExprPrimePlusNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public SimpleExprPrimePlusNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof SimpleExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class SimpleExprPrimeMinusNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public SimpleExprPrimeMinusNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof SimpleExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class TermNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public TermNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof FactorIfNode ||
+	semanticStack.peek().getNodeType() instanceof FactorNotNode ||
+    semanticStack.peek().getNodeType() instanceof FactorIDNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof TermPrimeAndNode ||
+	semanticStack.peek().getNodeType() instanceof TermPrimeTimesNode ||
+	semanticStack.peek().getNodeType() instanceof TermPrimeDivideNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	
+    }
   }
 }
+//---
 class TermPrimeAndNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public TermPrimeAndNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof TermNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	    
+	}
   }
 }
+//---
 class TermPrimeTimesNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public TermPrimeTimesNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof TermNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	    
+	}
   }
 }
+//---
 class TermPrimeDivideNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public TermPrimeDivideNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof TermNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	    
+	}
   }
 }
+//---
 class FactorIfNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public FactorIfNode();
  
-  private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+  private void getChildren(){	  
+    for(int i = 0; i < 3; i++){
+      if(semanticStack.peek().getNodeType() instanceof ExprNode){
+	    SemanticNode.this.tree.addleaf(semanticStack.pop());	  
+	  }
+	}
   }
 }
+//---
 class FactorNotNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public FactorNotNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof FactorIfNode ||
+	semanticStack.peek().getNodeType() instanceof FactorNotNode ||
+	semanticStack.peek().getNodeType() instanceof FactorIDNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	
+    }
   }
 }
+//---
+class FactorIDNode(){
+  public FactorIDNode();
+ 
+  private void getChildren(){
+    if(semanticStack.peek().getNodeType() instanceof IdentifierNode ||){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}
+    if(semanticStack.peek().getNodeType() instanceof IdentifierPrimeLP){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	
+    }
+  }
+}
+//---
 class IfIntLiteralNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public IfIntLiteralNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    if(semanticStack.peek().getNodeType() instanceof LiteralNumberNode ||
+	semanticStack.peek().getNodeType() instanceof LiteralBooleanNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());	   
+	}
   }
 }
+//---
 class IfIntMinusNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public IfIntMinusNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof FactorIDNode ||
+	semanticStack.peek().getNodeType() instanceof FactorIfNode ||
+	semanticStack.peek().getNodeType() instanceof FactorNotNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class IfIntLPNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public IfIntLPNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class IdentifierPrimeLP(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public IdentifierPrimeLP();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof ActualsNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class ActualsNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public ActualsNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof NonEmptyActualsNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class NonEmptyActualsNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public NonEmptyActualsNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof NonEmptyActualsPrimeNode){
 	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class NonEmptyActualsPrimeNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public NonEmptyActualsPrimeNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
+      SemanticNode.this.tree.addleaf(semanticStack.pop());
+	}	  
+    if(semanticStack.peek().getNodeType() instanceof NonEmptyActualsPrimeNode){
 	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class LiteralNumberNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public LiteralNumberNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof NumberNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class LiteralBooleanNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public LiteralBooleanNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof BooleanNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class PrintStatementNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public PrintStatementNode();
  
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
+    if(semanticStack.peek().getNodeType() instanceof ExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+    }
   }
 }
+//---
 class NumberNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public NumberNode();
  
-  private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+  private void getChildren(){  
   }
 }
+//---
 class BooleanNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public BooleanNode();
  
-  private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+  private void getChildren(){  
   }
 }
+//---
 class IdentifierNode(){
-  private ruleList[] = {new IdentifierNode(),
-		        new FormalsNode(),
-                        new DefinitionsNode(),
-                        new BodyNode()
-                      } );	
   public IdentifierNode();
  
-  private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof IdentifierNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-      for(int i = i; i < rulesList.length(); i++){
-        if(semanticStack.peek().getNodeType() instanceof rulesList[i]){
-	  SemanticNode.this.tree.addleaf(semanticStack.pop());	  
-	 }
-      }
-    }//else do nothing?
+  private void getChildren(){  
   }
 }
+//---
 

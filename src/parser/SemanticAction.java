@@ -1,4 +1,4 @@
-package src.parser;
+Programpackage src.parser;
 
 public class SemanticAction
 {
@@ -38,9 +38,7 @@ public class SemanticAction
   public static final SemanticAction LiteralNumber = new SemanticAction(34);
   public static final SemanticAction LiteralBoolean = new SemanticAction(35);
   public static final SemanticAction PrintStatement = new SemanticAction(36);
-  public static final SemanticAction Number= new SemanticAction(37);
-  public static final SemanticAction Boolean = new SemanticAction(38);
-  public static final SemanticAction Identifier = new SemanticAction(39);
+  public static final SemanticAction Identifier = new SemanticAction(37);
 
   private int typeNumber;
 

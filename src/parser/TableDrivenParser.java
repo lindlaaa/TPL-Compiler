@@ -322,37 +322,35 @@ public class TableDrivenParser extends Parser{
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Actuals),
                         new PushTerminal(     new PunctuationToken(')')),
-						//new PushSemantic(     SemanticAction.Action30)
+						new PushSemantic(     SemanticAction.IdentifierPrimeLP)
                         } );
 
     ParseRule rule31 = new PushRule( // ActualsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyActuals),
-						new PushSemantic(     SemanticAction.IdentifierPrimeLP)
+						new PushSemantic(     SemanticAction.Actuals)
                         } );
 
     ParseRule rule32 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
-						new PushSemantic(     SemanticAction.Actuals)
+						new PushSemantic(     SemanticAction.NonEmptyActuals)
                         } );
 
     ParseRule rule33 = new PushRule( // NonEmptyActualsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
-						new PushSemantic(     SemanticAction.NonEmptyActuals)
+						new PushSemantic(     SemanticAction.NonEmptyActualsPrime)
                         } );
 
     ParseRule rule34 = new PushRule(
       new ParseRule[] { new PushTerminal(     new IntToken()),
-	  					new PushSemantic(     SemanticAction.LiteralNumber),
-						new PushSemantic(     SemanticAction.NonEmptyActualsPrime)
+	  					new PushSemantic(     SemanticAction.LiteralNumber)
                         } );
 
     ParseRule rule35 = new PushRule(
       new ParseRule[] { new PushTerminal(     new BoolToken()),
-						new PushSemantic(     SemanticAction.LiteralBoolean),
-						new PushSemantic(     SemanticAction.NonEmptyActualsPrime)
+						new PushSemantic(     SemanticAction.LiteralBoolean)
                         } );
 
     ParseRule rule36 = new PushRule(

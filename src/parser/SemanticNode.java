@@ -56,9 +56,7 @@ public class  SemanticNode
       case 34: return new LiteralNumberNode();
       case 35: return new LiteralBooleanNode();
       case 36: return new PrintStatementNode();
-      case 37: return new NumberNode();
-      case 38: return new BooleanNode();
-      case 39: return new IdentifierNode();
+      case 37: return new IdentifierNode();
 		}
 
     createTree();//FIXME
@@ -410,17 +408,11 @@ class NonEmptyActualsPrimeNode extends SemanticNode{
 //---
 class LiteralNumberNode extends SemanticNode{
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof NumberNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());
-    }
   }
 }
 //---
 class LiteralBooleanNode extends SemanticNode{
   private void getChildren(){
-    if(semanticStack.peek().getNodeType() instanceof BooleanNode){
-      SemanticNode.this.tree.addleaf(semanticStack.pop());
-    }
   }
 }
 //---
@@ -429,16 +421,6 @@ class PrintStatementNode extends SemanticNode{
     if(semanticStack.peek().getNodeType() instanceof ExprNode){
       SemanticNode.this.tree.addleaf(semanticStack.pop());
     }
-  }
-}
-//---
-class NumberNode extends SemanticNode{
-  private void getChildren(){
-  }
-}
-//---
-class BooleanNode extends SemanticNode{
-  private void getChildren(){
   }
 }
 //---

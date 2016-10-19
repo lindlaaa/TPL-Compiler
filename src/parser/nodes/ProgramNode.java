@@ -1,8 +1,8 @@
-package src.parser.astnodes;
+package src.parser.nodes;
 
 
-class ProgramNode extends SemanticNode{
-  public void getChildren(){
+public class ProgramNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek() instanceof IdentifierNode){
 	    tree.addleaf(semanticStack.pop());
     }

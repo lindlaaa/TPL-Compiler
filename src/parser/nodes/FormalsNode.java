@@ -1,7 +1,9 @@
 package src.parser.nodes;
 
-class FormalsNode extends SemanticNode{
-  public void getChildren(){
+
+
+public class FormalsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek() instanceof NonEmptyFormalsNode){
       tree.addleaf(semanticStack.pop());
     }

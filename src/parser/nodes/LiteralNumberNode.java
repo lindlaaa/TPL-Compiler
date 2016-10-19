@@ -1,5 +1,5 @@
 package src.parser.nodes;
 
-class LiteralNumberNode extends SemanticNode{
-  public void getChildren(){}
+public class LiteralNumberNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){}
 }

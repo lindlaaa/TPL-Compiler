@@ -1,7 +1,7 @@
 package src.parser.nodes;
 
-class TermNode extends SemanticNode{
-  public void getChildren(){
+public class TermNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek() instanceof FactorIfNode ||
 	     semanticStack.peek() instanceof FactorNotNode ||
        semanticStack.peek() instanceof FactorIDNode){

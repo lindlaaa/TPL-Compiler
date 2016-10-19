@@ -1,7 +1,9 @@
 package src.parser.nodes;
 
-class FactorIDNode extends SemanticNode{
-  public void getChildren(){
+
+
+public class FactorIDNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek() instanceof IdentifierNode){
       tree.addleaf(semanticStack.pop());
 	  }

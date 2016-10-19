@@ -1,7 +1,7 @@
 package src.parser.nodes;
 
-class TypeBooleanNode extends SemanticNode{
-  public void getChildren(){
+public class TypeBooleanNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
   //only has a keyword terminal
 }

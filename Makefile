@@ -4,6 +4,8 @@ all:
 	@javac -d bin src/scanner/*.java
 	@echo -n '. '
 	@javac -d bin src/parser/*.java
+	javac -d bin src/parser/nodes/*.java
+
 	@echo -n '. '
 	@javadoc -d doc -quiet -package src.main src.scanner src.parser
 	@echo !

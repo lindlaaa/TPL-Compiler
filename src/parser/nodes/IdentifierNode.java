@@ -1,5 +1,6 @@
 package src.parser.nodes;
 
-class IdentifierNode extends SemanticNode{
-  public void getChildren(){}
+
+public class IdentifierNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){}
 }

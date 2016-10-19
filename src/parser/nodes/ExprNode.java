@@ -1,8 +1,10 @@
 package src.parser.nodes;
 
-class ExprNode extends SemanticNode{
-  public void getChildren(){
-    if(semanticStack.peek() instanceof SimplExprNode){
+
+
+public class ExprNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
+    if(semanticStack.peek() instanceof SimpleExprNode){
       tree.addleaf(semanticStack.pop());
 	   }
     if(semanticStack.peek() instanceof ExprPrimeLTNode ||

@@ -1,9 +1,14 @@
-package src.parser;
+package src.parser.nodes;
+
+import java.util.Stack;
+import src.parser.*;
 
 
 @SuppressWarnings("unchecked")
 public abstract class SemanticNode
 {
+
+  protected Tree tree;
 
   public SemanticNode createNewNode(SemanticAction inputNodeType){
     int tempInt = inputNodeType.getSemanticActionNumber();
@@ -18,7 +23,7 @@ public abstract class SemanticNode
       case 7:  temp = new FormalNode();               break;
       case 8:  temp = new BodyNode();                 break;
       case 9:  temp = new StatementListPSNode();      break;
-      case 10: temp = new StatementListtempNode();    break;
+      case 10: temp = new StatementListNode();        break;
       case 11: temp = new TypeIntegerNode();          break;
       case 12: temp = new TypeBooleanNode();          break;
       case 13: temp = new ExprNode();                 break;
@@ -56,11 +61,12 @@ public abstract class SemanticNode
   private void createTree(){
     tree = new Tree(this);
   }
+
 }
 
-
-class ProgramNode extends NodeBehavior{
-  public void getChildren(){
+/*
+class ProgramNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek() instanceof IdentifierNode){
 	    tree.addleaf(semanticStack.pop());
     }
@@ -76,8 +82,8 @@ class ProgramNode extends NodeBehavior{
   }
 }
 //---
-class DefinitionsNode extends NodeBehavior{
-  public void getChildren(){
+class DefinitionsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof DefNode){
       tree.addleaf(semanticStack.pop());
 	  }
@@ -87,8 +93,8 @@ class DefinitionsNode extends NodeBehavior{
   }
 }
 //---
-class DefNode extends NodeBehavior{
-  public void getChildren(){
+class DefNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof IdentifierNode){
 	  tree.addleaf(semanticStack.pop());
 	  }
@@ -105,16 +111,16 @@ class DefNode extends NodeBehavior{
   }
 }
 //---
-class FormalsNode extends NodeBehavior{
-  public void getChildren(){
+class FormalsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof NonEmptyFormalsNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class NonEmptyFormalsNode extends NodeBehavior{
-  public void getChildren(){
+class NonEmptyFormalsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof FormalNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -124,16 +130,16 @@ class NonEmptyFormalsNode extends NodeBehavior{
   }
 }
 //---
-class NonEmptyFormalsPrimeNode extends NodeBehavior{
-  public void getChildren(){
+class NonEmptyFormalsPrimeNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof NonEmptyFormalsNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class FormalNode extends NodeBehavior{
-  public void getChildren(){
+class FormalNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof IdentifierNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -144,8 +150,8 @@ class FormalNode extends NodeBehavior{
   }
 }
 //---
-class BodyNode extends NodeBehavior{
-  public void getChildren(){
+class BodyNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof StatementListPSNode ||
 	semanticStack.peek(). instanceof StatementListtemp =Node){
       tree.addleaf(semanticStack.pop());
@@ -153,8 +159,8 @@ class BodyNode extends NodeBehavior{
   }
 }
 //---
-class StatementListPSNode extends NodeBehavior{
-  public void getChildren(){
+class StatementListPSNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof PrintStatementNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -165,28 +171,28 @@ class StatementListPSNode extends NodeBehavior{
   }
 }
 //---
-class StatementListtemp =Node extends NodeBehavior{
-  public void getChildren(){
+class StatementListNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class TypeIntegerNode extends NodeBehavior{
-  public void getChildren(){
+class TypeIntegerNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
  //only has a keyword terminal
 }
 //---
-class TypeBooleanNode extends NodeBehavior{
-  public void getChildren(){
+class TypeBooleanNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
   //only has a keyword terminal
 }
 //---
-class ExprNode extends NodeBehavior{
-  public void getChildren(){
+class ExprNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof SimplExprNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -197,24 +203,24 @@ class ExprNode extends NodeBehavior{
   }
 }
 //---
-class ExprPrimeLTNode extends NodeBehavior{
-  public void getChildren(){
+class ExprPrimeLTNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class ExprPrimeExprNode extends NodeBehavior{
-  public void getChildren(){
+class ExprPrimeExprNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class SimpleExprNode extends NodeBehavior{
-  public void getChildren(){
+class SimpleExprNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof TermNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -226,32 +232,32 @@ class SimpleExprNode extends NodeBehavior{
   }
 }
 //---
-class SimpleExprPrimeOrNode extends NodeBehavior{
-  public void getChildren(){
+class SimpleExprPrimeOrNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof SimpleExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class SimpleExprPrimePlusNode extends NodeBehavior{
-  public void getChildren(){
+class SimpleExprPrimePlusNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof SimpleExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class SimpleExprPrimeMinusNode extends NodeBehavior{
-  public void getChildren(){
+class SimpleExprPrimeMinusNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof SimpleExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class TermNode extends NodeBehavior{
-  public void getChildren(){
+class TermNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof FactorIfNode ||
 	semanticStack.peek(). instanceof FactorNotNode ||
     semanticStack.peek(). instanceof FactorIDNode){
@@ -265,32 +271,32 @@ class TermNode extends NodeBehavior{
   }
 }
 //---
-class TermPrimeAndNode extends NodeBehavior{
-  public void getChildren(){
+class TermPrimeAndNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof TermNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class TermPrimeTimesNode extends NodeBehavior{
-  public void getChildren(){
+class TermPrimeTimesNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof TermNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class TermPrimeDivideNode extends NodeBehavior{
-  public void getChildren(){
+class TermPrimeDivideNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof TermNode){
       tree.addleaf(semanticStack.pop());
 	}
   }
 }
 //---
-class FactorIfNode extends NodeBehavior{
-  public void getChildren(){
+class FactorIfNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     for(int i = 0; i < 3; i++){
       if(semanticStack.peek(). instanceof ExprNode){
 	    tree.addleaf(semanticStack.pop());
@@ -299,8 +305,8 @@ class FactorIfNode extends NodeBehavior{
   }
 }
 //---
-class FactorNotNode extends NodeBehavior{
-  public void getChildren(){
+class FactorNotNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof FactorIfNode ||
 	semanticStack.peek(). instanceof FactorNotNode ||
 	semanticStack.peek(). instanceof FactorIDNode){
@@ -309,8 +315,8 @@ class FactorNotNode extends NodeBehavior{
   }
 }
 //---
-class FactorIDNode extends NodeBehavior{
-  public void getChildren(){
+class FactorIDNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof IdentifierNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -320,8 +326,8 @@ class FactorIDNode extends NodeBehavior{
   }
 }
 //---
-class IfIntLiteralNode extends NodeBehavior{
-  public void getChildren(){
+class IfIntLiteralNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof LiteralNumberNode ||
 	semanticStack.peek(). instanceof LiteralBooleanNode){
       tree.addleaf(semanticStack.pop());
@@ -329,8 +335,8 @@ class IfIntLiteralNode extends NodeBehavior{
   }
 }
 //---
-class IfIntMinusNode extends NodeBehavior{
-  public void getChildren(){
+class IfIntMinusNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof FactorIDNode ||
 	semanticStack.peek(). instanceof FactorIfNode ||
 	semanticStack.peek(). instanceof FactorNotNode){
@@ -339,32 +345,32 @@ class IfIntMinusNode extends NodeBehavior{
   }
 }
 //---
-class IfIntLPNode extends NodeBehavior{
-  public void getChildren(){
+class IfIntLPNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class IdentifierPrimeLP extends NodeBehavior{
-  public void getChildren(){
+class IdentifierPrimeLP extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ActualsNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class ActualsNode extends NodeBehavior{
-  public void getChildren(){
+class ActualsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof NonEmptyActualsNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class NonEmptyActualsNode extends NodeBehavior{
-  public void getChildren(){
+class NonEmptyActualsNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -374,8 +380,8 @@ class NonEmptyActualsNode extends NodeBehavior{
   }
 }
 //---
-class NonEmptyActualsPrimeNode extends NodeBehavior{
-  public void getChildren(){
+class NonEmptyActualsPrimeNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
 	}
@@ -385,25 +391,26 @@ class NonEmptyActualsPrimeNode extends NodeBehavior{
   }
 }
 //---
-class LiteralNumberNode extends NodeBehavior{
-  public void getChildren(){
+class LiteralNumberNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
 }
 //---
-class LiteralBooleanNode extends NodeBehavior{
-  public void getChildren(){
+class LiteralBooleanNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
 }
 //---
-class PrintStatementNode extends NodeBehavior{
-  public void getChildren(){
+class PrintStatementNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
     if(semanticStack.peek(). instanceof ExprNode){
       tree.addleaf(semanticStack.pop());
     }
   }
 }
 //---
-class IdentifierNode extends NodeBehavior{
-  public void getChildren(){
+class IdentifierNode extends SemanticNode{
+  public void getChildren(Stack semanticStack){
   }
 }
+*/

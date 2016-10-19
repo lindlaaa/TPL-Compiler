@@ -36,25 +36,17 @@ public class TableDrivenParser extends Parser{
   }
 
 
-  public void consumeSemanticAction(){/*
+  public void consumeSemanticAction(){
 	//1. The semanticAction is popped of the parseStack
 	//2. The semanticAction calls the creation of a semanticNode, corresponding to a specific make-rule.
 	SemanticAction tempAction = parseStack.pop();
-	SemNode tempNode = new SemNode(tempAction);
+	SemanticNode tempNode = new SemanticNode(tempAction);
 
 	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children.
-        switch (tempAction ){
-          case ActionIdentifier: case ActionNumber: case ActionBoolean:
-            tempNode.addElement(semanticBuffer.pop());
-            break;
-          default:
-	    //a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
-
-            tempNode.getChildren(semanticStack);
-            break;
-          }
+	//a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
+    tempNode.getChildren();
 	//4. We then add this new parent node, containing its children, onto the semantic stack.
-        semanticStack.push(tempNode);*/
+    semanticStack.push(tempNode);
   }
 
   @SuppressWarnings("unchecked")
@@ -93,7 +85,6 @@ public class TableDrivenParser extends Parser{
       //SemanticAction
       }else if(parseStack.peek() instanceof SemanticAction){
         consumeSemanticAction();
-        parseStack.pop();
         //System.out.println(parseStack.pop());
       }
       //Parse Error

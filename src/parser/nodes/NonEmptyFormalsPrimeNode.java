@@ -8,4 +8,9 @@ public class NonEmptyFormalsPrimeNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
   }
+
+  @Override
+  public String toString(){
+    return "NonEmptyFormalsPrimeNode";//TODO
+  }
 }

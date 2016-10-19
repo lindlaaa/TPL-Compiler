@@ -47,7 +47,7 @@ public class TableDrivenParser extends Parser{
 
 	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children.
 	//a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
-    tempNode.getChildren();
+    //tempNode.getChildren();
 	//4. We then add this new parent node, containing its children, onto the semantic stack.
     semanticStack.push(tempNode);
   }
@@ -100,6 +100,7 @@ public class TableDrivenParser extends Parser{
     }while((parseStack.peek() instanceof EOFToken) == false);
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
+      System.out.println(semanticStack);
       return true;
     }
     else{

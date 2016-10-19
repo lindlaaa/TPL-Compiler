@@ -17,4 +17,9 @@ public class ProgramNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "ProgramNode";//TODO
+  }
 }

@@ -9,4 +9,9 @@ public class BodyNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
   }
+
+  @Override
+  public String toString(){
+    return "BodyNode";//TODO
+  }
 }

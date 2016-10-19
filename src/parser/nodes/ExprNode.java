@@ -12,4 +12,9 @@ public class ExprNode extends SemanticNode{
 	    tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "ExprNode";//TODO
+  }
 }

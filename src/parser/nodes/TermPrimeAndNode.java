@@ -8,4 +8,9 @@ public class TermPrimeAndNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
   }
+
+  @Override
+  public String toString(){
+    return "TermPrimeAndNode";//TODO
+  }
 }

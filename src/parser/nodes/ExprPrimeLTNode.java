@@ -8,4 +8,9 @@ public class ExprPrimeLTNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
   }
+
+  @Override
+  public String toString(){
+    return "ExprPrimeLTNode";//TODO
+  }
 }

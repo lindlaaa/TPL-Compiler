@@ -8,4 +8,9 @@ public class StatementListNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "StatementListNode";//TODO
+  }
 }

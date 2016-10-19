@@ -19,6 +19,6 @@ public class SemanticNode implements NodeBehavior{
 
   @Override
   public String toString(){
-    return "node";
+    return "------------------------------------------------------------";
   }
 }

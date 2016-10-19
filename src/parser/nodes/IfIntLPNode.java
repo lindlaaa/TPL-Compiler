@@ -8,4 +8,9 @@ class IfIntLPNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "IfIntLPNode";//TODO
+  }
 }

@@ -11,4 +11,9 @@ public class FactorIDNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "FactorIDNode";//TODO
+  }
 }

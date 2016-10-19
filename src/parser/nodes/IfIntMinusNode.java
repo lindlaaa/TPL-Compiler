@@ -10,4 +10,9 @@ public class IfIntMinusNode extends SemanticNode{
       tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
+
+  @Override
+  public String toString(){
+    return "IfIntMinusNode";//TODO
+  }
 }

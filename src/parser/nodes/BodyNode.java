@@ -1,12 +1,12 @@
 package src.parser.nodes;
 
-
+import src.parser.*;
 
 public class BodyNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof StatementListPSNode ||
-	     semanticStack.peek() instanceof StatementListNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof StatementListPSNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof StatementListNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
   }
 }

@@ -1,19 +1,20 @@
 package src.parser.nodes;
 
+import src.parser.*;
 
 public class ProgramNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof IdentifierNode){
-	    tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek() instanceof FormalsNode){
-  	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof FormalsNode){
+  	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek() instanceof DefinitionsNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof DefinitionsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek() instanceof BodyNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }

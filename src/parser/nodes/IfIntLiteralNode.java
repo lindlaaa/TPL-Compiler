@@ -1,10 +1,12 @@
 package src.parser.nodes;
 
+import src.parser.*;
+
 public class IfIntLiteralNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof LiteralNumberNode ||
-	     semanticStack.peek() instanceof LiteralBooleanNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof LiteralNumberNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof LiteralBooleanNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
   }
 }

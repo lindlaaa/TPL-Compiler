@@ -1,9 +1,11 @@
 package src.parser.nodes;
 
+import src.parser.*;
+
 public class TermPrimeAndNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
   }
 }

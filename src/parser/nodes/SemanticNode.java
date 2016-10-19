@@ -5,12 +5,11 @@ import src.parser.*;
 
 
 @SuppressWarnings("unchecked")
-public abstract class SemanticNode
-{
+public abstract class SemanticNode{
 
   protected Tree tree;
 
-  public SemanticNode createNewNode(SemanticAction inputNodeType){
+  public SemanticNode createNewNode(SemanticAction inputNodeType) throws ParseException{
     int tempInt = inputNodeType.getSemanticActionNumber();
     SemanticNode temp;
     switch(tempInt){
@@ -51,6 +50,7 @@ public abstract class SemanticNode
       case 35: temp = new LiteralBooleanNode();       break;
       case 36: temp = new PrintStatementNode();       break;
       case 37: temp = new IdentifierNode();           break;
+      default:  throw new ParseException("--Token DUMB--");
 		}
 
     temp.createTree();
@@ -66,351 +66,351 @@ public abstract class SemanticNode
 
 /*
 class ProgramNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof IdentifierNode){
-	    tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek(). instanceof FormalsNode){
-  	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof FormalsNode){
+  	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek(). instanceof DefinitionsNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof DefinitionsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
-    if(semanticStack.peek(). instanceof BodyNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof BodyNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class DefinitionsNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof DefNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof DefNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
-    if(semanticStack.peek(). instanceof DefinitionsNode){
-	     tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof DefinitionsNode){
+	     tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class DefNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof IdentifierNode){
-	  tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof IdentifierNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
-    if(semanticStack.peek(). instanceof FormalsNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof FormalsNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof TypeIntegerNode ||
-    semanticStack.peek(). instanceof TypeBooleanNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof TypeIntegerNode ||
+    TableDrivenParser.semanticStack.peek(). instanceof TypeBooleanNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof BodyNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof BodyNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class FormalsNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof NonEmptyFormalsNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyFormalsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class NonEmptyFormalsNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof FormalNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof FormalNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof NonEmptyFormalsPrimeNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyFormalsPrimeNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class NonEmptyFormalsPrimeNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof NonEmptyFormalsNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyFormalsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class FormalNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof IdentifierNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof IdentifierNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof TypeIntegerNode ||
-	semanticStack.peek(). instanceof TypeBooleanNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof TypeIntegerNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof TypeBooleanNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class BodyNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof StatementListPSNode ||
-	semanticStack.peek(). instanceof StatementListtemp =Node){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof StatementListPSNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof StatementListtemp =Node){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class StatementListPSNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof PrintStatementNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof PrintStatementNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof StatementListPSNode ||
-	semanticStack.peek(). instanceof StatementListtemp =Node){
-	  tree.addleaf(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof StatementListPSNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof StatementListtemp =Node){
+	  tree.addLeaf(TableDrivenParser.TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class StatementListNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class TypeIntegerNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
   }
  //only has a keyword terminal
 }
 //---
 class TypeBooleanNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
   }
   //only has a keyword terminal
 }
 //---
 class ExprNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof SimplExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof SimplExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof ExprPrimeLTNode ||
-	semanticStack.peek(). instanceof ExprPrimeExprNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprPrimeLTNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof ExprPrimeExprNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class ExprPrimeLTNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class ExprPrimeExprNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class SimpleExprNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof SimpleExprPrimeOrNode ||
-	semanticStack.peek(). instanceof SimpleExprPrimePlusNode ||
-	semanticStack.peek(). instanceof SimpleExprPrimeMinusNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof SimpleExprPrimeOrNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof SimpleExprPrimePlusNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof SimpleExprPrimeMinusNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class SimpleExprPrimeOrNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof SimpleExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof SimpleExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class SimpleExprPrimePlusNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof SimpleExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof SimpleExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class SimpleExprPrimeMinusNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof SimpleExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof SimpleExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class TermNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof FactorIfNode ||
-	semanticStack.peek(). instanceof FactorNotNode ||
-    semanticStack.peek(). instanceof FactorIDNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof FactorIfNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof FactorNotNode ||
+    TableDrivenParser.semanticStack.peek(). instanceof FactorIDNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof TermPrimeAndNode ||
-	semanticStack.peek(). instanceof TermPrimeTimesNode ||
-	semanticStack.peek(). instanceof TermPrimeDivideNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof TermPrimeAndNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof TermPrimeTimesNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof TermPrimeDivideNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class TermPrimeAndNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class TermPrimeTimesNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class TermPrimeDivideNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class FactorIfNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
     for(int i = 0; i < 3; i++){
-      if(semanticStack.peek(). instanceof ExprNode){
-	    tree.addleaf(semanticStack.pop());
+      if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
 	}
   }
 }
 //---
 class FactorNotNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof FactorIfNode ||
-	semanticStack.peek(). instanceof FactorNotNode ||
-	semanticStack.peek(). instanceof FactorIDNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof FactorIfNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof FactorNotNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof FactorIDNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class FactorIDNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof IdentifierNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof IdentifierNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof IdentifierPrimeLP){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof IdentifierPrimeLP){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class IfIntLiteralNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof LiteralNumberNode ||
-	semanticStack.peek(). instanceof LiteralBooleanNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof LiteralNumberNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof LiteralBooleanNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
   }
 }
 //---
 class IfIntMinusNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof FactorIDNode ||
-	semanticStack.peek(). instanceof FactorIfNode ||
-	semanticStack.peek(). instanceof FactorNotNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof FactorIDNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof FactorIfNode ||
+	TableDrivenParser.semanticStack.peek(). instanceof FactorNotNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class IfIntLPNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class IdentifierPrimeLP extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ActualsNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ActualsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class ActualsNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof NonEmptyActualsNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyActualsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class NonEmptyActualsNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof NonEmptyActualsPrimeNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyActualsPrimeNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class NonEmptyActualsPrimeNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	}
-    if(semanticStack.peek(). instanceof NonEmptyActualsPrimeNode){
-	  tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek(). instanceof NonEmptyActualsPrimeNode){
+	  tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class LiteralNumberNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
   }
 }
 //---
 class LiteralBooleanNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
   }
 }
 //---
 class PrintStatementNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek(). instanceof ExprNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek(). instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }
 //---
 class IdentifierNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
+  public void getChildren(){
   }
 }
 */

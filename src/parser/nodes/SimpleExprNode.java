@@ -1,14 +1,16 @@
 package src.parser.nodes;
 
+import src.parser.*;
+
 public class SimpleExprNode extends SemanticNode{
-  public void getChildren(Stack semanticStack){
-    if(semanticStack.peek() instanceof TermNode){
-      tree.addleaf(semanticStack.pop());
+  public void getChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof TermNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
-    if(semanticStack.peek() instanceof SimpleExprPrimeOrNode ||
-	     semanticStack.peek() instanceof SimpleExprPrimePlusNode ||
-	     semanticStack.peek() instanceof SimpleExprPrimeMinusNode){
-      tree.addleaf(semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof SimpleExprPrimeOrNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof SimpleExprPrimePlusNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof SimpleExprPrimeMinusNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 }

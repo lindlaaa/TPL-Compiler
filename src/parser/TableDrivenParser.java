@@ -7,9 +7,9 @@ import src.scanner.*;
 public class TableDrivenParser extends Parser{
 
   private Parsetable flairTable;
-  private Stack parseStack = new Stack();
-  private Stack semanticStack = new Stack();
-  private Stack semanticBuffer = new Stack();
+  public static Stack parseStack = new Stack();
+  public static Stack semanticStack = new Stack();
+  public static Stack semanticBuffer = new Stack();
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
@@ -83,7 +83,7 @@ public class TableDrivenParser extends Parser{
           throw new ParseException("--Token mismatch--");
         }
       //NonTerminal
-      }else if((NonTerminal)parseStack.peek() instanceof NonTerminal){
+      }else if(parseStack.peek() instanceof NonTerminal){
         try{
           flairTable.lookup((NonTerminal)parseStack.pop(), curToken).execute(parseStack);
         }catch(ParseException e){
@@ -93,6 +93,7 @@ public class TableDrivenParser extends Parser{
       //SemanticAction
       }else if(parseStack.peek() instanceof SemanticAction){
         consumeSemanticAction();
+        parseStack.pop();
         //System.out.println(parseStack.pop());
       }
       //Parse Error

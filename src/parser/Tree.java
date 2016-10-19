@@ -33,11 +33,7 @@ public class Tree<T> {
     locate.put(head, this);
   }
 
-  /**
-   *  [addLeaf description]
-   *  @param  [description]
-   *  @param  [description]
-   */
+
   public void addLeaf(T root, T leaf) {
     if (locate.containsKey(root)) {
       locate.get(root).addLeaf(leaf);
@@ -46,11 +42,7 @@ public class Tree<T> {
     }
   }
 
-  /**
-   *  [addLeaf description]
-   *  @param  leaf [description]
-   *  @return      [description]
-   */
+
   public Tree<T> addLeaf(T leaf) {
     Tree<T> t = new Tree<T>(leaf);
     leafs.add(t);
@@ -60,11 +52,7 @@ public class Tree<T> {
     return t;
   }
 
-  /**
-   *  [setAsParent description]
-   *  @param  parentRoot [description]
-   *  @return            [description]
-   */
+
   public Tree<T> setAsParent(T parentRoot) {
     Tree<T> t = new Tree<T>(parentRoot);
     t.leafs.add(this);
@@ -75,36 +63,22 @@ public class Tree<T> {
     return t;
   }
 
-  /**
-   *  [getHead description]
-   *  @return [description]
-   */
+
   public T getHead() {
     return head;
   }
 
-  /**
-   *  [getTree description]
-   *  @param  element [description]
-   *  @return         [description]
-   */
+
   public Tree<T> getTree(T element) {
     return locate.get(element);
   }
 
-  /**
-   *  [getParent description]
-   *  @return [description]
-   */
+
   public Tree<T> getParent() {
     return parent;
   }
 
-  /**
-   *  [getSuccessors description]
-   *  @param  root [description]
-   *  @return      [description]
-   */
+
   public Collection<T> getSuccessors(T root) {
     Collection<T> successors = new ArrayList<T>();
     Tree<T> tree = getTree(root);
@@ -116,20 +90,12 @@ public class Tree<T> {
     return successors;
   }
 
-  /**
-   *  [getSubTrees description]
-   *  @return [description]
-   */
+
   public Collection<Tree<T>> getSubTrees() {
     return leafs;
   }
 
-  /**
-   *  [getSuccessors description]
-   *  @param   [description]
-   *  @param   [description]
-   *  @return  [description]
-   */
+
   public static <T> Collection<T> getSuccessors(T of, Collection<Tree<T>> in) {
     for (Tree<T> tree : in) {
       if (tree.locate.containsKey(of)) {
@@ -139,10 +105,7 @@ public class Tree<T> {
     return new ArrayList<T>();
   }
 
-  /**
-   *  [toString description]
-   *  @return [description]
-   */
+
   @Override
   public String toString() {
     return printTree(0);
@@ -153,11 +116,7 @@ public class Tree<T> {
    */
   private static final int indent = 2;
 
-  /**
-   *  [printTree description]
-   *  @param  increment [description]
-   *  @return           [description]
-   */
+
   private String printTree(int increment) {
     String s = "";
     String inc = "";

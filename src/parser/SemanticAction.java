@@ -1,4 +1,4 @@
-Programpackage src.parser;
+package src.parser;
 
 public class SemanticAction
 {
@@ -58,5 +58,3 @@ public class SemanticAction
     return Integer.toString(typeNumber);
   }
 }
-
-

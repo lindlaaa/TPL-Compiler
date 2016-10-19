@@ -2,6 +2,7 @@ package src.parser;
 
 import java.util.Stack;
 import src.scanner.*;
+import src.parser.nodes.*;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
@@ -36,11 +37,13 @@ public class TableDrivenParser extends Parser{
   }
 
 
-  public void consumeSemanticAction(){
+  public void consumeSemanticAction() throws ParseException{
+    //NodeFactory.getInstance();
 	//1. The semanticAction is popped of the parseStack
 	//2. The semanticAction calls the creation of a semanticNode, corresponding to a specific make-rule.
-	SemanticAction tempAction = parseStack.pop();
-	SemanticNode tempNode = new SemanticNode(tempAction);
+	  SemanticAction tempAction = (SemanticAction)parseStack.pop();
+    SemanticNode tempNode = NodeFactory.createNewNode(tempAction);
+	  //SemanticNode tempNode = new SemanticNode(tempAction);
 
 	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children.
 	//a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.

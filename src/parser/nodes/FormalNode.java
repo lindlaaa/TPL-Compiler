@@ -4,12 +4,12 @@ import src.parser.*;
 
 public class FormalNode extends SemanticNode{
   public void getChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof IdentifierNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
-    if(TableDrivenParser.semanticStack.peek() instanceof TypeIntegerNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof TypeBooleanNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof TypeIntegerNode ||
+	     TableDrivenParser.semanticStack.pop() instanceof TypeBooleanNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
 }

@@ -4,8 +4,8 @@ import src.parser.*;
 
 public class IdentifierPrimeLP extends SemanticNode{
   public void getChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof ActualsNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof ActualsNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
 }

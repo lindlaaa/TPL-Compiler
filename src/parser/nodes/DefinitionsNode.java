@@ -4,11 +4,11 @@ import src.parser.*;
 
 public class DefinitionsNode extends SemanticNode{
   public void getChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof DefNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof DefNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.pop());
 	  }
-    if(TableDrivenParser.semanticStack.peek() instanceof DefinitionsNode){
-	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof DefinitionsNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
 }

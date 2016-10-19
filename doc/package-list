@@ -1,3 +1,4 @@
 src.main
 src.parser
+src.parser.nodes
 src.scanner

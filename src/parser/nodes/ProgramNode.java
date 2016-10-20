@@ -9,13 +9,13 @@ public class ProgramNode extends SemanticNode{
 	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop());
     }
     if(TableDrivenParser.semanticStack.peek() instanceof FormalsNode){
-  	  this.addChild(TableDrivenParser.semanticStack.pop());
+  	  this.addChild((FormalsNode)TableDrivenParser.semanticStack.pop());
     }
     if(TableDrivenParser.semanticStack.peek() instanceof DefinitionsNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((DefinitionsNode)TableDrivenParser.semanticStack.pop());
     }
     if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((BodyNode)TableDrivenParser.semanticStack.pop());
     }
   }
 

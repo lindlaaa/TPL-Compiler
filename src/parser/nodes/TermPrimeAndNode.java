@@ -6,7 +6,7 @@ public class TermPrimeAndNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof TermNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((TermNode)TableDrivenParser.semanticStack.pop());
 	}
   }
 

@@ -3,12 +3,17 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class DefinitionsNode extends SemanticNode{
-  public void getChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof DefNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+  public void setChildren(){
+    if(TableDrivenParser.semanticStack.pop() instanceof DefNode){
+      this.getChildren().addChild(TableDrivenParser.semanticStack.pop());
 	  }
-    if(TableDrivenParser.semanticStack.peek() instanceof DefinitionsNode){
-	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
+    if(TableDrivenParser.semanticStack.pop() instanceof DefinitionsNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.pop());
     }
+  }
+
+  @Override
+  public String toString(){
+    return "DefinitionsNode";//TODO
   }
 }

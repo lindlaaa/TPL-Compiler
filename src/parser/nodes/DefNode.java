@@ -3,7 +3,7 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class DefNode extends SemanticNode{
-  public void getChildren(){
+  public void addChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
 	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
@@ -17,5 +17,10 @@ public class DefNode extends SemanticNode{
     if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
 	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
+  }
+
+  @Override
+  public String toString(){
+    return "DefNode";//TODO
   }
 }

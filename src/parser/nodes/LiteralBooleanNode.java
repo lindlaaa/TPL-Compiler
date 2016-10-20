@@ -3,10 +3,13 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class LiteralBooleanNode extends SemanticNode{
-  public void addChildren(){}
+  @Override
+  public void addChildren(){
+    this.addChild(TableDrivenParser.semanticBuffer.pop());
+  }
 
   @Override
   public String toString(){
-    return "LiteralBooleanNode";//TODO
+    return "LiteralBooleanNode";
   }
 }

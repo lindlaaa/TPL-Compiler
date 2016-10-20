@@ -2,7 +2,7 @@ package src.parser.nodes;
 
 public interface NodeBehavior{
 
-  public void getChildren();
+  public void setChildren();
 
   @Override
   public String toString();

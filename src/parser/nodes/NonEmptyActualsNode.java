@@ -3,12 +3,12 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class NonEmptyActualsNode extends SemanticNode{
-  public void getChildren(){
-    if(TableDrivenParser.semanticStack.pop() instanceof ExprNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.pop());
+  public void addChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
 	  }
-    if(TableDrivenParser.semanticStack.pop() instanceof NonEmptyActualsPrimeNode){
-	    tree.addLeaf(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyActualsPrimeNode){
+	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 

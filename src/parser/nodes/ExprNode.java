@@ -4,7 +4,7 @@ import src.parser.*;
 
 public class ExprNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof SimpleExprNode){
       this.addChildren(TableDrivenParser.semanticStack.pop());
 	   }

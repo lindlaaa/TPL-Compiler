@@ -63,7 +63,6 @@ public class NodeFactory{
       default:  throw new ParseException("--Token DUMB--");
 		}
 
-    temp.createTree();
     return temp;
   }
 }

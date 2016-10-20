@@ -4,7 +4,7 @@ import src.parser.*;
 
 class IfIntLPNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
       this.addChild(TableDrivenParser.semanticStack.pop());
     }

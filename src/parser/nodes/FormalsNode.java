@@ -4,7 +4,7 @@ import src.parser.*;
 
 public class FormalsNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyFormalsNode){
       this.addChild(TableDrivenParser.semanticStack.pop());
     }

@@ -6,7 +6,7 @@ public class ProgramNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
-	    this.addChild(TableDrivenParser.semanticStack.pop());
+	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop());
     }
     if(TableDrivenParser.semanticStack.peek() instanceof FormalsNode){
   	  this.addChild(TableDrivenParser.semanticStack.pop());

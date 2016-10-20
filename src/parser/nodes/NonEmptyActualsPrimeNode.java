@@ -9,7 +9,7 @@ public class NonEmptyActualsPrimeNode extends SemanticNode{
       this.addChild(TableDrivenParser.semanticStack.pop());
 	}
     if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyActualsPrimeNode){
-	  this.addChildtree.addLeaf(TableDrivenParser.semanticStack.pop());
+	  this.addChild.addLeaf(TableDrivenParser.semanticStack.pop());
     }
   }
 

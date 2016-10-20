@@ -4,7 +4,7 @@ import src.parser.*;
 
 public class FactorIfNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     for(int i = 0; i < 3; i++){
       if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
 	      this.addChild(TableDrivenParser.semanticStack.pop());

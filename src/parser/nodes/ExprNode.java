@@ -3,18 +3,19 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class ExprNode extends SemanticNode{
+  @Override
   public void addChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof SimpleExprNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+      this.addChildren(TableDrivenParser.semanticStack.pop());
 	   }
     if(TableDrivenParser.semanticStack.peek() instanceof ExprPrimeLTNode ||
 	     TableDrivenParser.semanticStack.peek() instanceof ExprPrimeExprNode){
-	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
+	    this.addChild(TableDrivenParser.semanticStack.pop());
     }
   }
 
   @Override
   public String toString(){
-    return "ExprNode";//TODO
+    return "ExprNode";
   }
 }

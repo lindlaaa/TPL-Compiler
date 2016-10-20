@@ -3,17 +3,18 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class FactorIDNode extends SemanticNode{
+  @Override
   public void addChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+      this.addChild(TableDrivenParser.semanticStack.pop());
 	  }
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierPrimeLP){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+      this.addChild(TableDrivenParser.semanticStack.pop());
     }
   }
 
   @Override
   public String toString(){
-    return "FactorIDNode";//TODO
+    return "FactorIDNode";
   }
 }

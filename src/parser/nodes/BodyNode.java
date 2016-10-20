@@ -7,12 +7,12 @@ public class BodyNode extends SemanticNode{
   public void addChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof StatementListPSNode ||
 	     TableDrivenParser.semanticStack.peek() instanceof StatementListNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+      this.addChild(TableDrivenParser.semanticStack.pop());
 	  }
   }
 
   @Override
   public String toString(){
-    return "BodyNode";//TODO
+    return "BodyNode";
   }
 }

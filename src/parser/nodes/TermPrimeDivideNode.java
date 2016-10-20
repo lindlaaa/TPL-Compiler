@@ -3,14 +3,15 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class TermPrimeDivideNode extends SemanticNode{
-  public void addChildren(){
+  @Override
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof TermNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
-	  }
+      this.addChild(TableDrivenParser.semanticStack.pop());
+	}
   }
 
   @Override
   public String toString(){
-    return "TermPrimeDivideNode";//TODO
+    return "TermPrimeDivideNode";
   }
 }

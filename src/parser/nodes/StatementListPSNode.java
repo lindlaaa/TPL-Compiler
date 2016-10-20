@@ -3,18 +3,19 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class StatementListPSNode extends SemanticNode{
-  public void addChildren(){
+  @Override
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof PrintStatementNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.peek());
+      this.addChild(TableDrivenParser.semanticStack.pop());
 	  }
     if(TableDrivenParser.semanticStack.peek() instanceof StatementListPSNode ||
 	     TableDrivenParser.semanticStack.peek() instanceof StatementListNode){
-	    tree.addLeaf(TableDrivenParser.semanticStack.peek());
+	    this.addChild(TableDrivenParser.semanticStack.pop());
     }
   }
 
   @Override
   public String toString(){
-    return "StatementListPSNode";//TODO
+    return "StatementListPSNode";
   }
 }

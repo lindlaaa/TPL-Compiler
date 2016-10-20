@@ -3,7 +3,7 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class TypeBooleanNode extends SemanticNode{
-  public void getChildren(){
+  public void addChildren(){
   }
 
   @Override

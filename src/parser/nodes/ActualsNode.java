@@ -4,14 +4,14 @@ import src.parser.*;
 
 public class ActualsNode extends SemanticNode{
   @Override
-  public void getChildren(){
-    if(TableDrivenParser.semanticStack.pop() instanceof NonEmptyActualsNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.pop());
+  public void setChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyActualsNode){
+      this.addChild(TableDrivenParser.semanticStack.pop());
     }
   }
 
   @Override
   public String toString(){
-    return "ActualsNode";//TODO
+    return "ActualsNode";
   }
 }

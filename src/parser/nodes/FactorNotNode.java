@@ -3,11 +3,11 @@ package src.parser.nodes;
 import src.parser.*;
 
 public class FactorNotNode extends SemanticNode{
-  public void getChildren(){
-    if(TableDrivenParser.semanticStack.pop() instanceof FactorIfNode ||
-	     TableDrivenParser.semanticStack.pop() instanceof FactorNotNode ||
-	     TableDrivenParser.semanticStack.pop() instanceof FactorIDNode){
-      tree.addLeaf(TableDrivenParser.semanticStack.pop());
+  public void addChildren(){
+    if(TableDrivenParser.semanticStack.peek() instanceof FactorIfNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof FactorNotNode ||
+	     TableDrivenParser.semanticStack.peek() instanceof FactorIDNode){
+      tree.addLeaf(TableDrivenParser.semanticStack.peek());
     }
   }
 

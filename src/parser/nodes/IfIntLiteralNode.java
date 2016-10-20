@@ -4,7 +4,7 @@ import src.parser.*;
 
 public class IfIntLiteralNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof LiteralNumberNode ||
 	     TableDrivenParser.semanticStack.peek() instanceof LiteralBooleanNode){
       this.addChild(TableDrivenParser.semanticStack.pop());

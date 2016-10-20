@@ -7,8 +7,8 @@ import src.parser.*;
 public class SemanticNode implements NodeBehavior{
 
   private String id;
-  private final List<SemanticNode> children = new ArrayList<>();
-  private final Node parent;
+  private List<SemanticNode> children = new ArrayList<>();
+  private SemanticNode parent;
 
   public SemanticNode() {
     this.parent = null;
@@ -18,25 +18,24 @@ public class SemanticNode implements NodeBehavior{
     this.parent = newParent;
   }
 
-  public List<Node> getChildren() {
+  public List<SemanticNode> getChildren() {
     return children;
   }
 
-  public Node getParent() {
+  public SemanticNode getParent() {
     return parent;
   }
 
-  public void getChildren(){};
+  public void setChildren(){};
 
-  private static Node addChild(Node child) {
+  public void addChild(SemanticNode child) {
     child.setParent(this);
     parent.getChildren().add(child);
-    return node;
   }
 
-  private static void printTree(Node node, String appender) {
-   System.out.println(appender + node.getId());
-   for (Node each : node.getChildren()) {
+  private void printTree(SemanticNode node, String appender) {
+   System.out.println(appender + this.getClass());
+   for (SemanticNode each : node.getChildren()) {
       printTree(each, appender + appender);
     }
   }

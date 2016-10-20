@@ -4,7 +4,7 @@ import src.parser.*;
 
 public class LiteralNumberNode extends SemanticNode{
   @Override
-  public void addChildren(){
+  public void setChildren(){
     this.addChild(TableDrivenParser.semanticBuffer.pop());
   }
 

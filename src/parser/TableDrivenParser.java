@@ -3,6 +3,7 @@ package src.parser;
 import java.util.Stack;
 import src.scanner.*;
 import src.parser.nodes.*;
+import src.scanner.BoolToken;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
@@ -21,10 +22,9 @@ public class TableDrivenParser extends Parser{
 
 
   public void consumeToken(){
-    if((curToken instanceof IntToken)
-       || (curToken instanceof BoolToken)
-       || (curToken instanceof IdentifierToken))
-    {
+    if(  (curToken instanceof IntToken)
+      || (curToken instanceof BoolToken)
+      || (curToken instanceof IdentifierToken)){
       semanticBuffer.push(curToken);
     }
     curPos++;
@@ -49,6 +49,7 @@ public class TableDrivenParser extends Parser{
 	//a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
     //tempNode.getChildren();
 	//4. We then add this new parent node, containing its children, onto the semantic stack.
+    tempNode.setChildren();
     semanticStack.push(tempNode);
   }
 
@@ -88,7 +89,6 @@ public class TableDrivenParser extends Parser{
       //SemanticAction
       }else if(parseStack.peek() instanceof SemanticAction){
         consumeSemanticAction();
-        //System.out.println(parseStack.pop());
       }
       //Parse Error
       else{
@@ -100,7 +100,17 @@ public class TableDrivenParser extends Parser{
     }while((parseStack.peek() instanceof EOFToken) == false);
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
-      System.out.println(semanticStack);
+      try{
+        System.out.println("***************************");
+        SemanticNode tm = (SemanticNode)semanticStack.peek();
+        tm.printTree(tm, "  ");
+        System.out.println(semanticStack);
+        System.out.println(semanticStack.size());
+        System.out.println("***************************");
+        //Thread.sleep(100);
+      }catch(Exception e){
+        //nothing
+      }
       return true;
     }
     else{
@@ -122,7 +132,7 @@ public class TableDrivenParser extends Parser{
     ParseRule rule01 = new PushRule( //ProgramRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("program")),
                         new PushTerminal(     new IdentifierToken()),
-						new PushSemantic(     SemanticAction.Identifier),
+						            new PushSemantic(     SemanticAction.Identifier),
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
@@ -130,19 +140,19 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Definitions),
                         new PushNonTerminal(  NonTerminal.Body),
                         new PushTerminal(     new TerminatorToken('.')),
-						new PushSemantic(     SemanticAction.Program)
+						            new PushSemantic(     SemanticAction.Program)
                       } );
 
     ParseRule rule02 = new PushRule( // DefinitionsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Def),
                         new PushNonTerminal(  NonTerminal.Definitions),
-						new PushSemantic(     SemanticAction.Definitions)
+						            new PushSemantic(     SemanticAction.Definitions)
                         } );
 
     ParseRule rule03 = new PushRule( // DefRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("function")),
                         new PushTerminal(     new IdentifierToken()),
-						new PushSemantic(     SemanticAction.Identifier),
+						            new PushSemantic(     SemanticAction.Identifier),
                         new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Formals),
                         new PushTerminal(     new PunctuationToken(')')),
@@ -150,12 +160,12 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Type),
                         new PushNonTerminal(  NonTerminal.Body),
                         new PushTerminal(     new TerminatorToken(';')),
-						new PushSemantic(     SemanticAction.Def)
+						            new PushSemantic(     SemanticAction.Def)
                         } );
 
     ParseRule rule04 = new PushRule( // FormalsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyFormals),
-						new PushSemantic(     SemanticAction.Formals)
+						            new PushSemantic(     SemanticAction.Formals)
                         } );
 
     ParseRule rule05 = new PushRule( // NonEmptyFormalsRule01
@@ -167,50 +177,48 @@ public class TableDrivenParser extends Parser{
     ParseRule rule06 = new PushRule( // NonEmptyFormalsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
                         new PushNonTerminal(  NonTerminal.NonEmptyFormals),
-						new PushSemantic(     SemanticAction.NonEmptyFormalsPrime)
+						            new PushSemantic(     SemanticAction.NonEmptyFormalsPrime)
                         } );
 
     ParseRule rule07 = new PushRule( // FormalRule01
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
-						new PushSemantic(     SemanticAction.Identifier),
+						            new PushSemantic(     SemanticAction.Identifier),
                         new PushTerminal(     new PunctuationToken(':')),
                         new PushNonTerminal(  NonTerminal.Type),
-						new PushSemantic(     SemanticAction.Formal)
+						            new PushSemantic(     SemanticAction.Formal)
                         } );
 
     ParseRule rule08 = new PushRule( // BodyRule01
       new ParseRule[] { new PushTerminal(     new KeywordToken("begin")),
                         new PushNonTerminal(  NonTerminal.StatementList),
                         new PushTerminal(     new KeywordToken("end")),
-						new PushSemantic(     SemanticAction.Body)
+						            new PushSemantic(     SemanticAction.Body)
                         } );
 
     ParseRule rule09 = new PushRule( // StatementListRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.PrintStatement),
                         new PushNonTerminal(  NonTerminal.StatementList),
-						new PushSemantic(     SemanticAction.StatementListPS)
+						            new PushSemantic(     SemanticAction.StatementListPS)
                         } );
 
     ParseRule rule10 = new PushRule( // StatementListRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("return")),
                         new PushNonTerminal(  NonTerminal.Expr),
-						new PushSemantic(     SemanticAction.StatementListReturn)
+						            new PushSemantic(     SemanticAction.StatementListReturn)
                         } );
 
     ParseRule rule11 = new PushRule( // TypeRule01
-      new ParseRule[] { new PushTerminal(     new KeywordToken("integer")),
-						new PushSemantic(     SemanticAction.TypeInteger)
+      new ParseRule[] { new PushTerminal(     new KeywordToken("integer"))
                         } );
 
     ParseRule rule12 = new PushRule(
-      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean")),
-						new PushSemantic(     SemanticAction.TypeBoolean)
+      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean"))
                         } );
 
     ParseRule rule13 = new PushRule( // ExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.SimpleExpr),
                         new PushNonTerminal(  NonTerminal.ExprPrime),
-						new PushSemantic(     SemanticAction.Expr)
+						            new PushSemantic(     SemanticAction.Expr)
                         } );
 
     ParseRule rule14 = new PushRule( // ExprPrimeRule01
@@ -228,7 +236,7 @@ public class TableDrivenParser extends Parser{
     ParseRule rule16 = new PushRule( // SimpleExprRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Term),
                         new PushNonTerminal(  NonTerminal.SimpleExprPrime),
-						new PushSemantic(     SemanticAction.SimpleExpr)
+						            new PushSemantic(     SemanticAction.SimpleExpr)
                         } );
 
     ParseRule rule17 = new PushRule( // SimpleExprRulePrime01
@@ -252,25 +260,28 @@ public class TableDrivenParser extends Parser{
     ParseRule rule20 = new PushRule( // TermRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Factor),
                         new PushNonTerminal(  NonTerminal.TermPrime),
-						new PushSemantic(     SemanticAction.Term)
+						            new PushSemantic(     SemanticAction.Term)
                         } );
 
     ParseRule rule21 = new PushRule( // TermPrimeRule01
        new ParseRule[] { new PushTerminal(    new KeywordToken("and")),
-                         new PushNonTerminal( NonTerminal.SimpleExpr),
-						 new PushSemantic(     SemanticAction.TermPrimeAnd)
+                         new PushNonTerminal( NonTerminal.Term),
+						             new PushSemantic(     SemanticAction.TermPrimeAnd),
+						             new PushSemantic(     SemanticAction.TermPrime)
                           } );
 
     ParseRule rule22 = new PushRule( // TermPrimeRule02
       new ParseRule[] { new PushTerminal(     new OpToken('*')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr),
-						new PushSemantic(     SemanticAction.TermPrimeTimes)
+                        new PushNonTerminal(  NonTerminal.Term),
+            						new PushSemantic(     SemanticAction.TermPrimeTimes),
+                        new PushSemantic(     SemanticAction.TermPrime)
                         } );
 
     ParseRule rule23 = new PushRule( // TermPrimeRule03
       new ParseRule[] { new PushTerminal(     new OpToken('/')),
-                        new PushNonTerminal(  NonTerminal.SimpleExpr),
-						new PushSemantic(     SemanticAction.TermPrimeDivide)
+                        new PushNonTerminal(  NonTerminal.Term),
+            						new PushSemantic(     SemanticAction.TermPrimeDivide),
+                        new PushSemantic(     SemanticAction.TermPrime)
                         } );
 
     ParseRule rule24 = new PushRule( // FactorRule01
@@ -280,38 +291,44 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new KeywordToken("else")),
                         new PushNonTerminal(  NonTerminal.Expr),
-						new PushSemantic(     SemanticAction.FactorIf)
+						            new PushSemantic(     SemanticAction.FactorIf),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule25 = new PushRule( // FactorRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("not")),
                         new PushNonTerminal(  NonTerminal.Factor),
-						new PushSemantic(     SemanticAction.FactorNot)
+						            new PushSemantic(     SemanticAction.FactorNot),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule26 = new PushRule( // FactorRule03
       new ParseRule[] { new PushTerminal(     new IdentifierToken()),
-						new PushSemantic(     SemanticAction.Identifier),
+						            new PushSemantic(     SemanticAction.Identifier),
                         new PushNonTerminal(  NonTerminal.IdentifierPrime),
-						new PushSemantic(     SemanticAction.FactorID)
+						            new PushSemantic(     SemanticAction.FactorID),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule27 = new PushRule(
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Literal),
-						new PushSemantic(     SemanticAction.IfIntLiteral)
+						            new PushSemantic(     SemanticAction.Literal),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule28 = new PushRule(
       new ParseRule[] { new PushTerminal(     new OpToken('-')),
                         new PushNonTerminal(  NonTerminal.Factor),
-						new PushSemantic(     SemanticAction.IfIntMinus)
+						            new PushSemantic(     SemanticAction.FactorMinus),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule29 = new PushRule( // FactorRule06
       new ParseRule[] { new PushTerminal(     new PunctuationToken('(')),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new PunctuationToken(')')),
-						new PushSemantic(     SemanticAction.IfIntLP)
+						            new PushSemantic(     SemanticAction.FactorExpr),
+                        new PushSemantic(     SemanticAction.Factor)
                         } );
 
     ParseRule rule30 = new PushRule( // IdentifierPrimeRule01
@@ -323,30 +340,30 @@ public class TableDrivenParser extends Parser{
 
     ParseRule rule31 = new PushRule( // ActualsRule02
       new ParseRule[] { new PushNonTerminal(  NonTerminal.NonEmptyActuals),
-						new PushSemantic(     SemanticAction.Actuals)
+						            new PushSemantic(     SemanticAction.Actuals)
                         } );
 
-    ParseRule rule32 = new PushRule(
+    ParseRule rule32 = new PushRule( // NEA rule
       new ParseRule[] { new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
-						new PushSemantic(     SemanticAction.NonEmptyActuals)
+						            new PushSemantic(     SemanticAction.NonEmptyActuals)
                         } );
 
     ParseRule rule33 = new PushRule( // NonEmptyActualsPrimeRule01
       new ParseRule[] { new PushTerminal(     new PunctuationToken(',')),
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushNonTerminal(  NonTerminal.NonEmptyActualsPrime),
-						new PushSemantic(     SemanticAction.NonEmptyActualsPrime)
+						            new PushSemantic(     SemanticAction.NonEmptyActualsPrime)
                         } );
 
     ParseRule rule34 = new PushRule(
       new ParseRule[] { new PushTerminal(     new IntToken()),
-	  					new PushSemantic(     SemanticAction.LiteralNumber)
+	  					          new PushSemantic(     SemanticAction.LiteralNumber)
                         } );
 
     ParseRule rule35 = new PushRule(
       new ParseRule[] { new PushTerminal(     new BoolToken()),
-						new PushSemantic(     SemanticAction.LiteralBoolean)
+						            new PushSemantic(     SemanticAction.LiteralBoolean)
                         } );
 
     ParseRule rule36 = new PushRule(
@@ -355,7 +372,7 @@ public class TableDrivenParser extends Parser{
                         new PushNonTerminal(  NonTerminal.Expr),
                         new PushTerminal(     new PunctuationToken(')')),
                         new PushTerminal(     new TerminatorToken(';')),
-						new PushSemantic(     SemanticAction.PrintStatement)
+						            new PushSemantic(     SemanticAction.PrintStatement)
                         } );
 
     tempTable.add(NonTerminal.Program,              new KeywordToken("program"), rule01);

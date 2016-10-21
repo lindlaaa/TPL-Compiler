@@ -6,7 +6,7 @@ public class IdentifierPrimeLP extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof ActualsNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((ActualsNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

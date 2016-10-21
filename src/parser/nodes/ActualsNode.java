@@ -6,7 +6,7 @@ public class ActualsNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyActualsNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((NonEmptyActualsNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

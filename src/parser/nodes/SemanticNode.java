@@ -28,15 +28,23 @@ public class SemanticNode implements NodeBehavior{
 
   public void setChildren(){};
 
-  public void addChild(SemanticNode child) {
-    child.setParent(this);
-    parent.getChildren().add(child);
+  public void addChild(SemanticNode child, SemanticNode p) {
+    //System.out.println("---before setparent---");
+    //System.out.println(p);
+    child.setParent(p);
+    //System.out.println("---after setparent---");
+    //System.out.println("parent = "+p.getChildren());
+    p.getChildren().add(child);
+    //System.out.println("---after .add---");
+
   }
 
-  private void printTree(SemanticNode node, String appender) {
-   System.out.println(appender + this.getClass());
+  public void printTree(SemanticNode node, String appender) {
+   System.out.println(appender + node);
+   //System.out.println(node.getChildren());
    for (SemanticNode each : node.getChildren()) {
-      printTree(each, appender + appender);
+     //System.out.println("Next");
+      printTree(each, appender + "| ");
     }
   }
 }

@@ -1,15 +1,21 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.scanner.BoolToken;
 
 public class LiteralBooleanNode extends SemanticNode{
+
+  BoolToken value;
+
   @Override
   public void setChildren(){
-    this.addChild(TableDrivenParser.semanticBuffer.pop());
+    //this.addChild((BoolToken)TableDrivenParser.semanticBuffer.pop());FIXME
+    //TableDrivenParser.semanticBuffer.pop();
+    this.value = (BoolToken)TableDrivenParser.semanticBuffer.pop();
   }
 
   @Override
   public String toString(){
-    return "LiteralBooleanNode";
+    return "LiteralBooleanNode "+ this.value;
   }
 }

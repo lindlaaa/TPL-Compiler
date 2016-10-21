@@ -1,0 +1,8 @@
+program less-than-ten(in : integer);
+
+
+begin
+
+	return in < 10
+	
+end.

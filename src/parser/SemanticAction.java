@@ -26,9 +26,9 @@ public class SemanticAction
   public static final SemanticAction FactorIf = new SemanticAction(24);
   public static final SemanticAction FactorNot = new SemanticAction(25);
   public static final SemanticAction FactorID = new SemanticAction(26);
-  public static final SemanticAction IfIntLiteral = new SemanticAction(27);
-  public static final SemanticAction IfIntMinus = new SemanticAction(28);
-  public static final SemanticAction IfIntLP = new SemanticAction(29);
+  //public static final SemanticAction IfIntLiteral = new SemanticAction(27);
+  //public static final SemanticAction IfIntMinus = new SemanticAction(28);
+  //public static final SemanticAction IfIntLP = new SemanticAction(29);
   public static final SemanticAction IdentifierPrimeLP = new SemanticAction(30);
   public static final SemanticAction Actuals = new SemanticAction(31);
   public static final SemanticAction NonEmptyActuals = new SemanticAction(32);
@@ -38,12 +38,16 @@ public class SemanticAction
   public static final SemanticAction PrintStatement = new SemanticAction(36);
   public static final SemanticAction Identifier = new SemanticAction(37);
 
+
+  //NEW
   public static final SemanticAction FactorExpr = new SemanticAction(38);
   public static final SemanticAction FactorMinus = new SemanticAction(39);
   public static final SemanticAction FactorLiteral = new SemanticAction(40);
   public static final SemanticAction Factor = new SemanticAction(41);
   public static final SemanticAction TermPrime = new SemanticAction(42);
   public static final SemanticAction Literal = new SemanticAction(43);
+  public static final SemanticAction StatementList = new SemanticAction(44);
+
 
 
 

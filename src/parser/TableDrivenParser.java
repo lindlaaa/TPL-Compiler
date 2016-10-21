@@ -54,7 +54,7 @@ public class TableDrivenParser extends Parser{
   }
 
   @SuppressWarnings("unchecked")
-  public boolean parseProgram() throws ParseException{
+  public boolean parseProgram(boolean showTree) throws ParseException{
 
     parseStack.push(new EOFToken(1));    //push EOF onto parseStack
     parseStack.push(NonTerminal.Program);//push program onto parseStack
@@ -69,8 +69,6 @@ public class TableDrivenParser extends Parser{
         if(parseStack.peek().getClass().equals(curToken.getClass())){
           //System.out.println("Item popped from parseStack: \n"+parseStack.peek()+"\n");//FIXME
           //System.out.println("Token Consumed: \n"+curToken+"\n");//FIXME
-          //TODO Will need to add primitive values to the semanticBuffer
-          //if they are popped from here!!
           parseStack.pop();
           consumeToken();
         }else // Token mismatch
@@ -100,16 +98,16 @@ public class TableDrivenParser extends Parser{
     }while((parseStack.peek() instanceof EOFToken) == false);
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
-      try{
-        System.out.println("***************************");
-        SemanticNode tm = (SemanticNode)semanticStack.peek();
-        tm.printTree(tm, "  ");
-        System.out.println(semanticStack);
-        System.out.println(semanticStack.size());
-        System.out.println("***************************");
-        //Thread.sleep(100);
-      }catch(Exception e){
-        //nothing
+      if(showTree){
+        try{
+          System.out.println("***************************");
+          SemanticNode tm = (SemanticNode)semanticStack.peek();
+          tm.printTree(tm, "  ");
+          System.out.println("Semantic Stack --> "+semanticStack);
+          System.out.println("Size of ^^^^^  --> "+semanticStack.size());
+          System.out.println("***************************");
+          //Thread.sleep(100);
+        }catch(Exception e){}
       }
       return true;
     }
@@ -198,13 +196,16 @@ public class TableDrivenParser extends Parser{
     ParseRule rule09 = new PushRule( // StatementListRule01
       new ParseRule[] { new PushNonTerminal(  NonTerminal.PrintStatement),
                         new PushNonTerminal(  NonTerminal.StatementList),
-						            new PushSemantic(     SemanticAction.StatementListPS)
+						            new PushSemantic(     SemanticAction.StatementListPS),
+						            new PushSemantic(     SemanticAction.StatementList)
+
                         } );
 
     ParseRule rule10 = new PushRule( // StatementListRule02
       new ParseRule[] { new PushTerminal(     new KeywordToken("return")),
                         new PushNonTerminal(  NonTerminal.Expr),
-						            new PushSemantic(     SemanticAction.StatementListReturn)
+						            new PushSemantic(     SemanticAction.StatementListReturn),
+						            new PushSemantic(     SemanticAction.StatementList)
                         } );
 
     ParseRule rule11 = new PushRule( // TypeRule01

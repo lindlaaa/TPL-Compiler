@@ -5,10 +5,12 @@ import src.parser.*;
 public class IfIntMinusNode extends SemanticNode{
   @Override
   public void setChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof FactorIDNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof FactorIfNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof FactorNotNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof FactorIDNode){
+      this.addChild((FactorIDNode)TableDrivenParser.semanticStack.pop(), this);
+    }else if(TableDrivenParser.semanticStack.peek() instanceof FactorIfNode){
+      this.addChild((FactorIfNode)TableDrivenParser.semanticStack.pop(), this);
+    }else if(TableDrivenParser.semanticStack.peek() instanceof FactorNotNode){
+      this.addChild((FactorNotNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

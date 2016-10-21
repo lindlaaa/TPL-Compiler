@@ -6,7 +6,7 @@ public class FormalsNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyFormalsNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+      this.addChild((NonEmptyFormalsNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

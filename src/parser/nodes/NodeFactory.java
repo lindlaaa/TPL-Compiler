@@ -33,8 +33,8 @@ public class NodeFactory{
       case 8:  temp = new BodyNode();                 break;
       case 9:  temp = new StatementListPSNode();      break;
       case 10: temp = new StatementListNode();        break;
-      case 11: temp = new TypeIntegerNode();          break;
-      case 12: temp = new TypeBooleanNode();          break;
+      //MISSING
+      //MISSING
       case 13: temp = new ExprNode();                 break;
       case 14: temp = new ExprPrimeLTNode();          break;
       case 15: temp = new ExprPrimeExprNode();        break;
@@ -49,7 +49,7 @@ public class NodeFactory{
       case 24: temp = new FactorIfNode();             break;
       case 25: temp = new FactorNotNode();            break;
       case 26: temp = new FactorIDNode();             break;
-      case 27: temp = new IfIntLiteralNode();         break;
+      //case 27: temp = new IfIntLiteralNode();         break;
       case 28: temp = new IfIntMinusNode();           break;
       case 29: temp = new IfIntLPNode();              break;
       case 30: temp = new IdentifierPrimeLP();        break;
@@ -60,6 +60,16 @@ public class NodeFactory{
       case 35: temp = new LiteralBooleanNode();       break;
       case 36: temp = new PrintStatementNode();       break;
       case 37: temp = new IdentifierNode();           break;
+
+      //NEW
+      case 38: temp = new FactorExprNode();           break;
+      case 39: temp = new FactorMinusNode();          break;
+      case 40: temp = new FactorLiteralNode();        break;
+      case 41: temp = new FactorNode();               break;
+      case 42: temp = new TermPrimeNode();            break;
+      case 43: temp = new LiteralNode();              break;
+
+
       default:  throw new ParseException("--Token DUMB--");
 		}
 

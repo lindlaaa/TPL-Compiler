@@ -5,18 +5,14 @@ import src.parser.*;
 public class DefNode extends SemanticNode{
   @Override
   public void setChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
-	    this.addChild(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
+	    this.addChild((BodyNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     if(TableDrivenParser.semanticStack.peek() instanceof FormalsNode){
-	    this.addChild(TableDrivenParser.semanticStack.pop());
+	    this.addChild((FormalsNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
-    if(TableDrivenParser.semanticStack.peek() instanceof TypeIntegerNode ||
-       TableDrivenParser.semanticStack.peek() instanceof TypeBooleanNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
-	  }
-    if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
-	    this.addChild(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
+	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

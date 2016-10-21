@@ -1,0 +1,16 @@
+program two-exponents(in : integer);
+
+	function exponent(n:integer) : integer
+		begin
+			if n = 1 then
+				return 2
+			else
+				return 2 * factorial(n - 1)
+		end;
+
+
+begin
+
+	return exponent (in)
+	
+end.

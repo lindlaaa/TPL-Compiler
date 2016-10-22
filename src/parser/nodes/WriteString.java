@@ -18,8 +18,10 @@ public class WriteString {
     public void write(String content) {
         FileWriter fileWriter = null;
         try {
-            File newTextFile = new File("/Users/ajathome/Desktop/TPL-Compiler/ast.txt");
+            File newTextFile = new File("/Users/ajathome/Desktop/TPL-Compiler/ast.dot");
             fileWriter = new FileWriter(newTextFile);
+            content = "digraph g {\n" + content;
+            content+="}";
             fileWriter.write(content);
             fileWriter.close();
         } catch (IOException ex) {

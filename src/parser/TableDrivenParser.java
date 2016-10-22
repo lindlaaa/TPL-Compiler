@@ -112,13 +112,13 @@ public class TableDrivenParser extends Parser{
         try{
           System.out.println("***************************");
           SemanticNode tm = (SemanticNode)semanticStack.peek();
-          System.out.println(tm.printTree(tm, "  "));
+          System.out.println(tm.printTree(tm, 0));
           System.out.println("Semantic Stack --> "+semanticStack);
           System.out.println("Size of ^^^^^  --> "+semanticStack.size());
           System.out.println("***************************");
           //Thread.sleep(150);
           WriteString writer = new WriteString();
-          writer.write(tm.printTree(tm, "  "));
+          writer.write(tm.printTree(tm, 0));
         }catch(Exception e){}
       }
       return true;

@@ -18,7 +18,8 @@ Compile & Run:
   d.  AST
     1.  make parser
     2.  ./flairp <filename>
-      a.  Compile with [./flairp <filename> -t] to print out the AST.
+    3.  Compile as ./flairp <filename> -t
+      a. This saves AST to a file in the root directory called ast.txt
 
   X.  Test script
     1.  make run

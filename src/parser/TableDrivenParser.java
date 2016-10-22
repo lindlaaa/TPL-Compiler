@@ -95,6 +95,16 @@ public class TableDrivenParser extends Parser{
       }
       //System.out.println("\nAt end of loop:\n"+parseStack+"\n"+curToken);//FIXME
       //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");//FIXME
+
+      /*try{
+        SemanticNode tm = (SemanticNode)semanticStack.peek();
+        System.out.println(tm.printTree(tm, "  "));
+        //System.out.println("Semantic Stack --> "+semanticStack);
+        //System.out.println("Size of ^^^^^  --> "+semanticStack.size());
+        System.out.println("–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––");
+        Thread.sleep(50);
+      }catch(Exception e){}*/
+
     }while((parseStack.peek() instanceof EOFToken) == false);
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
@@ -102,11 +112,13 @@ public class TableDrivenParser extends Parser{
         try{
           System.out.println("***************************");
           SemanticNode tm = (SemanticNode)semanticStack.peek();
-          tm.printTree(tm, "  ");
+          System.out.println(tm.printTree(tm, "  "));
           System.out.println("Semantic Stack --> "+semanticStack);
           System.out.println("Size of ^^^^^  --> "+semanticStack.size());
           System.out.println("***************************");
-          //Thread.sleep(100);
+          //Thread.sleep(150);
+          WriteString writer = new WriteString();
+          writer.write(tm.printTree(tm, "  "));
         }catch(Exception e){}
       }
       return true;

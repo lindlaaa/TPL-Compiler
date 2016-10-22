@@ -39,12 +39,14 @@ public class SemanticNode implements NodeBehavior{
 
   }
 
-  public void printTree(SemanticNode node, String appender) {
-   System.out.println(appender + node);
-   //System.out.println(node.getChildren());
-   for (SemanticNode each : node.getChildren()) {
-     //System.out.println("Next");
-      printTree(each, appender + "| ");
+  public String printTree(SemanticNode node, String appender) {
+    String content = "";
+    content += appender + node + "\n";
+    //System.out.println(node.getChildren());
+    for (SemanticNode each : node.getChildren()) {
+      //System.out.println("Next");
+      content += printTree(each, appender + "| ");
     }
+    return content;
   }
 }

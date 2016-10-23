@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- *
- */
+
 public class WriteString {
 
-    /**
-     *
-     */
     public void write(String content) {
         FileWriter fileWriter = null;
         try {

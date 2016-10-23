@@ -19,7 +19,8 @@ Compile & Run:
     1.  make parser
     2.  ./flairp <filename>
     3.  Compile as ./flairp <filename> -t
-      a. This saves AST to a file in the root directory called ast.txt
+      a. This saves AST to a file in the root directory called ast.dot
+      b. Open with GraphViz to see the new tree graph
 
   X.  Test script
     1.  make run
@@ -30,10 +31,10 @@ Documentation:    doc/
 Date:       2016/10/21
 
 
-Known Issues: No known issues. Testing the AST portion for accuracy seems tricky...
+Known Issues: Graphviz picture shows duplicate lines from parent nodes
               Does not compile ramen noodles.
               Does not have great documentation for Parser Components...yet
-              Wont run unless plugged in.
+              
 
 
 Directory Structure:

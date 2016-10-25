@@ -20,7 +20,9 @@ public class TableDrivenParser extends Parser{
     flairTable = makeParsingTable();
   }
 
-
+  /**
+   *  TODO
+   */
   public void consumeToken(){
     if(  (curToken instanceof IntToken)
       || (curToken instanceof BoolToken)
@@ -37,22 +39,23 @@ public class TableDrivenParser extends Parser{
   }
 
 
+  /**
+   *  TODO
+   */
   public void consumeSemanticAction() throws ParseException{
-    //NodeFactory.getInstance();
-	//1. The semanticAction is popped of the parseStack
-	//2. The semanticAction calls the creation of a semanticNode, corresponding to a specific make-rule.
 	  SemanticAction tempAction = (SemanticAction)parseStack.pop();
     SemanticNode tempNode = NodeFactory.createNewNode(tempAction);
-	  //SemanticNode tempNode = new SemanticNode(tempAction);
-
-	//3. we POP a predetermined number of nodes off of the semanticStack and add them to the NEW NODE OBJECT as its children.
-	//a. This number of pops will be known by the newly created 'node' that is expecting a certain number of children.
-    //tempNode.getChildren();
-	//4. We then add this new parent node, containing its children, onto the semantic stack.
     tempNode.setChildren();
     semanticStack.push(tempNode);
   }
 
+
+  /**
+   *  [parseProgram description]
+   *  @param  showTree Indicates is user wants to
+   *                   print a tree to the console
+   *  @return boolean Represents if the program was parsed successfully
+   */
   @SuppressWarnings("unchecked")
   public boolean parseProgram(boolean showTree) throws ParseException{
 
@@ -73,6 +76,7 @@ public class TableDrivenParser extends Parser{
           consumeToken();
         }else // Token mismatch
         {
+          //FIXME
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw new ParseException("--Token mismatch--");
         }
@@ -81,6 +85,7 @@ public class TableDrivenParser extends Parser{
         try{
           flairTable.lookup((NonTerminal)parseStack.pop(), curToken).execute(parseStack);
         }catch(ParseException e){
+          //FIXME
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
           throw e;
         }
@@ -90,6 +95,7 @@ public class TableDrivenParser extends Parser{
       }
       //Parse Error
       else{
+        //FIXME
         //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
         throw new ParseException("--Top of parseStack is not terminal or nonterminal--");
       }
@@ -99,6 +105,8 @@ public class TableDrivenParser extends Parser{
     }while((parseStack.peek() instanceof EOFToken) == false);
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
+
+      //-t
       if(showTree){
         try{
           SemanticNode tm = (SemanticNode)semanticStack.peek();
@@ -107,6 +115,7 @@ public class TableDrivenParser extends Parser{
           writer.write(tm.graphTree(tm, 0, 0));
         }catch(Exception e){}
       }
+
       return true;
     }
     else{
@@ -120,8 +129,6 @@ public class TableDrivenParser extends Parser{
 
     Parsetable tempTable = new Parsetable();
 
-    //Make the parse table on google sheets
-    //Declare and Add the rules to the table here
     ParseRule rule00 = new PushRule(
       new ParseRule[] { new PushNull() } );
 
@@ -424,7 +431,7 @@ public class TableDrivenParser extends Parser{
     tempTable.add(NonTerminal.ExprPrime,            new OpToken('<'), rule14);
     tempTable.add(NonTerminal.ExprPrime,            new OpToken('='), rule15);
 
-    tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken('('), rule16);//FIXME
+    tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken('('), rule16);//FIXME Whats wrong?
     tempTable.add(NonTerminal.SimpleExpr,           new PunctuationToken(')'), rule16);
     tempTable.add(NonTerminal.SimpleExpr,           new OpToken('-'), rule16);
     tempTable.add(NonTerminal.SimpleExpr,           new KeywordToken("if"), rule16);

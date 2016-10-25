@@ -39,22 +39,34 @@ public class SemanticNode implements NodeBehavior{
 
   }
 
-  public String printTree(SemanticNode node, int num){
+  public String graphTree(SemanticNode node, int num, int inc){
     String content = "";
-    int inc = 0;
+    int tmp = inc;
+    //int inc = 0;
     //content += appender + node + "\n";
     //Point to its children
     for (SemanticNode each : node.getChildren()) {
-      inc++;
-      content += "  \""+node+num+"\" -> \""+each+(num+inc)+"\";\n";
+      tmp++;
+      content += "  \""+node+num+"\" -> \""+each+(num+tmp)+"\";\n";
     }
 
-    inc = 0;
+    //inc = 0;
     //Call to its own children
     for (SemanticNode each : node.getChildren()) {
       inc++;
-      content += printTree(each, num+inc);
+      content += "subgraph cluster_"+inc+"{\n"
+                  +graphTree(each, num+inc, inc)
+                  +"\n}";
     }
     return content;
+  }
+
+  public void printTree(SemanticNode node, String appender) {
+   System.out.println(appender + node);
+   //System.out.println(node.getChildren());
+   for (SemanticNode each : node.getChildren()) {
+     //System.out.println("Next");
+      printTree(each, appender + "| ");
+    }
   }
 }

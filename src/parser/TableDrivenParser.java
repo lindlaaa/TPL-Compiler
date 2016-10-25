@@ -103,7 +103,8 @@ public class TableDrivenParser extends Parser{
         try{
           SemanticNode tm = (SemanticNode)semanticStack.peek();
           WriteString writer = new WriteString();
-          writer.write(tm.printTree(tm, 0));
+          tm.printTree(tm, "");
+          writer.write(tm.graphTree(tm, 0, 0));
         }catch(Exception e){}
       }
       return true;

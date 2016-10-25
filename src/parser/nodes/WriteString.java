@@ -14,7 +14,13 @@ public class WriteString {
         try {
             File newTextFile = new File("/Users/ajathome/Desktop/TPL-Compiler/ast.dot");
             fileWriter = new FileWriter(newTextFile);
-            content = "digraph g {\n" + content;
+            content = "digraph g {\n"
+                      +"graph [compound = true,"
+                      +"nodesep = 0.1,"
+                      +"ranksep = 0.1,"
+                      +"layout = dot,"
+                      +"rankdir = LR,"
+                      +"color = white]\n" + content;
             content+="}";
             fileWriter.write(content);
             fileWriter.close();

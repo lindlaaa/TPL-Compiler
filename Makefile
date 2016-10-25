@@ -38,5 +38,4 @@ clean:
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/
 	@rm ast.dot
-	@rm ast.png
 	@echo "Squeaky!"

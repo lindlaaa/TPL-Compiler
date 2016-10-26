@@ -33,6 +33,12 @@ public class SemanticNode implements NodeBehavior{
     p.getChildren().add(child);
   }
 
+  public void takeChildren(SemanticNode old, SemanticNode p){
+    for(SemanticNode each : old.getChildren()){
+      p.addChild(each, p);
+    }
+  }
+
   public String graphTree(SemanticNode node, int num, int inc){
     String content = "";
     int tmp = inc;

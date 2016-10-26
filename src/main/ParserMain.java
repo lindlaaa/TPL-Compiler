@@ -28,14 +28,11 @@ public class ParserMain{
       if(args[0].equals("-t")){
         treeVisible = true;
         fileName = args[1];
-        //parser = new TableDrivenParser( new Scanner( args[1] ));
       }else{
         fileName = args[0];
-        //parser = new TableDrivenParser( new Scanner( args[0] ));
       }
     }catch(Exception e){
       fileName = args[0];
-      //parser = new TableDrivenParser( new Scanner( args[0] ));
     }
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     System.out.println(parser.parseProgram(treeVisible));

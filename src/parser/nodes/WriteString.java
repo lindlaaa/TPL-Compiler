@@ -12,7 +12,7 @@ public class WriteString {
     public void write(String content) {
         FileWriter fileWriter = null;
         try {
-            File newTextFile = new File("/Users/ajathome/Desktop/TPL-Compiler/ast.dot");
+            File newTextFile = new File("../ast.dot");
             fileWriter = new FileWriter(newTextFile);
             content = "digraph g {\n"
                       +"graph [compound = true,"

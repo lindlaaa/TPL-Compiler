@@ -39,9 +39,7 @@ public class TableDrivenParser extends Parser{
   }
 
 
-  /**
-   *  TODO
-   */
+
   public void consumeSemanticAction() throws ParseException{
 	  SemanticAction tempAction = (SemanticAction)parseStack.pop();
     SemanticNode tempNode = NodeFactory.createNewNode(tempAction);
@@ -50,12 +48,7 @@ public class TableDrivenParser extends Parser{
   }
 
 
-  /**
-   *  [parseProgram description]
-   *  @param  showTree Indicates is user wants to
-   *                   print a tree to the console
-   *  @return boolean Represents if the program was parsed successfully
-   */
+
   @SuppressWarnings("unchecked")
   public boolean parseProgram(boolean showTree) throws ParseException{
 

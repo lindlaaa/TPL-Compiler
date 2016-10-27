@@ -22,12 +22,19 @@ public class ParserMain{
   public static void main(String[] args) throws ScanException,
                                                 Exception{
 
-    TableDrivenParser parser = new TableDrivenParser( new Scanner( args[0] ));
+    //TableDrivenParser parser;
+    String fileName;
     try{
-      if(args[1].equals("-t")){
+      if(args[0].equals("-t")){
         treeVisible = true;
+        fileName = args[1];
+      }else{
+        fileName = args[0];
       }
-    }catch(Exception e){}
+    }catch(Exception e){
+      fileName = args[0];
+    }
+    TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     System.out.println(parser.parseProgram(treeVisible));
   }
 }

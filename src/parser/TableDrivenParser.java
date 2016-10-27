@@ -45,6 +45,7 @@ public class TableDrivenParser extends Parser{
     SemanticNode tempNode = NodeFactory.createNewNode(tempAction);
     tempNode.setChildren();
     semanticStack.push(tempNode);
+    //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
 
@@ -207,11 +208,13 @@ public class TableDrivenParser extends Parser{
                         } );
 
     ParseRule rule11 = new PushRule( // TypeRule01
-      new ParseRule[] { new PushTerminal(     new KeywordToken("integer"))
+      new ParseRule[] { new PushTerminal(     new KeywordToken("integer")),
+                        new PushSemantic(     SemanticAction.IntTypeKeyword)
                         } );
 
     ParseRule rule12 = new PushRule(
-      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean"))
+      new ParseRule[] { new PushTerminal(    new KeywordToken("boolean")),
+                        new PushSemantic(     SemanticAction.BoolTypeKeyword)
                         } );
 
     ParseRule rule13 = new PushRule( // ExprRule01

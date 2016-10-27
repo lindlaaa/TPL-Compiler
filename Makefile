@@ -37,5 +37,5 @@ clean:
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/
-	@rm ast.dot
+	@rm -f *.dot
 	@echo "Squeaky!"

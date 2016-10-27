@@ -8,6 +8,11 @@ public class DefNode extends SemanticNode{
     if(TableDrivenParser.semanticStack.peek() instanceof BodyNode){
 	    this.addChild((BodyNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
+    if(TableDrivenParser.semanticStack.peek() instanceof BoolTypeNode){
+	    this.addChild((BoolTypeNode)TableDrivenParser.semanticStack.pop(), this);
+	  }else if(TableDrivenParser.semanticStack.peek() instanceof IntTypeNode){
+      this.addChild((IntTypeNode)TableDrivenParser.semanticStack.pop(), this);
+    }
     if(TableDrivenParser.semanticStack.peek() instanceof FormalsNode){
 	    this.addChild((FormalsNode)TableDrivenParser.semanticStack.pop(), this);
 	  }

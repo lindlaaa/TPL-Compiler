@@ -47,6 +47,8 @@ public class SemanticAction
   public static final SemanticAction TermPrime = new SemanticAction(42);
   public static final SemanticAction Literal = new SemanticAction(43);
   public static final SemanticAction StatementList = new SemanticAction(44);
+  public static final SemanticAction BoolTypeKeyword = new SemanticAction(45);
+  public static final SemanticAction IntTypeKeyword = new SemanticAction(46);
 
 
 

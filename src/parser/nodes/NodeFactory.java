@@ -69,6 +69,8 @@ public class NodeFactory{
       case 42: temp = new TermPrimeNode();            break;
       case 43: temp = new LiteralNode();              break;
       case 44: temp = new StatementListNode();        break;
+      case 45: temp = new BoolTypeNode();              break;
+      case 46: temp = new IntTypeNode();             break;
 
 
 

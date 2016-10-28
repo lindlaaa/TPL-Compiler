@@ -50,9 +50,10 @@ public class SemanticNode implements NodeBehavior{
     //Call to its own children
     for (SemanticNode each : node.getChildren()) {
       inc++;
-      content += "subgraph cluster_"+inc+"{\n"
+      /*content += "subgraph cluster_"+inc+"{\n"
                   +graphTree(each, num+inc, inc)
-                  +"\n}";
+                  +"\n}";*/
+      content += graphTree(each, num+inc, inc);
     }
     return content;
   }

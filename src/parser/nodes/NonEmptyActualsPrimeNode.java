@@ -6,10 +6,10 @@ public class NonEmptyActualsPrimeNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof NonEmptyActualsPrimeNode){
-	    this.addChild((NonEmptyActualsPrimeNode)TableDrivenParser.semanticStack.pop(), this);
+	    this.takeChildren((NonEmptyActualsPrimeNode)TableDrivenParser.semanticStack.pop(), this);
     }
     if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
-      this.addChild((ExprNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

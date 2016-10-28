@@ -6,7 +6,7 @@ public class ExprPrimeLTNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
-      this.addChild((ExprNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

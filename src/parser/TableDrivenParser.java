@@ -26,7 +26,8 @@ public class TableDrivenParser extends Parser{
   public void consumeToken(){
     if(  (curToken instanceof IntToken)
       || (curToken instanceof BoolToken)
-      || (curToken instanceof IdentifierToken)){
+      || (curToken instanceof IdentifierToken))
+    {
       semanticBuffer.push(curToken);
     }
     curPos++;
@@ -72,7 +73,7 @@ public class TableDrivenParser extends Parser{
         {
           //FIXME
           //System.out.println("\nAt error:\nparseStack:"+parseStack+"\nCURTOKEN:"+curToken+" @ line: "+curToken.getline()+" @ col: "+curToken.getCol()+"\n");
-          throw new ParseException("--Token mismatch--");
+          throw new ParseException("--Token mismatch @ "+curToken.getline()+":"+curToken.getCol()+"--");
         }
       //NonTerminal
       }else if(parseStack.peek() instanceof NonTerminal){

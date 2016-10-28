@@ -10,7 +10,7 @@ public class StatementListNode extends SemanticNode{
     }
 
     if(TableDrivenParser.semanticStack.peek() instanceof StatementListPSNode){
-      this.addChild((StatementListPSNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((StatementListPSNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

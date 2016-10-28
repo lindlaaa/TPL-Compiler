@@ -6,11 +6,11 @@ public class TermPrimeNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof TermPrimeAndNode){
-  	  this.addChild((TermPrimeAndNode)TableDrivenParser.semanticStack.pop(), this);
+  	  this.takeChildren((TermPrimeAndNode)TableDrivenParser.semanticStack.pop(), this);
   	}else if(TableDrivenParser.semanticStack.peek() instanceof TermPrimeTimesNode){
-  	  this.addChild((TermPrimeTimesNode)TableDrivenParser.semanticStack.pop(), this);
+  	  this.takeChildren((TermPrimeTimesNode)TableDrivenParser.semanticStack.pop(), this);
   	}else if(TableDrivenParser.semanticStack.peek() instanceof TermPrimeDivideNode){
-      this.addChild((TermPrimeDivideNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((TermPrimeDivideNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

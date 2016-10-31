@@ -6,10 +6,10 @@ public class FactorNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof FactorIfNode){
-      this.takeChildren((FactorIfNode)TableDrivenParser.semanticStack.pop(), this);
+      this.addChild((FactorIfNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorNotNode){
-      this.takeChildren((FactorNotNode)TableDrivenParser.semanticStack.pop(), this);
+      this.addChild((FactorNotNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorIDNode){
       this.takeChildren((FactorIDNode)TableDrivenParser.semanticStack.pop(), this);
@@ -18,7 +18,7 @@ public class FactorNode extends SemanticNode{
       this.takeChildren((LiteralNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorMinusNode){
-      this.takeChildren((FactorMinusNode)TableDrivenParser.semanticStack.pop(), this);
+      this.addChild((FactorMinusNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorExprNode){
       this.takeChildren((FactorExprNode)TableDrivenParser.semanticStack.pop(), this);

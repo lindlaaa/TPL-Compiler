@@ -44,7 +44,7 @@ public class SemanticNode implements NodeBehavior{
     int tmp = inc;
     for (SemanticNode each : node.getChildren()) {
       tmp++;
-      content += "  \""+node+num+"\" -> \""+each+(num+tmp)+"\";\n";
+      content += "  \""+node+" "+num+"\" -> \""+each+" "+(num+tmp)+"\";\n";
     }
 
     //Call to its own children

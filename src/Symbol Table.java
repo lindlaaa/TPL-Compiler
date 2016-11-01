@@ -13,8 +13,8 @@ public class SymbolTable{
 		return this.symbolTable.containsKey(inputID);
 	}
 
-    public BranchType lookupID(char inputID) throws SemanticException{}
-		if(isIDUsed(inputID){
+    public BranchType lookupID(char inputID) throws SemanticException{
+		if(isIDUsed(inputID)){
 			/*
 			if we make the value an arraylist, then index 0 will be the type
 			return (BranchType) this.symbolTable.get(inputID).get(0);

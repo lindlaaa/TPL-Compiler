@@ -9,9 +9,21 @@ public class SemanticNode implements NodeBehavior{
   private String id;
   private List<SemanticNode> children = new ArrayList<>();
   private SemanticNode parent;
+  public int position = -1;
+  public static int counter = 1;
 
   public SemanticNode() {
     this.parent = null;
+  }
+
+  public void setPosition(int pos){
+    if (this.getPosition() == -1){
+      this.position = pos;
+    }
+  }
+
+  public int getPosition(){
+    return this.position;
   }
 
   public void setParent(SemanticNode newParent){
@@ -28,15 +40,43 @@ public class SemanticNode implements NodeBehavior{
 
   public void setChildren(){};
 
-  public void addChild(SemanticNode child) {
-    child.setParent(this);
-    parent.getChildren().add(child);
+  public void addChild(SemanticNode child, SemanticNode p) {
+    child.setParent(p);
+    p.getChildren().add(child);
   }
 
-  private void printTree(SemanticNode node, String appender) {
-   System.out.println(appender + this.getClass());
+  public void takeChildren(SemanticNode old, SemanticNode p){
+    for(SemanticNode each : old.getChildren()){
+      p.addChild(each, p);
+    }
+  }
+
+  public String graphTree(SemanticNode node){
+    String content = "";
+
+    node.setPosition(SemanticNode.counter-1);
+
+    for (SemanticNode each : node.getChildren()) {
+      each.setPosition(SemanticNode.counter);
+      content += "  \""+node+" "+node.getPosition()+"\" -> \""+each+" "+each.getPosition()+"\";\n";
+      SemanticNode.counter++;
+
+    }
+
+    //Call to its own children
+    for (SemanticNode each : node.getChildren()) {
+      /*content += "subgraph cluster_"+inc+"{\n"
+                  +graphTree(each, num+inc, inc)
+                  +"\n}";*/
+      content += graphTree(each);
+    }
+    return content;
+  }
+
+  public void printTree(SemanticNode node, String appender) {
+   System.out.println(appender + node);
    for (SemanticNode each : node.getChildren()) {
-      printTree(each, appender + appender);
+      printTree(each, appender + "| ");
     }
   }
 }

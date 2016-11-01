@@ -1,15 +1,15 @@
 all:
-	@javac -d bin src/main/*.java -Xdiags:verbose
+	@javac -d bin src/main/*.java
 	@echo -n '. '
-	@javac -d bin src/scanner/*.java -Xdiags:verbose
+	@javac -d bin src/scanner/*.java
 	@echo -n '. '
-	@javac -d bin src/parser/*.java src/parser/nodes/*.java -Xdiags:verbose
+	@javac -d bin src/parser/*.java src/parser/nodes/*.java
 	@echo -n '. '
 	@javadoc -d doc -quiet -package src.main src.scanner src.parser src.parser.nodes
 	@echo !
 	@echo "\n--Flair Compiler Ready!--"
 
-test:
+run:
 	@make
 	@./flairTest
 
@@ -27,9 +27,9 @@ parser:
 	@echo -n '. '
 	@javac -d bin src/scanner/*.java
 	@echo -n '. '
-	@javac -d bin src/parser/*.java
+	@javac -d bin src/parser/*.java src/parser/nodes/*.java
 	@echo -n '. '
-	@javadoc -d doc -quiet -package src.main src.scanner src.parser
+	@javadoc -d doc -quiet -package src.main src.scanner src.parser src.parser.nodes
 	@echo !
 	@echo "\n--Flair Parser Ready!--"
 
@@ -37,4 +37,5 @@ clean:
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/
+	@rm -f *.dot
 	@echo "Squeaky!"

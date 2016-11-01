@@ -12,8 +12,6 @@ public class SemanticAction
   public static final SemanticAction Body = new SemanticAction(8);
   public static final SemanticAction StatementListPS = new SemanticAction(9);
   public static final SemanticAction StatementListReturn = new SemanticAction(10);
-  public static final SemanticAction TypeInteger= new SemanticAction(11);
-  public static final SemanticAction TypeBoolean = new SemanticAction(12);
   public static final SemanticAction Expr = new SemanticAction(13);
   public static final SemanticAction ExprPrimeLT = new SemanticAction(14);
   public static final SemanticAction ExprPrimeExpr = new SemanticAction(15);
@@ -28,9 +26,9 @@ public class SemanticAction
   public static final SemanticAction FactorIf = new SemanticAction(24);
   public static final SemanticAction FactorNot = new SemanticAction(25);
   public static final SemanticAction FactorID = new SemanticAction(26);
-  public static final SemanticAction IfIntLiteral = new SemanticAction(27);
-  public static final SemanticAction IfIntMinus = new SemanticAction(28);
-  public static final SemanticAction IfIntLP = new SemanticAction(29);
+  //public static final SemanticAction IfIntLiteral = new SemanticAction(27);
+  //public static final SemanticAction IfIntMinus = new SemanticAction(28);
+  //public static final SemanticAction IfIntLP = new SemanticAction(29);
   public static final SemanticAction IdentifierPrimeLP = new SemanticAction(30);
   public static final SemanticAction Actuals = new SemanticAction(31);
   public static final SemanticAction NonEmptyActuals = new SemanticAction(32);
@@ -39,6 +37,22 @@ public class SemanticAction
   public static final SemanticAction LiteralBoolean = new SemanticAction(35);
   public static final SemanticAction PrintStatement = new SemanticAction(36);
   public static final SemanticAction Identifier = new SemanticAction(37);
+
+
+  //NEW
+  public static final SemanticAction FactorExpr = new SemanticAction(38);
+  public static final SemanticAction FactorMinus = new SemanticAction(39);
+  public static final SemanticAction FactorLiteral = new SemanticAction(40);
+  public static final SemanticAction Factor = new SemanticAction(41);
+  public static final SemanticAction TermPrime = new SemanticAction(42);
+  public static final SemanticAction Literal = new SemanticAction(43);
+  public static final SemanticAction StatementList = new SemanticAction(44);
+  public static final SemanticAction BoolTypeKeyword = new SemanticAction(45);
+  public static final SemanticAction IntTypeKeyword = new SemanticAction(46);
+
+
+
+
 
   private int typeNumber;
 

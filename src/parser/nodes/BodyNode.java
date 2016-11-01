@@ -5,9 +5,8 @@ import src.parser.*;
 public class BodyNode extends SemanticNode{
   @Override
   public void setChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof StatementListPSNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof StatementListNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof StatementListNode){
+      this.takeChildren((StatementListNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

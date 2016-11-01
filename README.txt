@@ -9,19 +9,32 @@ Compile & Run:
 
   B.  Scanner
     1.  make scanner
+    2.  ./flairs <filename>
 
   C.  Parser
     1.  make parser
+    2.  ./flairp <filename>
+
+  d.  AST
+    1.  make parser
+    2.  ./flairp <filename>
+    3.  Compile as ./flairp <filename> -t
+      a. This saves AST to a file in the root directory called ast.dot
+      b. Open with GraphViz to see the new tree graph
+
+  X.  Test script
+    1.  make run
 
 
 Documentation:    doc/
 
-Date:       2016/10/01
+Date:       2016/10/21
 
 
-Known Issues: Does not recognize statements such as 0 = (n-1)
-              Does not have documentation for Parser Components...yet
-              Does not compile pizza.
+Known Issues: Graphviz picture shows duplicate lines from parent nodes
+              Does not compile ramen noodles.
+              Does not have great documentation for Parser Components...yet
+              
 
 
 Directory Structure:
@@ -29,7 +42,11 @@ Directory Structure:
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
   test_ignore/: stores the .flr files used to test the project parts
-  parserTest.flr: The program required to turn into the Parser
+  two-exponents.flr: The program required to turn into the AST Parser
+  flairp: The script to run the parser
+  flairs: The script to run the scanner
+  flairTest:  The script that runs all of our test programs
+  Makefile: Contains the make commands for ease-of-use
 
 
 High level Scanner design:
@@ -45,3 +62,6 @@ High level Parser design:
   This table is represented in a parseTable, and within this we create rule objects,
   add those objects to the table in specific locations, and the parse algorithm then
   uses that table to confirm there is no bad flair grammar in the input file.
+
+High level AST Parser Design:
+  //TODO FIXME

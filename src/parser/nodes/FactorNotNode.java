@@ -5,10 +5,8 @@ import src.parser.*;
 public class FactorNotNode extends SemanticNode{
   @Override
   public void setChildren(){
-    if(TableDrivenParser.semanticStack.peek() instanceof FactorIfNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof FactorNotNode ||
-	     TableDrivenParser.semanticStack.peek() instanceof FactorIDNode){
-      this.addChild(TableDrivenParser.semanticStack.pop());
+    if(TableDrivenParser.semanticStack.peek() instanceof FactorNode){
+      this.takeChildren((FactorNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
 

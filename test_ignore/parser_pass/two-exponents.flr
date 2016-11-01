@@ -1,0 +1,11 @@
+program twoExponents(in : integer);
+  function exponent(n:integer) : integer
+    begin
+      return if n = 1 then
+	      1
+	    else
+	      2 * exponent(n - 1)
+    end;
+begin
+  return exponent(5)
+end.

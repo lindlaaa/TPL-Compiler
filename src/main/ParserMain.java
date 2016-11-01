@@ -10,6 +10,8 @@ Where we will can and run our Parser object
 
 public class ParserMain{
 
+  private static boolean treeVisible;
+
   @SuppressWarnings("checkstyle:javadocmethod")
   /**
    *  <b>Runs the Parser</b>
@@ -20,8 +22,19 @@ public class ParserMain{
   public static void main(String[] args) throws ScanException,
                                                 Exception{
 
-    TableDrivenParser parser = new TableDrivenParser( new Scanner( args[0] ));
-
-    System.out.println(parser.parseProgram());
+    //TableDrivenParser parser;
+    String fileName;
+    try{
+      if(args[0].equals("-t")){
+        treeVisible = true;
+        fileName = args[1];
+      }else{
+        fileName = args[0];
+      }
+    }catch(Exception e){
+      fileName = args[0];
+    }
+    TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
+    System.out.println(parser.parseProgram(treeVisible));
   }
 }

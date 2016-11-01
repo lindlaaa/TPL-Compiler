@@ -19,16 +19,16 @@ public class SymbolTable{
 	
     //should this be the generic Token type?
 	//public <T> T lookupID(char inputID) throws SemanticException{
-    public DataType lookupID(char inputID) throws SemanticException{}
+    public BranchType lookupID(char inputID) throws SemanticException{}
 		if(isIDUsed(inputID){
 			//return (T) this.symbolTable.get(inputID);
-			return (DataType) this.symbolTable.get(new Character (inputID));
+			return (BranchType) this.symbolTable.get(new Character (inputID));
 		}else{
 			throw new SemanticException("Identifier "+inputID+" is not found within the symbol table");
 		}
 	}
 	
-	//Eugene uses "DataType" rather than T
+	//Eugene uses "BranchType" rather than T
 	public void addKeyValue(char inputID, T inputType) throws SemanticException{
 		if (isIDUsed(inputID)){
 			throw new SemanticException("Identifier " +inputID+" is already within the symbol table");

@@ -9,9 +9,21 @@ public class SemanticNode implements NodeBehavior{
   private String id;
   private List<SemanticNode> children = new ArrayList<>();
   private SemanticNode parent;
+  public int position = -1;
+  public static int counter = 1;
 
   public SemanticNode() {
     this.parent = null;
+  }
+
+  public void setPosition(int pos){
+    if (this.getPosition() == -1){
+      this.position = pos;
+    }
+  }
+
+  public int getPosition(){
+    return this.position;
   }
 
   public void setParent(SemanticNode newParent){
@@ -39,21 +51,24 @@ public class SemanticNode implements NodeBehavior{
     }
   }
 
-  public String graphTree(SemanticNode node, int num, int inc){
+  public String graphTree(SemanticNode node){
     String content = "";
-    int tmp = inc;
+
+    node.setPosition(SemanticNode.counter-1);
+
     for (SemanticNode each : node.getChildren()) {
-      tmp++;
-      content += "  \""+node+" "+num+"\" -> \""+each+" "+(num+tmp)+"\";\n";
+      each.setPosition(SemanticNode.counter);
+      content += "  \""+node+" "+node.getPosition()+"\" -> \""+each+" "+each.getPosition()+"\";\n";
+      SemanticNode.counter++;
+
     }
 
     //Call to its own children
     for (SemanticNode each : node.getChildren()) {
-      inc++;
       /*content += "subgraph cluster_"+inc+"{\n"
                   +graphTree(each, num+inc, inc)
                   +"\n}";*/
-      content += graphTree(each, num+inc, inc);
+      content += graphTree(each);
     }
     return content;
   }

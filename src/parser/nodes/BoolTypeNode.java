@@ -11,6 +11,10 @@ public class BoolTypeNode extends SemanticNode{
     this.value = "boolean";
   }
 
+  public String getValue(){
+    return this.value;
+  }
+
   @Override
   public String toString(){
     return "BoolTypeNode ";

@@ -12,16 +12,16 @@ public class FactorNode extends SemanticNode{
       this.addChild((FactorNotNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorIDNode){
-      this.addChild((FactorIDNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((FactorIDNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof LiteralNode){
-      this.addChild((LiteralNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((LiteralNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorMinusNode){
       this.addChild((FactorMinusNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
     else if(TableDrivenParser.semanticStack.peek() instanceof FactorExprNode){
-      this.addChild((FactorExprNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((FactorExprNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

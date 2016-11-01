@@ -16,11 +16,13 @@ public class WriteString {
             fileWriter = new FileWriter(newTextFile);
             content = "digraph g {\n"
                       +"graph [compound = true,"
-                      +"nodesep = 0.1,"
-                      +"ranksep = 0.1,"
-                      +"layout = dot,"
-                      +"rankdir = LR,"
-                      +"color = white]\n" + content;
+                              +"nodesep = 0.3,"
+                              +"ranksep = 2.0,"
+                              +"layout = dot,"
+                              +"rankdir = LR,"
+                              +"color=white]"
+                      +"\n" + content;
+
             content+="}";
             fileWriter.write(content);
             fileWriter.close();

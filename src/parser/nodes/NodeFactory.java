@@ -32,7 +32,7 @@ public class NodeFactory{
       case 7:  temp = new FormalNode();               break;
       case 8:  temp = new BodyNode();                 break;
       case 9:  temp = new StatementListPSNode();      break;
-      case 10: temp = new StatementListReturnNode();  break;
+      case 10: temp = new ReturnNode();  break;
       //MISSING
       //MISSING
       case 13: temp = new ExprNode();                 break;

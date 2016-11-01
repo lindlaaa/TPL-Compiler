@@ -6,9 +6,9 @@ public class IfIntLiteralNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof LiteralNumberNode){
-      this.addChild((LiteralNumberNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((LiteralNumberNode)TableDrivenParser.semanticStack.pop(), this);
     }else if(TableDrivenParser.semanticStack.peek() instanceof LiteralBooleanNode){
-      this.addChild((LiteralBooleanNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((LiteralBooleanNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

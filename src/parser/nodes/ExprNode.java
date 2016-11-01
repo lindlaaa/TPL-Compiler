@@ -10,9 +10,9 @@ public class ExprNode extends SemanticNode{
     }else if(TableDrivenParser.semanticStack.peek() instanceof ExprPrimeExprNode){
 	    this.addChild((ExprPrimeExprNode)TableDrivenParser.semanticStack.pop(), this);
     }
-    
+
     if(TableDrivenParser.semanticStack.peek() instanceof SimpleExprNode){
-      this.addChild((SimpleExprNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((SimpleExprNode)TableDrivenParser.semanticStack.pop(), this);
 	   }
   }
 

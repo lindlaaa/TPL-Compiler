@@ -14,7 +14,7 @@ public class SimpleExprNode extends SemanticNode{
     }
 
     if(TableDrivenParser.semanticStack.peek() instanceof TermNode){
-      this.addChild((TermNode)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((TermNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
 

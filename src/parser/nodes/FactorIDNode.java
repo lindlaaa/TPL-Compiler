@@ -6,9 +6,9 @@ public class FactorIDNode extends SemanticNode{
   @Override
   public void setChildren(){
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierPrimeLP){
-      this.addChild((IdentifierPrimeLP)TableDrivenParser.semanticStack.pop(), this);
+      this.takeChildren((IdentifierPrimeLP)TableDrivenParser.semanticStack.pop(), this);
     }
-    
+
     if(TableDrivenParser.semanticStack.peek() instanceof IdentifierNode){
       this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
 	  }

@@ -5,13 +5,13 @@ public enum BranchType{
 	BOOLEAN(1),
 	EITHER(2);
    
-   private final int branchTypeID;      
+	private final int branchTypeID;      
    
-   BranchType(int branchID) {    
-      this.branchTypeID = branchID;
-   }
+	BranchType(int branchID) {    
+		this.branchTypeID = branchID;
+	}
    
-   int getBranchTypeID() {             
-      return this.branchTypeID;
-   }
+	int getBranchTypeID() {             
+		return this.branchTypeID;
+	}
 }

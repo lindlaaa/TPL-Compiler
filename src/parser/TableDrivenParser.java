@@ -1,6 +1,7 @@
 package src.parser;
 
 import java.util.Stack;
+
 import src.scanner.*;
 import src.parser.nodes.*;
 import src.scanner.BoolToken;
@@ -108,6 +109,8 @@ public class TableDrivenParser extends Parser{
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
+          SymbolTableBuilder t = new SymbolTableBuilder(tm);
+          t.buildTable();
         }catch(Exception e){}
       }
 

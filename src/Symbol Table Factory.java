@@ -15,14 +15,14 @@ public class SymbolTableFactory{
 		
 		while(declaration != null){
 			Declaration currentDeclaration = declaration.first();//declaration has a "first" method?
-			DataType currentType = null;
+			BranchType currentType = null;
 			
 			if(currentDeclaration instanceof FloatDeclaration)//should be "integer"?
 			{
-				currentType = DataType.Float; // ... = new integerToken()?
+				currentType = BranchType.Float; // ... = new integerToken()?
 			}else if(currentDeclaration instanceof IntegerDeclaration)//should be "boolean"?
 			{
-				currentType = DataType.Integer; // ... = new boooleanToken()?
+				currentType = BranchType.Integer; // ... = new boooleanToken()?
 			}else
 			{
 				throw new SemanticException("The type declaration is invalid");

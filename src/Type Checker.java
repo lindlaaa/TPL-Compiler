@@ -21,7 +21,7 @@ public class TypeChecker{
 			checkExpression(s.value());
 			
 			Identifier id = s.identifier();
-			DataType type = this.symbolTable.lookupID(id.value());
+			BranchType type = this.symbolTable.lookupID(id.value());
 			
 			id.setType(type);
 			s.setValue(convertToType(s.value(), id.type() ));
@@ -41,9 +41,9 @@ public class TypeChecker{
 			Identifier id - (identifier) inputValue;
 			inputValue.setType(this.symbolTable.lookupID(id.value());
 		}else if(inputValue instanceof FloatValue){ //flair doesnt have floats but does have booleans
-			inputValue.setType(DataType.Float);
+			inputValue.setType(BranchType.Float);
 		}else if(inputValue instanceof IntegerValue){
-			inputValue.setType(DataType.Integer);
+			inputValue.setType(BranchType.Integer);
 		}else if(inputValue instanceof ExpressionTail){//ExpressionPrime?
 			ExpressionTail exp = (ExpressionTail) inputValue;
 			
@@ -53,7 +53,7 @@ public class TypeChecker{
 			checkExpression(left);
 			checkExpression(right);
 			
-			DataType type = generalize(left, right);
+			BranchType type = generalize(left, right);
 			exp.setLeftOperand(convertToType(left, type)); 
 			//"type" is assigned in checkStatement() function
 			exp.setRightOperand(convertToType(right, type));
@@ -64,23 +64,23 @@ public class TypeChecker{
 		}
 	}
 		
-	protected DataType generalize(Value inputVal1, Value inputVal2){//flair doesnt have float types
-		if(inputVal1.type().equals(DataType.Float) ||
-		inputVal2.type().equals(DataType.Float)){
-			return DataType.Float;
+	protected BranchType generalize(Value inputVal1, Value inputVal2){//flair doesnt have float types
+		if(inputVal1.type().equals(BranchType.Float) ||
+		inputVal2.type().equals(BranchType.Float)){
+			return BranchType.Float;
 		}
-		return DataType.Integer;
+		return BranchType.Integer;
 	}
 		
-	protected Value convertToType(Value inputValue, DataType newType) throws SemanticException{
-		DataType valueType = inputValue.type();
+	protected Value convertToType(Value inputValue, BranchType newType) throws SemanticException{
+		BranchType valueType = inputValue.type();
 		//don't have fliat types but do have booleans
-		if(valueType.equals(DataType.Float) && //bool=true ==>1; bool=false ==>0 
-		newType.equals(DataType.Integer)){
+		if(valueType.equals(BranchType.Float) && //bool=true ==>1; bool=false ==>0 
+		newType.equals(BranchType.Integer)){
 			throw new SemanticException("cannot convert float to int");
 		}
-		if(valueType.equals(DataType.Integer) &&
-		newType.equals(DataType.Float)){
+		if(valueType.equals(BranchType.Integer) &&
+		newType.equals(BranchType.Float)){
 			return new IntToFloatConversion(value);//int=1 ==>true; int=0 ==>false; else cannot convert int to bool
 		}
 		return inputValue;

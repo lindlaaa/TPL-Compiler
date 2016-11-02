@@ -1,4 +1,4 @@
-package src.parser;
+//package src.parser;
 
 public enum BranchType{ 
 	INTEGER(0),

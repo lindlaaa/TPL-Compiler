@@ -15,7 +15,7 @@ public class Pair{
   public int getLine() { 
 	return this.line; 
   }
-  public in getPos() {
+  public int getPos() {
     return this.pos; 
   }
 }

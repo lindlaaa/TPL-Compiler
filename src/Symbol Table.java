@@ -1,4 +1,4 @@
-//public class SymbolTable{
+public class SymbolTable{
 	private HashMap symbolTable;
 	
 	public SymbolTable(){
@@ -18,11 +18,11 @@
 		}
 	}
 	
-	public Pair getLexicalAddress(int lexicalPair){
+	public Pair getLexicalAddress(char inputID, int lexicalPair) throws SemanticException{
 		try{
 			return (Pair) this.symbolTable.get(inputID).get(lexicalPair);
 		}catch{
-			//lexical pair does not exist at this index
+			throw new SemanticException("The Lexical address was not found within the symbol table");
 		}
 	}
 

@@ -1,8 +1,8 @@
-package src.parser;
+//package src.parser;
 
 import java.util.Hashmap;
 
-public class SymbolTable{
+//public class SymbolTable{
 	private HashMap symbolTable;
 	
 	public SymbolTable(){
@@ -13,15 +13,20 @@ public class SymbolTable{
 		return this.symbolTable.containsKey(inputID);
 	}
 
-    public BranchType lookupID(char inputID) throws SemanticException{
+    public BranchType lookupIDType(char inputID) throws SemanticException{
 		if(isIDUsed(inputID)){
-			/*
-			if we make the value an arraylist, then index 0 will be the type
-			return (BranchType) this.symbolTable.get(inputID).get(0);
-			*/
-			return (BranchType) this.symbolTable.get(inputID); 
+			//if we make the value an arraylist, then index 0 will be the type
+			return (BranchType) this.symbolTable.get(inputID).get(0); 
 		}else{
 			throw new SemanticException("Identifier "+inputID+" is not found within the symbol table");
+		}
+	}
+	
+	public Pair getLexicalAddress(int lexicalPair){
+		try{
+			return (Pair) this.symbolTable.get(inputID).get(lexicalPair);
+		}catch{
+			//lexical pair does not exist at this index
 		}
 	}
 
@@ -29,13 +34,16 @@ public class SymbolTable{
 		if (isIDUsed(inputID)){
 			throw new SemanticException("Identifier " +inputID+" is already within the symbol table");
 		}
-		/*
-		might want a generic arraylist for the value to keep track of type and lexical addresses
-		List<Object> inputList = new ArrayList<>(); 
-		inputList.add(inputType);
-		this.symbolTable.put(inputID, inputList);
-		*/
-		this.symbolTable.put(inputID, inputType);
+		ArrayList<Object> tempList = new ArrayList<>();
+		tempList.add(inputType);
+		this.symbolTable.put(inputID, tempList);
+	}
+	
+	public void addLexicalPair(char inputID, Pair inputPair){
+		if(isIDUsed(inputID)){
+			this.symbolTable.get(inputID).add(inputPair);	
+		}else{
+			throw new SemanticException("Identifier "+inputID+" is not found within the symbol table");	
 	}
 	
 	public String toString(){

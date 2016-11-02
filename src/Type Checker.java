@@ -1,4 +1,4 @@
-package src.parser;
+//package src.parser;
 
 public class TypeChecker{
 	private SymbolTable symbolTable;

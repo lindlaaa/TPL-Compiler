@@ -1,4 +1,4 @@
-package src.parser;
+//package src.parser;
 
 public class SymbolTableFactory{
 	//this "program" class is Eugenes nonterminal parser type?

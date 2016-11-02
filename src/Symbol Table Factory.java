@@ -8,7 +8,7 @@ public class SymbolTableFactory{
 		this.program = inputAST;
 	}
 	
-	public SymbolTable createTable() throws SemanticExceoption{
+	public SymbolTable createTable() throws SemanticException{
 		SymbolTable symbolTable = new SymbolTable();
 		//program has a declarations() method? like a getChildren?
 		Declaration declaration = this.program.declarations();
@@ -27,7 +27,7 @@ public class SymbolTableFactory{
 			{
 				throw new SemanticException("The type declaration is invalid");
 			}
-			symbolTable.addKeyValue(currentDeclaration.identifier().value(). currentType);
+			symbolTable.addKeyValue(currentDeclaration.identifier().value().currentType);
 			declaration = declaration.rest();
 		}
 		

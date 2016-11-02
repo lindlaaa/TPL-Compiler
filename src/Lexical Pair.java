@@ -1,7 +1,5 @@
 //package src.parser;
 
-import java.util.Hashmap;
-
 public class Pair{
 
   private int line;

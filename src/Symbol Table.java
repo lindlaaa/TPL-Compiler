@@ -1,7 +1,3 @@
-//package src.parser;
-
-import java.util.Hashmap;
-
 //public class SymbolTable{
 	private HashMap symbolTable;
 	

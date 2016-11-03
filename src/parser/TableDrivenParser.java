@@ -52,6 +52,32 @@ public class TableDrivenParser extends Parser{
     //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
+  private void balanceTree(SemanticNode node){
+    for (SemanticNode parent : node.getChildren()) {
+      int childPos = 0;
+      if(parent instanceof ExprNode){
+
+        for(SemanticNode child : parent.getChildren()){
+          if(child instanceof SimpleExprPrimePlusNode   ||
+             child instanceof SimpleExprPrimeMinusNode  ||
+             child instanceof SimpleExprPrimeOrNode     ||
+             child instanceof TermPrimeAndNode          ||
+             child instanceof TermPrimeDivideNode       ||
+             child instanceof TermPrimeTimesNode        ||
+             child instanceof ExprPrimeExprNode         ||
+             child instanceof ExprPrimeLTNode){
+            System.out.println(childPos);
+            System.out.println(child);
+            //child.addChild(parent.getChild(childPos+1), parent);
+          }
+          childPos++;
+        }
+
+      }
+      balanceTree(parent);
+    }
+  }
+
 
 
   @SuppressWarnings("unchecked")
@@ -110,13 +136,12 @@ public class TableDrivenParser extends Parser{
           ProgramNode tm = (ProgramNode)semanticStack.peek();
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
-          writer.write(tm.graphTree(tm))
-		  //balanceTree;
-          SemanticAnalyzer test = new SemanticAnalyzer(tm);
+          writer.write(tm.graphTree(tm));
+          //SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
         }catch(Exception e){}
       }
-	  
-      //TypeCheckTree;
+      ProgramNode tm = (ProgramNode)semanticStack.peek();
+      balanceTree(tm);
       return true;
     }
     else{

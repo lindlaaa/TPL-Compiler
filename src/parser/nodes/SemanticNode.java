@@ -16,6 +16,10 @@ public class SemanticNode implements NodeBehavior{
     this.parent = null;
   }
 
+  public String getID(){
+    return "";
+  }
+
   public void setPosition(int pos){
     if (this.getPosition() == -1){
       this.position = pos;

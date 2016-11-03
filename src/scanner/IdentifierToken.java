@@ -1,4 +1,5 @@
 package src.scanner;
+import src.parser.*;
 /**
  *The class constructor takes a string as input.
  *Input is expected to start with a letter while all other
@@ -53,6 +54,10 @@ public class IdentifierToken implements Token{
   public int getCol(){
     return col;
   }
+  
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }  
 
   public int getTerminalType(){
     return 29;

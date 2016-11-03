@@ -1,4 +1,5 @@
 package src.scanner;
+import src.parser.*;
 /**
  *The class constructor a string as input. It is expected to be a
  *reserved keyword for the language. It implements the Token interface,
@@ -47,7 +48,9 @@ public class KeywordToken implements Token{
   public int getCol(){
     return col;
   }
-
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }
   /*
   {"if", "then", "else", "integer",
     "boolean", "true", "false", "not", "or", "and", "print", "program",

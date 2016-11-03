@@ -1,4 +1,5 @@
 package src.scanner;
+import src.parser.*;
 /**
  * The class constructor takes a character as input.
  * Input is expected to be a mathematical operator.
@@ -38,7 +39,10 @@ public class OpToken implements Token{
   public int getCol(){
     return col;
   }
-
+  
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }
 
   //    case '+': case '-': case '*':
   //    case '/': case '<': case '=':

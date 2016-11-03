@@ -19,9 +19,11 @@ public class ProgramNode extends SemanticNode{
     }
   }
   
-  @override
-  public void typeCheck(){
-	  //unique implementation
+  @Override
+  public void typeCheck(){  
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+	}
   }
 
   @Override

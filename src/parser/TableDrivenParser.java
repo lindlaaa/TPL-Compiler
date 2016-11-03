@@ -1,9 +1,12 @@
 package src.parser;
 
 import java.util.Stack;
+
 import src.scanner.*;
+import src.parser.*;
+import src.parser.semanticanalyzer.*;
 import src.parser.nodes.*;
-import src.scanner.BoolToken;
+//import src.scanner.BoolToken;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
@@ -104,10 +107,11 @@ public class TableDrivenParser extends Parser{
       //-t
       if(showTree){
         try{
-          SemanticNode tm = (SemanticNode)semanticStack.peek();
+          ProgramNode tm = (ProgramNode)semanticStack.peek();
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
+          SemanticAnalyzer test = new SemanticAnalyzer(tm);
         }catch(Exception e){}
       }
 

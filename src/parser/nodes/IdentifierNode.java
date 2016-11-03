@@ -14,6 +14,11 @@ public class IdentifierNode extends SemanticNode{
   }
 
   @Override
+  public String getID(){
+    return this.value.toString();
+  }
+
+  @Override
   public String toString(){
     return "IdentifierNode "+this.value;
   }

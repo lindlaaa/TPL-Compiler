@@ -1,17 +1,16 @@
 package src.parser;
 
 public enum BranchType{
-	INTEGER(0),
-	BOOLEAN(1),
-	EITHER(2);
+    public static final BranchType INTEGER =
+                        new BranchType(0);
+    public static final BranchType BOOLEAN =
+                        new BranchType(1);
+    public static final BranchType EITHER =
+                        new BranchType(2);
+    private String typeName;
 
-	private final int branchTypeID;
-
-	BranchType(int branchID) {
-		this.branchTypeID = branchID;
-	}
-
-	int getBranchTypeID() {
-		return this.branchTypeID;
-	}
+    private BranchType(int inputInt)
+    {
+        type = name;
+    }
 }

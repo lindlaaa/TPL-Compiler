@@ -9,7 +9,10 @@ public class PrintStatementNode extends SemanticNode{
       this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "PrintStatementNode";

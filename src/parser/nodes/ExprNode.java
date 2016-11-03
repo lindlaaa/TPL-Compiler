@@ -15,7 +15,10 @@ public class ExprNode extends SemanticNode{
       this.takeChildren((SimpleExprNode)TableDrivenParser.semanticStack.pop(), this);
 	   }
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "ExprNode";

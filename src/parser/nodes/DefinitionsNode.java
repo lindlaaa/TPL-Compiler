@@ -12,7 +12,10 @@ public class DefinitionsNode extends SemanticNode{
       this.addChild((DefNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "DefinitionsNode";

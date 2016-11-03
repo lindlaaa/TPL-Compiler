@@ -18,6 +18,11 @@ public class ProgramNode extends SemanticNode{
 	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
+  
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
 
   @Override
   public String toString(){

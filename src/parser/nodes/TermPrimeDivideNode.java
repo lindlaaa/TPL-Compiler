@@ -9,7 +9,10 @@ public class TermPrimeDivideNode extends SemanticNode{
       this.takeChildren((TermNode)TableDrivenParser.semanticStack.pop(), this);
 	}
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "TermPrimeDivideNode";

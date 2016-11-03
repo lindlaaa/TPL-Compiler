@@ -9,7 +9,10 @@ public class FormalsNode extends SemanticNode{
       this.takeChildren((NonEmptyFormalsNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "FormalsNode";

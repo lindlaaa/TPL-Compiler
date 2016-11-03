@@ -1,4 +1,12 @@
 //package src.parser;
+/*
+All the grammar rules that include non-terminal "TYPE" might be useful...
+
+<DEF>    ::= function <IDENTIFIER> Make-Identifier ( <FORMALS> ) : <TYPE> <BODY> ; Make-Def
+<FORMAL> ::= <IDENTIFIER> Make-Identifier : <TYPE> Make-Formal
+<TYPE>   ::= integer  Make-Integer
+           | boolean  Make-Boolean
+*/
 
 public class SymbolTableFactory{
 	//this "program" class is Eugenes nonterminal parser type?
@@ -8,9 +16,19 @@ public class SymbolTableFactory{
 		this.program = inputAST;
 	}
 	
+	/* 
+	NDS: Thought process...
+	
+	1. need to iterate through tree branches by checking the .getChildren() of all branches
+	2. if current SemanticNode instanceof SemanticNode.Identifier hold string of identifier in a buffer,
+	3. get next SemanticNode
+	4. if next semanticnode instanceof SemanticNode.LiteralNumberNode || SemanticNode.LiteralBooleanNode,
+	then place identifier in the buffer into the hashmap as the key, and enter the SemanticNode..getValue() as the value to the key
+		i.e. SymbolTable.addKeyValue(string name of the current id node, .getvalue() of next node)
+	*/
+	
 	public SymbolTable createTable() throws SemanticException{
 		SymbolTable symbolTable = new SymbolTable();
-		//program has a declarations() method? like a getChildren?
 		Declaration declaration = this.program.declarations();
 		
 		while(declaration != null){

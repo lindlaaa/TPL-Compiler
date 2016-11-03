@@ -1,4 +1,4 @@
-package src.parser;
+package src.parser.semanticanalyzer;
 
 import java.util.*;
 import src.parser.nodes.*;
@@ -9,14 +9,16 @@ public class SymbolTableBuilder{
   private SemanticNode program;
   private SymbolTable table;
 
-  public SymbolTableBuilder(SemanticNode p){
-
-    program = p;
+  public SymbolTableBuilder(){
     testHash = new HashMap();
-    System.out.println("\n\n\n\n");
+  }
+
+  public HashMap getTable(){
+    return this.testHash;
   }
 
   public void printMap(){
+    System.out.println("\n\n\nSymbol Table:");
     for(Object each : this.testHash.entrySet()){
       System.out.println(each);
     }

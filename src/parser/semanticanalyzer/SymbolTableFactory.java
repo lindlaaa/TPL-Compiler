@@ -1,4 +1,5 @@
-package src.parser;
+package src.parser.semanticanalyzer;
+
 /*
 All the grammar rules that include non-terminal "TYPE" might be useful...
 

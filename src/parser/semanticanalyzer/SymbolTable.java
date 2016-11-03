@@ -1,9 +1,29 @@
-package src.parser;
+package src.parser.semanticanalyzer;
 
 import java.util.*;
 import src.parser.nodes.*;
+import java.util.HashMap;
 
 public class SymbolTable{
+
+	private ProgramNode program;
+	private SymbolTableBuilder tableMaker;
+	private HashMap table;
+
+	public SymbolTable(ProgramNode p){
+
+		this.program = p;
+
+		this.tableMaker = new SymbolTableBuilder();
+		tableMaker.buildTable(program);
+		this.table = tableMaker.getTable();
+		tableMaker.printMap();
+	}
+
+	public HashMap getTable(){
+		return this.table;
+	}
+	/*
 	private HashMap symbolTable;
 
 	public SymbolTable(){
@@ -14,14 +34,14 @@ public class SymbolTable{
 		return this.symbolTable.containsKey(inputID);
 	}
 
-  /*public BranchType lookupIDType(char inputID) throws SemanticException{
+  public BranchType lookupIDType(char inputID) throws SemanticException{
 		if(isIDUsed(inputID)){
 			//if we make the value an arraylist, then index 0 will be the type
 			return (BranchType) this.symbolTable.get(inputID).get(0);
 		}else{
 			throw new SemanticException("Identifier "+inputID+" is not found within the symbol table");
 		}
-	}*/
+	}
 
 	public LexicalPair getLexicalAddress(char inputID, int lexicalPair) throws ParseException{
 		try{
@@ -50,5 +70,5 @@ public class SymbolTable{
 
 	public String toString(){
 		return this.symbolTable.toString();
-	}
+	}*/
 }

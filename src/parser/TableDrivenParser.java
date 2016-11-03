@@ -110,13 +110,10 @@ public class TableDrivenParser extends Parser{
           ProgramNode tm = (ProgramNode)semanticStack.peek();
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
-          writer.write(tm.graphTree(tm))
-		  //balanceTree;
+          writer.write(tm.graphTree(tm));
           SemanticAnalyzer test = new SemanticAnalyzer(tm);
         }catch(Exception e){}
       }
-	  
-      //TypeCheckTree;
       return true;
     }
     else{

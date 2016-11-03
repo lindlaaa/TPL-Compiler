@@ -109,8 +109,9 @@ public class TableDrivenParser extends Parser{
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
-          SymbolTableBuilder t = new SymbolTableBuilder(tm);
-          t.buildTable(tm);
+          SymbolTableBuilder test = new SymbolTableBuilder(tm);
+          test.buildTable(tm);
+          test.printMap();
         }catch(Exception e){}
       }
 

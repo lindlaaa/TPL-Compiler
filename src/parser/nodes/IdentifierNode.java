@@ -13,6 +13,7 @@ public class IdentifierNode extends SemanticNode{
     this.value = (IdentifierToken)TableDrivenParser.semanticBuffer.pop();
   }
 
+  @Override
   public String getID(){
     return this.value.toString();
   }

@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.*;
 /**
  * The class constructor takes no input
  * It is used to represent the end of the file stream
@@ -25,6 +27,10 @@ public class EOFToken implements Token{
   public char getVal(){
       return '$';
   }
+
+  public LexicalPair getLexicalPair(){
+    return new LexicalPair(-1, -1);
+  };
 
   public int getTerminalType(){
     return 30;

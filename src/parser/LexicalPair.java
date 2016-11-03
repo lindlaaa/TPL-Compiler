@@ -10,6 +10,11 @@ public class LexicalPair{
     this.pos = right;
   }
 
+  @Override
+  public String toString(){
+    return "["+this.line +", "+ this.pos +"]";
+  }
+
   public int getLine() {
 	return this.line;
   }

@@ -23,4 +23,8 @@ public class Parser{
     curToken = tokenArray.get(curPos);
     peekToken = tokenArray.get(curPos+1);
   }
+
+  public List<Token> getTokenArray(){
+    return this.tokenArray;
+  }
 }

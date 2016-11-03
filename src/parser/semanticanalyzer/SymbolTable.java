@@ -2,6 +2,7 @@ package src.parser.semanticanalyzer;
 
 import java.util.*;
 import src.parser.nodes.*;
+import src.parser.*;
 import java.util.HashMap;
 
 public class SymbolTable{
@@ -10,11 +11,11 @@ public class SymbolTable{
 	private SymbolTableBuilder tableMaker;
 	private HashMap table;
 
-	public SymbolTable(ProgramNode p){
+	public SymbolTable(ProgramNode p, Parser parser){
 
 		this.program = p;
 
-		this.tableMaker = new SymbolTableBuilder();
+		this.tableMaker = new SymbolTableBuilder(parser);
 		tableMaker.buildTable(program);
 		this.table = tableMaker.getTable();
 		tableMaker.printMap();

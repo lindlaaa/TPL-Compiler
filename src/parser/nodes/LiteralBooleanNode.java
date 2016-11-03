@@ -13,9 +13,12 @@ public class LiteralBooleanNode extends SemanticNode{
     //TableDrivenParser.semanticBuffer.pop();
     this.value = (BoolToken)TableDrivenParser.semanticBuffer.pop();
   }
-  @override
+  @Override
   public void typeCheck(){
-	  //unique implementation
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+		//check if children have assigned types
+	}
   }
   @Override
   public String toString(){

@@ -1,4 +1,5 @@
 package src.scanner;
+import src.parser.*;
 /**
  * The class constructor takes a character as input.
  * Input is expected to be either a period or a semicolon.
@@ -38,6 +39,10 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
+  
+   public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  } 
 
   /**
    *  Returns the column number this token BEGINS at.

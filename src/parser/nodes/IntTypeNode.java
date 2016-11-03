@@ -14,7 +14,10 @@ public class IntTypeNode extends SemanticNode{
   public String getValue(){
     return this.value;
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "IntTypeNode ";

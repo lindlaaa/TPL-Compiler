@@ -1,6 +1,6 @@
 package src.parser.semanticanalyzer;
 
-public class TypeChecker{/*
+public class TypeChecker{
 	private SymbolTable symbolTable;
 
 	public TypeChecker(SymbolTable inputTable){
@@ -85,5 +85,4 @@ public class TypeChecker{/*
 		}
 		return inputValue;
 	}
-*/
 }

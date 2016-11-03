@@ -140,8 +140,11 @@ public class TableDrivenParser extends Parser{
           //SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
         }catch(Exception e){}
       }
+<<<<<<< HEAD
       ProgramNode tm = (ProgramNode)semanticStack.peek();
       balanceTree(tm);
+=======
+>>>>>>> master
       return true;
     }
     else{

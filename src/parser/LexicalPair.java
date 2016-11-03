@@ -21,4 +21,5 @@ public class LexicalPair{
   public int getPos() {
     return this.pos;
   }
+  
 }

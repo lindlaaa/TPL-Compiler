@@ -13,7 +13,10 @@ public class LiteralNumberNode extends SemanticNode{
     //TableDrivenParser.semanticBuffer.pop();
     this.value = (IntToken)TableDrivenParser.semanticBuffer.pop();
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "LiteralNumberNode "+ this.value;

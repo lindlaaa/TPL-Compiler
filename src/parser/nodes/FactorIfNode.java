@@ -11,7 +11,10 @@ public class FactorIfNode extends SemanticNode{
 	    }
 	  }
   }
-
+  @override
+  public void typeCheck(){
+	  //unique implementation
+  }
   @Override
   public String toString(){
     return "FactorIfNode";

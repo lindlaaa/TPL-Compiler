@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.*;
 /**
 *The class constructor takes a string as input.
 *Input is expected to start with a letter while all other
@@ -22,6 +24,10 @@ public class CommentToken implements Token{
   public CommentToken(){
     this("Comment",0,0);
   }
+
+  public LexicalPair getLexicalPair(){
+    return new LexicalPair(-1, -1);
+  };
 
   /**
    *  Returns the comment represented by this Token

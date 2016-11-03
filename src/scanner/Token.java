@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.*;
 /**
  *  This is an interface used to classify all the classes ending in
  *  "Token". Token only enforces the toString() method.
@@ -15,4 +17,6 @@ public interface Token{
     public int getCol();
 
     public int getTerminalType();
+
+    public LexicalPair getLexicalPair();
 }

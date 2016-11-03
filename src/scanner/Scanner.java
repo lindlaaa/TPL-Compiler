@@ -257,6 +257,7 @@ public class Scanner{
         {
           handleStrings();
           handleSymbols();
+          curPos++;
           currentState = LOOKING;
         }else
         {
@@ -264,7 +265,6 @@ public class Scanner{
                   "--Had unexpected character|" +curChar+ "| at"+
                   " line:"+curLine+" col:"+curPos+"--\n");
         }
-        break;
     }
     curIndex++;
     curPos++;

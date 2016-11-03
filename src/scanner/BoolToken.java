@@ -1,4 +1,6 @@
 package src.scanner;
+import src.parser.*;
+
 /**
  *The class constructor takes a string as input. Input is expected
  *to be either "true" or "false". It implements the Token interface,
@@ -50,6 +52,10 @@ public class BoolToken implements Token{
    */
   public int getCol(){
     return col;
+  }
+  
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
   }
 
   public int getTerminalType(){

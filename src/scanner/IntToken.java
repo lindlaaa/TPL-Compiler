@@ -1,4 +1,5 @@
 package src.scanner;
+import src.parser.*;
 /**
  *The class constructor takes a string as input.
  *All characters are expected to be digits.
@@ -56,7 +57,10 @@ public class IntToken implements Token{
   public int getCol(){
     return col;
   }
-
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }
+  
   public int getTerminalType(){
     return 28;
   }

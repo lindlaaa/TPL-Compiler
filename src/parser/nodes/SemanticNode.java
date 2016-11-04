@@ -20,7 +20,7 @@ public class SemanticNode implements NodeBehavior{
   public String getID(){
     return "";
   }
-	  
+
   public void setPosition(int pos){
     if (this.getPosition() == -1){
       this.position = pos;
@@ -77,21 +77,21 @@ public class SemanticNode implements NodeBehavior{
     }
     return content;
   }
-  
+
   public void setNodeType(BranchType inputType){
-    this.nodeType = inputType;	  
+    this.nodeType = inputType;
   }
-  
+
   public BranchType setNodeType(){
-    return this.nodeType;	  
+    return this.nodeType;
   }
-   
+
   public void printTree(SemanticNode node, String appender) {
    System.out.println(appender + node);
    for (SemanticNode each : node.getChildren()) {
       printTree(each, appender + "| ");
     }
   }
-  
-  public void typeCheck();
+
+  public void typeCheck(){};
 }

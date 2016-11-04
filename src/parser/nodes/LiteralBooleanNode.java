@@ -15,10 +15,7 @@ public class LiteralBooleanNode extends SemanticNode{
   }
   @Override
   public void typeCheck(){
-    for(SemanticNode childNode : this.getChildren()){
-		childNode.typeCheck();
-		//check if children have assigned types
-	}
+    this.setNodeType(BranchType.BOOLEAN);
   }
   @Override
   public String toString(){

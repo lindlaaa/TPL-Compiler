@@ -15,10 +15,7 @@ public class LiteralNumberNode extends SemanticNode{
   }
   @Override
   public void typeCheck(){
-    for(SemanticNode childNode : this.getChildren()){
-		childNode.typeCheck();
-		//check if children have assigned types
-	}
+    this.setNodeType(BranchType.INTEGER);
   }
   @Override
   public String toString(){

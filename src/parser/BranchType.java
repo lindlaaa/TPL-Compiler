@@ -12,11 +12,7 @@ public class BranchType{
 
     private BranchType(int inputInt)
     {
-<<<<<<< HEAD
         this.type = inputInt;
-=======
-        this.type = name;
->>>>>>> origin/master
     }
 }
 

@@ -1,7 +1,7 @@
 package src.parser.semanticanalyzer;
 
 import src.parser.*;
-import src.parser.nodes.*;
+import src.parser.nodes.ProgramNode;
 
 public class SemanticAnalyzer{
 
@@ -14,5 +14,4 @@ public class SemanticAnalyzer{
 
     this.symbolTable = new SymbolTable(program, parser);
   }
-
 }

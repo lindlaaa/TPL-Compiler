@@ -15,10 +15,10 @@ Compile & Run:
     1.  make parser
     2.  ./flairp <filename>
 
-  d.  AST
+  d.  SemanticAnalyzer
     1.  make parser
     2.  ./flairp <filename>
-    3.  Compile as ./flairp <filename> -t
+    3.  Compile as ./flairp -t <filename>
       a. This saves AST to a file in the root directory called ast.dot
       b. Open with GraphViz to see the new tree graph
 
@@ -28,14 +28,20 @@ Compile & Run:
 
 Documentation:    doc/
 
-Date:       2016/10/21
+Date:       2016/11/04
 
 
-Known Issues: Graphviz picture shows duplicate lines from parent nodes
-              Does not compile ramen noodles.
-              Does not have great documentation for Parser Components...yet
-              
-
+Known Issues: Left-hand-sides of binary operators are the 'younger-child'
+                  of the binary operator. I.e. the sibling below them.
+              Does not compile my other homework.
+              Does not have great documentation for Parser Components...yet...still....
+              SymbolTable is not complete.
+              TypeChecker is not complete.
+              The hashMap in SymbolTable is giving us trouble when trying
+                  to reference the keys. We cannot access the HashMap.
+              We regenerate JavaDoc on every compilation.
+                This is a design decision and is intentional.
+                Final submission at the end of the semester will not.
 
 Directory Structure:
   bin/ : stores the binary files
@@ -47,6 +53,7 @@ Directory Structure:
   flairs: The script to run the scanner
   flairTest:  The script that runs all of our test programs
   Makefile: Contains the make commands for ease-of-use
+  ~Other files~: Used to support the GitHub Pages website.
 
 
 High level Scanner design:

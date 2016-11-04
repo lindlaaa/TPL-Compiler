@@ -140,7 +140,7 @@ public class TableDrivenParser extends Parser{
           balanceTree(tm);
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
-          //SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
+          SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
         }catch(Exception e){}
       }
       ProgramNode tm = (ProgramNode)semanticStack.peek();

@@ -34,6 +34,7 @@ parser:
 	@echo "\n--Flair Parser Ready!--"
 
 clean:
+	@rm -rf doc/*
 	@cp test_ignore/doNotDelete doc/
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/

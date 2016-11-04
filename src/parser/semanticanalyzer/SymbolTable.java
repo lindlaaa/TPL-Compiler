@@ -17,6 +17,7 @@ public class SymbolTable{
 
 		this.tableMaker = new SymbolTableBuilder(parser);
 		tableMaker.buildTable(program);
+		tableMaker.populatePairs();
 		this.table = tableMaker.getTable();
 		tableMaker.printMap();
 	}

@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import src.parser.nodes.*;
 import src.scanner.Token;
+import src.scanner.IdentifierToken;
 import src.parser.Parser;
 
+@SuppressWarnings("unchecked")
 public class SymbolTableBuilder{
 
   private HashMap testHash;
@@ -28,14 +30,15 @@ public class SymbolTableBuilder{
       }
       this.buildTable(each);
     }
-    //this.populatePairs();
   }
 
   public void populatePairs(){
-    //System.out.println("\n\n\nPairs");//FIXME
-    /*for(Token each : tokenArray){
-      System.out.println(each.getLexicalPair()+"-"+each);
-    }
+    System.out.println("\n\n\nIdentifier Reference Locations:");//FIXME
+    for(Token each : tokenArray){
+      if(each instanceof IdentifierToken){
+        System.out.println(each.getLexicalPair()+"-"+each);
+      }
+    }/*
     for(Token each : tokenArray){
       //TODO
     }*/
@@ -46,9 +49,9 @@ public class SymbolTableBuilder{
   }
 
   public void printMap(){
-    //System.out.println("\n\n\nSymbol Table:");//FIXME
+    System.out.println("\n\n\nSymbol Table Entries:");//FIXME
     for(Object each : this.testHash.entrySet()){
-      //System.out.println(each);//FIXME
+      System.out.println(each);//FIXME
     }
   }
 }

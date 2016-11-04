@@ -15,7 +15,7 @@ public class IdentifierNode extends SemanticNode{
 
   @Override
   public String getID(){
-    return this.value.toString();
+    return this.value.getVal();
   }
   @Override
   public void typeCheck(){
@@ -26,6 +26,6 @@ public class IdentifierNode extends SemanticNode{
   }
   @Override
   public String toString(){
-    return "IdentifierNode "+this.value;
+    return "IdentifierNode "+this.getID();
   }
 }

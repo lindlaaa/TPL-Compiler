@@ -52,12 +52,13 @@ public class TableDrivenParser extends Parser{
     //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
-  private void balanceTree(SemanticNode node){
+  private void balanceTree(SemanticNode node){/*
+    SemanticNode child;
     for (SemanticNode parent : node.getChildren()) {
-      int childPos = 0;
-      if(parent instanceof ExprNode){
+      //if(parent instanceof ExprNode){
 
-        for(SemanticNode child : parent.getChildren()){
+        for(int i = 0; i < parent.getChildren().size(); i++){
+          child = parent.getChild(i);
           if(child instanceof SimpleExprPrimePlusNode   ||
              child instanceof SimpleExprPrimeMinusNode  ||
              child instanceof SimpleExprPrimeOrNode     ||
@@ -66,16 +67,17 @@ public class TableDrivenParser extends Parser{
              child instanceof TermPrimeTimesNode        ||
              child instanceof ExprPrimeExprNode         ||
              child instanceof ExprPrimeLTNode){
-            System.out.println(childPos);
-            System.out.println(child);
-            //child.addChild(parent.getChild(childPos+1), parent);
+            //System.out.println(childPos);
+            //System.out.println(parent.getChild(i));
+            //System.out.println(parent.getChild(i+1));
+            child.addChild(parent.getChild(i+1), child);
+            //parent.getChildren().remove(i+1);
           }
-          childPos++;
         }
 
-      }
+      //}
       balanceTree(parent);
-    }
+    }*/
   }
 
 
@@ -135,6 +137,7 @@ public class TableDrivenParser extends Parser{
         try{
           ProgramNode tm = (ProgramNode)semanticStack.peek();
           WriteString writer = new WriteString();
+          balanceTree(tm);
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
           //SemanticAnalyzer test = new SemanticAnalyzer(tm, this);

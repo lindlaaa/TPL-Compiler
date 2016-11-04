@@ -1,6 +1,6 @@
 package src.parser;
 
-public enum BranchType{
+public class BranchType{
     public static final BranchType INTEGER =
                         new BranchType(0);
     public static final BranchType BOOLEAN =

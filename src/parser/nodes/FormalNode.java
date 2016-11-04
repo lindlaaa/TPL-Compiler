@@ -14,9 +14,12 @@ public class FormalNode extends SemanticNode{
       this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
-  @override
+  @Override
   public void typeCheck(){
-	  //unique implementation
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+		//check if children have assigned types
+	}
   }
   @Override
   public String toString(){

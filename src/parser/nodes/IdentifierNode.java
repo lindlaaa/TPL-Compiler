@@ -17,9 +17,12 @@ public class IdentifierNode extends SemanticNode{
   public String getID(){
     return this.value.toString();
   }
-  @override
+  @Override
   public void typeCheck(){
-	  //unique implementation
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+		//check if children have assigned types
+	}
   }
   @Override
   public String toString(){

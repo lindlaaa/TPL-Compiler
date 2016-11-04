@@ -93,5 +93,5 @@ public class SemanticNode implements NodeBehavior{
     }
   }
   
-  public abstract void typeCheck();
+  public void typeCheck();
 }

@@ -9,9 +9,12 @@ public class SimpleExprPrimePlusNode extends SemanticNode{
       this.takeChildren((SimpleExprNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
-  @override
+  @Override
   public void typeCheck(){
-	  //unique implementation
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+		//check if children have assigned types
+	}
   }
   @Override
   public String toString(){

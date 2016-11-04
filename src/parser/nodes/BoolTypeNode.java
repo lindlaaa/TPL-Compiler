@@ -14,9 +14,12 @@ public class BoolTypeNode extends SemanticNode{
   public String getValue(){
     return this.value;
   }
-  @override
+  @Override
   public void typeCheck(){
-	  //unique implementation
+    for(SemanticNode childNode : this.getChildren()){
+		childNode.typeCheck();
+		//check if children have assigned types
+	}
   }
   @Override
   public String toString(){

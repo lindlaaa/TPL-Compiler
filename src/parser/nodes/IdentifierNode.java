@@ -19,10 +19,6 @@ public class IdentifierNode extends SemanticNode{
   }
   @Override
   public void typeCheck(){
-    for(SemanticNode childNode : this.getChildren()){
-		childNode.typeCheck();
-		//check if children have assigned types
-	}
 	//assuming that our containsKey is working and only has the value as the key
 	try{
       if(SymbolTable.table.containsKey(this.value)){

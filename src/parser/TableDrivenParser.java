@@ -52,32 +52,41 @@ public class TableDrivenParser extends Parser{
     //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
-  private void balanceTree(SemanticNode node){/*
+  private void balanceTree(SemanticNode node){
     SemanticNode child;
-    for (SemanticNode parent : node.getChildren()) {
-      //if(parent instanceof ExprNode){
+    SemanticNode childBelow;
 
-        for(int i = 0; i < parent.getChildren().size(); i++){
-          child = parent.getChild(i);
-          if(child instanceof SimpleExprPrimePlusNode   ||
-             child instanceof SimpleExprPrimeMinusNode  ||
-             child instanceof SimpleExprPrimeOrNode     ||
-             child instanceof TermPrimeAndNode          ||
-             child instanceof TermPrimeDivideNode       ||
-             child instanceof TermPrimeTimesNode        ||
-             child instanceof ExprPrimeExprNode         ||
-             child instanceof ExprPrimeLTNode){
-            //System.out.println(childPos);
-            //System.out.println(parent.getChild(i));
-            //System.out.println(parent.getChild(i+1));
-            child.addChild(parent.getChild(i+1), child);
-            //parent.getChildren().remove(i+1);
+    if(node instanceof IdentifierNode  ||
+       node instanceof IntTypeNode     ||
+       node instanceof BoolTypeNode){
+         //do nothing
+
+    }else{ //node to be checked
+      for (int i = node.getChildren().size()-1; i > -1; i--){
+        child = node.getChild(i);
+        balanceTree(child);
+        if(child instanceof SimpleExprPrimePlusNode  || //PLUS
+           child instanceof SimpleExprPrimeMinusNode || //MINUS
+           child instanceof SimpleExprPrimeOrNode    || //OR
+           child instanceof ExprPrimeLTNode          || //LT
+           child instanceof ExprPrimeExprNode        || //==
+           child instanceof TermPrimeAndNode         || //AND
+           child instanceof TermPrimeTimesNode       || //*
+           child instanceof TermPrimeDivideNode){       ///
+
+          try{
+            childBelow = node.getChild(i+1);
+
+            System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
+            child.addChild(childBelow, child);
+            node.getChildren().remove(childBelow);
+
+          }catch(Exception e){
+            System.out.println("errors occured\n");
           }
-        }
-
-      //}
-      balanceTree(parent);
-    }*/
+        }//END IF
+      }//END FOR
+    }
   }
 
 

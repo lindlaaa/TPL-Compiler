@@ -39,6 +39,10 @@ public class SemanticNode implements NodeBehavior{
     return children;
   }
 
+  public SemanticNode getChild(int pos){
+    return this.children.get(pos);
+  }
+
   public SemanticNode getParent() {
     return parent;
   }

@@ -17,22 +17,22 @@ public class IdentifierNode extends SemanticNode{
   public String getID(){
     return this.value.getVal();
   }
+/*
   @Override
   public void typeCheck(){
 	//assuming that our containsKey is working and only has the value as the key
 	try{
-      if(SymbolTable.table.containsKey(this.value)){
-		//I assume the hashmap key is "x" instead of "Identifier x"
+    if(SymbolTable.table.containsKey(this.value)){
+		  //I assume the hashmap key is "x" instead of "Identifier x"
 	    this.setNodeType(SymbolTable.table.get(this.value));
-		
-        /*should set BranchType to first item in the value array, assuming the value is a generic array		
-		this.setNodeType(SymbolTable.table.get(this.value).get(0));
-		*/
+      //should set BranchType to first item in the value array, assuming the value is a generic array
+		  //this.setNodeType(SymbolTable.table.get(this.value).get(0));
 	  }
-	}catch(Exception e) {	
+	}catch(Exception e) {
       System.out.println("Exception thrown  :" + e);
-    }	
-  }
+    }
+  }*/
+
   @Override
   public String toString(){
     return "IdentifierNode "+this.getID();

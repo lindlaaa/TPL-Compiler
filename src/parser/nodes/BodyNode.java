@@ -9,12 +9,13 @@ public class BodyNode extends SemanticNode{
       this.takeChildren((StatementListNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
+  /*
   @Override
   public void typeCheck(){
     for(SemanticNode childNode : this.getChildren()){
 		childNode.typeCheck();
-	}
   }
+}*/
   @Override
   public String toString(){
     return "BodyNode";

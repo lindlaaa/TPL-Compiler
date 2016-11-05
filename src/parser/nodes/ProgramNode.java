@@ -18,13 +18,14 @@ public class ProgramNode extends SemanticNode{
 	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
-  
+
+  /*
   @Override
-  public void typeCheck(){  
+  public void typeCheck(){
     for(SemanticNode childNode : this.getChildren()){
 		childNode.typeCheck();
-	}
   }
+}*/
 
   @Override
   public String toString(){

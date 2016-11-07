@@ -1,20 +1,21 @@
 package src.parser.semanticanalyzer;
 
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import src.parser.nodes.*;
 import src.scanner.Token;
-import src.scanner.IdentifierToken;
+import src.scanner.*;
 import src.parser.Parser;
 
 @SuppressWarnings("unchecked")
 public class SymbolTableBuilder{
 
-  private HashMap testHash;
-  private SemanticNode program;
-  private SymbolTable table;
-  private List<Token> tokenArray;
-  private Parser parser;
+  private HashMap       testHash;
+  private SemanticNode  program;
+  private SymbolTable   table;
+  private List<Token>   tokenArray;
+  private Parser        parser;
 
   public SymbolTableBuilder(Parser p){
     testHash = new HashMap();
@@ -23,25 +24,32 @@ public class SymbolTableBuilder{
 
   public void buildTable(SemanticNode q){
     for(SemanticNode each : q.getChildren()){
+      ArrayList parts = new ArrayList();
       if(each instanceof FormalNode){
-        testHash.put(each.getChildren().get(1).getID(),each.getChildren().get(0));
+        parts.add(each.getChildren().get(0));
+        testHash.put(each.getChildren().get(1).toString(),parts);
       }else if(each instanceof DefNode){
-        testHash.put(each.getChildren().get(3).getID(),each.getChildren().get(1));
+        parts.add(each.getChildren().get(0));
+        testHash.put(each.getChildren().get(3).toString(),parts);
       }
       this.buildTable(each);
     }
   }
 
   public void populatePairs(){
+    ArrayList parts;
     System.out.println("\n\n\nIdentifier Reference Locations:");//FIXME
     for(Token each : tokenArray){
-      if(each instanceof IdentifierToken){
-        System.out.println(each.getLexicalPair()+"-"+each);
+      if(each instanceof IdentifierToken){ //If ID
+        System.out.println(each.getLexicalPair()+"-"+each.toString());
+        if(testHash.containsKey(each.toString())){ //If known //RESUME FIXME FIXME
+          System.out.println("inside");
+          parts = (ArrayList)testHash.get(each.toString());
+          parts.add(each.getLexicalPair());
+          testHash.replace(each.toString(), parts);
+        }
       }
-    }/*
-    for(Token each : tokenArray){
-      //TODO
-    }*/
+    }
   }
 
   public HashMap getTable(){
@@ -51,7 +59,8 @@ public class SymbolTableBuilder{
   public void printMap(){
     System.out.println("\n\n\nSymbol Table Entries:");//FIXME
     for(Object each : this.testHash.entrySet()){
-      System.out.println(each);//FIXME
+      //System.out.println(each);//FIXME
+      System.out.println(testHash.entrySet());
     }
   }
 }

@@ -28,6 +28,7 @@ public class IdentifierToken implements Token{
   public IdentifierToken() throws ScanException{
     this("X",0,0);
   }
+
   /**
    *  Returns the name represented by this Token
    *
@@ -54,10 +55,10 @@ public class IdentifierToken implements Token{
   public int getCol(){
     return col;
   }
-  
+
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
-  }  
+  }
 
   public int getTerminalType(){
     return 29;

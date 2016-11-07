@@ -24,6 +24,6 @@ public class IntTypeNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "IntTypeNode ";
+    return "IntTypeNode";
   }
 }

@@ -60,6 +60,7 @@ public class TableDrivenParser extends Parser{
        node instanceof IntTypeNode     ||
        node instanceof BoolTypeNode){
          //do nothing
+         System.out.println("leaf");
 
     }else{ //node to be checked
       for (int i = node.getChildren().size()-1; i > -1; i--){
@@ -145,15 +146,16 @@ public class TableDrivenParser extends Parser{
       if(showTree){
         try{
           ProgramNode tm = (ProgramNode)semanticStack.peek();
-          WriteString writer = new WriteString();
           balanceTree(tm);
+          WriteString writer = new WriteString();
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
           SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
         }catch(Exception e){}
       }
-      ProgramNode tm = (ProgramNode)semanticStack.peek();
-      balanceTree(tm);
+
+      //ProgramNode tm = (ProgramNode)semanticStack.peek();
+      //balanceTree(tm);
       return true;
     }
     else{

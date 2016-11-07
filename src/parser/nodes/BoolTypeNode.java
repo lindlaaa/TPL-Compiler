@@ -24,6 +24,6 @@ public class BoolTypeNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "BoolTypeNode ";
+    return "BoolTypeNode";
   }
 }

@@ -48,9 +48,6 @@ public class KeywordToken implements Token{
   public int getCol(){
     return col;
   }
-  public LexicalPair getLexicalPair(){
-	  return new LexicalPair(this.line, this.col);
-  }
   /*
   {"if", "then", "else", "integer",
     "boolean", "true", "false", "not", "or", "and", "print", "program",

@@ -4,7 +4,6 @@ import java.util.Stack;
 
 import src.scanner.*;
 import src.parser.*;
-import src.parser.semanticanalyzer.*;
 import src.parser.nodes.*;
 //import src.scanner.BoolToken;
 
@@ -60,7 +59,7 @@ public class TableDrivenParser extends Parser{
        node instanceof IntTypeNode     ||
        node instanceof BoolTypeNode){
          //do nothing
-         System.out.println("leaf");
+         //System.out.println("leaf");
 
     }else{ //node to be checked
       for (int i = node.getChildren().size()-1; i > -1; i--){
@@ -78,12 +77,12 @@ public class TableDrivenParser extends Parser{
           try{
             childBelow = node.getChild(i+1);
 
-            System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
+            //System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
             child.addChild(childBelow, child);
             node.getChildren().remove(childBelow);
 
           }catch(Exception e){
-            System.out.println("errors occured\n");
+            //System.out.println("errors occured\n");
           }
         }//END IF
       }//END FOR
@@ -142,20 +141,18 @@ public class TableDrivenParser extends Parser{
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
 
+      ProgramNode tm = (ProgramNode)semanticStack.peek();
+      balanceTree(tm);
       //-t
       if(showTree){
         try{
-          ProgramNode tm = (ProgramNode)semanticStack.peek();
           balanceTree(tm);
           WriteString writer = new WriteString();
           tm.printTree(tm, "");
           writer.write(tm.graphTree(tm));
-          SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
         }catch(Exception e){}
       }
 
-      //ProgramNode tm = (ProgramNode)semanticStack.peek();
-      //balanceTree(tm);
       return true;
     }
     else{

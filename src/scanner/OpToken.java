@@ -40,9 +40,6 @@ public class OpToken implements Token{
     return col;
   }
   
-  public LexicalPair getLexicalPair(){
-	  return new LexicalPair(this.line, this.col);
-  }
 
   //    case '+': case '-': case '*':
   //    case '/': case '<': case '=':

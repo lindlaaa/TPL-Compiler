@@ -17,7 +17,8 @@ public class LiteralNumberNode extends SemanticNode{
   @Override
   public void typeCheck(){
     this.setNodeType(BranchType.INTEGER);
-  }*/
+  }
+  */
 
   @Override
   public String toString(){

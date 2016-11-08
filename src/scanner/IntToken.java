@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.semanticanalyzer.*;
 import src.parser.*;
 /**
  *The class constructor takes a string as input.
@@ -60,7 +62,7 @@ public class IntToken implements Token{
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
-  
+
   public int getTerminalType(){
     return 28;
   }

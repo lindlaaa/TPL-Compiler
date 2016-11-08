@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.semanticanalyzer.*;
 import src.parser.*;
 /**
  * The class constructor takes a character as input.
@@ -39,10 +41,10 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
-  
+
    public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
-  } 
+  }
 
   /**
    *  Returns the column number this token BEGINS at.

@@ -1,4 +1,4 @@
-package src.parser;
+package src.parser.semanticanalyzer;
 
 public class LexicalPair{
 
@@ -21,5 +21,5 @@ public class LexicalPair{
   public int getPos() {
     return this.pos;
   }
-  
+
 }

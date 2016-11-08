@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.semanticanalyzer.*;
 import src.parser.*;
 /**
  *The class constructor a string as input. It is expected to be a

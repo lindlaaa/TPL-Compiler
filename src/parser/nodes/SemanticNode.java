@@ -3,6 +3,7 @@ package src.parser.nodes;
 import java.util.ArrayList;
 import java.util.List;
 import src.parser.*;
+import src.parser.semanticanalyzer.*;
 
 public class SemanticNode implements NodeBehavior{
 

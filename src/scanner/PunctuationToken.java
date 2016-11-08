@@ -1,4 +1,6 @@
 package src.scanner;
+
+import src.parser.semanticanalyzer.*;
 import src.parser.*;
 /**
  *The class constructor takes a character as input.
@@ -39,7 +41,7 @@ public class PunctuationToken implements Token{
   public int getline(){
     return line;
   }
-  
+
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }

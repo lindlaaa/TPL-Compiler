@@ -1,4 +1,4 @@
-package src.parser;
+package src.parser.semanticanalyzer;
 
 public class BranchType{
 	int type;
@@ -15,4 +15,3 @@ public class BranchType{
         this.type = inputInt;
     }
 }
-

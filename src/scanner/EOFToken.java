@@ -28,9 +28,6 @@ public class EOFToken implements Token{
       return '$';
   }
 
-  public LexicalPair getLexicalPair(){
-    return new LexicalPair(-1, -1);
-  };
 
   public int getTerminalType(){
     return 30;

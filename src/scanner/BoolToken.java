@@ -54,9 +54,6 @@ public class BoolToken implements Token{
     return col;
   }
 
-  public LexicalPair getLexicalPair(){
-	  return new LexicalPair(this.line, this.col);
-  }
 
   public int getTerminalType(){
     if(boolValue){

@@ -25,9 +25,6 @@ public class CommentToken implements Token{
     this("Comment",0,0);
   }
 
-  public LexicalPair getLexicalPair(){
-    return new LexicalPair(-1, -1);
-  };
 
   /**
    *  Returns the comment represented by this Token

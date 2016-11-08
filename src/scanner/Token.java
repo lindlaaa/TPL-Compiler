@@ -17,6 +17,4 @@ public interface Token{
     public int getCol();
 
     public int getTerminalType();
-
-    public LexicalPair getLexicalPair();
 }

@@ -56,9 +56,6 @@ public class IdentifierToken implements Token{
     return col;
   }
 
-  public LexicalPair getLexicalPair(){
-	  return new LexicalPair(this.line, this.col);
-  }
 
   public int getTerminalType(){
     return 29;

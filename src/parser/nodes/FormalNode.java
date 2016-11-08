@@ -16,12 +16,22 @@ public class FormalNode extends SemanticNode{
   }
   /*
   @Override
-  public void typeCheck(){
+  public void typeCheck() throws Exception{
+    BranchType formalTypeNode;
+    BranchType formalIDNode;
     for(SemanticNode childNode : this.getChildren()){
-		childNode.typeCheck();
-		//check if children have assigned types
+      childNode.typeCheck();	
+    }
+	
+    formalTypeNode = this.getChildren().get(0).getNodeType();
+    formalIDNode = this.getChildren().get(1).getNodeType();
+    if(formalTypeNode.equals(formalIDNode)){
+      this.setNodeType(formalTypeNode);  		
+    }else{
+      throw new Exception("formal node was assigned conflicting types");
+    }
   }
-}*/
+  */
   @Override
   public String toString(){
     return "FormalNode";

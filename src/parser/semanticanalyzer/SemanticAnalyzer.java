@@ -1,5 +1,7 @@
 package src.parser.semanticanalyzer;
 
+import src.parser.symboltable.*;
+
 import src.parser.*;
 import src.parser.nodes.ProgramNode;
 

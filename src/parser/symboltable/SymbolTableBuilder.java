@@ -1,4 +1,4 @@
-package src.parser.semanticanalyzer;
+package src.parser.symboltable;
 
 import java.util.HashMap;
 import java.util.ArrayList;

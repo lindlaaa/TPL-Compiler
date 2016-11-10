@@ -1,6 +1,7 @@
 package src.scanner;
 
 import src.parser.semanticanalyzer.*;
+import src.parser.symboltable.*;
 import src.parser.*;
 /**
  * The class constructor takes a character as input.

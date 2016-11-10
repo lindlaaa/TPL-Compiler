@@ -1,5 +1,7 @@
 package src.parser.semanticanalyzer;
 
+import src.parser.symboltable;
+
 public class TypeChecker{
 	private SymbolTable symbolTable;
 

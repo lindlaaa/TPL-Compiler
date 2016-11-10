@@ -1,4 +1,4 @@
-package src.parser.semanticanalyzer;
+package src.parser.symboltable;
 
 public class LexicalPair{
 

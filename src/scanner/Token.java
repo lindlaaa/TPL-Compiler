@@ -1,7 +1,7 @@
 package src.scanner;
 
 import src.parser.*;
-
+import src.parser.symboltable.*;
 import src.parser.semanticanalyzer.*;
 /**
  *  This is an interface used to classify all the classes ending in

@@ -39,4 +39,5 @@ clean:
 	@rm -rf bin/*
 	@cp test_ignore/doNotDelete bin/
 	@rm -f *.dot
+	@rm -f *.tm
 	@echo "Squeaky!"

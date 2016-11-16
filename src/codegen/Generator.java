@@ -1,9 +1,22 @@
 package src.codegen;
 
+import src.parser.nodes.WriteString;
+
 public class Generator{
 
   //TODO
-  public void generate(){}; //Main
+  public void generate(String fileName){
+    System.out.println("Test Passed call from Generator.generate()\n");
+    createRuntime();
+    createPrint();
+
+    WriteString writer = new WriteString();
+    writer.write("Test Passed call from Generator.generate()", fileName);
+  }; //Main
+
+  public void createRuntime(){};
+  public void createPrint(){};
+
   public void makeNewTemp(){};
   public void emitCode(){};
   private void emitRegister(){}; //Optional, not necessary.

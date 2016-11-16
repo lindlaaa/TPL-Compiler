@@ -14,12 +14,21 @@ public class TableDrivenParser extends Parser{
   public static Stack parseStack = new Stack();
   public static Stack semanticStack = new Stack();
   public static Stack semanticBuffer = new Stack();
+  public static ProgramNode ast;
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
 
     super(source);
     flairTable = makeParsingTable();
+  }
+
+  public ProgramNode getAST() throws ParseException{
+    if(ast == null){
+      throw new ParseException("--Tried to get the AST before it was created or assigned.--");
+    }else{
+      return ast;
+    }
   }
 
   /**
@@ -92,7 +101,7 @@ public class TableDrivenParser extends Parser{
 
 
   @SuppressWarnings("unchecked")
-  public boolean parseProgram(boolean showTree) throws ParseException{
+  public boolean parseProgram(boolean showTree, String fileName) throws ParseException{
 
     parseStack.push(new EOFToken(1));    //push EOF onto parseStack
     parseStack.push(NonTerminal.Program);//push program onto parseStack
@@ -141,15 +150,15 @@ public class TableDrivenParser extends Parser{
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
 
-      ProgramNode tm = (ProgramNode)semanticStack.peek();
-      balanceTree(tm);
+      ast = (ProgramNode)semanticStack.peek();
+      balanceTree(ast);
       //-t
       if(showTree){
         try{
-          balanceTree(tm);
+          balanceTree(ast);
           WriteString writer = new WriteString();
-          tm.printTree(tm, "");
-          writer.write(tm.graphTree(tm));
+          ast.printTree(ast, "");
+          writer.writeTree(ast.graphTree(ast), fileName);
         }catch(Exception e){}
       }
 

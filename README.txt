@@ -31,9 +31,7 @@ Documentation:    doc/
 Date:       2016/11/04
 
 
-Known Issues: Left-hand-sides of binary operators are the 'younger-child'
-                  of the binary operator. I.e. the sibling below them.
-              Does not compile my other homework.
+Known Issues: Does not compile my other homework.
               Does not have great documentation for Parser Components...yet...still....
               SymbolTable is not complete.
               TypeChecker is not complete.
@@ -44,6 +42,10 @@ Known Issues: Left-hand-sides of binary operators are the 'younger-child'
                 Final submission at the end of the semester will not.
 
 Directory Structure:
+NEW:
+  flairc  : script used to create a .tm file with same name as original
+
+OLD:
   bin/ : stores the binary files
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
@@ -70,5 +72,15 @@ High level Parser design:
   add those objects to the table in specific locations, and the parse algorithm then
   uses that table to confirm there is no bad flair grammar in the input file.
 
-High level AST Parser Design:
-  //TODO FIXME
+  Upon completing the parsing of a file, the object returns true or
+  false representing if the file is a proper flair program. The AST
+  that is generated is then stored in the 'TableDrivenParser' object.
+
+High level AST Design:
+  Our AST is an object type ProgramNode.
+  This SemanticNode object has children that are also different types
+    SemanticNodes. Upon completing the SymbolTable and TypeChecker
+    these nodes will contain attributes referencing their datatypes and
+    other necessary information. Upon completing the 'ParseProgram()'
+    method in TableDrivenParser we store the final tree which can be
+    accessed using 'getAST()'.

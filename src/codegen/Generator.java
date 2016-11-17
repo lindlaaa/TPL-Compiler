@@ -5,13 +5,33 @@ import src.parser.nodes.WriteString;
 public class Generator{
 
   //TODO
+
+
   public void generate(String fileName){
-    System.out.println("Test Passed call from Generator.generate()\n");
+
+    String program =
+      "0:	LDA		6,1(7)	; Store runtime return addr in R6\n"
+      +"1:	LDA		7,7(0)	; Jump to main\n"
+      +"2:	LDA		6,1(7)	; Store runtime return addr in R6\n"
+      +"3:	LDA		7,5(0)	; Jump to print\n"
+      +"4:	HALT	0,0,0	  ; Done\n"
+      +"\n/*\n"
+      +" * 	Print\n"
+      +" */\n"
+      +"5:	OUT		5,0,0	  ; Print value in R5\n"
+      +"6:	LDA		7,0(6)	; Jump back to main in R6\n"
+      +"\n/*\n"
+      +" *	Main\n"
+      +" */\n"
+      +"7:	LDA		5,1(0)	; Save number 1 into R5\n"
+      +"8:	LDA		7,0(6)	; Jump back to runtime in R6\n";
+
+    System.out.println(program);
     createRuntime();
     createPrint();
 
     WriteString writer = new WriteString();
-    writer.write("Test Passed call from Generator.generate()", fileName);
+    writer.write(program, fileName);
   }; //Main
 
   public void createRuntime(){};

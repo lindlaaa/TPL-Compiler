@@ -5,8 +5,8 @@
   TASK  : finds the exponential value of an integer using repeated halving.
 }
 
-program fastexponent (base: integer, exp: integer): integer ;
-	
+program fastexponent (base: integer, exp: integer);
+
 
    function mod(m : integer, n : integer) : integer
    begin
@@ -16,8 +16,8 @@ program fastexponent (base: integer, exp: integer): integer ;
 
 begin
 	return if exp = 0 then 1
-		    else if base mod 2 = 0 then
-				fastexponent(base, (exp / 2)) * fastexponent(base, (exp / 2))
-			else
-				fastexponent(base, (exp / 2)) * fastexponent(base, ((exp / 2)) + 1
+	else if (mod(base, 2) = 0)
+		then fastexponent(base, (exp / 2)) * fastexponent(base, (exp / 2))
+		else
+			fastexponent(base, (exp / 2)) * fastexponent(base, (exp / 2)) + 1
 end.

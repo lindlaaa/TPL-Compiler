@@ -10,21 +10,34 @@ public class Generator{
   public void generate(String fileName){
 
     String program =
-      "0:	LDA		6,1(7)	; Store runtime return addr in R6\n"
-      +"1:	LDA		7,7(0)	; Jump to main\n"
-      +"2:	LDA		6,1(7)	; Store runtime return addr in R6\n"
-      +"3:	LDA		7,5(0)	; Jump to print\n"
-      +"4:	HALT	0,0,0	  ; Done\n"
+       "0:  LDA		3,1(7)	; Store runtime return addr in R3\n"
+      +"1:  ST    1,7(6)  ; Store arg\n"
+      +"2:  ST    5,9(6)  ; Store return addr\n"
+      +"3:  ADD   5,10,5  ; Update bottom\n"
+      +"4:  ST    6,10,6  ; Update top\n"
+      +"5:  LDA		7,7(0)	; Jump to main\n"
+      +"6:  LD    4,1(6)  ; Get return value from main\n"
+      +"7:  ST    4,2(6)  ; Store arg\n"
+      +"8:  ST    3,1(7)  ; Store Return addr\n"
+      +"9:  LDA		7,5(0)	; Jump to print\n"
+      +"10: HALT	0,0,0	  ; Done\n"
       +"\n/*\n"
       +" * 	Print\n"
       +" */\n"
-      +"5:	OUT		5,0,0	  ; Print value in R5\n"
-      +"6:	LDA		7,0(6)	; Jump back to main in R6\n"
+      +"11:  LD    4,2(6)  ; load arg\n"
+      +"12:  LD    3,-2(6) ; load return addr\n"
+      +"13:  OUT	 4,0,0	 ; Print value in R5\n"
+      +"14:  LDA	 7,0(3)	 ; Jump back to main\n"
       +"\n/*\n"
       +" *	Main\n"
       +" */\n"
-      +"7:	LDA		5,1(0)	; Save number 1 into R5\n"
-      +"8:	LDA		7,0(6)	; Jump back to runtime in R6\n";
+      +"15: LD    4,2(6)  ; load arg\n"
+      +"16: LD    3,-2(6) ; load return addr\n"
+      +"17: LDA   5,1(0)	; Save number 1 into R5\n"
+      +"18: ST    5,0(5)  ; Store return value\n"
+      +"19: ADD   5,-10,5 ; Update bottom\n"
+      +"20: ST    6,-10,6 ; Update top\n"
+      +"21: LDA   7,0(3)	; Jump back to runtime\n";
 
     System.out.println(program);
     createRuntime();

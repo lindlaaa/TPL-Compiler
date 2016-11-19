@@ -60,6 +60,8 @@ public class TableDrivenParser extends Parser{
     //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
+
+
   private void balanceTree(SemanticNode node){
     SemanticNode child;
     SemanticNode childBelow;
@@ -69,7 +71,6 @@ public class TableDrivenParser extends Parser{
        node instanceof BoolTypeNode){
          //do nothing
          //System.out.println("leaf");
-
     }else{ //node to be checked
       for (int i = node.getChildren().size()-1; i > -1; i--){
         child = node.getChild(i);
@@ -82,14 +83,12 @@ public class TableDrivenParser extends Parser{
            child instanceof TermPrimeAndNode         || //AND
            child instanceof TermPrimeTimesNode       || //*
            child instanceof TermPrimeDivideNode){       ///
-
           try{
             childBelow = node.getChild(i+1);
 
             //System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
             child.addChild(childBelow, child);
             node.getChildren().remove(childBelow);
-
           }catch(Exception e){
             //System.out.println("errors occured\n");
           }

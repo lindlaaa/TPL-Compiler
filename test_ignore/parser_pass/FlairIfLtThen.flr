@@ -1,0 +1,28 @@
+program FlairIfLtTen (myInt  : integer,
+				 myBool : boolean);
+	function ifTrue (): integer
+	begin
+		return myInt * myInt
+	end;
+	function ifFalse (): integer
+	begin
+		return myInt / myInt
+	end;
+	function ifLtTen (lessThanInt : integer): boolean
+	begin
+		return lessThanInt < 10
+	end;
+begin
+	return(ifLtTen(lessThanInt =
+		            if (
+		                myBool = true
+			            )
+		            then (
+		                  ifTrue()
+				          )
+		            else (
+		                  ifFalse()
+				          )
+		          )
+		  )
+end;

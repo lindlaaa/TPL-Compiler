@@ -20,7 +20,6 @@ public class DefNode extends SemanticNode{
 	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
-
   /*
   @Override
   public void typeCheck(){

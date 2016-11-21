@@ -61,9 +61,12 @@ public class IntToken implements Token{
     return col;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 

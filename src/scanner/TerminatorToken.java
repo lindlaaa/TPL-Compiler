@@ -43,10 +43,14 @@ public class TerminatorToken implements Token{
     return line;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
    public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
+=======
+  
+>>>>>>> master
 =======
   
 >>>>>>> master

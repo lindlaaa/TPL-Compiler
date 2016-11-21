@@ -15,14 +15,21 @@ Compile & Run:
     1.  make parser
     2.  ./flairp <filename>
 
-  d.  SemanticAnalyzer
+  D.  SemanticAnalyzer
     1.  make parser
     2.  ./flairp <filename>
-    3.  Compile as ./flairp -t <filename>
-      a. This saves AST to a file in the root directory called ast.dot
+    3.  Run as ./flairp -t <filename>
+      a. This saves AST to a file in the root directory called <filename>.dot
       b. Open with GraphViz to see the new tree graph
 
-  X.  Test script
+  E.  Code Generator
+    1.  make
+    2.  ./flairc <filename>
+    3.  Run as ./flairc -t <filename>
+      a. This saves AST to a file in the root directory called <filename>.dot
+      b. Open with GraphViz to see the new tree graph
+
+  E  Test script
     1.  make run
 
 

@@ -66,6 +66,9 @@ public class TableDrivenParser extends Parser{
     SemanticNode child;
     SemanticNode childBelow;
 
+    /*
+     *  balances expressions but not functions
+     */
     if(node instanceof IdentifierNode  ||
        node instanceof IntTypeNode     ||
        node instanceof BoolTypeNode){
@@ -94,6 +97,19 @@ public class TableDrivenParser extends Parser{
           }
         }//END IF
       }//END FOR
+    }
+
+
+    /*
+     *  Balances functions, eg puts function args as function children
+     */
+    if( node instanceof DefNode
+        && !(node.getChild(3) instanceof NullNode) ){
+      System.out.println(node + "----->" + node.getChild(3));
+    }else{
+      for (int i = node.getChildren().size()-1; i > -1; i--){
+        child = node.getChild(i);
+      }
     }
   }
 

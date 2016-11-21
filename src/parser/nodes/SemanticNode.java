@@ -39,7 +39,11 @@ public class SemanticNode implements NodeBehavior{
   }
 
   public SemanticNode getChild(int pos){
-    return this.children.get(pos);
+    try{
+      return this.children.get(pos);
+    }catch(IndexOutOfBoundsException e){
+      return new NullNode();
+    }
   }
 
   public SemanticNode getParent() {

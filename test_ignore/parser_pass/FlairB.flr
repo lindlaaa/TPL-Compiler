@@ -38,22 +38,13 @@ program FlairB (myInt : integer,
 			return myInt
 		end;
 		begin
-			print("Times Ten: ");
 			print(timesTen());
-			print("Divide Ten: ");
 			print(divideTen());
-			print("Add Ten: ");
 			print(addTen());
-			print("Subtract Ten: ");
 			print(subtractTen());
-			print("Less Than Ten: ");
 			print(lessthanTen());
-			print("And Bool: ");
 			print(andBool());
-			print("Or Bool: ");
 			print(orBool());
-			print("What's Bool?: ");
 			print(whatsBool());
-			print("What's Int?: ");
-			return(whatsInt());
+			return(whatsInt())
 		end;

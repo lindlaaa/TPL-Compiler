@@ -4,7 +4,6 @@ import java.util.Stack;
 
 import src.scanner.*;
 import src.parser.*;
-import src.parser.semanticanalyzer.*;
 import src.parser.nodes.*;
 //import src.scanner.BoolToken;
 
@@ -15,12 +14,21 @@ public class TableDrivenParser extends Parser{
   public static Stack parseStack = new Stack();
   public static Stack semanticStack = new Stack();
   public static Stack semanticBuffer = new Stack();
+  public static ProgramNode ast;
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
 
     super(source);
     flairTable = makeParsingTable();
+  }
+
+  public ProgramNode getAST() throws ParseException{
+    if(ast == null){
+      throw new ParseException("--Tried to get the AST before it was created or assigned.--");
+    }else{
+      return ast;
+    }
   }
 
   /**
@@ -52,6 +60,8 @@ public class TableDrivenParser extends Parser{
     //System.out.println("Semantic Stack-> " + semanticStack);
   }
 
+
+
   private void balanceTree(SemanticNode node){
     SemanticNode child;
     SemanticNode childBelow;
@@ -60,8 +70,7 @@ public class TableDrivenParser extends Parser{
        node instanceof IntTypeNode     ||
        node instanceof BoolTypeNode){
          //do nothing
-         System.out.println("leaf");
-
+         //System.out.println("leaf");
     }else{ //node to be checked
       for (int i = node.getChildren().size()-1; i > -1; i--){
         child = node.getChild(i);
@@ -74,16 +83,14 @@ public class TableDrivenParser extends Parser{
            child instanceof TermPrimeAndNode         || //AND
            child instanceof TermPrimeTimesNode       || //*
            child instanceof TermPrimeDivideNode){       ///
-
           try{
             childBelow = node.getChild(i+1);
 
-            System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
+            //System.out.println("Child = "+child+"\nchild Below = "+childBelow+"\n");
             child.addChild(childBelow, child);
             node.getChildren().remove(childBelow);
-
           }catch(Exception e){
-            System.out.println("errors occured\n");
+            //System.out.println("errors occured\n");
           }
         }//END IF
       }//END FOR
@@ -93,7 +100,7 @@ public class TableDrivenParser extends Parser{
 
 
   @SuppressWarnings("unchecked")
-  public boolean parseProgram(boolean showTree) throws ParseException{
+  public boolean parseProgram(boolean showTree, String fileName) throws ParseException{
 
     parseStack.push(new EOFToken(1));    //push EOF onto parseStack
     parseStack.push(NonTerminal.Program);//push program onto parseStack
@@ -142,20 +149,18 @@ public class TableDrivenParser extends Parser{
 
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
 
+      ast = (ProgramNode)semanticStack.peek();
+      balanceTree(ast);
       //-t
       if(showTree){
         try{
-          ProgramNode tm = (ProgramNode)semanticStack.peek();
-          balanceTree(tm);
+          balanceTree(ast);
           WriteString writer = new WriteString();
-          tm.printTree(tm, "");
-          writer.write(tm.graphTree(tm));
-          SemanticAnalyzer test = new SemanticAnalyzer(tm, this);
+          ast.printTree(ast, "");
+          writer.writeTree(ast.graphTree(ast), fileName);
         }catch(Exception e){}
       }
 
-      //ProgramNode tm = (ProgramNode)semanticStack.peek();
-      //balanceTree(tm);
       return true;
     }
     else{

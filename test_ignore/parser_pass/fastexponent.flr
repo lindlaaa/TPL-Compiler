@@ -1,0 +1,23 @@
+{
+  FILE  : fastexponent.flr
+  AUTHOR: Grant Siebring
+  DATE  : 2016/11/10
+  TASK  : finds the exponential value of an integer using repeated halving.
+}
+
+program fastexponent (base: integer, exp: integer);
+
+
+   function mod(m : integer, n : integer) : integer
+   begin
+	  return if m < n then m
+	         else mod(m-n, n)
+   end;
+
+begin
+	return if exp = 0 then 1
+	else if (mod(base, 2) = 0)
+		then fastexponent(base, (exp / 2)) * fastexponent(base, (exp / 2))
+		else
+			fastexponent(base, (exp / 2)) * fastexponent(base, (exp / 2)) + 1
+end.

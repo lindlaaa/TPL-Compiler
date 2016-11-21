@@ -42,10 +42,14 @@ public class PunctuationToken implements Token{
   public int getline(){
     return line;
   }
+<<<<<<< HEAD
 
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
+=======
+  
+>>>>>>> master
   /**
    *  Returns the column number this token BEGINS at.
    *

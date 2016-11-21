@@ -12,7 +12,6 @@ public class SemanticNode implements NodeBehavior{
   private SemanticNode parent;
   public int position = -1;
   public static int counter = 1;
-  public BranchType nodeType;
 
   public SemanticNode() {
     this.parent = null;
@@ -83,13 +82,6 @@ public class SemanticNode implements NodeBehavior{
     return content;
   }
 
-  public void setNodeType(BranchType inputType){
-    this.nodeType = inputType;
-  }
-
-  public BranchType setNodeType(){
-    return this.nodeType;
-  }
 
   public void printTree(SemanticNode node, String appender) {
    System.out.println(appender + node);

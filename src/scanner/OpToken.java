@@ -42,18 +42,10 @@ public class OpToken implements Token{
   public int getCol(){
     return col;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
-=======
-  
->>>>>>> master
-=======
-  
->>>>>>> master
 
   //    case '+': case '-': case '*':
   //    case '/': case '<': case '=':

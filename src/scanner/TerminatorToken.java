@@ -42,18 +42,10 @@ public class TerminatorToken implements Token{
   public int getline(){
     return line;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
    public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
-=======
-  
->>>>>>> master
-=======
-  
->>>>>>> master
 
   /**
    *  Returns the column number this token BEGINS at.

@@ -60,15 +60,12 @@ public class IntToken implements Token{
   public int getCol(){
     return col;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
-=======
->>>>>>> master
-=======
->>>>>>> master
+  
 
   public int getTerminalType(){
     return 28;

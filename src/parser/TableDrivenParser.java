@@ -105,7 +105,11 @@ public class TableDrivenParser extends Parser{
      */
     if( node instanceof DefNode
         && !(node.getChild(3) instanceof NullNode) ){
-      System.out.println(node + "----->" + node.getChild(3));
+      System.out.println("\n" + node + "----->" + node.getChild(3).getID());
+
+      for(SemanticNode arg : node.getChild(2).getChildren()){
+        System.out.println("           | " + arg.getChild(1).getID());
+      }
     }else{
       for (int i = node.getChildren().size()-1; i > -1; i--){
         child = node.getChild(i);

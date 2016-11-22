@@ -39,7 +39,7 @@ public class Generator{
       +"20: ST    6,-10,6 ; Update top\n"
       +"21: LDA   7,0(3)	; Jump back to runtime\n";
 
-    System.out.println(program);
+    //System.out.println(program); //FIXME
     createRuntime();
     createPrint();
 

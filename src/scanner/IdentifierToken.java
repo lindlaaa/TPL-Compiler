@@ -32,6 +32,10 @@ public class IdentifierToken implements Token{
     this("X",0,0);
   }
 
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }
+
   /**
    *  Returns the name represented by this Token
    *

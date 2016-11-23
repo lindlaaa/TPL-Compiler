@@ -22,4 +22,9 @@ public class SymbolTable{
 	public HashMap getTable(){
 		return this.table;
 	}
+
+	public void add(String key, Symbol val){
+		// check if exists in table
+		// if true then IDK WHATEVER TODO
+	}
 }

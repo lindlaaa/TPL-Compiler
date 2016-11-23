@@ -6,6 +6,7 @@ import src.scanner.*;
 import src.parser.*;
 import src.parser.nodes.*;
 //import src.scanner.BoolToken;
+import src.parser.semanticanalyzer.*;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
@@ -171,6 +172,9 @@ public class TableDrivenParser extends Parser{
 
       ast = (ProgramNode)semanticStack.peek();
       balanceTree(ast);
+
+      SemanticAnalyzer semAn = new SemanticAnalyzer(ast, tokenArray);
+
       //-t
       if(showTree){
         try{
@@ -178,6 +182,7 @@ public class TableDrivenParser extends Parser{
           WriteString writer = new WriteString();
           ast.printTree(ast, "");
           writer.writeTree(ast.graphTree(ast), fileName);
+
         }catch(Exception e){}
       }
 

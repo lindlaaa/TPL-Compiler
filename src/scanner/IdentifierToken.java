@@ -45,6 +45,10 @@ public class IdentifierToken implements Token{
     return idVal;
   }
 
+  public String avery(){
+    return this.idVal;
+  }
+
   /**
    *  Returns the line number this Token is in
    *

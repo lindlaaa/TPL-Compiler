@@ -5,13 +5,12 @@ import java.util.Stack;
 import src.scanner.*;
 import src.parser.*;
 import src.parser.nodes.*;
-//import src.scanner.BoolToken;
 import src.parser.semanticanalyzer.*;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
 
-  private Parsetable flairTable;
+  private       Parsetable flairTable;
   public static Stack parseStack = new Stack();
   public static Stack semanticStack = new Stack();
   public static Stack semanticBuffer = new Stack();
@@ -19,7 +18,6 @@ public class TableDrivenParser extends Parser{
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
-
     super(source);
     flairTable = makeParsingTable();
   }
@@ -31,6 +29,9 @@ public class TableDrivenParser extends Parser{
       return ast;
     }
   }
+
+
+
 
   /**
    *  TODO
@@ -50,6 +51,7 @@ public class TableDrivenParser extends Parser{
       //do nothing
     }
   }
+
 
 
 
@@ -99,6 +101,7 @@ public class TableDrivenParser extends Parser{
         }//END IF
       }//END FOR
     }
+
 
 
     /*
@@ -171,14 +174,13 @@ public class TableDrivenParser extends Parser{
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
 
       ast = (ProgramNode)semanticStack.peek();
-      balanceTree(ast);
-
       SemanticAnalyzer semAn = new SemanticAnalyzer(ast, tokenArray);
+      System.out.println("\n------ Diagram of function contents: ---"); //FIXME
+      balanceTree(ast);
 
       //-t
       if(showTree){
         try{
-          balanceTree(ast);
           WriteString writer = new WriteString();
           ast.printTree(ast, "");
           writer.writeTree(ast.graphTree(ast), fileName);
@@ -196,7 +198,6 @@ public class TableDrivenParser extends Parser{
 
   private Parsetable makeParsingTable() throws ScanException,
                                                 Exception{
-
     Parsetable tempTable = new Parsetable();
 
     ParseRule rule00 = new PushRule(

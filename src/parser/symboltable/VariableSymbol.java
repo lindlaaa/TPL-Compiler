@@ -1,10 +1,13 @@
 package src.parser.symboltable;
 
+import java.util.List;
+
 /**
  *  This object will be held in the symbol table
  *    and represent the variables in the program holding all
  *    of their information.
  */
+@SuppressWarnings("unchecked")
 public class VariableSymbol implements Symbol{
 
   /* holds list of reference locations */

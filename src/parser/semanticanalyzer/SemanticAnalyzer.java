@@ -3,10 +3,8 @@ package src.parser.semanticanalyzer;
 import src.parser.symboltable.*;
 
 import src.scanner.Token;
-import java.util.HashMap;
 import java.util.List;
 import src.scanner.IdentifierToken;
-import java.util.ArrayList;
 
 import src.parser.*;
 import src.parser.nodes.ProgramNode;
@@ -25,15 +23,18 @@ public class SemanticAnalyzer{
 
     this.symbolTable = new SymbolTable();
     populatePairs();
+    symbolTable.printTable();
   }
 
 
   public void populatePairs(){
 
-    System.out.println("\n\n\nIdentifier Reference Locations:");//FIXME
+    System.out.println("\n------ Identifier references and locations: ---"); //FIXME
     for(Token each : tokenArray){
       if(each instanceof IdentifierToken){
-        System.out.println(each);
+        IdentifierToken var = (IdentifierToken)each;
+        System.out.println(var.avery() + " -- " + var.getLexicalPair());
+        symbolTable.put(var.avery());
       } // end if
     } // end for
   }

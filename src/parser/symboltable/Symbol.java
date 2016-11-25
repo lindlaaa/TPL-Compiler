@@ -3,7 +3,7 @@ package src.parser.symboltable;
 /**
  *
  */
-public interface FunctionSymbol{
+public interface Symbol{
 
   //TODO
 }

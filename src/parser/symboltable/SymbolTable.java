@@ -1,10 +1,11 @@
 package src.parser.symboltable;
 
 import java.util.*;
-import src.parser.nodes.*;
-import src.parser.*;
 import java.util.HashMap;
-import src.parser.symboltable.VariableSymbol;
+
+import src.parser.*;
+import src.parser.nodes.*;
+import src.parser.symboltable.Symbol;
 
 @SuppressWarnings("unchecked")
 public class SymbolTable{
@@ -49,7 +50,7 @@ public class SymbolTable{
 	 *  @param key String representing key to print pairs from.
 	 */
 	public void printPairs(String key){
-		get(key).printKeyPairs();
+		get(key).printPair();
 	}
 
 
@@ -93,7 +94,7 @@ public class SymbolTable{
 			//System.out.println("Already Exists.\n"); // FIXME
 			return false;
 		}else{
-			VariableSymbol tempSymbol = new VariableSymbol(tempKey, "-Parent Name-"); //FIXME
+			Symbol tempSymbol = new Symbol(tempKey, "-Parent Name-"); //FIXME
 			table.put(tempKey, tempSymbol);
 			//System.out.println("added new pair.\n"); // FIXME
 			return true;
@@ -124,8 +125,8 @@ public class SymbolTable{
 
 
 
-	public VariableSymbol get(String key){
-		return (VariableSymbol)table.get(key);
+	public Symbol get(String key){
+		return (Symbol)table.get(key);
 	}
 
 }

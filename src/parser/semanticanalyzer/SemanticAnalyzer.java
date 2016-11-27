@@ -1,13 +1,13 @@
 package src.parser.semanticanalyzer;
 
-import src.parser.symboltable.*;
+import java.util.List;
 
 import src.scanner.Token;
-import java.util.List;
 import src.scanner.IdentifierToken;
 
 import src.parser.*;
 import src.parser.nodes.ProgramNode;
+import src.parser.symboltable.*;
 
 @SuppressWarnings("unchecked")
 public class SemanticAnalyzer{
@@ -37,7 +37,6 @@ public class SemanticAnalyzer{
 
         String varName = var.avery();
         symbolTable.put(varName);
-        symbolTable.getType(varName);
         symbolTable.addPair(varName, var.getLexicalPair());
         //symbolTable.printPairs(varName); // FIXME
       } // end if

@@ -42,7 +42,7 @@ public class SymbolTableBuilder{
     for(Token each : tokenArray){
       if(each instanceof IdentifierToken){ //If ID
         System.out.println(each.getLexicalPair()+"-"+each.toString());
-        if(testHash.containsKey(each.toString())){ //If known //RESUME FIXME FIXME
+        if(testHash.containsKey(each.toString())){ //If known //RESUME FIXME
           System.out.println("inside");
           parts = (ArrayList)testHash.get(each.toString());
           parts.add(each.getLexicalPair());

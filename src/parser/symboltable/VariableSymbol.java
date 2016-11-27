@@ -11,7 +11,7 @@ import java.util.List;
 public class VariableSymbol implements Symbol{
 
   /* holds list of reference locations */
-  private List<LexicalPair> pairs = null;
+  private List<LexicalPair> pairs;
 
   /* string showing the name */
   private String name;
@@ -23,6 +23,14 @@ public class VariableSymbol implements Symbol{
   public VariableSymbol(String n, String c){
     name = n;
     callerFunction = c;
+  }
+
+  public void setName(String n){
+    this.name = n;
+  }
+
+  public void addPair(LexicalPair pair){
+    this.parts.add(pair);
   }
 
 }

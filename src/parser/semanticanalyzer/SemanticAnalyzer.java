@@ -33,8 +33,11 @@ public class SemanticAnalyzer{
     for(Token each : tokenArray){
       if(each instanceof IdentifierToken){
         IdentifierToken var = (IdentifierToken)each;
-        System.out.println(var.avery() + " -- " + var.getLexicalPair());
-        symbolTable.put(var.avery());
+        System.out.println(var.avery() + " -- " + var.getLexicalPair()); // FIXME
+
+        String varName = var.avery();
+        symbolTable.put(varName);
+        symbolTable.addPair(varName, var.getLexicalPair());
       } // end if
     } // end for
   }

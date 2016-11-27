@@ -21,6 +21,9 @@ public class Symbol{
   /* represents if this key is a function or a variable */
   private BranchType type;
 
+  /* true if we are a function, false if we are a variable */
+  private boolean isFunction;
+
   /* string showing the name of the function it was declared in */
   //What if 'n' is a parameter in multiple functions? FIXME TODO
   //Should callerFunction be a list of all callers? FIXME TODO
@@ -51,6 +54,15 @@ public class Symbol{
   }
 
 
+  /**
+	 *  Returns the BranchType of the symbol.
+	 *  @return     BranchType representing the type of the symbol.
+	 */
+  public BranchType getType(){
+    return this.type;
+  }
+
+
 
   /**
    *  Prints the LexicalPairs of the key to stdout.
@@ -77,6 +89,15 @@ public class Symbol{
    */
   public void addPair(LexicalPair pair){
     this.pairsList.add(pair);
+  }
+
+
+  /**
+   *  Sets the isFunction attribute.
+   *  @param i boolean representing if this symbol is a function.
+   */
+  public void setIsFunction(boolean i){
+    this.isFunction = i;
   }
 
 }

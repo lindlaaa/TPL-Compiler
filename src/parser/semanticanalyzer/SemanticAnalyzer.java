@@ -6,25 +6,26 @@ import src.scanner.Token;
 import src.scanner.IdentifierToken;
 
 import src.parser.*;
-import src.parser.nodes.ProgramNode;
+import src.parser.nodes.*;
 import src.parser.symboltable.*;
 
 @SuppressWarnings("unchecked")
 public class SemanticAnalyzer{
 
-  private ProgramNode program;
+  private ProgramNode root;
   private SymbolTable symbolTable;
   private List<Token>   tokenArray;
 
   /* Constructor */
   public SemanticAnalyzer(ProgramNode p, List tokens){
 
-    this.program = p;
+    this.root = p;
     this.tokenArray = tokens;
 
     this.symbolTable = new SymbolTable();
     populatePairs();
     symbolTable.printTable();
+    getBasicTypes();
   }
 
 
@@ -55,8 +56,23 @@ public class SemanticAnalyzer{
    *  Utilized the BranchType Constants.
    */
   public void getBasicTypes(){
+    for (SemanticNode each : root.getChildren()) {
+      getBasicTypes(each);
+    }
+  }
+  /* Used by the function above */
+  public void getBasicTypes(SemanticNode node){
+    if(node instanceof FormalNode){
+      String key = node.getChild(1).getID();        //Getting key
+      BranchType type = node.getChild(0).getType(); //Getting type
+      symbolTable.get(key).setType(type);           //Set type to key
 
-    //TODO
+      //Set this symbol to be a variable type and not a function type.
+      symbolTable.get(key).setIsFunction(false);
+    }
+    for(SemanticNode each : node.getChildren()){
+      getBasicTypes(each);
+    }
   }
 
 

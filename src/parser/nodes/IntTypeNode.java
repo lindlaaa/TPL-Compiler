@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.parser.semanticanalyzer.BranchType;
 
 public class IntTypeNode extends SemanticNode{
 
@@ -9,6 +10,7 @@ public class IntTypeNode extends SemanticNode{
   @Override
   public void setChildren(){
     this.value = "integer";
+    setType(BranchType.INTEGER);
   }
 
   public String getValue(){

@@ -1,25 +1,16 @@
 package src.parser.symboltable;
 
-import java.util.*;
 import java.util.HashMap;
-
-import src.parser.*;
-import src.parser.nodes.*;
-import src.parser.symboltable.Symbol;
 
 @SuppressWarnings("unchecked")
 public class SymbolTable{
 
 
-	/** The HashMap to hold all of our function and variable names. */
+	/** The HashMap to hold all of our function and variable pairs. */
 	private HashMap table;
 
 
 	public SymbolTable(){
-		//this.tableMaker = new SymbolTableBuilder(parser);
-		//tableMaker.populatePairs();
-		//this.table = tableMaker.getTable();
-		//tableMaker.printMap();
 		this.table = new HashMap();
 	}
 

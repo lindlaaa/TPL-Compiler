@@ -1,6 +1,6 @@
 package src.parser.symboltable;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *  This object will be held in the symbol table
@@ -11,7 +11,7 @@ import java.util.List;
 public class VariableSymbol implements Symbol{
 
   /* holds list of reference locations */
-  private List<LexicalPair> pairs;
+  private ArrayList<LexicalPair> pairsList = new ArrayList();
 
   /* string showing the name */
   private String name;
@@ -25,12 +25,16 @@ public class VariableSymbol implements Symbol{
     callerFunction = c;
   }
 
-  public void setName(String n){
-    this.name = n;
+  public void printKeyPairs(){
+    System.out.println(name + " -- " + pairsList);
+  }
+
+  public void setCallerName(String n){
+    this.callerFunction = n;
   }
 
   public void addPair(LexicalPair pair){
-    this.parts.add(pair);
+    this.pairsList.add(pair);
   }
 
 }

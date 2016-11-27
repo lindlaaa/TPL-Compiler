@@ -44,7 +44,7 @@ public class CodeGenMain{
     */
 
     name = name.substring(0, name.length()-4);
-    System.out.println(name);
+    System.out.println("\n------ File name ---\n" + name);
 
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     parser.parseProgram(treeVisible, name);

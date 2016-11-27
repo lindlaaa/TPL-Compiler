@@ -29,15 +29,17 @@ public class SemanticAnalyzer{
 
   public void populatePairs(){
 
-    System.out.println("\n------ Identifier references and locations: ---"); //FIXME
+    //System.out.println("\n------ Identifier references and locations: ---"); //FIXME
     for(Token each : tokenArray){
       if(each instanceof IdentifierToken){
         IdentifierToken var = (IdentifierToken)each;
-        System.out.println(var.avery() + " -- " + var.getLexicalPair()); // FIXME
+        //System.out.println(var.avery() + " -- " + var.getLexicalPair()); // FIXME
 
         String varName = var.avery();
         symbolTable.put(varName);
+        symbolTable.getType(varName);
         symbolTable.addPair(varName, var.getLexicalPair());
+        //symbolTable.printPairs(varName); // FIXME
       } // end if
     } // end for
   }

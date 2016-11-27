@@ -46,6 +46,7 @@ public class PunctuationToken implements Token{
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
+  
   /**
    *  Returns the column number this token BEGINS at.
    *

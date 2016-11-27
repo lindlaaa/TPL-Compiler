@@ -54,8 +54,10 @@ public class SemanticNode implements NodeBehavior{
   public void setChildren(){};
 
   public void addChild(SemanticNode child, SemanticNode p) {
-    child.setParent(p);
-    p.getChildren().add(child);
+    if( !(child instanceof NullNode) ){
+      child.setParent(p);
+      p.getChildren().add(child);
+    }
   }
 
   public void takeChildren(SemanticNode old, SemanticNode p){

@@ -12,6 +12,7 @@ public class SemanticNode implements NodeBehavior{
   private SemanticNode parent;
   public int position = -1;
   public static int counter = 1;
+  private BranchType type;
 
   public SemanticNode() {
     this.parent = null;
@@ -19,6 +20,13 @@ public class SemanticNode implements NodeBehavior{
 
   public String getID(){
     return "";
+  }
+
+  public BranchType getType(){
+    return this.type;
+  }
+  public void setType(BranchType t){
+    this.type = t;
   }
 
   public void setPosition(int pos){

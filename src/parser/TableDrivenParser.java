@@ -101,24 +101,6 @@ public class TableDrivenParser extends Parser{
         }//END IF
       }//END FOR
     }
-
-
-
-    /*
-     *  Balances functions, eg puts function args as function children
-     */
-    if( node instanceof DefNode
-        && !(node.getChild(3) instanceof NullNode) ){
-      System.out.println(node + "----->" + node.getChild(3).getID());
-
-      for(SemanticNode arg : node.getChild(2).getChildren()){
-        System.out.println("           | " + arg.getChild(1).getID());
-      }
-    }else{
-      for (int i = node.getChildren().size()-1; i > -1; i--){
-        child = node.getChild(i);
-      }
-    }
   }
 
 
@@ -174,9 +156,9 @@ public class TableDrivenParser extends Parser{
     if(parseStack.peek() instanceof EOFToken && curToken instanceof EOFToken){
 
       ast = (ProgramNode)semanticStack.peek();
-      SemanticAnalyzer semAn = new SemanticAnalyzer(ast, tokenArray);
-      System.out.println("\n------ Diagram of function contents: ---"); //FIXME
+      //System.out.println("\n------ Diagram of function contents: ---"); //FIXME
       balanceTree(ast);
+      SemanticAnalyzer semAn = new SemanticAnalyzer(ast, tokenArray);
 
       //-t
       if(showTree){

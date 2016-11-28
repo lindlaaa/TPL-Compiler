@@ -14,4 +14,15 @@ public class BranchType{
     {
         this.type = inputInt;
     }
+
+		public String toString(){
+			if(this.type == 0){
+				return "INTEGER";
+			}else if(this.type == 1){
+				return "BOOLEAN";
+			}else if(this.type == 2){
+				return "EITHER";
+			}
+			return "ERROR";
+		}
 }

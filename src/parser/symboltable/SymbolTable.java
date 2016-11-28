@@ -1,6 +1,7 @@
 package src.parser.symboltable;
 
 import java.util.HashMap;
+import src.parser.semanticanalyzer.BranchType;
 
 @SuppressWarnings("unchecked")
 public class SymbolTable{
@@ -9,7 +10,7 @@ public class SymbolTable{
 	/** The HashMap to hold all of our function and variable pairs. */
 	private HashMap table;
 
-
+	/* Constructor */
 	public SymbolTable(){
 		this.table = new HashMap();
 	}
@@ -42,6 +43,16 @@ public class SymbolTable{
 	 */
 	public void printPairs(String key){
 		get(key).printPair();
+	}
+
+
+	/**
+	 *  Returns the BranchType of the given key in the symbolTable.
+	 *  @param  key String representing key to get type from.
+	 *  @return     BranchType representing the type of the symbol.
+	 */
+	public BranchType getType(String key){
+		return get(key).getType();
 	}
 
 
@@ -102,6 +113,17 @@ public class SymbolTable{
 	public void setCallerName(String key, String name){
 		get(key).setCallerName(name);
 	}
+
+
+
+	/**
+	 *  Sets the isFunction attribute of the symbol with the given key.
+	 *  @param  key String used to find the key to be changed
+	 *  @param  i boolean the vakue to be set.
+	 */
+  public void setIsFunction(String key, boolean i){
+    get(key).setIsFunction(i);
+  }
 
 
 

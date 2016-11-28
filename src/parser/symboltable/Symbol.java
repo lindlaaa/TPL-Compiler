@@ -21,6 +21,9 @@ public class Symbol{
   /* represents if this key is a function or a variable */
   private BranchType type;
 
+  /* the amount of args this takes. (if it is a finction) */
+  private int amtOfArgs;
+
   /* true if we are a function, false if we are a variable */
   private boolean isFunction;
 
@@ -64,6 +67,18 @@ public class Symbol{
 
 
 
+  public void setNumOfArgs(int amt){
+    if(this.isFunction){
+      this.amtOfArgs = amt;
+    }
+  }
+
+  public int numOfArgs(){
+    return this.amtOfArgs;
+  }
+
+
+
   /**
    *  Prints the LexicalPairs of the key to stdout.
    */
@@ -98,6 +113,10 @@ public class Symbol{
    */
   public void setIsFunction(boolean i){
     this.isFunction = i;
+  }
+
+  public boolean getIsFunction(){
+    return this.isFunction;
   }
 
 }

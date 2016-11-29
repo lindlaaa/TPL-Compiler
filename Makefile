@@ -5,6 +5,8 @@ all:
 	@echo -n '. '
 	@javac -d bin src/parser/*.java src/parser/nodes/*.java
 	@echo -n '. '
+	@javac -d bin src/codegen/*.java
+	@echo -n '. '
 	@javadoc -d doc -quiet -package src.main src.scanner src.parser src.parser.nodes
 	@echo !
 	@echo "\n--Flair Compiler Ready!--"

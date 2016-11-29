@@ -72,7 +72,8 @@ public class SemanticAnalyzer{
       //Set this symbol to be a variable type and not a function type.
       symbolTable.get(key).setIsFunction(false);
     }
-    for(SemanticNode each : node.getChildren()){
+    for(int i = node.getChildren().size()-1; i > -1; i--){
+      SemanticNode each = node.getChild(i);
       getBasicTypes(each);
     }
   }
@@ -84,7 +85,8 @@ public class SemanticAnalyzer{
    *  Makes that number an attribute of the Symbol in the symboltable.
    */
   public void setFunctionParamsAmt(){
-    for (SemanticNode each : root.getChildren()) {
+    for (int i = root.getChildren().size()-1; i > -1; i--) {
+      SemanticNode each = root.getChild(i);
       setFunctionParamsAmt(each);
     }
   }
@@ -94,14 +96,15 @@ public class SemanticAnalyzer{
       int amt=node.getChild(2).getChildren().size();//Getting arg amt
       String key = node.getChild(3).getID();        //Getting key
       BranchType type = node.getChild(1).getType(); //Getting type
-
+      
       symbolTable.get(key).setType(type);           //Set type to key
       symbolTable.get(key).setIsFunction(true);     //Set to a function
       symbolTable.get(key).setNumOfArgs(amt);       //Set num of args
       //System.out.println("@key -"+key+" @Type -"+type+" @amt: "+amt); //FIXME
       return 0;
     }
-    for(SemanticNode each : node.getChildren()){
+    for(int i = node.getChildren().size()-1; i > -1; i--){
+      SemanticNode each = node.getChild(i);
       setFunctionParamsAmt(each);
     }
     return 1;
@@ -110,7 +113,8 @@ public class SemanticAnalyzer{
 
 
   public void rebalanceTree() throws ParseException {
-    for (SemanticNode each : root.getChildren()) {
+    for (int i = root.getChildren().size()-1; i > -1; i--) {
+      SemanticNode each = root.getChild(i);
       rebalanceTree(each);
     }
   }
@@ -122,7 +126,7 @@ public class SemanticAnalyzer{
         if(symbolTable.get(node.getID()).getIsFunction()){
 
           int pos = node.getParent().getChildren().indexOf(node);
-          int amt = symbolTable.get(node.getID()).numOfArgs();
+          int amt = symbolTable.get(node.getID()).getNumOfArgs();
 
           for (int i = amt; i > 0; i--){ // Amount of args to move
             try{

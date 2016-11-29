@@ -73,7 +73,7 @@ public class Symbol{
     }
   }
 
-  public int numOfArgs(){
+  public int getNumOfArgs(){
     return this.amtOfArgs;
   }
 

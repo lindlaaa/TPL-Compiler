@@ -33,9 +33,18 @@ public class CodeGenMain{
     }
 
     File file = new File(fileName);
+
     String name = file.getName();
+
+    /*May be used to put the output file in the original files dirextory
+    String path;
+    path = file.getPath();
+    path = path.substring(0, path.length()-4);
+    System.out.println(path);
+    */
+
     name = name.substring(0, name.length()-4);
-    System.out.println(name);
+    //System.out.println("\n------ File name ---\n" + name);
 
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     parser.parseProgram(treeVisible, name);

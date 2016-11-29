@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.parser.semanticanalyzer.BranchType;
 
 public class BoolTypeNode extends SemanticNode{
 
@@ -9,6 +10,7 @@ public class BoolTypeNode extends SemanticNode{
   @Override
   public void setChildren(){
     this.value = "boolean";
+    setType(BranchType.BOOLEAN);
   }
 
   public String getValue(){
@@ -17,11 +19,9 @@ public class BoolTypeNode extends SemanticNode{
   /*
   @Override
   public void typeCheck(){
-    for(SemanticNode childNode : this.getChildren()){
-		childNode.typeCheck();
-		//check if children have assigned types
+    this.setNodeType(BranchType.BOOLEAN);
   }
-}*/
+  */
   @Override
   public String toString(){
     return "BoolTypeNode";

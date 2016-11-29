@@ -39,9 +39,9 @@ public class ParserMain{
     File file = new File(fileName);
     String name = file.getName();
     name = name.substring(0, name.length()-4);
-    System.out.println(name);
+    //System.out.println("Program name:\n" + name); //FIXME
 
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
-    System.out.println(parser.parseProgram(treeVisible, name));
+    System.out.println(parser.parseProgram(treeVisible, name)); //FIXME ?
   }
 }

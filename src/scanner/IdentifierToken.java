@@ -1,4 +1,7 @@
 package src.scanner;
+
+import src.parser.semanticanalyzer.*;
+import src.parser.symboltable.*;
 import src.parser.*;
 /**
  *The class constructor takes a string as input.
@@ -29,6 +32,10 @@ public class IdentifierToken implements Token{
     this("X",0,0);
   }
 
+  public LexicalPair getLexicalPair(){
+	  return new LexicalPair(this.line, this.col);
+  }
+
   /**
    *  Returns the name represented by this Token
    *
@@ -36,6 +43,10 @@ public class IdentifierToken implements Token{
    */
   public String getVal(){
     return idVal;
+  }
+
+  public String avery(){
+    return this.idVal;
   }
 
   /**

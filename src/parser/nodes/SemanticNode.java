@@ -3,6 +3,7 @@ package src.parser.nodes;
 import java.util.ArrayList;
 import java.util.List;
 import src.parser.*;
+import src.parser.semanticanalyzer.*;
 
 public class SemanticNode implements NodeBehavior{
 
@@ -11,6 +12,7 @@ public class SemanticNode implements NodeBehavior{
   private SemanticNode parent;
   public int position = -1;
   public static int counter = 1;
+  private BranchType type;
 
   public SemanticNode() {
     this.parent = null;
@@ -18,6 +20,13 @@ public class SemanticNode implements NodeBehavior{
 
   public String getID(){
     return "";
+  }
+
+  public BranchType getType(){
+    return this.type;
+  }
+  public void setType(BranchType t){
+    this.type = t;
   }
 
   public void setPosition(int pos){
@@ -39,7 +48,11 @@ public class SemanticNode implements NodeBehavior{
   }
 
   public SemanticNode getChild(int pos){
-    return this.children.get(pos);
+    try{
+      return this.children.get(pos);
+    }catch(IndexOutOfBoundsException e){
+      return new NullNode();
+    }
   }
 
   public SemanticNode getParent() {
@@ -49,8 +62,10 @@ public class SemanticNode implements NodeBehavior{
   public void setChildren(){};
 
   public void addChild(SemanticNode child, SemanticNode p) {
-    child.setParent(p);
-    p.getChildren().add(child);
+    if( !(child instanceof NullNode) ){
+      child.setParent(p);
+      p.getChildren().add(child);
+    }
   }
 
   public void takeChildren(SemanticNode old, SemanticNode p){

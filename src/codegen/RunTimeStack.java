@@ -8,7 +8,7 @@ public class RunTimeStack {
   public int numberOfArgs = 0;//will be able to find with the symbol table
   public int numberOfTempObjects = 0;  
   public int r5Bottom = 0;
-  public int r6Top = 0;
+  public int r6Top = -1;
   public int r7PC = 0;//won't be able to get until later on
   
   public static MemoryTable dMem = new MemoryTable();
@@ -19,31 +19,31 @@ public class RunTimeStack {
   //write the main functions arguments to dMem
   public RunTimeStack(int[] inputArgs){	  
 	RunTimeStack.dMem.setArguments(inputArgs);
-	this.r5Bottom = RunTimeStack.dMem.getTopIndex();
-	this.r6Top = RunTimeStack.dMem.getTopIndex();
   }
-  public void printStack(){
-    for(int k = 0; k < RunTimeStack.dMem.getTopIndex();k++){
-        System.out.println("--------------------");     
-        System.out.println("|         " + 
-                RunTimeStack.dMem.getItemAt(k) +
-                "|");
-    }
-    System.out.println("--------------------");  
-    
-//    this.printReturnValue();
-//    this.printArguments();
-//    this.printStatus();
-//    this.printRegisters();
-//    this.printTempObjects();
-  }
+  
   //This is only temporary until I can get multiple frames working
-  public void printIndividualStackFrame(){
+  public void printStack(){
+    
+    for(int k = 0; k < this.r6Top + 1; k++){
+        System.out.println(k + ": " + RunTimeStack.dMem.getItemAt(k));
+    }  
+    System.out.println("--------------------");  
+    System.out.println("--------------------");  
+    System.out.println("--------------------");
+    
+    do{
+        printFrame();
+        this.popFrame();
+    }while(this.r5Bottom != 0);
+    printFrame();
+  }
+  
+  private void printFrame(){
     this.printReturnValue();
     this.printArguments();
     this.printStatus();
     this.printRegisters();
-    this.printTempObjects();       
+    this.printTempObjects();      
   }
   
   private void printReturnValue(){
@@ -51,10 +51,12 @@ public class RunTimeStack {
     System.out.println("|Return value: " + this.getDMemReturnValue() + "   |");
   }
   private void printArguments(){
+    int[] argumentArray = this.getDMemArguments();      
     for(int k = 0; k < this.numberOfArgs;k++){
-        int[] argumentArray = this.getDMemArguments();      
+        if(argumentArray[k] != -1){
         System.out.println("--------------------");  
-        System.out.println("|Argument" + k + ": " + argumentArray[k] + "       |");       
+        System.out.println("|Argument" + k + ": " + argumentArray[k] + "       |");
+        }       
     }
   }
   private void printStatus(){
@@ -62,39 +64,49 @@ public class RunTimeStack {
     System.out.println("|Status Link: " + this.getDmemStatus() + "    |");
   }
   private void printRegisters(){
-    for(int l = 0; l < 5; l++){
-        int[] registerArray = this.getDmemRegisters();      
+    int[] registerArray = this.getDmemRegisters();       
+    for(int l = 0; l < 7; l++){
+        //if(registerArray[l] != -1){
         System.out.println("--------------------");  
-        System.out.println("|Register" + (l + 1) + ": " + registerArray[l] + "       |");       
+        System.out.println("|Register" + (l + 1) + ": " + registerArray[l] + "       |");
+        //}
     }
   }
-  private void printTempObjects(){
+  private void printTempObjects(){      
+    List<Integer> tempObjectArray = this.getTempObjects();      
     for(int k = 0; k < this.numberOfTempObjects;k++){
-        List<Integer> tempObjectArray = this.getTempObjects();
         System.out.println("--------------------");  
         System.out.println("|Temp Object" + k + ": " + tempObjectArray.get(k) + "    |");       
     }
     System.out.println("--------------------");
   }    
   public void popFrame(){
-    this.r6Top = this.r5Bottom - 1;
-    this.r5Bottom = this.getDmemRegisterAt(5);	
+    //need to test 
+    this.r6Top = this.getDmemRegisterAt(5) - 1;
+    this.r5Bottom = this.getDmemRegisterAt(5);
   }
   public void pushFrame(String inputName,int[] inputArgs,int[] inputRegisters){
-    //numberOfArgs =lookup inputName in the symbol table to get number of args
-    this.r5Bottom = this.r6Top;
+    //should be able to get from symbol table  
     this.numberOfArgs = inputArgs.length;
-    RunTimeStack.dMem.writeMemoryItem();//return value not assigned yet, so null
+    if(this.r6Top != 0){
+        this.r5Bottom = this.r6Top + 1; 
+    }
+    this.numberOfArgs = inputArgs.length;
+    RunTimeStack.dMem.writeMemoryItem();//return value not assigned yet, -1
     RunTimeStack.dMem.setArguments(inputArgs);//arguments
-    RunTimeStack.dMem.writeMemoryItem();//status/return address, also null
+    RunTimeStack.dMem.writeMemoryItem();//status/return address, -1
     RunTimeStack.dMem.setArguments(inputRegisters);//registers 1-4
     RunTimeStack.dMem.writeMemoryItem(this.r5Bottom);//register r5Bottom
-    this.r6Top = RunTimeStack.dMem.getTopIndex();
+    int tempTop = 9 + this.numberOfArgs + this.r6Top;
+    RunTimeStack.dMem.writeMemoryItem(tempTop);
+    this.r6Top = tempTop;   
+    RunTimeStack.dMem.writeMemoryItem(this.r7PC);
+    
     //will setTempObjects() when we evaluate function	
   }  
   public int getDMemReturnValue(){
-	//bottom is the return address	
-    return RunTimeStack.dMem.getItemAt(this.r5Bottom);
+    //bottom is the return address
+    return RunTimeStack.dMem.getItemAt(getDmemRegisterAt(5));
   } 
   public void setDmemReturnValue(int inputReturnValue){
 	//bottom is the return address	
@@ -102,8 +114,8 @@ public class RunTimeStack {
   }
   
   public int[] getDMemArguments(){
+    int argPointer = getDmemRegisterAt(5) + 1;  
     int[] returnArray = new int[this.numberOfArgs];
-    int argPointer = this.r5Bottom + 1;  
     for(int i = 0; i < this.numberOfArgs; i++){
         returnArray[i] = RunTimeStack.dMem.getItemAt(argPointer);
 	argPointer++;
@@ -126,15 +138,15 @@ public class RunTimeStack {
   }    
  
   public int getDmemRegisterAt(int registerNumber){
-    return RunTimeStack.dMem.getItemAt(RunTimeStack.dMem.getTopIndex() - this.numberOfTempObjects - 5 - registerNumber);
+    return RunTimeStack.dMem.getItemAt(this.r6Top - this.numberOfTempObjects - 7 + registerNumber);
   }
   public void setDmemRegisterAt(int registerNumber, int inputVal){
     RunTimeStack.dMem.setItemAt(this.r5Bottom + this.numberOfArgs + 1 + registerNumber, inputVal);
   }   
   public int[] getDmemRegisters(){
-    int[] returnArray = new int[5]; //registers 1-4 and r5Bottom
-    int rPointer = (RunTimeStack.dMem.getTopIndex() - this.numberOfTempObjects - 5);  
-    for(int i = 0; i < 5; i++){
+    int[] returnArray = new int[7]; //registers 1-4 and r5Bottom
+    int rPointer = this.r5Bottom + this.numberOfArgs + 2;  
+    for(int i = 0; i < 7; i++){
         returnArray[i] = RunTimeStack.dMem.getItemAt(rPointer);
         rPointer++;
     }
@@ -142,7 +154,7 @@ public class RunTimeStack {
   }
   public void setDmemRegisters(int[] argv){
     int rPointer = this.r5Bottom + this.numberOfArgs + 2;  
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < 7; i++){
         RunTimeStack.dMem.setItemAt(rPointer, argv[i]);
         rPointer++;
     }
@@ -151,8 +163,8 @@ public class RunTimeStack {
   public List<Integer> getTempObjects(){
     //calculate based on size from bottom up
     List<Integer> returnArray = new ArrayList<>();
-    int rPointer = this.r5Bottom + this.numberOfArgs + 7;  
-    for(int i = rPointer; i < (RunTimeStack.dMem.getTopIndex() + 1); i++){
+    int rPointer = this.r5Bottom + this.numberOfArgs + 9;  
+    for(int i = rPointer; i < (rPointer + numberOfTempObjects); i++){
         returnArray.add(RunTimeStack.dMem.getItemAt(i));
     }
     return returnArray;	
@@ -160,7 +172,10 @@ public class RunTimeStack {
   public void setTempObjects(int[] inputValues){
     this.numberOfTempObjects = inputValues.length;
     RunTimeStack.dMem.setArguments(inputValues);
-    this.r6Top = RunTimeStack.dMem.getTopIndex();
+    this.r6Top += inputValues.length;
+    int tempTop = 9 + this.numberOfArgs + this.r6Top;
+    setDmemRegisterAt(6 + this.r6Top, tempTop);
+    this.r6Top = tempTop;   
   }
 }
 

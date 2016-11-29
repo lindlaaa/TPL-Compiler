@@ -52,6 +52,16 @@ public class Generator{
 
   public void makeNewTemp(){};
   public void emitCode(){};
+  public String emitRO(int line_num, String opcode, int r1, int r2, int r3){
+    String result = new String();
+    result = line_num + ": " + opcode + " " + r1 + " " + r2 + " " + r3;
+    return result;
+  };
+  public String emitRM(int line_num, String opcode, int r1, int r2, String r3){
+    String result = new String();
+    result = line_num + ": " + opcode + " " + r1 + " " + r2 + " (" + r3 + ")";
+    return result;
+  };
   private void emitRegister(){}; //Optional, not necessary.
   public void makeNewLabel(){};
 

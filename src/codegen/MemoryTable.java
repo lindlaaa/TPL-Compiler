@@ -31,11 +31,5 @@ public class MemoryTable {
   }
   public void setItemAt(int inputIndex, int inputValue){
     this.memoryBlock[inputIndex] = inputValue;
-  }       
-  public void setTopIndex(int inputIndex){
-	this.topIndex = inputIndex;
-  }
-  public int getTopIndex(){
-	return this.topIndex;
-  } 
+  }    
 }

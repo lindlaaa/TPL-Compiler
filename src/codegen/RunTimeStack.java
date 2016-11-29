@@ -1,11 +1,11 @@
 package src.codegen;
-//import src.parser.symboltable;
 
+import src.parser.symboltable;
 import java.util.*;
 
 public class RunTimeStack {
   //these will be implemented when we create iMem
-  public int numberOfArgs = 0;//will be able to find with the symbol table
+  public int numberOfArgs = 0;
   public int numberOfTempObjects = 0;  
   public int r5Bottom = 0;
   public int r6Top = -1;
@@ -21,7 +21,6 @@ public class RunTimeStack {
 	RunTimeStack.dMem.setArguments(inputArgs);
   }
   
-  //This is only temporary until I can get multiple frames working
   public void printStack(){
     
     for(int k = 0; k < this.r6Top + 1; k++){
@@ -87,7 +86,7 @@ public class RunTimeStack {
   }
   public void pushFrame(String inputName,int[] inputArgs,int[] inputRegisters){
     //should be able to get from symbol table  
-    this.numberOfArgs = inputArgs.length;
+    this.numberOfArgs = SymbolTable.get(inputName).getNumOfArgs();
     if(this.r6Top != 0){
         this.r5Bottom = this.r6Top + 1; 
     }
@@ -105,11 +104,9 @@ public class RunTimeStack {
     //will setTempObjects() when we evaluate function	
   }  
   public int getDMemReturnValue(){
-    //bottom is the return address
     return RunTimeStack.dMem.getItemAt(getDmemRegisterAt(5));
   } 
   public void setDmemReturnValue(int inputReturnValue){
-	//bottom is the return address	
     RunTimeStack.dMem.setItemAt(this.r5Bottom, inputReturnValue);
   }
   
@@ -144,7 +141,7 @@ public class RunTimeStack {
     RunTimeStack.dMem.setItemAt(this.r5Bottom + this.numberOfArgs + 1 + registerNumber, inputVal);
   }   
   public int[] getDmemRegisters(){
-    int[] returnArray = new int[7]; //registers 1-4 and r5Bottom
+    int[] returnArray = new int[7]; 
     int rPointer = this.r5Bottom + this.numberOfArgs + 2;  
     for(int i = 0; i < 7; i++){
         returnArray[i] = RunTimeStack.dMem.getItemAt(rPointer);
@@ -161,7 +158,6 @@ public class RunTimeStack {
   }
   
   public List<Integer> getTempObjects(){
-    //calculate based on size from bottom up
     List<Integer> returnArray = new ArrayList<>();
     int rPointer = this.r5Bottom + this.numberOfArgs + 9;  
     for(int i = rPointer; i < (rPointer + numberOfTempObjects); i++){

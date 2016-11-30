@@ -4,7 +4,7 @@ import src.parser.nodes.WriteString;
 
 public class Generator{
 
-  //TODO
+  private int line_num = 0;
 
 
   public void generate(String fileName){
@@ -39,31 +39,37 @@ public class Generator{
       +"20: ST    6,-10,6 ; Update top\n"
       +"21: LDA   7,0(3)	; Jump back to runtime\n";
 
-    //System.out.println(program); //FIXME
-    createRuntime();
-    createPrint();
+    generatePrelude();
+    generatePrint();
+    generateMain();
 
     WriteString writer = new WriteString();
     writer.write(program, fileName);
   }; //Main
 
-  public void createRuntime(){};
-  public void createPrint(){};
 
-  public void makeNewTemp(){};
-  public void emitCode(){};
-  public String emitRO(int line_num, String opcode, int r1, int r2, int r3){
-    String result = new String();
-    result = line_num + ": " + opcode + " " + r1 + " " + r2 + " " + r3;
+
+  public void generatePrelude(){}
+  public void generatePrint(){}
+  public void generateMain(){}
+  public void makeNewTemp(){}
+  public void emitCode(){}
+  public String emitRO(int line_num, String opcode, int r1, int r2, int r3, String comment){
+    //String result = new String();
+    //result = line_num + ": " + opcode + " " + r1 + " " + r2 + " " + r3;
+    String result = String.format("%-4s%-6s%s,%s,%-7s;%-10s", line_num+":",opcode,r1,r2,r3,comment);
+
     return result;
-  };
-  public String emitRM(int line_num, String opcode, int r1, int r2, String r3){
-    String result = new String();
-    result = line_num + ": " + opcode + " " + r1 + " " + r2 + " (" + r3 + ")";
+  }
+  public String emitRM(int line_num, String opcode, int r1, int offset, int r3, String comment){
+    //String result = new String();
+    //result = line_num + ": " + opcode + " " + r1 + " " + r2 + " (" + r3 + ")";
+    String result = String.format("%-4s%-6s%s,%s%-8s;%-10s", line_num+":",opcode,r1,offset,"("+r3+")",comment);
+
     return result;
-  };
-  private void emitRegister(){}; //Optional, not necessary.
-  public void makeNewLabel(){};
+  }
+  private void emitRegister(){} //Optional, not necessary.
+  public void makeNewLabel(){}
 
 }
 

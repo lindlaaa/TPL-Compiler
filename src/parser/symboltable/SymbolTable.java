@@ -32,7 +32,7 @@ public class SymbolTable{
 	 */
 	public void printTable(){
 		System.out.println("\n------ Symbol table contents: ---"); //FIXME
-		System.out.println(table.keySet());
+		System.out.println(table.entrySet());
 	}
 
 

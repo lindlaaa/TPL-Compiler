@@ -119,4 +119,17 @@ public class Symbol{
     return this.isFunction;
   }
 
+  @Override
+  public String toString(){
+    String output = "";
+
+    output += " @@name = "+name;
+    output+= " @@type = "+type;
+    output += " @@Caller = " +callerFunction;
+    output += " @@Args amount = "+amtOfArgs;
+    output += " @@Is a Function?: "+isFunction;
+    output += "\n";
+    return output;
+  }
+
 }

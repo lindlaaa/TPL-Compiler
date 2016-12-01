@@ -24,10 +24,10 @@ public class SemanticAnalyzer{
 
     this.symbolTable = new SymbolTable();
     populatePairs();
-    //symbolTable.printTable(); //FIXME
     getBasicTypes();
     setFunctionParamsAmt(root);
     rebalanceTree();
+    //symbolTable.printTable(); //FIXME
   }
 
 
@@ -41,9 +41,9 @@ public class SemanticAnalyzer{
     for(Token each : tokenArray){
       if(each instanceof IdentifierToken){
         IdentifierToken var = (IdentifierToken)each;
-        //System.out.println(var.avery() + " -- " + var.getLexicalPair()); // FIXME
+        //System.out.println(var.getVal() + " -- " + var.getLexicalPair()); // FIXME
 
-        String varName = var.avery();
+        String varName = var.getVal();
         symbolTable.put(varName);
         symbolTable.addPair(varName, var.getLexicalPair());
         //symbolTable.printPairs(varName); // FIXME
@@ -96,7 +96,7 @@ public class SemanticAnalyzer{
       int amt=node.getChild(2).getChildren().size();//Getting arg amt
       String key = node.getChild(3).getID();        //Getting key
       BranchType type = node.getChild(1).getType(); //Getting type
-      
+
       symbolTable.get(key).setType(type);           //Set type to key
       symbolTable.get(key).setIsFunction(true);     //Set to a function
       symbolTable.get(key).setNumOfArgs(amt);       //Set num of args

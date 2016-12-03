@@ -8,7 +8,7 @@ public class SymbolTable{
 
 
 	/** The HashMap to hold all of our function and variable pairs. */
-	private HashMap table;
+	private static HashMap table;
 
 	/* Constructor */
 	public SymbolTable(){

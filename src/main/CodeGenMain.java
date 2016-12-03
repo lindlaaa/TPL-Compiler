@@ -47,7 +47,8 @@ public class CodeGenMain{
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     parser.parseProgram(treeVisible, name);
 
-    Generator generator = new Generator();
+
+    Generator generator = new Generator(parser.getAST());
     generator.generate(name);
   }
 }

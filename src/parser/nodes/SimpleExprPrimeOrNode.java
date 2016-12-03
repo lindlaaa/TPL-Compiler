@@ -12,6 +12,6 @@ public class SimpleExprPrimeOrNode extends SemanticNode{
 
   @Override
   public String toString(){
-    return "SimpleExprPrimeOrNode";
+    return "Or";
   }
 }

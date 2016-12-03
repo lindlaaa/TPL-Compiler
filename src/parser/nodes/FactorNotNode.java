@@ -12,6 +12,6 @@ public class FactorNotNode extends SemanticNode{
 
   @Override
   public String toString(){
-    return "FactorNotNode";
+    return "Negate";
   }
 }

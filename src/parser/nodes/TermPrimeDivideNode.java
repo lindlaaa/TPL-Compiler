@@ -17,9 +17,9 @@ public class TermPrimeDivideNode extends SemanticNode{
 		//check if children have assigned types
 	   }
   }*/
-  
+
   @Override
   public String toString(){
-    return "TermPrimeDivideNode";
+    return "Divide";
   }
 }

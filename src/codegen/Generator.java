@@ -1,13 +1,29 @@
 package src.codegen;
 
+import src.parser.nodes.ProgramNode;
 import src.parser.nodes.WriteString;
 
 public class Generator{
 
   private int line_num = 0;
+  private ProgramNode root;
 
 
+  public Generator(ProgramNode ast){
+    this.root = ast;
+  }
+
+
+  /**
+   *  This method kickastarts the TM gebneration process.
+   *  This includes the interpretation of the AST to 3AC and
+   *  also the interpretation to TM code.
+   *
+   *  @param fileName String representing the desired name of a file.
+   */
   public void generate(String fileName){
+
+    // TODO FIXME REDO this!
 
     String program =
        "0:  LDA		3,1(7)	; Store runtime return addr in R3\n"
@@ -54,20 +70,49 @@ public class Generator{
   public void generateMain(){}
   public void makeNewTemp(){}
   public void emitCode(){}
+
+
+  /**
+   *  emitRO takes parameters and outputs a string in the format
+   *  of a TM file. Following TM syntax semantics.
+   *  @param   line_num int representing the line of the instructions
+   *  @param   opcode   String representing the operation to output
+   *  @param   r1       int representing the register 1 output
+   *  @param   r2       int representing the register 2 output
+   *  @param   r3       int representing the register 3 output
+   *  @param   comment  String representing the comment to attach
+   *  @return  String of the properly formatted TM RO command.
+   */
   public String emitRO(int line_num, String opcode, int r1, int r2, int r3, String comment){
-    //String result = new String();
-    //result = line_num + ": " + opcode + " " + r1 + " " + r2 + " " + r3;
     String result = String.format("%-4s%-6s%s,%s,%-7s;%-10s", line_num+":",opcode,r1,r2,r3,comment);
-
     return result;
   }
+
+
+  /**
+   *  emitRM takes parameters and outputs a string in the format
+   *  of a TM file. Following TM syntax semantics.
+   *  @param   line_num int representing the line of the instructions
+   *  @param   opcode   String representing the operation to output
+   *  @param   r1       int representing the register 1 output
+   *  @param   offset   int representing the offset portion of a RM op
+   *  @param   r3       int representing the register 3 output
+   *  @param   comment  String representing the comment to attach
+   *  @return  String of the properly formatted TM RM command.
+   */
   public String emitRM(int line_num, String opcode, int r1, int offset, int r3, String comment){
-    //String result = new String();
-    //result = line_num + ": " + opcode + " " + r1 + " " + r2 + " (" + r3 + ")";
     String result = String.format("%-4s%-6s%s,%s%-8s;%-10s", line_num+":",opcode,r1,offset,"("+r3+")",comment);
-
     return result;
   }
+
+
+  public String emitComment(String comment){
+    String output = "";
+    output += "";
+    return output;
+  }
+
+
   private void emitRegister(){} //Optional, not necessary.
   public void makeNewLabel(){}
 

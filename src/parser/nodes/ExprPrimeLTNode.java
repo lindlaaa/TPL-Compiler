@@ -19,6 +19,6 @@ public class ExprPrimeLTNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "ExprPrimeLTNode";
+    return "LessThan";
   }
 }

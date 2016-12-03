@@ -20,6 +20,6 @@ public class TermPrimeTimesNode extends SemanticNode{
   */
   @Override
   public String toString(){
-    return "TermPrimeTimesNode";
+    return "Multiply";
   }
 }

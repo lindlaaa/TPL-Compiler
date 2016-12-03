@@ -22,9 +22,9 @@ public class IdentifierNode extends SemanticNode{
   public void typeCheck(){
     try{
       if(SymbolTable.table.containsKey(this.value)){
-        this.setNodeType(SymbolTable.table.get(this.value));	
-        //could set BranchType to first item in the value array, assuming the value is a generic array		
-        //this.setNodeType(SymbolTable.table.get(this.value).get(0));		
+        this.setNodeType(SymbolTable.table.get(this.value));
+        //could set BranchType to first item in the value array, assuming the value is a generic array
+        //this.setNodeType(SymbolTable.table.get(this.value).get(0));
        }
 	}catch(Exception e) {
       System.out.println("Exception thrown  :" + e);
@@ -34,6 +34,6 @@ public class IdentifierNode extends SemanticNode{
 
   @Override
   public String toString(){
-    return "IdentifierNode "+this.getID();
+    return "Identifier "+this.getID();
   }
 }

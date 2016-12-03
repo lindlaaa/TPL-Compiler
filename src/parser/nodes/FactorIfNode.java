@@ -21,6 +21,6 @@ public class FactorIfNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "FactorIfNode";
+    return "IfNode";
   }
 }

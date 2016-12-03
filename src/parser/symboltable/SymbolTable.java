@@ -8,7 +8,7 @@ public class SymbolTable{
 
 
 	/** The HashMap to hold all of our function and variable pairs. */
-	private HashMap table;
+	private static HashMap table;
 
 	/* Constructor */
 	public SymbolTable(){
@@ -32,7 +32,7 @@ public class SymbolTable{
 	 */
 	public void printTable(){
 		System.out.println("\n------ Symbol table contents: ---"); //FIXME
-		System.out.println(table.keySet());
+		System.out.println(table.entrySet());
 	}
 
 

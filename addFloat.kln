@@ -1,0 +1,65 @@
+program addFloat (x : integer,
+				  xExp: integer,
+				  y : integer,
+				  yExp: integer);
+
+	function breakUp(n : integer,
+				     nExp: integer,
+					 answer: integer) : integer
+	begin
+	   return
+		if (nExp = 0) then
+			answer
+		else
+			breakup((n -(n/10)),
+					nExp-1,
+					((answer * 10) + (n-(n/10)*10)))
+
+	end.
+
+	function exponent(x: integer,
+					  exp: integer): integer
+	begin
+		return if (exp = 0) then
+		        x
+			   else
+			    exponent(x,
+						 exp -1)
+	end.
+
+	function add (a  : integer,
+				  b  : integer): integer
+	begin
+		return a + b
+	end.
+
+	function largest(a : integer,
+					 b : integer): integer
+	begin
+	return
+		if (a < b) then
+			exponent(1, b+1)
+		else
+			exponent(1,a+1)
+	end.
+
+	function addF (a      : integer,
+				   aExp   : integer,
+				   b      : integer,
+				   bExp   : integer): integer
+	begin
+		return
+			if ((aExp - bExp) < 0) then
+				add(breakup(a, aExp, 0) * exponent(1,((aExp - bExp) * -1)),
+					breakup(b, bExp, 0))
+			else
+				add(breakup(b, bExp, 0) * exponent(1,(aExp - bExp)),
+					breakup(a, aExp, 0))
+	end.
+
+begin
+	print(add(add((x/exponent(1,xExp)),(y/exponent(1,yExp))),
+			  (addF(x, xExp, y, yExp)/ largest(xExp,yExp))));
+
+	return(addF(x, xExp, y, yExp) - (addF(x, xExp, y, yExp)/ largest(xExp,yExp)) * largest(xExp,yExp))
+end.

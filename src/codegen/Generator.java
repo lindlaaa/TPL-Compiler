@@ -2,20 +2,23 @@ package src.codegen;
 
 import src.parser.nodes.ProgramNode;
 import src.parser.nodes.WriteString;
+import src.parser.symboltable.SymbolTable;
 
 public class Generator{
 
   private int line_num = 0;
   private ProgramNode root;
+  private SymbolTable table;
 
 
-  public Generator(ProgramNode ast){
+  public Generator(ProgramNode ast, SymbolTable t){
     this.root = ast;
+    this.table = t;
   }
 
 
   /**
-   *  This method kickastarts the TM gebneration process.
+   *  This method kickastarts the TM generation process.
    *  This includes the interpretation of the AST to 3AC and
    *  also the interpretation to TM code.
    *

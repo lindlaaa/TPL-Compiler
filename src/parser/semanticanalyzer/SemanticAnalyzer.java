@@ -33,6 +33,16 @@ public class SemanticAnalyzer{
 
 
   /**
+   *  Returns the symboltable associated with this analyzer
+   *  @return SymbolTable
+   */
+  public SymbolTable getTable(){
+    return this.symbolTable;
+  }
+
+
+
+  /**
    *  Finds all identifiers in the program.
    *  Sets the LexicalPairs of each.
    */

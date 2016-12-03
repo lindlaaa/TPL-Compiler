@@ -48,7 +48,7 @@ public class CodeGenMain{
     parser.parseProgram(treeVisible, name);
 
 
-    Generator generator = new Generator(parser.getAST());
+    Generator generator = new Generator(parser.getAST(), parser.getTable());
     generator.generate(name);
   }
 }

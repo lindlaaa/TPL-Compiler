@@ -33,8 +33,9 @@ public class CodeGenMain{
     }
 
     File file = new File(fileName);
-
     String name = file.getName();
+    name = name.substring(0, name.length()-4);
+    //System.out.println("\n------ File name ---\n" + name);
 
     /*May be used to put the output file in the original files dirextory
     String path;
@@ -43,13 +44,11 @@ public class CodeGenMain{
     System.out.println(path);
     */
 
-    name = name.substring(0, name.length()-4);
-    //System.out.println("\n------ File name ---\n" + name);
-
     TableDrivenParser parser = new TableDrivenParser( new Scanner( fileName ));
     parser.parseProgram(treeVisible, name);
 
-    Generator generator = new Generator();
+
+    Generator generator = new Generator(parser.getAST(), parser.getTable());
     generator.generate(name);
   }
 }

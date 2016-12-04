@@ -22,16 +22,16 @@ public class LiteralBooleanNode extends SemanticNode{
     //TableDrivenParser.semanticBuffer.pop();
     this.value = (BoolToken)TableDrivenParser.semanticBuffer.pop();
   }
-  
+
   /*
   @Override
   public void typeCheck(){
     this.setNodeType(BranchType.BOOLEAN);
   }
   */
-  
+
   @Override
   public String toString(){
-    return "LiteralBooleanNode "+ this.value;
+    return "Boolean "+ this.value.getVal();
   }
 }

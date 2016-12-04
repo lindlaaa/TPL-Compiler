@@ -6,6 +6,7 @@ import src.scanner.*;
 import src.parser.*;
 import src.parser.nodes.*;
 import src.parser.semanticanalyzer.*;
+import src.parser.symboltable.SymbolTable;
 
 @SuppressWarnings("unchecked")
 public class TableDrivenParser extends Parser{
@@ -14,7 +15,8 @@ public class TableDrivenParser extends Parser{
   public static Stack parseStack = new Stack();
   public static Stack semanticStack = new Stack();
   public static Stack semanticBuffer = new Stack();
-  public static ProgramNode ast;
+  private static ProgramNode ast;
+  private static SemanticAnalyzer semAn;
 
   public TableDrivenParser(Scanner source) throws ScanException,
                                                   Exception{
@@ -30,6 +32,9 @@ public class TableDrivenParser extends Parser{
     }
   }
 
+  public SymbolTable getTable(){
+    return this.semAn.getTable();
+  }
 
 
 
@@ -54,7 +59,10 @@ public class TableDrivenParser extends Parser{
 
 
 
-
+  /**
+   *  TODO
+   */
+  @SuppressWarnings("unchecked")
   public void consumeSemanticAction() throws ParseException{
 	  SemanticAction tempAction = (SemanticAction)parseStack.pop();
     SemanticNode tempNode = NodeFactory.createNewNode(tempAction);
@@ -65,13 +73,15 @@ public class TableDrivenParser extends Parser{
 
 
 
+  /**
+   *  TODO
+   *  @param node SemanticNode
+   */
   private void balanceTree(SemanticNode node){
     SemanticNode child;
     SemanticNode childBelow;
 
-    /*
-     *  balances expressions but not functions
-     */
+    //balances expressions but not function
     if(node instanceof IdentifierNode  ||
        node instanceof IntTypeNode     ||
        node instanceof BoolTypeNode){
@@ -104,7 +114,12 @@ public class TableDrivenParser extends Parser{
   }
 
 
-
+  /**
+   *  TODO
+   *  @param   showTree boolean
+   *  @param   fileName String
+   *  @return  TODO
+   */
   @SuppressWarnings("unchecked")
   public boolean parseProgram(boolean showTree, String fileName) throws ParseException{
 
@@ -158,7 +173,7 @@ public class TableDrivenParser extends Parser{
       ast = (ProgramNode)semanticStack.peek();
       //System.out.println("\n------ Diagram of function contents: ---"); //FIXME
       balanceTree(ast);
-      SemanticAnalyzer semAn = new SemanticAnalyzer(ast, tokenArray);
+      semAn = new SemanticAnalyzer(ast, tokenArray);
 
       //-t
       if(showTree){
@@ -176,6 +191,7 @@ public class TableDrivenParser extends Parser{
       throw new ParseException("--Parser found tokens after program end.--");
     }
   }
+
 
 
   private Parsetable makeParsingTable() throws ScanException,

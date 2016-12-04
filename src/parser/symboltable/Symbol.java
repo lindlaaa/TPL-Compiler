@@ -73,7 +73,7 @@ public class Symbol{
     }
   }
 
-  public int numOfArgs(){
+  public int getNumOfArgs(){
     return this.amtOfArgs;
   }
 
@@ -117,6 +117,19 @@ public class Symbol{
 
   public boolean getIsFunction(){
     return this.isFunction;
+  }
+
+  @Override
+  public String toString(){
+    String output = "";
+
+    output += " @@name = "+name;
+    output+= " @@type = "+type;
+    output += " @@Caller = " +callerFunction;
+    output += " @@Args amount = "+amtOfArgs;
+    output += " @@Is a Function?: "+isFunction;
+    output += "\n";
+    return output;
   }
 
 }

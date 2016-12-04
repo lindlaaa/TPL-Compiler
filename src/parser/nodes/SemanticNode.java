@@ -103,6 +103,4 @@ public class SemanticNode implements NodeBehavior{
       printTree(each, appender + "| ");
     }
   }
-
-  public void typeCheck(){};
 }

@@ -19,6 +19,6 @@ public class SimpleExprPrimePlusNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "SimpleExprPrimePlusNode";
+    return "Plus";
   }
 }

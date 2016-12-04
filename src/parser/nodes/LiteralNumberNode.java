@@ -27,6 +27,6 @@ public class LiteralNumberNode extends SemanticNode{
 
   @Override
   public String toString(){
-    return "LiteralNumberNode "+ this.value;
+    return "Integer "+ this.value.getVal();
   }
 }

@@ -1,0 +1,93 @@
+/*
+//each node must hold its own E.Code() allowing for recursive calls until a literal or identifier
+
+//EVERY TIME A MAKETEMP() IS CALLED, MAKE SURE TO PLACE IT IN THE SYMBOL TABLE, EVEN IF NO VALUE EXISTS
+//THE TEMPS WITHIN THE CHILDRENS' EVALUATE FUNCTIONS MAY BE USED BY THE CALLING FUNCTION!!!
+
+//REDO AND HAVE AN EVALUATE() AND SETLOCATION() FUNCTION FOR EACH. THIS WAY THE LOCATION MAY BE OBTAINED ON ITS OWN
+//corresponding to E.Code()   AND E.Place()
+//this is why E.place is called befor e.code in the examples!!!
+
+public String makeTemp(){
+	static int varNumber = 0;
+	return "t"+varNumber;
+	
+}
+public String makeLabel(){
+	static int labelNumber = 0;
+	return "label"+labelNumber;
+}
+
+whileNode...
+public void evaluate(){
+	String L1 = makeLabel();
+	String L2 = makeLabel();
+	emit(L1 + " : " + getLeftChild().evaluate());
+	//this makeTemp() should actually use the var in getLeftChild().evaluate()
+	emit("if " + makeTemp() + " = 0 goto " + L2); 
+	emit(getRightChild().evaluate());
+	emit("goto " + L1);
+	emit(l2 + " : ");
+}
+
+ifThenNode...
+public void evaluate(){
+	String L1 = makeLabel();
+	String L2 = makeLabel();
+	emit("if" + getLeftChild().evaluate() + " goto " + L1));
+	emit("goto " + L2);
+	emit(L1 + " : " + getRightChild().evaluate() + L2 + " : ");
+}
+
+//determining if an equality or an assignment will be a bit tricky depending on the context
+assignmentNode...
+public void evaluate(){
+	emit(makeTemp() + " = " + getOnlyChild());
+}
+
+//we assume that an enum/constant is used for boolean types, but it will still prove challenging
+equalityComparisonNode...
+public void evaluate(){
+	INode n1 = getLeftChild();
+	INode n2 = getRightChild();
+	if(n1.evaluate )
+	emit(makeTemp() + ":= " + getLeftChild().evaluate() + "=" + getRightChild.evaluate());
+}
+
+plusNode...
+public String setVariable(){
+	return makeTemp();
+}
+public void evaluate(){
+	getLeftChild().evaluate() 
+	getRightChild.evaluate()
+	emit(makeTemp() + ":=" + getLeftChild().getVariable() + "+" getRightChild.getVariable());
+}
+
+minusNode...
+public void evaluate(){
+	emit(makeTemp() + ":=" + getLeftChild().evaluate() + "-" getRightChild.evaluate());
+}
+
+multNode...
+public void evaluate(){
+	emit(makeTemp() + ":=" + getLeftChild().evaluate() + "*" getRightChild.evaluate());
+}
+
+divNode...
+public void evaluate(){
+	emit(makeTemp() + ":=" + getLeftChild().evaluate() + "/" getRightChild.evaluate());
+}
+
+identifierNode...
+public void evaluate(){
+	//not sure where most updated value will be at
+	//emit(value); 
+	emit(symboltable.get(idName));
+}
+
+literalNode...
+public void evaluate(){
+	emit(value);
+}
+*/

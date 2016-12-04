@@ -8,8 +8,8 @@ public class LiteralNumberNode extends SemanticNode{
   IntToken value;
   int intValue = this.value.getVal();  
   
-  public int evaluate(){
-	  return this.intValue;
+  public String evaluate(){
+	  return this.intValue.toString();
   }
   
   @Override

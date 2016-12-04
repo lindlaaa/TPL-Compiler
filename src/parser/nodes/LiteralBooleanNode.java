@@ -9,11 +9,11 @@ public class LiteralBooleanNode extends SemanticNode{
   boolean boolValue = this.value.getVal();
   int intValue = 0;
 
-  public int evaluate(){
+  public String evaluate(){
 	if(boolValue){
 	  intValue = 1;
     }
-	  return this.intValue;
+	return this.intValue.toString();
   }
   
   @Override

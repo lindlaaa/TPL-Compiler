@@ -6,6 +6,7 @@ import src.scanner.BoolToken;
 public class LiteralBooleanNode extends SemanticNode{
 
   BoolToken value;
+  boolean boolValue = value.getVal();
 
   @Override
   public void setChildren(){

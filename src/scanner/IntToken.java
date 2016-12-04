@@ -39,7 +39,7 @@ public class IntToken implements Token{
    *
    * @return long representing the int value of this token
    */
-  public long getVal(){
+  public int getVal(){
       return intValue;
   }
 

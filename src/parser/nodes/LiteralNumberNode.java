@@ -8,6 +8,10 @@ public class LiteralNumberNode extends SemanticNode{
   IntToken value;
   int intValue = value.getVal();  
   
+  public int getLiteralVal(){
+	  return intValue;
+  }
+  
   @Override
   public void setChildren(){
     //this.addChild((int)TableDrivenParser.semanticBuffer.pop());FIXME

@@ -7,7 +7,15 @@ public class LiteralBooleanNode extends SemanticNode{
 
   BoolToken value;
   boolean boolValue = value.getVal();
+  int intValue = 0;
+  if(boolValue){
+	  intValue = 1;
+  }
 
+  public int getLiteralVal(){
+	  return intValue;
+  }
+  
   @Override
   public void setChildren(){
     //this.addChild((BoolToken)TableDrivenParser.semanticBuffer.pop());FIXME

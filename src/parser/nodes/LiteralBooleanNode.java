@@ -6,11 +6,10 @@ import src.scanner.BoolToken;
 public class LiteralBooleanNode extends SemanticNode{
 
   BoolToken value;
-  boolean boolValue = this.value.getVal();
   int intValue = 0;
 
   public String evaluate(){
-	if(boolValue){
+	if(this.value.getVal()){
 	  intValue = 1;
     }
 	return this.intValue.toString();

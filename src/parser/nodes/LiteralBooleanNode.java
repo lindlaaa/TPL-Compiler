@@ -8,11 +8,11 @@ public class LiteralBooleanNode extends SemanticNode{
   BoolToken value;
   boolean boolValue = this.value.getVal();
   int intValue = 0;
-  if(boolValue){
-	  intValue = 1;
-  }
 
   public int evaluate(){
+	if(boolValue){
+	  intValue = 1;
+    }
 	  return this.intValue;
   }
   

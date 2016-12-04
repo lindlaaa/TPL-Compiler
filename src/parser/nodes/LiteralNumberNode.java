@@ -6,10 +6,11 @@ import src.scanner.IntToken;
 public class LiteralNumberNode extends SemanticNode{
 
   IntToken value;
-  
+  long intValue;
+
+  @Override
   public String evaluate(){
-	int intValue = this.value.getVal();  	  
-	return this.intValue.toString();
+	  return Long.toString(this.value.getVal());
   }
   
   @Override

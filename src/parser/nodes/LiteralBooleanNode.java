@@ -6,7 +6,7 @@ import src.scanner.BoolToken;
 public class LiteralBooleanNode extends SemanticNode{
 
   BoolToken value;
-  int intValue = 0;
+  int intValue;
 
 
   @Override
@@ -14,7 +14,7 @@ public class LiteralBooleanNode extends SemanticNode{
 	  if(this.value.getVal()){
 	    intValue = 1;
     }
-	  return Integer.toString(this.intValue);
+	  return Integer.toString(this.value.getVal());
   }
 
   @Override

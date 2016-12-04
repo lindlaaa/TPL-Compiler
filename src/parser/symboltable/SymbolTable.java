@@ -138,7 +138,7 @@ public class SymbolTable{
 
 
 
-	public Symbol get(String key){
+	public static Symbol get(String key){
 		return (Symbol)table.get(key);
 	}
 

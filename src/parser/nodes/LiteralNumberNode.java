@@ -12,7 +12,7 @@ public class LiteralNumberNode extends SemanticNode{
   public String evaluate(){
 	  return Long.toString(this.value.getVal());
   }
-  
+
   @Override
   public void setChildren(){
     //this.addChild((int)TableDrivenParser.semanticBuffer.pop());FIXME

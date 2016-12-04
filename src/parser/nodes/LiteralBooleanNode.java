@@ -13,10 +13,12 @@ public class LiteralBooleanNode extends SemanticNode{
   public String evaluate(){
 	  if(this.value.getVal()){
 	    intValue = 1;
+    }else{
+      intValue = 0;
     }
-	  return Integer.toString(this.value.getVal());
+	  return Integer.toString(intValue);
   }
-  
+
   @Override
   public void setChildren(){
     //this.addChild((BoolToken)TableDrivenParser.semanticBuffer.pop());FIXME

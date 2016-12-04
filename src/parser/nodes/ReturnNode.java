@@ -9,6 +9,16 @@ public class ReturnNode extends SemanticNode{
       this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
+
+
+  @Override
+  public String evaluate(){
+    String temp = this.getChild(0).evaluate();
+    emit("Return "+temp);
+    return temp;
+  }
+
+
   /*
   @Override
   public void typeCheck(){

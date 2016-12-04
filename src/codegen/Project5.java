@@ -1,9 +1,10 @@
+/*
 package src.codegen;
 
 import src.parser.symboltable.*;
 
 public class Project5 {
-
+    
     public static void main(String[] args) {
           Quadruple q = new Quadruple();
           q.emit("op","arg1","arg2","result");
@@ -12,6 +13,7 @@ public class Project5 {
           q.emit("op","arg1","result");
           q.emit("op","result");
           System.out.println(q);
+*/
 //        RunTimeStack dMemory = new RunTimeStack();
 //        //test frame 1
 //        int[] inputArgs = {1};

@@ -2,7 +2,12 @@ package src.parser.nodes;
 
 import src.parser.*;
 import src.scanner.IdentifierToken;
+import src.parser.symboltable.*;
+import src.codegen.Generator;
+import java.util.ArrayList;
 
+
+@SuppressWarnings("unchecked")
 public class IdentifierNode extends SemanticNode{
 
   IdentifierToken value;
@@ -12,6 +17,33 @@ public class IdentifierNode extends SemanticNode{
     //this.addChild((String)TableDrivenParser.semanticBuffer.pop());FIXME
     this.value = (IdentifierToken)TableDrivenParser.semanticBuffer.pop();
   }
+
+
+  @Override
+  public String evaluate(){
+
+    Symbol sym = SymbolTable.get(this.getID());
+    ArrayList paramArray = new ArrayList();
+    String temp = "";
+
+    if( sym.getIsFunction() ){ //Function ID
+      temp = Generator.newTemp();
+
+      for(int i = 0; i < sym.getNumOfArgs(); i++){ //Evaluate each child
+        temp = this.getChild(i).evaluate();
+        paramArray.add(temp);
+      }
+      temp = Generator.newTemp();
+      Generator.emitFnCall(this.getID(), paramArray, temp);
+      return temp;
+    }else{ //Leaf: Variable ID
+      temp = Generator.newTemp();
+      Generator.emit("assign",this.getID(),temp);
+      return temp;
+
+    }
+  }
+
 
   @Override
   public String getID(){

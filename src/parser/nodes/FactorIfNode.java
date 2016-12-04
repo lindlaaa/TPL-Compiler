@@ -7,7 +7,7 @@ public class FactorIfNode extends SemanticNode{
   public void setChildren(){
     for(int i = 0; i < 3; i++){
       if(TableDrivenParser.semanticStack.peek() instanceof ExprNode){
-	      this.addChild((ExprNode)TableDrivenParser.semanticStack.pop(), this);
+	      this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
 	    }
 	  }
   }

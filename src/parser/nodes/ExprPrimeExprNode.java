@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.codegen.Generator;
 
 public class ExprPrimeExprNode extends SemanticNode{
   @Override
@@ -9,6 +10,19 @@ public class ExprPrimeExprNode extends SemanticNode{
       this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
+
+
+  @Override
+  public String evaluate(){
+    String arg1 = this.getChild(0).evaluate();
+    String arg2 = this.getChild(1).evaluate();
+    String temp = Generator.newTemp();
+
+    Generator.emit("equalTo", arg1, arg2, temp);
+
+    return temp;
+  }
+
   /*
   @Override
   public void typeCheck(){
@@ -19,6 +33,6 @@ public class ExprPrimeExprNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "ExprPrimeExprNode";
+    return "isEqualTo?";
   }
 }

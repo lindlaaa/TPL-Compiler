@@ -61,6 +61,7 @@ public class TableDrivenParser extends Parser{
 
   /**
    *  TODO
+   *  @throws ParseException [description]
    */
   @SuppressWarnings("unchecked")
   public void consumeSemanticAction() throws ParseException{
@@ -116,9 +117,10 @@ public class TableDrivenParser extends Parser{
 
   /**
    *  TODO
-   *  @param   showTree boolean
-   *  @param   fileName String
-   *  @return  TODO
+   *  @param  fileName        String      TODO
+   *  @param  showTree        boolean     TODO
+   *  @return                boolean representing if parse was a success
+   *  @throws ParseException TODO
    */
   @SuppressWarnings("unchecked")
   public boolean parseProgram(boolean showTree, String fileName) throws ParseException{

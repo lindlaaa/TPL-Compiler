@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import src.parser.*;
 import src.parser.semanticanalyzer.*;
+import src.parser.symboltable.Symbol;
+import src.codegen.Generator;
+import java.util.ArrayList;
+
 
 public class SemanticNode implements NodeBehavior{
 
@@ -16,6 +20,10 @@ public class SemanticNode implements NodeBehavior{
 
   public SemanticNode() {
     this.parent = null;
+  }
+
+  public String evaluate(){
+    return "FAIL";
   }
 
   public String getID(){

@@ -4,6 +4,8 @@ import src.parser.nodes.ProgramNode;
 import src.parser.nodes.WriteString;
 import src.parser.symboltable.SymbolTable;
 
+import java.util.ArrayList;
+
 public class Generator{
 
   private int line_num = 0;
@@ -65,6 +67,17 @@ public class Generator{
     WriteString writer = new WriteString();
     writer.write(program, fileName);
   }; //Main
+
+
+  public static String newTemp(){
+    return "test";
+  }
+  public static void emit(String s){}
+  public static void emit(String a, String v){}
+  public static void emit(String a, String s, String f){}
+  public static void emit(String a, String s, String f, String h){}
+
+  public static void emitFnCall(String a, ArrayList s, String t){}
 
 
 

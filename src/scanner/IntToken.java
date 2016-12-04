@@ -39,7 +39,7 @@ public class IntToken implements Token{
    *
    * @return long representing the int value of this token
    */
-  public int getVal(){
+  public long getVal(){
       return intValue;
   }
 
@@ -65,7 +65,7 @@ public class IntToken implements Token{
   public LexicalPair getLexicalPair(){
 	  return new LexicalPair(this.line, this.col);
   }
-  
+
 
   public int getTerminalType(){
     return 28;

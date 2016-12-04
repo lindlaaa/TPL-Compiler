@@ -6,16 +6,19 @@ import src.scanner.BoolToken;
 public class LiteralBooleanNode extends SemanticNode{
 
   BoolToken value;
-  boolean boolValue = this.value.getVal();
+  boolean boolValue;
   int intValue = 0;
 
-  public int evaluate(){
-	if(boolValue){
-	  intValue = 1;
+
+  @Override
+  public String evaluate(){
+    this.boolValue = this.value.getVal();
+  	if(boolValue){
+  	  intValue = 1;
     }
-	  return this.intValue;
+	  return Integer.toString(this.intValue);
   }
-  
+
   @Override
   public void setChildren(){
     //this.addChild((BoolToken)TableDrivenParser.semanticBuffer.pop());FIXME

@@ -6,12 +6,14 @@ import src.scanner.IntToken;
 public class LiteralNumberNode extends SemanticNode{
 
   IntToken value;
-  int intValue = this.value.getVal();  
-  
-  public int evaluate(){
-	  return this.intValue;
+  long intValue;
+
+  @Override
+  public String evaluate(){
+    this.intValue = this.value.getVal();
+	  return Long.toString(this.intValue);
   }
-  
+
   @Override
   public void setChildren(){
     //this.addChild((int)TableDrivenParser.semanticBuffer.pop());FIXME

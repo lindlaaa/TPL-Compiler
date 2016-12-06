@@ -96,7 +96,7 @@ public class SymbolTable{
 			//System.out.println("Already Exists.\n"); // FIXME
 			return false;
 		}else{
-			Symbol tempSymbol = new Symbol(tempKey, "-Parent Name-"); //FIXME
+			Symbol tempSymbol = new Symbol(tempKey, "-TODO-"); //FIXME
 			table.put(tempKey, tempSymbol);
 			//System.out.println("added new pair.\n"); // FIXME
 			return true;

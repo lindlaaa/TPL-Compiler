@@ -27,7 +27,7 @@ public class SemanticAnalyzer{
     getBasicTypes();
     setFunctionParamsAmt(root);
     rebalanceTree();
-    //symbolTable.printTable(); //FIXME
+    symbolTable.printTable(); //FIXME
   }
 
 

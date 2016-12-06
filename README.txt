@@ -17,10 +17,11 @@ Compile & Run:
 
   D.  SemanticAnalyzer
     1.  make parser
-    2.  ./flairp <filename>
+    2.  ./flairv <filename>
     3.  Run as ./flairp -t <filename>
       a. This saves AST to a file in the root directory called <filename>.dot
       b. Open with GraphViz to see the new tree graph
+    NOTE: flairv always prints the symbol table to stdout.
 
   E.  Code Generator
     1.  make
@@ -29,40 +30,45 @@ Compile & Run:
       a. This saves AST to a file in the root directory called <filename>.dot
       b. Open with GraphViz to see the new tree graph
 
-  E  Test script
+  F  Test script
     1.  make run
 
 
 Documentation:    doc/
 
-Date:       2016/11/04
+Date:       2016/12/06
 
 
 Known Issues: Does not compile my other homework.
-              Does not have great documentation for Parser Components...yet...still....
-              SymbolTable is not complete.
+              Needs better source code documentation.
               TypeChecker is not complete.
-              The hashMap in SymbolTable is giving us trouble when trying
-                  to reference the keys. We cannot access the HashMap.
               We regenerate JavaDoc on every compilation.
                 This is a design decision and is intentional.
                 Final submission at the end of the semester will not.
+              SymbolTable does NOT record the name(list) of the function(s)
+                in which it is referenced. Will output -TODO-
+
 
 Directory Structure:
 NEW:
-  flairc  : script used to create a .tm file with same name as original
+  flairv  : script used to output and test the SemanticAnalyzer,
+              which itself calls the SymbolTable.
 
 OLD:
   bin/ : stores the binary files
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
   test_ignore/: stores the .flr files used to test the project parts
-  two-exponents.flr: The program required to turn into the AST Parser
   flairp: The script to run the parser
   flairs: The script to run the scanner
+  flairc  : script used to create a .tm file with same name as original
   flairTest:  The script that runs all of our test programs
   Makefile: Contains the make commands for ease-of-use
-  ~Other files~: Used to support the GitHub Pages website.
+  StackFrameDiagram.txt:  Reference diagram for our stack frame for flairc.
+  ~Other files~: Used to support the GitHub Pages.
+
+
+
 
 
 High level Scanner design:

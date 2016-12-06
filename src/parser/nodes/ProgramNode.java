@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.codegen.Generator;
 
 public class ProgramNode extends SemanticNode{
   @Override
@@ -18,6 +19,17 @@ public class ProgramNode extends SemanticNode{
 	    this.addChild((IdentifierNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
+
+
+
+  public String evaluate(){
+    String result = getChild(0).evaluate(); // body node
+    Generator.emit("print",result);
+    getChild(1).evaluate(); //definitions node
+    return result;
+  }
+
+
 
   /*
   @Override

@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.codegen.Generator;
 
 public class FactorIfNode extends SemanticNode{
   @Override
@@ -11,6 +12,18 @@ public class FactorIfNode extends SemanticNode{
 	    }
 	  }
   }
+
+
+  @Override
+  public String evaluate(){
+    String test = this.getChild(0).evaluate();
+    String tempLabel = Generator.newLabel();
+    Generator.emit("If",test,"GOTO",Generator.newLabel());
+    return test;
+  }
+
+
+
   /*
   @Override
   public void typeCheck(){

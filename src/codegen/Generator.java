@@ -6,16 +6,28 @@ import src.parser.symboltable.SymbolTable;
 
 import java.util.ArrayList;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Generator{
 
   private int line_num = 0;
   private ProgramNode root;
   private SymbolTable table;
 
+  private static int curRow = -1;
+  private static List<List<String>> quadruple = new ArrayList<>();
+
+
+  public static int tempAmount= 1;
+  public static int tempLabel = 1;
+
 
   public Generator(ProgramNode ast, SymbolTable t){
     this.root = ast;
     this.table = t;
+    this.root.evaluate();
+    System.out.println(this);
   }
 
 
@@ -69,15 +81,60 @@ public class Generator{
   }; //Main
 
 
-  public static String newTemp(){
-    return "test";
+  public static void emit(String op, String arg1, String arg2, String res){
+      List<String> tempRow = new ArrayList<>(Arrays.asList(op,arg1,arg2,res));
+      Generator.quadruple.add(tempRow);
   }
-  public static void emit(String s){}
-  public static void emit(String a, String v){}
-  public static void emit(String a, String s, String f){}
-  public static void emit(String a, String s, String f, String h){}
+  public static void emit(String op, String arg1, String res){
+      List<String> tempRow = new ArrayList<>(Arrays.asList(op,arg1,"",res));
+      Generator.quadruple.add(tempRow);
+  }
+  public static void emit(String op,String res){
+      List<String> tempRow = new ArrayList<>(Arrays.asList(op,"","",res));
+      Generator.quadruple.add(tempRow);
+  }
+  public static void emit(String op){
+      List<String> tempRow = new ArrayList<>(Arrays.asList(op,"","",""));
+      Generator.quadruple.add(tempRow);
+  }
+  public static List<String> get3ACLine(){
+      curRow++;
+      return Generator.quadruple.get(curRow);
+  }
+  @Override
+  public String toString(){
+      String outString = "";
+      for(int i = 0; i < Generator.quadruple.size();i++){
+          for(int k = 0; k < Generator.quadruple.get(i).size(); k++){
+              outString += Generator.quadruple.get(i).get(k).toString() + " ";
+          }
+          outString += "\n";
+      }
+      return outString;
+  }
 
-  public static void emitFnCall(String a, ArrayList s, String t){}
+  public static String newTemp(){
+    String outString = "t" + tempAmount;
+    tempAmount++;
+
+    return outString;
+  }
+
+  public static String newLabel(){
+    String outString = "L" + tempLabel;
+    tempLabel++;
+
+    return outString;
+  }
+  //public static void emit(String s){}
+  //public static void emit(String a, String v){}
+  //public static void emit(String a, String s, String f){}
+  //public static void emit(String a, String s, String f, String h){}
+
+  public static void emitFunctionCall(String a, ArrayList s, String t){
+    List<String> tempRow = new ArrayList<>(Arrays.asList("Function call was here"));
+    Generator.quadruple.add(tempRow);
+  }
 
 
 

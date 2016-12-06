@@ -1,6 +1,7 @@
 package src.parser.nodes;
 
 import src.parser.*;
+import src.codegen.Generator;
 
 public class PrintStatementNode extends SemanticNode{
   @Override
@@ -9,6 +10,17 @@ public class PrintStatementNode extends SemanticNode{
       this.takeChildren((ExprNode)TableDrivenParser.semanticStack.pop(), this);
     }
   }
+
+
+
+  @Override
+  public String evaluate(){
+    String temp = this.getChild(0).evaluate();
+    Generator.emit("print "+temp);
+    return temp;
+  }
+
+
   /*
   @Override
   public void typeCheck(){
@@ -19,6 +31,6 @@ public class PrintStatementNode extends SemanticNode{
 }*/
   @Override
   public String toString(){
-    return "PrintStatementNode";
+    return "Print";
   }
 }

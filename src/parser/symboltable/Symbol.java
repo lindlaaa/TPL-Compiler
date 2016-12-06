@@ -132,7 +132,7 @@ public class Symbol{
     String isA   = "\n    @Is a Function?: "+isFunction;
     String p     = "\n    @"+printPair();
 
-    output = String.format("%-20s%-20s%-20s%-20s%-20s%s\n", n,t,caller,args,isA,p);
+    output = String.format("%-20s%-20s%-20s%-20s%-20s%s\n\n", n,t,caller,args,isA,p);
 
     return output;
   }

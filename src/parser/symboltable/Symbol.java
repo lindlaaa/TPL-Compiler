@@ -80,10 +80,12 @@ public class Symbol{
 
 
   /**
-   *  Prints the LexicalPairs of the key to stdout.
+   *  returns and prints the lexical pairs of the symbol
+   *  @return String representing the array of pairs
    */
-  public void printPair(){
-    System.out.println(name + " -- " + pairsList);
+  public String printPair(){
+    //System.out.println(name + " -- " + pairsList);
+    return "References [X,Y]--> " + pairsList;
   }
 
 
@@ -121,14 +123,17 @@ public class Symbol{
 
   @Override
   public String toString(){
-    String output = "";
+    String output;
 
-    output += " @@name = "+name;
-    output+= " @@type = "+type;
-    output += " @@Caller = " +callerFunction;
-    output += " @@Args amount = "+amtOfArgs;
-    output += " @@Is a Function?: "+isFunction;
-    output += "\n";
+    String n     = "\n    @Name = "+name;
+    String t     = "\n    @Type = "+type;
+    String caller= "\n    @Caller = " +callerFunction;
+    String args  = "\n    @Args amount = "+amtOfArgs;
+    String isA   = "\n    @Is a Function?: "+isFunction;
+    String p     = "\n    @"+printPair();
+
+    output = String.format("%-20s%-20s%-20s%-20s%-20s%s\n", n,t,caller,args,isA,p);
+
     return output;
   }
 

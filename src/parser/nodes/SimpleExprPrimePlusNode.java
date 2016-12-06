@@ -13,8 +13,8 @@ public class SimpleExprPrimePlusNode extends SemanticNode{
 
   @Override
   public String evaluate(){
-    String arg1 = this.getChild(0).evaluate();
-    String arg2 = this.getChild(1).evaluate();
+    String arg1 = this.getChild(1).evaluate();
+    String arg2 = this.getChild(0).evaluate();
     String temp = Generator.newTemp();
 
     Generator.emit("minus", arg1, arg2, temp);

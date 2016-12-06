@@ -16,9 +16,27 @@ public class FactorIfNode extends SemanticNode{
 
   @Override
   public String evaluate(){
-    String test = this.getChild(0).evaluate();
-    String tempLabel = Generator.newLabel();
-    Generator.emit("If",test,"GOTO",Generator.newLabel());
+    //lebels
+    String firstLabel = Generator.newLabel();
+    String secondLabel = Generator.newLabel();
+
+    //test node
+    String test = this.getChild(2).evaluate();
+
+    Generator.emit("If",test,"GOTO",firstLabel);
+
+    //then node
+    this.getChild(1).evaluate();
+    Generator.emit("assign",this.getChild(1).evaluate());
+    Generator.emit("GOTO",secondLabel);
+
+    //else node
+    Generator.emit("Label "+firstLabel);
+    this.getChild(0).evaluate();
+    Generator.emit("assign",this.getChild(0).evaluate());
+
+    Generator.emit("Label "+secondLabel);
+
     return test;
   }
 

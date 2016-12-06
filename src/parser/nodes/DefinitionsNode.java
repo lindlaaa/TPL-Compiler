@@ -12,6 +12,19 @@ public class DefinitionsNode extends SemanticNode{
       this.addChild((DefNode)TableDrivenParser.semanticStack.pop(), this);
 	  }
   }
+
+
+
+  @Override
+  public String evaluate(){
+    for(SemanticNode each : this.getChildren()){
+      each.evaluate(); // for all of the defs
+    }
+    return "___ERROR___";
+  }
+
+
+
   /*
   @Override
   public void typeCheck(){

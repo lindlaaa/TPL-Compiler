@@ -27,7 +27,7 @@ public class Generator{
     this.root = ast;
     this.table = t;
     this.root.evaluate();
-    System.out.println(this);
+    System.out.println(this); //TODO FOXME
   }
 
 
@@ -40,8 +40,7 @@ public class Generator{
    */
   public void generate(String fileName){
 
-    // TODO FIXME REDO this!
-
+    // TODO FIXME REDO this!m
     String program =
        "0:  LDA		3,1(7)	; Store runtime return addr in R3\n"
       +"1:  ST    1,7(6)  ; Store arg\n"
@@ -114,17 +113,11 @@ public class Generator{
   }
 
   public static String newTemp(){
-    String outString = "t" + tempAmount;
-    tempAmount++;
-
-    return outString;
+    return "t"+tempAmount++;
   }
 
   public static String newLabel(){
-    String outString = "L" + tempLabel;
-    tempLabel++;
-
-    return outString;
+    return "L"+tempLabel++;
   }
   //public static void emit(String s){}
   //public static void emit(String a, String v){}

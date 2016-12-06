@@ -3,14 +3,14 @@
 for i in $( ls test_ignore/parser_pass/ ); do
   echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
   echo -e "\033[1;32mStarting parser_pass/$i\033[m"
-  echo | ./flairp ../test_ignore/parser_pass/$i $1
+  echo | ./flairc ../test_ignore/parser_pass/$i $1
 done
 echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
 
 for i in $( ls test_ignore/parser_fail/ ); do
   echo -e "\x1b[0;36m--------------------------------------------\x1b[m"
   echo -e "\033[1;31mStarting parser_fail/$i/$i\033[m"
-  echo | ./flairp ../test_ignore/parser_fail/$i $1
+  echo | ./flairc ../test_ignore/parser_fail/$i $1
 done
 echo -e "\x1b[0;34m++++++++++++++++++++++++++++++++++++++++++++++++++++\x1b[m"
 

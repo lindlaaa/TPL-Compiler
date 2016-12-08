@@ -5,6 +5,7 @@ import src.scanner.IdentifierToken;
 import src.parser.symboltable.*;
 import src.codegen.Generator;
 import java.util.ArrayList;
+//import src.codegen.Project5; //TODO FIXME
 
 
 @SuppressWarnings("unchecked")
@@ -39,6 +40,7 @@ public class IdentifierNode extends SemanticNode{
       return temp;
     }else{ //Leaf: Variable ID
       temp = Generator.newTemp();
+      //Project5.testTable.setVal(temp,Integer.MIN_VALUE); //TODO FIXME
       Generator.emit("assign",this.getID(),temp);
       return temp;
 

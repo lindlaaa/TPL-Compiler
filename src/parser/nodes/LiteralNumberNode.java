@@ -3,6 +3,7 @@ package src.parser.nodes;
 import src.parser.*;
 import src.scanner.IntToken;
 import src.codegen.Generator;
+//import src.codegen.Project5; //TODO FIXME
 
 public class LiteralNumberNode extends SemanticNode{
 
@@ -12,6 +13,7 @@ public class LiteralNumberNode extends SemanticNode{
   @Override
   public String evaluate(){
     String temp = Generator.newTemp();
+    //Project5.testTable.setVal(temp,Integer.parseInt(this.value.getVal())); //TODO FIXME
     Generator.emit("assign",Long.toString(this.value.getVal()),temp);
 	  return temp;
   }

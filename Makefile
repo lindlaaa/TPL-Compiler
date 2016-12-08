@@ -37,9 +37,9 @@ parser:
 
 clean:
 	@rm -rf doc/*
-	@cp test_ignore/doNotDelete doc/
+	@cp test_programs/doNotDelete doc/
 	@rm -rf bin/*
-	@cp test_ignore/doNotDelete bin/
+	@cp test_programs/doNotDelete bin/
 	@rm -f *.dot
 	@rm -f *.tm
 	@echo "Squeaky!"

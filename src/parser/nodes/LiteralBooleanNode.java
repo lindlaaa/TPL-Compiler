@@ -2,6 +2,7 @@ package src.parser.nodes;
 
 import src.parser.*;
 import src.scanner.BoolToken;
+import src.codegen.Generator;
 
 public class LiteralBooleanNode extends SemanticNode{
 
@@ -11,12 +12,13 @@ public class LiteralBooleanNode extends SemanticNode{
 
   @Override
   public String evaluate(){
+    String temp = Generator.newTemp();
 	  if(this.value.getVal()){
-	    intValue = 1;
+	    Generator.emit("assign","1",temp);
     }else{
-      intValue = 0;
+      Generator.emit("assign","0",temp);
     }
-	  return Integer.toString(intValue);
+	  return temp;
   }
 
   @Override

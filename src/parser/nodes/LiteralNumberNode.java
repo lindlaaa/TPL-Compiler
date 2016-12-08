@@ -2,6 +2,7 @@ package src.parser.nodes;
 
 import src.parser.*;
 import src.scanner.IntToken;
+import src.codegen.Generator;
 
 public class LiteralNumberNode extends SemanticNode{
 
@@ -10,7 +11,9 @@ public class LiteralNumberNode extends SemanticNode{
 
   @Override
   public String evaluate(){
-	  return Long.toString(this.value.getVal());
+    String temp = Generator.newTemp();
+    Generator.emit("assign",Long.toString(this.value.getVal()),temp);
+	  return temp;
   }
 
   @Override

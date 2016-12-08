@@ -124,9 +124,17 @@ public class Generator{
   //public static void emit(String a, String s, String f){}
   //public static void emit(String a, String s, String f, String h){}
 
-  public static void emitFunctionCall(String a, ArrayList s, String t){
-    List<String> tempRow = new ArrayList<>(Arrays.asList("Function call was here"));
+  public static void emitFunctionCall(String a, ArrayList params, String t){/*
+    List<String> tempRow = new ArrayList<>(Arrays.asList("BEGIN_CALL"));
     Generator.quadruple.add(tempRow);
+    for(String param : params){
+      tempRow = new ArrayList<>(Arrays.asList(param));
+      Generator.quadruple.add(tempRow);
+    }
+    tempRow = new ArrayList<>(Arrays.asList("Call "+a));
+    Generator.quadruple.add(tempRow);
+    tempRow = new ArrayList<>(Arrays.asList("Recieve "+t));
+    Generator.quadruple.add(tempRow);*/
   }
 
 

@@ -19,7 +19,7 @@ public class Project5 {
     }
 
     public String Do() throws Exception{
-      System.out.println(testTable);
+      //System.out.println(testTable);
       ImemManager imem = new ImemManager(testTable);
       for(int i = 0; i < g.Length();i++){
           List<String> nextRow = g.get3ACLine();

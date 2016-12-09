@@ -1,0 +1,33 @@
+Script started on Fri Dec  9 16:46:33 2016
+_________________________________________________________| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa)| => make
+. . . . !
+
+--Flair Compiler Ready!--
+
+_________________________________________________________| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa)| => ./flairc -t ../test.kln
+ProgramNode
+| BodyNode
+| | ReturnNode
+| | | Plus
+| | | | Minus
+| | | | | Plus
+| | | | | | Plus
+| | | | | | | Integer 9
+| | | | | | | Minus
+| | | | | | | | Integer 3
+| | | | | | | | Integer 12
+| | | | | | Minus
+| | | | | | | Integer 12
+| | | | | | | Multiply
+| | | | | | | | Integer 999
+| | | | | | | | Integer 1
+| | | | | Plus
+| | | | | | Multiply
+| | | | | | | Integer 5
+| | | | | | | Integer 2
+| | | | | | Integer 6
+| | | | Integer 6
+| Identifier main
+
+
+Script done on Fri Dec  9 16:47:00 2016

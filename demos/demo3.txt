@@ -1,0 +1,240 @@
+Script started on Fri Dec  9 16:53:01 2016
+[?1034h_________________________________________________________
+| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa) 
+| => make
+. . . . !
+
+--Flair Compiler Ready!--
+_________________________________________________________
+| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa) 
+| => ./flairc -t ../addFloat.flr
+ProgramNode
+| BodyNode
+| | ReturnNode
+| | | Identifier addF
+| | | | Identifier x
+| | | | Identifier xExp
+| | | | Identifier y
+| | | | Minus
+| | | | | Identifier addF
+| | | | | | Identifier x
+| | | | | | Identifier xExp
+| | | | | | Identifier y
+| | | | | | Multiply
+| | | | | | | Identifier largest
+| | | | | | | | Identifier xExp
+| | | | | | | | Identifier yExp
+| | | | | | | Divide
+| | | | | | | | Identifier largest
+| | | | | | | | | Identifier xExp
+| | | | | | | | | Identifier yExp
+| | | | | | | | Identifier yExp
+| | | | | Identifier yExp
+| | Print
+| | | Identifier add
+| | | | Identifier addF
+| | | | | Identifier add
+| | | | | | Divide
+| | | | | | | Identifier exponent
+| | | | | | | | Integer 1
+| | | | | | | | Identifier xExp
+| | | | | | | Identifier x
+| | | | | | Divide
+| | | | | | | Identifier exponent
+| | | | | | | | Integer 1
+| | | | | | | | Identifier yExp
+| | | | | | | Identifier y
+| | | | Identifier x
+| | | | Identifier xExp
+| | | | Identifier y
+| | | | Divide
+| | | | | Identifier largest
+| | | | | | Identifier xExp
+| | | | | | Identifier yExp
+| | | | | Identifier yExp
+| DefinitionsNode
+| | DefNode
+| | | BodyNode
+| | | | ReturnNode
+| | | | | IfNode
+| | | | | | Identifier add
+| | | | | | | Identifier add
+| | | | | | | | Integer 0
+| | | | | | | | Identifier bExp
+| | | | | | | | Identifier b
+| | | | | | | | Identifier breakup
+| | | | | | | | Multiply
+| | | | | | | | | Identifier exponent
+| | | | | | | | | | Integer 1
+| | | | | | | | | | Multiply
+| | | | | | | | | | | Negate
+| | | | | | | | | | | | Integer 1
+| | | | | | | | | | | Minus
+| | | | | | | | | | | | Identifier bExp
+| | | | | | | | | | | | Identifier aExp
+| | | | | | | | | Integer 0
+| | | | | | | | Identifier aExp
+| | | | | | | | Identifier a
+| | | | | | | | Identifier breakup
+| | | | | | | Identifier breakup
+| | | | | | | Identifier b
+| | | | | | | Identifier bExp
+| | | | | | | Multiply
+| | | | | | | | Identifier exponent
+| | | | | | | | | Integer 1
+| | | | | | | | | Minus
+| | | | | | | | | | Identifier bExp
+| | | | | | | | | | Identifier aExp
+| | | | | | | | Integer 0
+| | | | | | | Identifier breakup
+| | | | | | | Identifier a
+| | | | | | | Identifier aExp
+| | | | | | | Integer 0
+| | | | | | LessThan
+| | | | | | | Integer 0
+| | | | | | | Minus
+| | | | | | | | Identifier bExp
+| | | | | | | | Identifier aExp
+| | | IntTypeNode
+| | | FormalsNode
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier bExp
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier b
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier aExp
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier a
+| | | Identifier addF
+| | DefNode
+| | | BodyNode
+| | | | ReturnNode
+| | | | | IfNode
+| | | | | | Identifier exponent
+| | | | | | | Identifier exponent
+| | | | | | | | Plus
+| | | | | | | | | Integer 1
+| | | | | | | | | Identifier b
+| | | | | | | | Integer 1
+| | | | | | | Integer 1
+| | | | | | | Plus
+| | | | | | | | Integer 1
+| | | | | | | | Identifier a
+| | | | | | LessThan
+| | | | | | | Identifier b
+| | | | | | | Identifier a
+| | | IntTypeNode
+| | | FormalsNode
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier b
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier a
+| | | Identifier largest
+| | DefNode
+| | | BodyNode
+| | | | ReturnNode
+| | | | | Plus
+| | | | | | Identifier b
+| | | | | | Identifier a
+| | | IntTypeNode
+| | | FormalsNode
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier b
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier a
+| | | Identifier add
+| | DefNode
+| | | BodyNode
+| | | | ReturnNode
+| | | | | IfNode
+| | | | | | Identifier exponent
+| | | | | | | Identifier x
+| | | | | | | Minus
+| | | | | | | | Integer 1
+| | | | | | | | Identifier exp
+| | | | | | Identifier x
+| | | | | | isEqualTo?
+| | | | | | | Integer 0
+| | | | | | | Identifier exp
+| | | IntTypeNode
+| | | FormalsNode
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier exp
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier x
+| | | Identifier exponent
+| | DefNode
+| | | BodyNode
+| | | | ReturnNode
+| | | | | IfNode
+| | | | | | Plus
+| | | | | | | Minus
+| | | | | | | | Multiply
+| | | | | | | | | Integer 10
+| | | | | | | | | Divide
+| | | | | | | | | | Integer 10
+| | | | | | | | | | Identifier n
+| | | | | | | | Identifier n
+| | | | | | | Multiply
+| | | | | | | | Integer 10
+| | | | | | | | Identifier answer
+| | | | | | Minus
+| | | | | | | Integer 1
+| | | | | | | Identifier nExp
+| | | | | | Minus
+| | | | | | | Divide
+| | | | | | | | Integer 10
+| | | | | | | | Identifier n
+| | | | | | | Identifier n
+| | | | | | Identifier breakup
+| | | | | | Identifier answer
+| | | | | | isEqualTo?
+| | | | | | | Integer 0
+| | | | | | | Identifier nExp
+| | | IntTypeNode
+| | | FormalsNode
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier answer
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier nExp
+| | | | FormalNode
+| | | | | IntTypeNode
+| | | | | Identifier n
+| | | Identifier breakUp
+| FormalsNode
+| | FormalNode
+| | | IntTypeNode
+| | | Identifier yExp
+| | FormalNode
+| | | IntTypeNode
+| | | Identifier y
+| | FormalNode
+| | | IntTypeNode
+| | | Identifier xExp
+| | FormalNode
+| | | IntTypeNode
+| | | Identifier x
+| Identifier addFloat
+_________________________________________________________
+| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa) 
+| => ls
+Makefile      addFloat.dot  addFloat.kln  [1m[34mbin[39;49m[0m           demo2.txt     [1m[34mdoc[39;49m[0m           [1m[32mflairc[39;49m[0m        [1m[32mflairs[39;49m[0m        [1m[34msrc[39;49m[0m           test.kln      [1m[34mtest_programs[39;49m[0m
+README.txt    addFloat.flr  addFloat.tm   demo.txt      demo3.txt     [1m[32mflairTest[39;49m[0m     [1m[32mflairp[39;49m[0m        [1m[32mflairv[39;49m[0m        test.dot      test.tm
+_________________________________________________________
+| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa) 
+| => exit
+exit
+
+Script done on Fri Dec  9 16:53:23 2016

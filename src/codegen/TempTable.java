@@ -8,11 +8,13 @@ public class TempTable {
     Map<String, tempUsage> tempTable = new HashMap();
 
     public long getVal(String varName)throws Exception{
+      try{
         if(this.tempTable.containsKey(varName)){
             return this.tempTable.get(varName).getIntVal();
         }else{
             throw new Exception("getVal() Error: there is no value for the " + varName);
         }
+      }catch(Exception e){return 0;}
     }
 
     public void setVal(String varName, long inputVal){

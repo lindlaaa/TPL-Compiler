@@ -1,0 +1,14 @@
+Script started on Fri Dec  9 16:45:39 2016
+
+_________________________________________________________| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa)| => make
+. . . . !
+
+--Flair Compiler Ready!--
+
+_________________________________________________________| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa)| => ./flairc ../test.kln
+
+_________________________________________________________| ~/Desktop/TPL-Compiler @ lindlaaa (lindlaaa)| => ls
+Makefile      addFloat.flr  [1m[34mbin[39;49m[0m           [1m[34mdoc[39;49m[0m           [1m[32mflairc[39;49m[0m        [1m[32mflairs[39;49m[0m        [1m[34msrc[39;49m[0m           test.tm
+README.txt    addFloat.kln  demo.txt      [1m[32mflairTest[39;49m[0m     [1m[32mflairp[39;49m[0m        [1m[32mflairv[39;49m[0m        test.kln      [1m[34mtest_programs[39;49m[0m
+
+Script done on Fri Dec  9 16:46:25 2016

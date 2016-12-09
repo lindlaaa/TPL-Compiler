@@ -35,7 +35,7 @@ public class ImemManager {
                 break;
             case "<": lessThanTemplate(topRow);
                 break;
-            default: System.out.println(op);
+            default:
                 break;
             //add more cases
         }
@@ -48,7 +48,9 @@ public class ImemManager {
     }
     private void openRegister(long freeIndex){
         //probably should be more complicated
-        this.registers.set((int)freeIndex,true);
+        try{
+          this.registers.set((int)freeIndex,true);
+        }catch(Exception e){/*do nothing*/}
     }
     public void openAllRegisters(){
         for(long i = 1; i < this.registers.size();i++){

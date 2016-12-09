@@ -48,9 +48,9 @@ public class Generator{
     this.tt = new TempTable();
     this.root.evaluate();
 
-    System.out.println(this); //TODO FIXME
+    //System.out.println(this); //TODO FIXME
     program += this.p5.Do();
-    System.out.println(program);
+    //System.out.println(program);
 
     WriteString writer = new WriteString();
     writer.write(program, fileName);

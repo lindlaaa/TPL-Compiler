@@ -15,7 +15,7 @@ public class ReturnNode extends SemanticNode{
   @Override
   public String evaluate(){
     String temp = this.getChild(0).evaluate();
-    Generator.emit("Return "+temp);
+    Generator.emit("Return",temp);
     return temp;
   }
 

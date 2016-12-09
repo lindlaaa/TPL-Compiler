@@ -127,14 +127,14 @@ public class Generator{
 
   public void generatePrelude(){
 
-    //emitComment("Prelude");
     //emitRM(line_num++,   'LDC', 5, -1,       0, "initialize status ptr"); //TODO
     //emitRM(line_num++, 'LDC', 6, stack_base, 0, "initialize top ptr"); //TODO
     //emitComment("Call Main");
     emitRM(line_num++, "ST",   0, 0, 0, "store 0 in 0");
     emitRM(line_num++, "LDA",  7, 3, 7, "Jump to main"); //TODO FIXME
-    emitRO(line_num++, "OUT",  1, 0, 0,   "print result from main");
-    emitRO(line_num++, "HALT", 1, 0, 0,  "stop");
+    emitRO(line_num++, "OUT",  5, 0, 0, "print result from main");
+    emitRO(line_num++, "HALT", 1, 0, 0, "stop");
+    //emitComment("-- Prelude");
 
   }
 
@@ -175,7 +175,7 @@ public class Generator{
    *  @param  String comment String representing the comment
    */
   public void emitComment(String comment){
-    this.program += String.format(";;      %s\n",comment);
+    this.program += String.format("      %s\n",comment);
   }
 
 

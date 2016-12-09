@@ -15,7 +15,7 @@ public class ImemManager {
     }
 
     public String tmString = "";
-    long curLine = 3;
+    long curLine = 4;
     public void createTemplate(List<String> topRow) throws Exception{
         String op = topRow.get(0).toLowerCase();
         switch (op) {
@@ -57,13 +57,13 @@ public class ImemManager {
     }
     private void returnTemplate(List<String> inputRow) throws Exception{
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += ";;----Return Template----\n";
+        //this.tmString += ";;----Return Template----\n";
 
         long arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
-        this.tmString += String.format("%d: ADD 5, 1(0)\n%d: LD 7, 1(0)\n",
+        this.tmString += String.format("%d: ADD 5, 1, 0\n%d: LDA 7, 2(0)\n",
                                         curLine++,curLine++);
     }
 
@@ -245,7 +245,7 @@ public class ImemManager {
             this.tmString += String.format("%d: LDC %d, %d (0)\n",
                     curLine++,r2,arg2);
         }
-        this.tmString += String.format("%d: MULT %d, %d, %d\n",
+        this.tmString += String.format("%d: MUL %d, %d, %d\n",
                 curLine++,r1,r1,r2);
 
         this.openRegister(r2);

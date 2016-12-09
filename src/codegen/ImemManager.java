@@ -17,6 +17,10 @@ public class ImemManager {
     public String tmString = "";
     long curLine = 3;
     public void createTemplate(List<String> topRow) throws Exception{
+        if(topRow.get(0).equals("Return") || topRow.get(1).equals("Return") ||
+           topRow.get(2).equals("Return") || topRow.get(3).equals("Return")){
+            returnTemplate(topRow);  
+        }
         String op = topRow.get(0);
         switch (op) {
             case "assign": assignmentTemplate(topRow);

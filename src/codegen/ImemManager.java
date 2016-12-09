@@ -35,7 +35,7 @@ public class ImemManager {
                 break;
             case "<": lessThanTemplate(topRow);
                 break;
-            default: System.out.println("There is no template for "+ op);
+            default: System.out.println("");
                 break;
             //add more cases
         }
@@ -122,7 +122,7 @@ public class ImemManager {
         this.tmString += "//----Print Template----\n";
 
         //TODO: should probably use a buffered reader
-        this.tmString += String.format("%d: OUT %d, 0, 0)\n",
+        this.tmString += String.format("%d: OUT %d, 0, 0\n",
             curLine++,arg1);
 
 

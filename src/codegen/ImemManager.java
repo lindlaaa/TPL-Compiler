@@ -17,11 +17,7 @@ public class ImemManager {
     public String tmString = "";
     long curLine = 3;
     public void createTemplate(List<String> topRow) throws Exception{
-        if(topRow.get(0).equals("Return") || topRow.get(1).equals("Return") ||
-           topRow.get(2).equals("Return") || topRow.get(3).equals("Return")){
-            returnTemplate(topRow);  
-        }
-        String op = topRow.get(0);
+        String op = topRow.get(0).toLowerCase();
         switch (op) {
             case "assign": assignmentTemplate(topRow);
                 break;
@@ -35,7 +31,7 @@ public class ImemManager {
                 break;
             //case "print": printTemplate(topRow);
             //    break;
-            case "Return": returnTemplate(topRow);
+            case "return": returnTemplate(topRow);
                 break;
             case "<": lessThanTemplate(topRow);
                 break;

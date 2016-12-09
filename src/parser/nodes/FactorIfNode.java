@@ -27,13 +27,14 @@ public class FactorIfNode extends SemanticNode{
 
     //then node
     this.getChild(1).evaluate();
-    Generator.emit("assign",this.getChild(1).evaluate());
+
+    //Generator.emit("assign",this.getChild(1).evaluate());
     Generator.emit("GOTO",secondLabel);
 
     //else node
     Generator.emit("Label "+firstLabel);
     this.getChild(0).evaluate();
-    Generator.emit("assign",this.getChild(0).evaluate());
+    //Generator.emit("assign",this.getChild(0).evaluate());
 
     Generator.emit("Label "+secondLabel);
 

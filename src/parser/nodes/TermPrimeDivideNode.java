@@ -18,6 +18,7 @@ public class TermPrimeDivideNode extends SemanticNode{
     String arg2 = this.getChild(0).evaluate();
     String temp = Generator.newTemp();
 
+    Generator.addTemp(temp,Integer.MIN_VALUE); //TODO FIXME
     Generator.emit("divide", arg1, arg2, temp);
 
     return temp;

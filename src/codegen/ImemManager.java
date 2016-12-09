@@ -14,7 +14,12 @@ public class ImemManager {
         tempTable = inputTable;
     }
 
-    public String tmString = "";
+    public String tmString = 
+        ";;      Prelude\n" +
+        ";;      Call Main\n" +
+        "0:  LD    7,999(7)     ;Jump to main\n" +
+        "1:  OUT   1,0,0      ;print result from main\n" +
+        "2:  HALT  1,0,0      ;stop\n";
     long curLine = 3;
     public void createTemplate(List<String> topRow) throws Exception{
         String op = topRow.get(0);
@@ -57,7 +62,7 @@ public class ImemManager {
     }
     private void returnTemplate(List<String> inputRow) throws Exception{
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "----Return Template----\n";
+        this.tmString += ";;----Return Template----\n";
 
         long arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
@@ -118,7 +123,7 @@ public class ImemManager {
         }
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Print Template----\n";
+        this.tmString += ";;----Print Template----\n";
 
         //TODO: should probably use a buffered reader
         this.tmString += String.format("%d: OUT %d, 0, 0\n",
@@ -154,7 +159,7 @@ public class ImemManager {
         }
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Addition Template----\n";
+        this.tmString += ";;----Addition Template----\n";
 
         //TODO: should probably use a buffered reader
         if(!isR1){
@@ -197,7 +202,7 @@ public class ImemManager {
         }
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Subtraction Template----\n";
+        this.tmString += ";;----Subtraction Template----\n";
 
         //TODO: should probably use a buffered reader
         if(!isR1){
@@ -240,7 +245,7 @@ public class ImemManager {
         }
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Multiplication Template----\n";
+        this.tmString += ";;----Multiplication Template----\n";
 
         //TODO: should probably use a buffered reader
         if(!isR1){
@@ -283,7 +288,7 @@ public class ImemManager {
         }
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Division Template----\n";
+        this.tmString += ";;----Division Template----\n";
 
         //TODO: should probably use a buffered reader
         if(!isR1){
@@ -309,7 +314,7 @@ public class ImemManager {
         long r2 = this.nextOpenRegister();
 
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Less Than Template----\n";
+        this.tmString += ";;----Less Than Template----\n";
         //WILL REQUIRE BACKPATCHINHG AND A TEMPORARY PLACEHOLDER
         this.tmString += String.format("%d: LDC r%d, %d (0)\n",
                 curLine++,r1,arg1) +

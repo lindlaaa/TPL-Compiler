@@ -27,14 +27,10 @@ public class Generator{
   private static TempTable tt;
 
 
-  public Generator(ProgramNode ast, SymbolTable t) throws Exception{
+  public Generator(ProgramNode ast, SymbolTable t){
     this.root = ast;
     this.table = t;
-    //this.p5 = new Project5(this);
-    //this.tt = new TempTable();
-    //this.root.evaluate();
-    //System.out.println(this); //TODO FIXME
-    //this.p5.Do();
+    this.root.evaluate();
   }
 
 
@@ -45,9 +41,15 @@ public class Generator{
    *
    *  @param fileName String representing the desired name of a file.
    */
-  public void generate(String fileName){
+  public void generate(String fileName) throws Exception{
 
     generatePrelude();
+
+    this.p5 = new Project5(this);
+    this.tt = new TempTable();
+
+    System.out.println(this); //TODO FIXME
+    this.p5.Do();
 
     WriteString writer = new WriteString();
     writer.write(program, fileName);

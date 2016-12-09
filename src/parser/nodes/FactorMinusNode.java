@@ -17,6 +17,8 @@ public class FactorMinusNode extends SemanticNode{
     String result = this.getChild(0).evaluate();
     String temp = Generator.newTemp();
 
+
+    Generator.addTemp(temp,Integer.MIN_VALUE); //TODO FIXME
     Generator.emit("negate", result, temp);
 
     return temp;

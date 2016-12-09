@@ -22,10 +22,15 @@ public class Generator{
   public static int tempAmount= 1;
   public static int tempLabel = 1;
 
+  private Project5 p5;
+  private static TempTable tt;
 
-  public Generator(ProgramNode ast, SymbolTable t){
+
+  public Generator(ProgramNode ast, SymbolTable t) throws Exception{
     this.root = ast;
     this.table = t;
+    this.p5 = new Project5(this);
+    this.tt = new TempTable();
     this.root.evaluate();
     System.out.println(this); //TODO FOXME
   }
@@ -80,6 +85,10 @@ public class Generator{
   }; //Main
 
 
+
+  public static void addTemp(String s, int i){
+    Generator.tt.setVal(s, i);
+  }
   public static void emit(String op, String arg1, String arg2, String res){
       List<String> tempRow = new ArrayList<>(Arrays.asList(op,arg1,arg2,res));
       Generator.quadruple.add(tempRow);
@@ -124,9 +133,17 @@ public class Generator{
   //public static void emit(String a, String s, String f){}
   //public static void emit(String a, String s, String f, String h){}
 
-  public static void emitFunctionCall(String a, ArrayList s, String t){
-    List<String> tempRow = new ArrayList<>(Arrays.asList("Function call was here"));
+  public static void emitFunctionCall(String a, ArrayList params, String t){/*
+    List<String> tempRow = new ArrayList<>(Arrays.asList("BEGIN_CALL"));
     Generator.quadruple.add(tempRow);
+    for(String param : params){
+      tempRow = new ArrayList<>(Arrays.asList(param));
+      Generator.quadruple.add(tempRow);
+    }
+    tempRow = new ArrayList<>(Arrays.asList("Call "+a));
+    Generator.quadruple.add(tempRow);
+    tempRow = new ArrayList<>(Arrays.asList("Recieve "+t));
+    Generator.quadruple.add(tempRow);*/
   }
 
 
@@ -150,8 +167,7 @@ public class Generator{
    *  @return  String of the properly formatted TM RO command.
    */
   public String emitRO(int line_num, String opcode, int r1, int r2, int r3, String comment){
-    String result = String.format("%-4s%-6s%s,%s,%-7s;%-10s", line_num+":",opcode,r1,r2,r3,comment);
-    return result;
+    return String.format("%-4s%-6s%s,%s,%-7s;%-10s", line_num+":",opcode,r1,r2,r3,comment);
   }
 
 
@@ -167,21 +183,19 @@ public class Generator{
    *  @return  String of the properly formatted TM RM command.
    */
   public String emitRM(int line_num, String opcode, int r1, int offset, int r3, String comment){
-    String result = String.format("%-4s%-6s%s,%s%-8s;%-10s", line_num+":",opcode,r1,offset,"("+r3+")",comment);
-    return result;
+    return String.format("%-4s%-6s%s,%s%-8s;%-10s", line_num+":",opcode,r1,offset,"("+r3+")",comment);
   }
 
 
+
+  /**
+   *  emitComment takes a string and creates a TM comment
+   *  @param  String comment String representing the comment
+   *  @return        String of the properly formed TM comment
+   */
   public String emitComment(String comment){
-    String output = "";
-    output += "";
-    return output;
+    return String.format(";;%6s",comment);
   }
-
-
-  private void emitRegister(){} //Optional, not necessary.
-  public void makeNewLabel(){}
-
 }
 
 /*

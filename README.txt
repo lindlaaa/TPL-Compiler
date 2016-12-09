@@ -60,7 +60,7 @@ OLD:
   bin/ : stores the binary files
   doc/ : stores the javadoc in html form
   src/ : stores the .java files in a structure that is self descriptive
-  test_ignore/: stores the .flr files used to test the project parts
+  /: stores the .flr files used to test the project parts
   flairp: The script to run the parser
   flairs: The script to run the scanner
   flairc  : script used to create a .tm file with same name as original

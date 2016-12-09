@@ -6,7 +6,6 @@ import src.parser.symboltable.*;
 import src.codegen.Generator;
 import java.util.ArrayList;
 
-
 @SuppressWarnings("unchecked")
 public class IdentifierNode extends SemanticNode{
 
@@ -34,12 +33,13 @@ public class IdentifierNode extends SemanticNode{
         paramArray.add(temp);
       }
 
-      //temp = Generator.newTemp(); //TODO FIXME not new temp but reference the most receltly made temp
+      temp = Generator.newTemp(); //TODO FIXME not new temp but reference the most receltly made temp
       Generator.emitFunctionCall(this.getID(), paramArray, temp);
       return temp;
     }else{ //Leaf: Variable ID
       temp = Generator.newTemp();
-      Generator.emit("assign",this.getID(),temp);
+      Generator.addTemp(temp,Integer.MIN_VALUE); //TODO FIXME
+      //Generator.emit("assign",this.getID(),temp);
       return temp;
 
     }

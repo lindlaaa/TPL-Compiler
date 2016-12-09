@@ -1,0 +1,108 @@
+<PROGRAM> 1 ::= program <IDENTIFIER>Make Identifier ( <FORMALS> ) ; <DEFINITIONS>  
+       <BODY> . Make Program
+
+
+<DEFINITIONS>  0 ::= ε
+               2 | <DEF> <DEFINITIONS> Make Definition
+
+
+<DEF>  3 ::= function <IDENTIFIER> Make Identifier ( <FORMALS> ) : <TYPE> 
+         <BODY> ; Make Def
+
+
+<FORMALS>  0 ::= ε
+           4 | <NONEMPTYFORMALS> Make Formals
+
+
+<NONEMPTYFORMALS> 5  ::= <FORMAL> <NONEMPTYFORMALS*> Make Non Empty Formals
+                        
+<NONEMPTYFORMALS*> 6  ::= , <NONEMPTYFORMALS> Make Non Empty Formals Prime
+                   0  |  ε
+
+
+<FORMAL>  7 ::= <IDENTIFIER>Make Identifier : <TYPE> Make Formal
+
+
+<BODY> 8 ::= begin <STATEMENT-LIST> end Make Body
+
+
+<STATEMENT-LIST>  9 ::= <PRINT-STATEMENT> <STATEMENT-LIST> Make StatementlistPS, MakeStatementlist
+                 10 | return <EXPR> Make StatementlistReturn, MakeStatementlist
+
+
+<TYPE>  11 ::= integer  Make Integer
+        12 | boolean  Make Boolean
+
+
+<EXPR>  13 ::= <SIMPLE-EXPR> <EXPR*> Make Expr
+                        
+<EXPR*> 14 ::= < <EXPR>[a] Make ExprPrimeLT
+        15 | = <EXPR>[b] Make ExprPrimeExpr
+        0  | ε 
+
+
+<SIMPLE-EXPR>  16 ::= <TERM> <SIMPLE-EXPR*> Make SimpleExpr
+
+
+<SIMPLE-EXPR*> 17 ::= or <SIMPLE-EXPR>[c] Make SimpleExprOr
+               18 | + <SIMPLE-EXPR>[d] Make SimpleExprPlus
+               19 | - <SIMPLE-EXPR>[e] Make SimpleExprMinus
+               0  | ε
+
+
+
+
+
+
+<TERM>  20 ::= <FACTOR> <TERM*> Make Term
+                   
+
+
+
+
+     
+<TERM*>  21 ::= and <TERM>[f] Make TermPrimeAnd, Make TermPrime
+         22 | * <TERM>[g] Make TermPrimeTimes, Make TermPrime
+         23 | / <TERM>[h] Make TermPrimeDivide, Make TermPrime
+          0 | ε
+
+
+???<FACTOR>  24 ::= if <EXPR> then <EXPR> else <EXPR> Make Factor
+             25  | not <FACTOR> Make Factor
+             26  | <IDENTIFIER> Make Identifier <IDENTIFIER*> Make IdentifierPrime, Make Factor
+             27  | <LITERAL> Make Literal, Make Factor
+             28  | - <FACTOR> Make Factor
+             29  | ( <EXPR> ) Make Factor
+        
+<IDENTIFIER*> 30 ::= ( <ACTUALS> ) Make IdentifierPrimeLP
+              0  | ε
+
+
+<ACTUALS> 0 ::= ε
+          31 | <NONEMPTYACTUALS> Make Actuals
+
+
+<NONEMPTYACTUALS>   32 ::= <EXPR> <NONEMPTYACTUALS*> Make NonEmptyActuals
+                       
+<NONEMPTYACTUALS*> 33 ::= , <EXPR> <NONEMPTYACTUALS*> Make NonEmptyActualsPrime
+                    0 | ε
+
+
+<LITERAL> 34 ::= <NUMBER> Make LiteralNumber  
+          35 | <BOOLEAN> Make LiteralBoolean
+
+
+<PRINT-STATEMENT> 36  ::= print ( <EXPR> ) ; Make PrintStatement
+
+
+[a]Replaced <SIMPLE-EXPR> with <EXPR>
+[b]Replaced <SIMPLE-EXPR> with <EXPR>
+[c]Replaced <TERM> with
+ <SIMPLE-EXPR>
+[d]Replaced <TERM> with
+<SIMPLE-EXPR>
+[e]Replaced <TERM> with
+<SIMPLE-EXPR>
+[f]Replaced <FACTOR> with <TERM>
+[g]Replaced <FACTOR> with <TERM>
+[h]Replaced <FACTOR> with <TERM>

@@ -1,20 +1,19 @@
-
-package project5;
+package src.codegen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class ImemManager {
-    
+
     TempTable tempTable;
     public List<Boolean> registers = new ArrayList<>(Arrays.asList(null,true,true,true,true));
- 
+
     //values should already be within the inpuTable
     public ImemManager(TempTable inputTable){
-        tempTable = inputTable;        
+        tempTable = inputTable;
     }
-     
+
     String tmString = "";
     int curLine = 0;
     public void createTemplate(List<String> topRow) throws Exception{
@@ -31,15 +30,15 @@ public class ImemManager {
             case "div": divisionTemplate(topRow);
                 break;
             case "print": printTemplate(topRow);
-                break; 
+                break;
             case "Return": returnTemplate(topRow);
-                break;         
+                break;
             case "<": lessThanTemplate(topRow);
-                break;    
+                break;
             default: System.out.println("There is no template for "+ op);
                 break;
-            //add more cases         
-        }              
+            //add more cases
+        }
     }
     private int nextOpenRegister(){
         //probably should be more complicated
@@ -59,16 +58,16 @@ public class ImemManager {
     private void returnTemplate(List<String> inputRow) throws Exception{
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "----Return Template----\n";
-        
+
         int arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
-        
+
         this.tmString += String.format("%d: ST %d, 1023(0)\n",
-            curLine++,arg1);    
-    }          
-    
+            curLine++,arg1);
+    }
+
     private void assignmentTemplate(List<String> inputRow) throws Exception{
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "----Assignment Template----\n";
@@ -81,11 +80,11 @@ public class ImemManager {
         }catch(Exception e){
             arg1 = this.tempTable.getVal(flairVar);
             if(this.tempTable.getLastRegister(flairVar) != -1){
-                r1 = this.tempTable.getLastRegister(flairVar); 
+                r1 = this.tempTable.getLastRegister(flairVar);
             }else{
-                r1 = this.nextOpenRegister();  
+                r1 = this.nextOpenRegister();
                 this.tmString += String.format("%d: LDC %d, %d (0)\n",
-                    curLine++,r1,arg1);    
+                    curLine++,r1,arg1);
             }
         }
         String flairVar2= inputRow.get(3);
@@ -100,35 +99,35 @@ public class ImemManager {
                 arg2 = 0;
             }
             if(this.tempTable.getLastRegister(flairVar2) != -1){
-                r2 = this.tempTable.getLastRegister(flairVar2); 
+                r2 = this.tempTable.getLastRegister(flairVar2);
             }else{
-                r2 = this.nextOpenRegister();  
+                r2 = this.nextOpenRegister();
                 this.tmString += String.format("%d: LDC %d, %d (0)\n",
-                    curLine++,r2,arg2);    
+                    curLine++,r2,arg2);
             }
         }
-        
+
         this.tmString += String.format("%d: LDC %d, %d (0)\n",
             curLine++,r2,r1);
-        
-        this.openRegister(r1);       
-    }    
-    private void printTemplate(List<String> inputRow) throws Exception{    
+
+        this.openRegister(r1);
+    }
+    private void printTemplate(List<String> inputRow) throws Exception{
         int arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
-        
+
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Print Template----\n";
-        
+
         //TODO: should probably use a buffered reader
         this.tmString += String.format("%d: OUT %d, 0, 0)\n",
             curLine++,arg1);
-        
-            
+
+
     }
-    
+
     private void additionTemplate(List<String> inputRow) throws Exception{
         int r1;
         int r2;
@@ -148,16 +147,16 @@ public class ImemManager {
             isR2 = true;
             r2 = arg2;
         }else{
-            r2 = this.nextOpenRegister();            
-        }        
-        
+            r2 = this.nextOpenRegister();
+        }
+
         if(this.tempTable.getVal(inputRow.get(3)) == Integer.MIN_VALUE){
             this.tempTable.setLastRegister(inputRow.get(3),r1);
         }
-        
+
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Addition Template----\n";
-        
+
         //TODO: should probably use a buffered reader
         if(!isR1){
             this.tmString += String.format("%d: LDC %d, %d (0)\n",
@@ -169,7 +168,7 @@ public class ImemManager {
         }
         this.tmString += String.format("%d: ADD %d, %d, %d\n",
                 curLine++,r1,r1,r2);
-        
+
         this.openRegister(r2);
     }
     private void subtractionTemplate(List<String> inputRow) throws Exception{
@@ -191,16 +190,16 @@ public class ImemManager {
             isR2 = true;
             r2 = arg2;
         }else{
-            r2 = this.nextOpenRegister();            
-        }        
-        
+            r2 = this.nextOpenRegister();
+        }
+
         if(this.tempTable.getVal(inputRow.get(3)) == Integer.MIN_VALUE){
             this.tempTable.setLastRegister(inputRow.get(3),r1);
         }
-        
+
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Subtraction Template----\n";
-        
+
         //TODO: should probably use a buffered reader
         if(!isR1){
             this.tmString += String.format("%d: LDC %d, %d (0)\n",
@@ -212,7 +211,7 @@ public class ImemManager {
         }
         this.tmString += String.format("%d: SUB %d, %d, %d\n",
                 curLine++,r1,r1,r2);
-        
+
         this.openRegister(r2);
     }
     private void multiplicationTemplate(List<String> inputRow) throws Exception{
@@ -234,16 +233,16 @@ public class ImemManager {
             isR2 = true;
             r2 = arg2;
         }else{
-            r2 = this.nextOpenRegister();            
-        }        
-        
+            r2 = this.nextOpenRegister();
+        }
+
         if(this.tempTable.getVal(inputRow.get(3)) == Integer.MIN_VALUE){
             this.tempTable.setLastRegister(inputRow.get(3),r1);
         }
-        
+
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Multiplication Template----\n";
-        
+
         //TODO: should probably use a buffered reader
         if(!isR1){
             this.tmString += String.format("%d: LDC %d, %d (0)\n",
@@ -255,7 +254,7 @@ public class ImemManager {
         }
         this.tmString += String.format("%d: MULT %d, %d, %d\n",
                 curLine++,r1,r1,r2);
-        
+
         this.openRegister(r2);
     }
     private void divisionTemplate(List<String> inputRow) throws Exception{
@@ -277,16 +276,16 @@ public class ImemManager {
             isR2 = true;
             r2 = arg2;
         }else{
-            r2 = this.nextOpenRegister();            
-        }        
-        
+            r2 = this.nextOpenRegister();
+        }
+
         if(this.tempTable.getVal(inputRow.get(3)) == Integer.MIN_VALUE){
             this.tempTable.setLastRegister(inputRow.get(3),r1);
         }
-        
+
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Division Template----\n";
-        
+
         //TODO: should probably use a buffered reader
         if(!isR1){
             this.tmString += String.format("%d: LDC %d, %d (0)\n",
@@ -298,21 +297,21 @@ public class ImemManager {
         }
         this.tmString += String.format("%d: DIV %d, %d, %d\n",
                 curLine++,r1,r1,r2);
-        
+
         this.openRegister(r2);
-    }    
-    
-    
+    }
+
+
     private void lessThanTemplate(List<String> inputRow) throws Exception{
         int arg1 = this.tempTable.getVal(inputRow.get(1));
         int arg2 = this.tempTable.getVal(inputRow.get(2));
         //will need three open registers
         int r1 = this.nextOpenRegister();
         int r2 = this.nextOpenRegister();
-        
+
         //TODO: REMOVE: this a test string that should be removed later
-        this.tmString += "//----Less Than Template----\n";        
-        //WILL REQUIRE BACKPATCHINHG AND A TEMPORARY PLACEHOLDER       
+        this.tmString += "//----Less Than Template----\n";
+        //WILL REQUIRE BACKPATCHINHG AND A TEMPORARY PLACEHOLDER
         this.tmString += String.format("%d: LDC r%d, %d (0)\n",
                 curLine++,r1,arg1) +
                 String.format("%d: LDC %d, %d (0)\n",
@@ -322,9 +321,8 @@ public class ImemManager {
                 String.format("%d: JLT %d, (then) (7)\n",
                 curLine++,r1);
         //open needed registers
-    }    
-    
-    
+    }
+
+
     //add more templates
 }
-

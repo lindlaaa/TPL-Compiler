@@ -26,8 +26,8 @@ public class tempUsage {
     /* AVERY UNCOMMENT THIS
 	public String getUsage(){
 		outputString +=
-			getIntVal() + " " +
-			getReg() + " ";
+			this.value + " " +
+			this.assignedTo + "\n";
 	}
     */
 }

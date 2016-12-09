@@ -14,12 +14,7 @@ public class ImemManager {
         tempTable = inputTable;
     }
 
-    public String tmString = 
-        ";;      Prelude\n" +
-        ";;      Call Main\n" +
-        "0:  LD    7,999(7)     ;Jump to main\n" +
-        "1:  OUT   1,0,0      ;print result from main\n" +
-        "2:  HALT  1,0,0      ;stop\n";
+    public String tmString = "";
     long curLine = 3;
     public void createTemplate(List<String> topRow) throws Exception{
         String op = topRow.get(0);

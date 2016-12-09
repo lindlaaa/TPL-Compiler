@@ -96,7 +96,9 @@ public class Generator{
         }
         return false;
     }
-
+    public int Length(){
+        return this.quadruple.size();
+    }    
   public static void addTemp(String s, int i){
     Generator.tt.setVal(s, i);
   }

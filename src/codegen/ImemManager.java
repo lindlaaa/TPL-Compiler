@@ -31,8 +31,8 @@ public class ImemManager {
                 break;
             case "print": printTemplate(topRow);
                 break;
-            case "Return": returnTemplate(topRow);
-                break;
+            //case "Return": returnTemplate(topRow);
+            //    break;
             case "<": lessThanTemplate(topRow);
                 break;
             default: System.out.println("");

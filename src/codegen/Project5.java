@@ -18,8 +18,7 @@ public class Project5 {
       this.testTable.setVal(t,l);
     }
 
-
-    public void Do() throws Exception{
+    public String Do() throws Exception{
       System.out.println(testTable);
       ImemManager imem = new ImemManager(testTable);
       for(int i = 0; i < g.Length();i++){
@@ -31,6 +30,6 @@ public class Project5 {
               imem.openAllRegisters();
           }
       }
-      System.out.println( imem.tmString );
+      return imem.tmString;
     }
 }

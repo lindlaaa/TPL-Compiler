@@ -29,10 +29,10 @@ public class ImemManager {
                 break;
             case "divide": divisionTemplate(topRow);
                 break;
-            case "print": printTemplate(topRow);
-                break;
-            //case "Return": returnTemplate(topRow);
+            //case "print": printTemplate(topRow);
             //    break;
+            case "Return": returnTemplate(topRow);
+                break;
             case "<": lessThanTemplate(topRow);
                 break;
             default: System.out.println("");

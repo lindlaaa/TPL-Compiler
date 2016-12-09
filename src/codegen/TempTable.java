@@ -45,5 +45,14 @@ public class TempTable {
         usage.setInUse();
         this.tempTable.put(varName,usage);
     }
-
+    /*AVERY UNCOMMENT THIS
+	@Override
+	public String toString(){
+		String output = "";
+		for (Map.Entry<String, tempUsage> entry : tempTable.entrySet()) {
+			output += entry.getKey().toString() + " | " + entry.getValue().getUsage();
+		}
+		return output;
+	}
+    */
 }

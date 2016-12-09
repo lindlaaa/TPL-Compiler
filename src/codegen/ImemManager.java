@@ -15,7 +15,7 @@ public class ImemManager {
     }
 
     public String tmString = "";
-    long curLine = 0;
+    long curLine = 3;
     public void createTemplate(List<String> topRow) throws Exception{
         String op = topRow.get(0);
         switch (op) {
@@ -35,7 +35,7 @@ public class ImemManager {
                 break;
             case "<": lessThanTemplate(topRow);
                 break;
-            default: System.out.println("There is no template for "+ op);
+            default: System.out.println("");
                 break;
             //add more cases
         }
@@ -63,9 +63,8 @@ public class ImemManager {
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
-
-        this.tmString += String.format("%d: ST %d, 1023(0)\n",
-            curLine++,arg1);
+        this.tmString += String.format("%d: ADD 5, 1(0)\n%d: LD 7, 1(0)\n",
+                                        curLine++,curLIne++);
     }
 
     private void assignmentTemplate(List<String> inputRow) throws Exception{
@@ -122,7 +121,7 @@ public class ImemManager {
         this.tmString += "//----Print Template----\n";
 
         //TODO: should probably use a buffered reader
-        this.tmString += String.format("%d: OUT %d, 0, 0)\n",
+        this.tmString += String.format("%d: OUT %d, 0, 0\n",
             curLine++,arg1);
 
 

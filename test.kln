@@ -1,0 +1,4 @@
+program main();
+begin
+  return (6+(6+(2*5))-((1*999)-12)+((12-3))+9)
+end.

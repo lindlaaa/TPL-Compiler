@@ -2,11 +2,12 @@ package src.codegen;
 
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public class TempTable {
 
     Map<String, tempUsage> tempTable = new HashMap();
 
-    public int getVal(String varName)throws Exception{
+    public long getVal(String varName)throws Exception{
         if(this.tempTable.containsKey(varName)){
             return this.tempTable.get(varName).getIntVal();
         }else{
@@ -14,20 +15,20 @@ public class TempTable {
         }
     }
 
-    public void setVal(String varName, int inputVal){
+    public void setVal(String varName, long inputVal){
         tempUsage usage = new tempUsage();
         usage.setIntVal(inputVal);
         this.tempTable.put(varName,usage);
     }
 
-    public int getLastRegister(String varName)throws Exception{
+    public long getLastRegister(String varName)throws Exception{
         if(this.tempTable.containsKey(varName)){
             return this.tempTable.get(varName).getReg();
         }else{
             throw new Exception("getVal() Error: there is no value for the " + varName);
         }
     }
-    public void setLastRegister(String varName, int inputReg){
+    public void setLastRegister(String varName, long inputReg){
         tempUsage usage = new tempUsage();
         usage.setReg(inputReg);
         this.tempTable.put(varName,usage);
@@ -45,14 +46,13 @@ public class TempTable {
         usage.setInUse();
         this.tempTable.put(varName,usage);
     }
-    /*AVERY UNCOMMENT THIS
+
 	@Override
-	public String toString(){
+	 public String toString(){
 		String output = "";
 		for (Map.Entry<String, tempUsage> entry : tempTable.entrySet()) {
 			output += entry.getKey().toString() + " | " + entry.getValue().getUsage();
 		}
 		return output;
 	}
-    */
 }

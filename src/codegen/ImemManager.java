@@ -14,20 +14,20 @@ public class ImemManager {
         tempTable = inputTable;
     }
 
-    String tmString = "";
-    int curLine = 0;
+    public String tmString = "";
+    long curLine = 0;
     public void createTemplate(List<String> topRow) throws Exception{
         String op = topRow.get(0);
         switch (op) {
             case "assign": assignmentTemplate(topRow);
                 break;
-            case "add": additionTemplate(topRow);
+            case "plus": additionTemplate(topRow);
                 break;
-            case "sub": subtractionTemplate(topRow);
+            case "minus": subtractionTemplate(topRow);
                 break;
-            case "mult": multiplicationTemplate(topRow);
+            case "multiply": multiplicationTemplate(topRow);
                 break;
-            case "div": divisionTemplate(topRow);
+            case "divide": divisionTemplate(topRow);
                 break;
             case "print": printTemplate(topRow);
                 break;
@@ -40,18 +40,18 @@ public class ImemManager {
             //add more cases
         }
     }
-    private int nextOpenRegister(){
+    private long nextOpenRegister(){
         //probably should be more complicated
-        int returnIndex = this.registers.indexOf(true);
-        this.registers.set(returnIndex,false);
+        long returnIndex = this.registers.indexOf(true);
+        this.registers.set((int)returnIndex,false);
         return returnIndex;
     }
-    private void openRegister(int freeIndex){
+    private void openRegister(long freeIndex){
         //probably should be more complicated
-        this.registers.set(freeIndex,true);
+        this.registers.set((int)freeIndex,true);
     }
     public void openAllRegisters(){
-        for(int i = 1; i < this.registers.size();i++){
+        for(long i = 1; i < this.registers.size();i++){
             this.openRegister(i);
         }
     }
@@ -59,7 +59,7 @@ public class ImemManager {
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "----Return Template----\n";
 
-        int arg1 = this.tempTable.getVal(inputRow.get(3));
+        long arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
@@ -72,8 +72,8 @@ public class ImemManager {
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "----Assignment Template----\n";
         String flairVar= inputRow.get(1);
-        int arg1;
-        int r1 = 0;
+        long arg1;
+        long r1 = 0;
         try{
             arg1 = Integer.parseInt(flairVar);
             r1 = arg1;
@@ -88,8 +88,8 @@ public class ImemManager {
             }
         }
         String flairVar2= inputRow.get(3);
-        int arg2;
-        int r2 = 0;
+        long arg2;
+        long r2 = 0;
         try{
             arg2 = Integer.parseInt(flairVar2);
             r2 = arg2;
@@ -113,7 +113,7 @@ public class ImemManager {
         this.openRegister(r1);
     }
     private void printTemplate(List<String> inputRow) throws Exception{
-        int arg1 = this.tempTable.getVal(inputRow.get(3));
+        long arg1 = this.tempTable.getVal(inputRow.get(3));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(3));
         }
@@ -129,11 +129,11 @@ public class ImemManager {
     }
 
     private void additionTemplate(List<String> inputRow) throws Exception{
-        int r1;
-        int r2;
+        long r1;
+        long r2;
         boolean isR1 = false;
         boolean isR2 = false;
-        int arg1 = this.tempTable.getVal(inputRow.get(1));
+        long arg1 = this.tempTable.getVal(inputRow.get(1));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(1));
             isR1 = true;
@@ -141,7 +141,7 @@ public class ImemManager {
         }else{
             r1 = this.nextOpenRegister();
         }
-        int arg2 = this.tempTable.getVal(inputRow.get(2));
+        long arg2 = this.tempTable.getVal(inputRow.get(2));
         if(arg2 == Integer.MIN_VALUE){
             arg2 = this.tempTable.getLastRegister(inputRow.get(2));
             isR2 = true;
@@ -172,11 +172,11 @@ public class ImemManager {
         this.openRegister(r2);
     }
     private void subtractionTemplate(List<String> inputRow) throws Exception{
-        int r1;
-        int r2;
+        long r1;
+        long r2;
         boolean isR1 = false;
         boolean isR2 = false;
-        int arg1 = this.tempTable.getVal(inputRow.get(1));
+        long arg1 = this.tempTable.getVal(inputRow.get(1));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(1));
             isR1 = true;
@@ -184,7 +184,7 @@ public class ImemManager {
         }else{
             r1 = this.nextOpenRegister();
         }
-        int arg2 = this.tempTable.getVal(inputRow.get(2));
+        long arg2 = this.tempTable.getVal(inputRow.get(2));
         if(arg2 == Integer.MIN_VALUE){
             arg2 = this.tempTable.getLastRegister(inputRow.get(2));
             isR2 = true;
@@ -215,11 +215,11 @@ public class ImemManager {
         this.openRegister(r2);
     }
     private void multiplicationTemplate(List<String> inputRow) throws Exception{
-        int r1;
-        int r2;
+        long r1;
+        long r2;
         boolean isR1 = false;
         boolean isR2 = false;
-        int arg1 = this.tempTable.getVal(inputRow.get(1));
+        long arg1 = this.tempTable.getVal(inputRow.get(1));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(1));
             isR1 = true;
@@ -227,7 +227,7 @@ public class ImemManager {
         }else{
             r1 = this.nextOpenRegister();
         }
-        int arg2 = this.tempTable.getVal(inputRow.get(2));
+        long arg2 = this.tempTable.getVal(inputRow.get(2));
         if(arg2 == Integer.MIN_VALUE){
             arg2 = this.tempTable.getLastRegister(inputRow.get(2));
             isR2 = true;
@@ -258,11 +258,11 @@ public class ImemManager {
         this.openRegister(r2);
     }
     private void divisionTemplate(List<String> inputRow) throws Exception{
-        int r1;
-        int r2;
+        long r1;
+        long r2;
         boolean isR1 = false;
         boolean isR2 = false;
-        int arg1 = this.tempTable.getVal(inputRow.get(1));
+        long arg1 = this.tempTable.getVal(inputRow.get(1));
         if(arg1 == Integer.MIN_VALUE){
             arg1 = this.tempTable.getLastRegister(inputRow.get(1));
             isR1 = true;
@@ -270,7 +270,7 @@ public class ImemManager {
         }else{
             r1 = this.nextOpenRegister();
         }
-        int arg2 = this.tempTable.getVal(inputRow.get(2));
+        long arg2 = this.tempTable.getVal(inputRow.get(2));
         if(arg2 == Integer.MIN_VALUE){
             arg2 = this.tempTable.getLastRegister(inputRow.get(2));
             isR2 = true;
@@ -303,11 +303,11 @@ public class ImemManager {
 
 
     private void lessThanTemplate(List<String> inputRow) throws Exception{
-        int arg1 = this.tempTable.getVal(inputRow.get(1));
-        int arg2 = this.tempTable.getVal(inputRow.get(2));
+        long arg1 = this.tempTable.getVal(inputRow.get(1));
+        long arg2 = this.tempTable.getVal(inputRow.get(2));
         //will need three open registers
-        int r1 = this.nextOpenRegister();
-        int r2 = this.nextOpenRegister();
+        long r1 = this.nextOpenRegister();
+        long r2 = this.nextOpenRegister();
 
         //TODO: REMOVE: this a test string that should be removed later
         this.tmString += "//----Less Than Template----\n";

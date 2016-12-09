@@ -35,7 +35,7 @@ public class ImemManager {
                 break;
             case "<": lessThanTemplate(topRow);
                 break;
-            default: System.out.println("");
+            default: System.out.println("op");
                 break;
             //add more cases
         }

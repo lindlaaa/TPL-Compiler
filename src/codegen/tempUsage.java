@@ -1,11 +1,10 @@
-
-package project5;
+package src.codegen;
 
 public class tempUsage {
     int value = Integer.MIN_VALUE;
     int assignedTo = -1;
     boolean inUse = false;
-    
+
     public int getIntVal(){
         return this.value;
     }
@@ -17,12 +16,12 @@ public class tempUsage {
     }
     public void setReg(int newReg){
         this.assignedTo = newReg;
-    }    
+    }
     public boolean inUse(){
         return this.inUse;
     }
     public void setInUse(){
         this.inUse = true;
-    }   
-    
+    }
+
 }

@@ -14,9 +14,9 @@ public class LiteralBooleanNode extends SemanticNode{
   public String evaluate(){
     String temp = Generator.newTemp();
 	  if(this.value.getVal()){
-	    Generator.emit("assign","1",temp);
+      Generator.addTemp(temp,Integer.MIN_VALUE); //TODO FIXME	    //Generator.emit("assign","1",temp);
     }else{
-      Generator.emit("assign","0",temp);
+      Generator.addTemp(temp,Integer.MIN_VALUE); //TODO FIXME      //Generator.emit("assign","0",temp);
     }
 	  return temp;
   }

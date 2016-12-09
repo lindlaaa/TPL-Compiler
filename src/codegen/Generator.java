@@ -84,7 +84,18 @@ public class Generator{
     writer.write(program, fileName);
   }; //Main
 
-
+    public boolean checkReuse(String tempVar){
+        //a relatively expensive operation for checking if the arg is reused
+        for(int i = this.curRow; i < this.quadruple.size();i++){
+            if(this.quadruple.get(i).get(1).equals(tempVar)){
+                return true;
+            }
+            if(this.quadruple.get(i).get(2).equals(tempVar)){
+                return true;
+            }
+        }
+        return false;
+    }
 
   public static void addTemp(String s, int i){
     Generator.tt.setVal(s, i);

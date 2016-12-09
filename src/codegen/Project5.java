@@ -11,13 +11,16 @@ public class Project5 {
 
     public Project5(Generator gen) throws Exception{
       this.g = gen;
-      this.Do();
+      testTable = new TempTable();
+    }
+
+    public void setTemp(String t, long l){
+      this.testTable.setVal(t,l);
     }
 
 
-    private void Do() throws Exception{
+    public void Do() throws Exception{
 
-        testTable = new TempTable();
 //        //this would have been added to the table
 //        testTable.setVal("t1", 7);
 //        testTable.setVal("t2", 7);
@@ -59,7 +62,7 @@ public class Project5 {
 
 
 //        RunTimeStack dMemory = new RunTimeStack();
-
+        System.out.println(testTable);
         ImemManager imem = new ImemManager(testTable);
         for(int i = 0; i < g.Length();i++){
             List<String> nextRow = g.get3ACLine();
@@ -70,5 +73,6 @@ public class Project5 {
                 imem.openAllRegisters();
             }
         }
+        System.out.println( imem.tmString );
     }
 }

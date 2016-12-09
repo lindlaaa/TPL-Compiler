@@ -1,20 +1,20 @@
 package src.codegen;
 
 public class tempUsage {
-    int value = Integer.MIN_VALUE;
-    int assignedTo = -1;
+    long value = Integer.MIN_VALUE;
+    long assignedTo = -1;
     boolean inUse = false;
 
-    public int getIntVal(){
+    public long getIntVal(){
         return this.value;
     }
-    public void setIntVal(int newVal){
+    public void setIntVal(long newVal){
         this.value = newVal;
     }
-    public int getReg(){
+    public long getReg(){
         return this.assignedTo;
     }
-    public void setReg(int newReg){
+    public void setReg(long newReg){
         this.assignedTo = newReg;
     }
     public boolean inUse(){
@@ -23,11 +23,8 @@ public class tempUsage {
     public void setInUse(){
         this.inUse = true;
     }
-    /* AVERY UNCOMMENT THIS
-	public String getUsage(){
-		outputString +=
-			this.value + " " +
-			this.assignedTo + "\n";
+
+	  public String getUsage(){
+		  return this.value + " " + this.assignedTo + "\n";
 	}
-    */
 }

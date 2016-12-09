@@ -14,6 +14,7 @@ public class Generator{
   private int line_num = 0;
   private ProgramNode root;
   private SymbolTable table;
+  private String program = "";
 
   private static int curRow = -1;
   private static List<List<String>> quadruple = new ArrayList<>();
@@ -22,17 +23,18 @@ public class Generator{
   public static int tempAmount= 1;
   public static int tempLabel = 1;
 
-  private Project5 p5;
+  private static Project5 p5;
   private static TempTable tt;
 
 
   public Generator(ProgramNode ast, SymbolTable t) throws Exception{
     this.root = ast;
     this.table = t;
-    this.p5 = new Project5(this);
-    this.tt = new TempTable();
-    this.root.evaluate();
-    System.out.println(this); //TODO FOXME
+    //this.p5 = new Project5(this);
+    //this.tt = new TempTable();
+    //this.root.evaluate();
+    //System.out.println(this); //TODO FIXME
+    //this.p5.Do();
   }
 
 
@@ -45,63 +47,35 @@ public class Generator{
    */
   public void generate(String fileName){
 
-    // TODO FIXME REDO this!m
-    String program =
-       "0:  LDA		3,1(7)	; Store runtime return addr in R3\n"
-      +"1:  ST    1,7(6)  ; Store arg\n"
-      +"2:  ST    5,9(6)  ; Store return addr\n"
-      +"3:  ADD   5,10,5  ; Update bottom\n"
-      +"4:  ST    6,10,6  ; Update top\n"
-      +"5:  LDA		7,7(0)	; Jump to main\n"
-      +"6:  LD    4,1(6)  ; Get return value from main\n"
-      +"7:  ST    4,2(6)  ; Store arg\n"
-      +"8:  ST    3,1(7)  ; Store Return addr\n"
-      +"9:  LDA		7,5(0)	; Jump to print\n"
-      +"10: HALT	0,0,0	  ; Done\n"
-      +"\n/*\n"
-      +" * 	Print\n"
-      +" */\n"
-      +"11:  LD    4,2(6)  ; load arg\n"
-      +"12:  LD    3,-2(6) ; load return addr\n"
-      +"13:  OUT	 4,0,0	 ; Print value in R5\n"
-      +"14:  LDA	 7,0(3)	 ; Jump back to main\n"
-      +"\n/*\n"
-      +" *	Main\n"
-      +" */\n"
-      +"15: LD    4,2(6)  ; load arg\n"
-      +"16: LD    3,-2(6) ; load return addr\n"
-      +"17: LDA   5,1(0)	; Save number 1 into R5\n"
-      +"18: ST    5,0(5)  ; Store return value\n"
-      +"19: ADD   5,-10,5 ; Update bottom\n"
-      +"20: ST    6,-10,6 ; Update top\n"
-      +"21: LDA   7,0(3)	; Jump back to runtime\n";
-
     generatePrelude();
-    generatePrint();
-    generateMain();
 
     WriteString writer = new WriteString();
     writer.write(program, fileName);
-  }; //Main
-
-    public boolean checkReuse(String tempVar){
-        //a relatively expensive operation for checking if the arg is reused
-        for(int i = this.curRow; i < this.quadruple.size();i++){
-            if(this.quadruple.get(i).get(1).equals(tempVar)){
-                return true;
-            }
-            if(this.quadruple.get(i).get(2).equals(tempVar)){
-                return true;
-            }
-        }
-        return false;
-    }
-    public int Length(){
-        return this.quadruple.size();
-    }    
-  public static void addTemp(String s, int i){
-    Generator.tt.setVal(s, i);
   }
+
+
+
+  public boolean checkReuse(String tempVar){
+      //a relatively expensive operation for checking if the arg is reused
+      for(int i = this.curRow; i < this.quadruple.size();i++){
+          if(this.quadruple.get(i).get(1).equals(tempVar)){
+              return true;
+          }
+          if(this.quadruple.get(i).get(2).equals(tempVar)){
+              return true;
+          }
+      }
+      return false;
+  }
+
+  public int Length(){
+      return this.quadruple.size();
+  }
+
+  public static void addTemp(String s, long i){
+    Generator.p5.setTemp(s, i);
+  }
+
   public static void emit(String op, String arg1, String arg2, String res){
       List<String> tempRow = new ArrayList<>(Arrays.asList(op,arg1,arg2,res));
       Generator.quadruple.add(tempRow);
@@ -122,17 +96,7 @@ public class Generator{
       curRow++;
       return Generator.quadruple.get(curRow);
   }
-  @Override
-  public String toString(){
-      String outString = "";
-      for(int i = 0; i < Generator.quadruple.size();i++){
-          for(int k = 0; k < Generator.quadruple.get(i).size(); k++){
-              outString += Generator.quadruple.get(i).get(k).toString() + " ";
-          }
-          outString += "\n";
-      }
-      return outString;
-  }
+
 
   public static String newTemp(){
     return "t"+tempAmount++;
@@ -141,10 +105,7 @@ public class Generator{
   public static String newLabel(){
     return "L"+tempLabel++;
   }
-  //public static void emit(String s){}
-  //public static void emit(String a, String v){}
-  //public static void emit(String a, String s, String f){}
-  //public static void emit(String a, String s, String f, String h){}
+
 
   public static void emitFunctionCall(String a, ArrayList params, String t){/*
     List<String> tempRow = new ArrayList<>(Arrays.asList("BEGIN_CALL"));
@@ -161,11 +122,17 @@ public class Generator{
 
 
 
-  public void generatePrelude(){}
-  public void generatePrint(){}
-  public void generateMain(){}
-  public void makeNewTemp(){}
-  public void emitCode(){}
+  public void generatePrelude(){
+
+    emitComment("Prelude");
+    //emitRM(line_num++,   'LDC', 5, -1,       0, "initialize status ptr"); //TODO
+    //emitRM(line_num++, 'LDC', 6, stack_base, 0, "initialize top ptr"); //TODO
+    emitComment("Call Main");
+    emitRM(line_num++, "LD",  7, 999, 7, "Jump to main"); //TODO FIXME
+    emitRO(line_num++, "OUT", 1, 0, 0,   "print result from main");
+    emitRO(line_num++, "HALT", 1, 0, 0,  "stop");
+
+  }
 
 
   /**
@@ -177,10 +144,9 @@ public class Generator{
    *  @param   r2       int representing the register 2 output
    *  @param   r3       int representing the register 3 output
    *  @param   comment  String representing the comment to attach
-   *  @return  String of the properly formatted TM RO command.
    */
-  public String emitRO(int line_num, String opcode, int r1, int r2, int r3, String comment){
-    return String.format("%-4s%-6s%s,%s,%-7s;%-10s", line_num+":",opcode,r1,r2,r3,comment);
+  public void emitRO(int line, String opcode, int r1, int r2, int r3, String comment){
+    this.program += String.format("%-4s%-6s%s,%s,%-7s;%-10s\n", line+":",opcode,r1,r2,r3,comment);
   }
 
 
@@ -193,10 +159,9 @@ public class Generator{
    *  @param   offset   int representing the offset portion of a RM op
    *  @param   r3       int representing the register 3 output
    *  @param   comment  String representing the comment to attach
-   *  @return  String of the properly formatted TM RM command.
    */
-  public String emitRM(int line_num, String opcode, int r1, int offset, int r3, String comment){
-    return String.format("%-4s%-6s%s,%s%-8s;%-10s", line_num+":",opcode,r1,offset,"("+r3+")",comment);
+  public void emitRM(int line, String opcode, int r1, int offset, int r3, String comment){
+    this.program += String.format("%-4s%-6s%s,%s%-8s;%-10s\n", line+":",opcode,r1,offset,"("+r3+")",comment);
   }
 
 
@@ -204,10 +169,22 @@ public class Generator{
   /**
    *  emitComment takes a string and creates a TM comment
    *  @param  String comment String representing the comment
-   *  @return        String of the properly formed TM comment
    */
-  public String emitComment(String comment){
-    return String.format(";;%6s",comment);
+  public void emitComment(String comment){
+    this.program += String.format(";;      %s\n",comment);
+  }
+
+
+  @Override
+  public String toString(){
+      String outString = "";
+      for(int i = 0; i < Generator.quadruple.size();i++){
+          for(int k = 0; k < Generator.quadruple.get(i).size(); k++){
+              outString += Generator.quadruple.get(i).get(k).toString() + " ";
+          }
+          outString += "\n";
+      }
+      return outString;
   }
 }
 

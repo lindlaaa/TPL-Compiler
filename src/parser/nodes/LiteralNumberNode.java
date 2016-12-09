@@ -12,7 +12,7 @@ public class LiteralNumberNode extends SemanticNode{
   @Override
   public String evaluate(){
     String temp = Generator.newTemp();
-    Generator.addTemp( temp, Integer.parseInt(this.value.getVal()) ); //TODO FIXME
+    Generator.addTemp( temp, this.value.getVal() ); //TODO FIXME
     //Generator.emit("assign",Long.toString(this.value.getVal()),temp);
 	  return temp;
   }

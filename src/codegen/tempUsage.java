@@ -23,5 +23,11 @@ public class tempUsage {
     public void setInUse(){
         this.inUse = true;
     }
-
+    /* AVERY UNCOMMENT THIS
+	public String getUsage(){
+		outputString +=
+			getIntVal() + " " +
+			getReg() + " ";
+	}
+    */
 }

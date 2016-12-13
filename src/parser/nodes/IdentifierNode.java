@@ -35,7 +35,7 @@ public class IdentifierNode extends SemanticNode{
 
       temp = Generator.newTemp(); //TODO FIXME not new temp but reference the most receltly made temp
       Generator.addTemp( temp, Integer.MIN_VALUE ); //TODO FIXME
-      //Generator.emitFunctionCall(this.getID(), paramArray, temp);
+      Generator.emitFunctionCall(this.getID(), paramArray, temp);
       return temp;
     }else{ //Leaf: Variable ID
       temp = Generator.newTemp();

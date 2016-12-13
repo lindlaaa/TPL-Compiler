@@ -48,9 +48,9 @@ public class Generator{
     this.tt = new TempTable();
     this.root.evaluate();
 
-    //System.out.println(this); //TODO FIXME
+    System.out.println(this); //TODO FIXME
     program += this.p5.Do();
-    //System.out.println(program);
+    System.out.println(program);
 
     WriteString writer = new WriteString();
     writer.write(program, fileName);
@@ -110,17 +110,10 @@ public class Generator{
   }
 
 
-  public static void emitFunctionCall(String a, ArrayList params, String t){/*
-    List<String> tempRow = new ArrayList<>(Arrays.asList("BEGIN_CALL"));
-    Generator.quadruple.add(tempRow);
-    for(String param : params){
-      tempRow = new ArrayList<>(Arrays.asList(param));
-      Generator.quadruple.add(tempRow);
-    }
-    tempRow = new ArrayList<>(Arrays.asList("Call "+a));
-    Generator.quadruple.add(tempRow);
-    tempRow = new ArrayList<>(Arrays.asList("Recieve "+t));
-    Generator.quadruple.add(tempRow);*/
+  public static void emitFunctionCall(String a, ArrayList params, String t){
+    emit("BEGIN_CALL");
+    emit("Call",a);
+    emit("Recieve", t);
   }
 
 
